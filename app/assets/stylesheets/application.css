@@ -1,0 +1,63 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require font-awesome
+ *= require_tree .
+ *= require_self
+ */
+
+.main-container {
+  margin-top: 90px;
+}
+.heading1 {
+  font-size:30px;
+  font-family: "Lato",Arial,Helvetica,sans-serif;
+  text-transform:uppercase;
+  color: #24607D;
+  font-weight:900;
+}
+.heading2 {
+  font-size: 26px;
+  color: #000000;
+  text-align: center;
+  font-weight: 400;
+}
+.heading4 {
+  font-size:18px;
+  font-weight:400;
+  font-family: "Lato",Arial,Helvetica,sans-serif;
+  color:#000000;
+  margin:0px 0px 5px 0px;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.talent-fore-btn, .blue-bar {
+  background-color: #24607D !important;
+}
+
+.blue-bar {
+  border-bottom: 2px solid #3399ff;
+  margin-bottom: 20px;
+  min-height: 60px;
+  padding: 10px 0;
+}
+
+.site-color {
+  color: #24607D !important;
+}

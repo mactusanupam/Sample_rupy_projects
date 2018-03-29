@@ -1,0 +1,37 @@
+<div class="col-md-6">
+ <h4 class="cont_hed_colr">Add your technical skills</h4>
+        <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="name">
+
+      </label>
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <h4>Skill</h4>
+        </div>
+        <div class="col-md-6">
+          <h4>Rating</h4>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-5">
+          1&nbsp;&nbsp;&nbsp; 2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp; 5
+        </div>
+          <div class="col-md-1">
+
+        </div>
+      </div>
+      <div class="addmoreskill">
+       <%= f.simple_fields_for :cv_skills do |cv_skill| %>
+       <%= render "cv_skill_fields" ,:f=>cv_skill %>
+       <% end %>
+      </div>
+      <div class="col-md-12">
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to_add_association 'Add Skills', f, :cv_skills, class: 'adda btn btn-info btn-subm-2', data: { association_insertion_node: '.addmoreskill',association_insertion_method: :append } %>
+      </div>
+    </div>
+  </div>
+</div>

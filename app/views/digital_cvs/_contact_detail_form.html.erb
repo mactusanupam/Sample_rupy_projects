@@ -1,0 +1,30 @@
+<div class="col-md-12 margin-bottom-30">
+  <h4 class="text-center">CONTACT DETAILS</h4>
+  <hr />
+  <div class="row">
+    <div class="col-md-9">
+      <%= simple_form_for @digital_cv.contact_detail ||= @digital_cv.build_contact_detail, url: save_contact_detail_digital_cv_path(@digital_cv), remote: true, html: { class: 'form-horizontal', method: :post }  do |f| %>
+
+        <%= f.error_notification %>
+
+        <div class="col-sm-12 margin-bottom-30">
+          <%= f.input :first_name %>
+          <%= f.input :last_name %>
+          <%= f.input :email %>
+          <%= f.input :mobile %>
+          <%= f.input :skype_username %>
+          <%= f.input :linkedin_url %>
+          <%= f.input :address %>
+          <%= f.input :pincode %>
+        </div>
+        <div class="text-center">
+          <%= f.button :submit, "Save and Continue", class: "btn btn-primary talent-fore-btn" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <%#= render 'photo_partial' %>
+    </div>
+  </div>
+</div>
+

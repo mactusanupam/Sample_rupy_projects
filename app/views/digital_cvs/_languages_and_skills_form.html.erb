@@ -1,0 +1,68 @@
+<%= simple_form_for(@digital_cv, remote: true, html: { class: 'academic-form form-horizontal' }) do |f|  %>
+  <div class="col-md-12 languages">
+    <h4 class="cont_hed_colr">Languages</h4>
+    <hr>
+    <div class="row">
+      <div class="col-sm-offset-1 col-sm-6 text-center">
+        <label for="name">Language</label>
+      </div>
+      <div class="col-sm-1">
+        <label for="name" class="skill_font">R</label>
+      </div>
+      <div class="col-sm-1">
+        <label for="name" class="skill_font">W</label>
+      </div>
+      <div class="col-sm-1">
+        <label for="name" class="skill_font">S</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="addmorelang" >
+        <br>
+        <%= f.simple_fields_for :cv_languages do |language| %>
+          <%= render "cv_language_fields" ,:f=>language %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-sm-offset-1">
+      <br />
+      <%= link_to_add_association 'Add Another Language', f, :cv_languages, class: 'adda btn btn-info talent-fore-btn', data: { association_insertion_node: '.addmorelang', association_insertion_method: :append } %>
+    </div>
+  </div>
+  <div class="col-md-12 skills">
+    <h4 class="cont_hed_colr">Skills</h4>
+    <hr />
+    <div class="row">
+      <div class="col-sm-6">
+        <h4 class="text-center">Skill Name</h4>
+      </div>
+      <div class="col-sm-5">
+        <h4 class="text-center">Rating</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-offset-6 col-sm-1">1</div>
+      <div class="col-sm-1">2</div>
+      <div class="col-sm-1">3</div>
+      <div class="col-sm-1">4</div>
+      <div class="col-sm-1">5</div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="addmoreskill">
+        <%= f.simple_fields_for :cv_skills do |cv_skill| %>
+          <%= render "cv_skill_fields", :f => cv_skill %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-sm-offset-1 margin-bottom-30">
+      <br />
+      <%= link_to_add_association 'Add Another Skill', f, :cv_skills, class: 'adda btn btn-info talent-fore-btn', data: { association_insertion_node: '.addmoreskill',association_insertion_method: :append } %>
+    </div>
+    <div class="row">
+      <div class="text-center">
+        <%= f.submit "Save and Continue", class: "btn btn-primary talent-fore-btn" %>
+      </div>
+    </div>
+  </div>
+<% end %>

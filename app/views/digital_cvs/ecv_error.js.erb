@@ -1,0 +1,3 @@
+var activeTab = $('li.active');
+var divId = activeTab.children('a').attr('href');
+$(divId+' .ecv_error_data').empty().html("<%=escape_javascript(render 'ecv_mandatory_fields_error', :f => obj )%>")

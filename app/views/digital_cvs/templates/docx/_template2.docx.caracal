@@ -1,0 +1,892 @@
+#-----------------------------------------------------
+# page settings
+#-----------------------------------------------------
+
+docx.page_margins do
+left    200     # sets the left margin. units in twips.
+right   1    # sets the right margin. units in twips.
+top     1    # sets the top margin. units in twips.
+bottom  1    # sets the bottom margin. units in twips.
+end
+
+
+docx.font name: 'Helvetica'
+
+#-----------------------------------------------------
+# Tables
+#-----------------------------------------------------
+digital_cv = @digital_cv
+user_info = @digital_cv.user.attributes
+docx_image = @digital_cv.photo.image.url(:thumb)
+present_job_tit = @digital_cv.present_job ? @digital_cv.present_job.job_title : "No Title"
+personal_info = @digital_cv.personal_detail.attributes
+cv_skill = @digital_cv.cv_skills
+languages = @digital_cv.cv_languages
+employement_detail = @digital_cv.employment_details
+education_detail = @digital_cv.academic_details
+trainings = @digital_cv.trainings
+certifications = @digital_cv.certifications
+honr_aw = @digital_cv.honor_and_awards
+research_or_projectdet = @digital_cv.research_or_projectdetails
+references = @digital_cv.references
+font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://www.salesworld.net/"
+
+c1= Caracal::Core::Models::TableCellModel.new do
+img 'http:' + docx_image, width: 75, height: 75, align: :center
+end
+
+c2= Caracal::Core::Models::TableCellModel.new do
+h4  user_info['first_name']+" "+user_info['last_name'] 
+p  digital_cv.summary
+end
+
+c01=Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/user-circle.png",width:14 , height: 14, align: :left
+end
+
+c02=Caracal::Core::Models::TableCellModel.new do
+h2 'PERSONAL INFO' ,color: '000000'
+end
+
+c03=Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/certificate.png",width:14 , height: 14, align: :left
+end
+
+c04=Caracal::Core::Models::TableCellModel.new do
+h2 'PROFESSIONAL SKILLS' , color: '000000'
+end
+
+c3 = Caracal::Core::Models::TableCellModel.new do
+table [[c01,c02]] do
+cell_style cols[0], width: 600
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+  end
+  
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+h5 "Mobile Number:"
+p personal_info['mobile']
+p
+h5 'Email:'
+p user_info['email']
+p
+h5 'Date of birth:'
+p personal_info['date_of_birth']
+p
+if personal_info['linkedin_profile'] != nil && personal_info['linkedin_profile'] !=""
+h5 'Linkedin profile url:'
+p personal_info['linkedin_profile']
+p
+end
+if personal_info['skype_username'] != nil && personal_info['skype_username'] !=""
+h5 'Skype username:'
+p personal_info['skype_username']
+p
+end
+if personal_info['address'] != nil && personal_info['address'] !=""
+h5 'Address:'
+p personal_info['address']
+p
+end
+if cv_skill.size>0
+ table [[c03,c04]] do
+cell_style cols[0], width: 600
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+  end
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+cv_skill.each do |f|
+p f.skill.title
+img font_url + "/assets/digital_cv/rating_images/"+f.self_rating.to_s+"_rating.png",width:150 , height: 10, align: :left
+end
+p
+end
+end
+
+c05=Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/bullseye.png",width:14 , height: 14, align: :left 
+end
+
+c06=Caracal::Core::Models::TableCellModel.new do
+h4 "Career Objective" do
+color   '000000' 
+end
+hr do
+color   'E5E5E5'  
+line    :single   
+size    1        
+spacing 1       
+end 
+end
+
+c07=Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/briefcase.png",width:14 , height: 14, align: :left 
+end
+
+c08=Caracal::Core::Models::TableCellModel.new do
+h4 'EXPERIENCE' do
+color   '000000' 
+end 
+end
+ 
+
+
+c09=Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/graduation-cap.png",width:14 , height: 14, align: :left
+end
+c010=Caracal::Core::Models::TableCellModel.new do
+h4 'EDUCATION DETAILS' do
+color   '000000' 
+end
+end
+
+c011=Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/language.png",width:14 , height: 14, align: :left
+end
+c012=Caracal::Core::Models::TableCellModel.new do
+h4 'LANGUAGES KNOWN' do
+color '000000'
+end
+end
+ 
+
+c013=Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/industry.png",width:14 , height: 14, align: :left
+end
+c014=Caracal::Core::Models::TableCellModel.new do
+h4 "TRAINING" do
+color   '000000' 
+end
+end
+
+c015=Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/trophy.png",width:14 , height: 14, align: :left
+end
+c016=Caracal::Core::Models::TableCellModel.new do
+h4 "HONORS AND AWARDS" do
+color   '000000' 
+end
+end
+
+
+c017=Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/tasks.png",width:14 , height: 14, align: :left 
+end
+c018=Caracal::Core::Models::TableCellModel.new do
+h4 "RESEARCH EXPERIENCE AND PROJECTS:" do
+color '000000' 
+end
+end
+
+c019=Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/users.png",width:14 , height: 14, align: :left
+end
+c020=Caracal::Core::Models::TableCellModel.new do
+h4 "REFERENCES" do
+color '000000' 
+end
+end
+
+c021=Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/info-circle.png",width:14 , height: 14, align: :left
+end
+c022=Caracal::Core::Models::TableCellModel.new do
+h4 "ADDITIONAL INFORMATION" do
+color   '000000' 
+end
+end
+
+c023=Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/certificate.png",width:14 , height: 14, align: :left 
+end
+c024=Caracal::Core::Models::TableCellModel.new do
+h4 "CERTIFICATION" do
+color   '000000' 
+end
+end
+
+c4 = Caracal::Core::Models::TableCellModel.new do
+
+h6
+p digital_cv.summary
+
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+
+table [[c05,c06]] do
+cell_style cols[0], width: 600
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+  end
+
+
+p digital_cv.objective
+p
+if digital_cv.experienced
+table [[c07,c08]] do
+cell_style cols[0], width: 600
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+  end
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+employement_detail.each do |empl|
+end_date = if empl.present_job 
+then "present"
+else 
+empl.end_date.strftime("%Y-%m")
+end
+
+table [[empl.start_date.strftime("%Y-%m").to_s+"-\n"+end_date.to_s,empl.job_title+"\n"+empl.company.name+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.key_area)+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.achievement)]] do
+cell_style cols[0], width: 1200
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+  end
+  hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+end
+p
+end
+
+
+table [[c09,c010]] do
+cell_style cols[0], width: 600
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+  end
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+education_detail.each do |educat|
+
+table [[educat.start_date.strftime("%Y-%m").to_s+"-\n"+educat.end_date.strftime("%Y-%m").to_s,educat.degree+" " +"in "+educat.specialization+" with "+ educat.percentage.to_s + " from "+ educat.university]] do
+cell_style cols[0], width: 1200
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+end
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+end
+p
+if languages.size>0
+table [[c011,c012]] do
+cell_style cols[0], width: 600
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+  end
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+languages.each do |lang|
+a = []
+a << 'Read' if lang.read?
+a << 'Write' if lang.write?
+a << 'Speak' if lang.speak?
+p lang.language.name+ "("+a.join(', ')+")"
+end
+p
+end
+
+if trainings.size>0
+table [[c013,c014]] do
+cell_style cols[0], width: 600
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+  end
+
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+trainings.each do |tra|
+p "Attended " + tra.duration.to_s + " days training on " + tra.name + " from " + tra.institute 
+p
+end
+p
+end
+
+if certifications.size>0
+table [[c023,c024]] do
+cell_style cols[0], width: 600
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+  end
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+certifications.each do |cert| 
+
+table [[cert.date.strftime("%Y-%m"),cert.title + " - " +  cert.certifier ]] do
+cell_style cols[0], width: 1200
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+end
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+end
+end
+
+
+if honr_aw.size>0
+table [[c015,c016]] do
+cell_style cols[0], width: 600
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+  end
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+
+honr_aw.each do |honor|
+table [[honor.award_date.strftime("%Y-%m"),honor.title + " at " + honor.company]] do
+cell_style cols[0], width: 1200
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+end
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end  
+end
+end
+p
+
+if research_or_projectdet.size>0
+table [[c017,c018]] do
+cell_style cols[0], width: 600
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+  end
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+research_or_projectdet.each do |project_det|
+p "Title: " + project_det.title  
+p "Duration: " + project_det.duration.to_s  + " days"
+p
+h5 "Description"
+p project_det.description
+p
+end
+p
+end
+
+if references.size>0
+table [[c019,c020]] do
+cell_style cols[0], width: 600
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+  end
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end 
+references.each do |reference|
+h5 reference.name + ", " + reference.designation do
+color '000000'
+end
+p reference.companyname
+p reference.contact_no.to_s + ", " + reference.designation
+p
+end
+
+table [[c021,c022]] do
+cell_style cols[0], width: 600
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end 
+  end
+hr do
+color   'E7E7E7'  
+line    :single   
+size    1        
+spacing 1       
+end
+if !personal_info['nationality'].blank?
+p "Nationality-" + personal_info['nationality']
+end
+if !personal_info['gender'].blank?
+p "Gender-" + personal_info['gender']
+end
+if !personal_info['physical_challenged'].blank?
+p "Physically Challenged-" + personal_info['physical_challenged'].to_s
+end
+if !personal_info['hobbies_and_interest'].blank?
+p "Hobbies and Interest-" + ActionView::Base.full_sanitizer.sanitize(personal_info['hobbies_and_interest'])
+end
+if !personal_info['prefferred_location'].blank?
+p 'Preferred Location-' + personal_info['prefferred_location']
+end
+if !personal_info['marital_status']
+p 'Marital Status-' + personal_info['marital_status']
+end
+p
+end
+
+
+h5 "DECLARATION" do
+color '000000'
+align 'center'
+end
+p "I hereby declare that information furnished above is true to the best of my knowledge.", align: :center
+h5 "Place: Bangalore"
+h5 "Date: " + Time.now.strftime("%B %d, %Y").to_s 
+h5 user_info['first_name']+" "+user_info['last_name'] , align: :right
+end
+docx.table [[c2,c1]] do
+cell_style cols[1], width: 2500
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+end
+
+docx.table [[c3,c4]] do
+cell_style cols[0], width: 3500
+border_top do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_bottom do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_left do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+border_right do
+color   'FFFFFF'
+line    :single
+size    1
+spacing 2
+end
+end

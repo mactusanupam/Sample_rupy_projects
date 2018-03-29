@@ -1,0 +1,63 @@
+<div class="container contact-us margin-top-20">
+  <div class="row">
+    <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading talent-fore-btn">
+          <h3 class="color-white">
+            <%= fa_icon 'map-marker 15x', class: 'color-red margin-right-5' %>
+            <font>Location</font>
+          </h3>
+        </div>
+        <div class="panel-body no-padding">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
+      <div class="col-sm-4 col-lg-4 col-md-4 no-padding">
+        <div class="panel panel-default">
+          <div class="panel-heading talent-fore-btn">
+            <h3 class="color-white">
+              <%= glyph(:pushpin, class: 'margin-right-5 color-red') %>
+              <font>Office Address</font>
+            </h3>
+          </div>
+          <div class="panel-body">
+            <address>
+              <%= fa_icon "address-card", class: 'margin-top-right-5 site-color' %>
+              <strong>Salesworld pvt. ltd.</strong><br>
+              No. 209, 2nd Floor, Ice Queens Amber Building, <br>
+              Arekere Gate, Above Andhra Bank, Bannerghatta Road,
+              Bengaluru, Karnataka 560076<br>
+              <%= glyph('envelope', class: 'margin-top-right-5 site-color') %>
+              <%= link_to "info@salesworld[dot]net", "mailto:info@salesworld.net" %><br />
+              <%= glyph('phone-alt', class: 'margin-top-right-5 site-color') %>
+               +91-8880088080
+            </address>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-offset-1 col-lg-offset-1 col-sm-offset-1 col-sm-7 col-lg-7 col-md-7 pull-right contact-form">
+        <%= render :partial => 'messages/form' %>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function initMap() {
+    var location = {lat: 12.8904759, lng: 77.59739480000007};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 20,
+      center: location
+    });
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+  }
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB75RuEnVZqA4ovOPM3SG45uRnD22EMqec&callback=initMap">
+</script>

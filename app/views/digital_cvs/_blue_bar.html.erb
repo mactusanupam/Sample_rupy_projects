@@ -1,0 +1,13 @@
+<div class="row blue-bar">
+  <div class="container">
+    <div class="pull-right">
+      <% if request.params["action"] == 'show' %>
+        <%= link_to "Edit Resume", edit_digital_cv_path(@digital_cv), class: 'btn btn-link', style: 'color: white;' %>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changecvtemplatemodal" id="chgtempmodbtn">
+          Change Template
+        </button>
+      <% end %>
+      <%= link_to "Download Resume", 'javascript:void(0)', class: 'btn btn-clock btn-default' %>
+    </div>
+  </div>
+</div>

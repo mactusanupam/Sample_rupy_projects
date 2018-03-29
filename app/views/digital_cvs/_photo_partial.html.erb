@@ -1,0 +1,36 @@
+<div class="well profile-photo">
+  <h4 class="cont_hed_colr">Your Profile Photo</h4>
+  <% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
+    <%= image_tag @digital_cv.photo.image.url(:thumb) %>
+  <% else %>
+    <%= image_tag "digital_cv/photo_cv.png", width: 160, height: 160 %>
+  <% end %>
+</div>
+<div class="text-center">
+  <button type="button" class="btn btn-primary talent-fore-btn" data-toggle="modal" data-target="#cv-image-upload-modal">Change Photo</button>
+</div>
+
+<!-- Modal -->
+<%= form_for @digital_cv.photo ||= @digital_cv.build_photo, url: save_photo_digital_cv_path, remote: true, method: :post  do |f| %>
+  <div id="cv-image-upload-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title text-center">UPLOAD IMAGE</h4>
+        </div>
+        <div class="modal-body">
+          <%= f.hidden_field :image_type, value: "digital_cv" %>
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <div class="well" style="border:1px solid #DCDCDC; padding:20px">
+            <%= f.file_field :image  %>
+          </div>
+        </div>
+        <div class="modal-footer">
+         <%= f.submit 'Save Image', :class => 'btn btn-primary' %>
+       </div>
+     </div>
+    </div>
+  </div>
+<%end %>

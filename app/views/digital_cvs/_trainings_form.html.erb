@@ -1,0 +1,20 @@
+<%= simple_form_for(@digital_cv, remote: true, html:{ class: 'form-horizontal' }) do |f| %>
+  <div class="col-md-12">
+    <h4 class="text-center">Training Details</h4>
+    <hr />
+    <div class="ecv_error_data"></div>
+    <div class="trainingsatt">
+      <%= f.simple_fields_for :trainings do |f| %>
+        <%= render "training_fields", f: f %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-offset-2 margin-bottom-30">
+      <%= link_to_add_association 'Add Another Training', f, :trainings, class: 'adda btn btn-info talent-fore-btn', data: { association_insertion_node: '.trainingsatt', association_insertion_method: :append } %>
+    </div>
+  </div>
+  <div class="text-center">
+    <%= f.submit "Save and Continue", class: "btn btn-primary talent-fore-btn" %>
+  </div>
+<% end %>

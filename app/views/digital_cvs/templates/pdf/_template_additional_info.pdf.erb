@@ -1,0 +1,60 @@
+<style>
+.cv_declaration{padding-top:16px;font-size:15px;padding-left:14px;padding-right:20px;}
+</style>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-xs-3"></div>
+		<div class="col-xs-9">
+		<h4>ADDITIONAL INFORMATION</h4>
+			<hr>
+	    <div class="col-xs-6">
+	      <ul style="float:left;"  class="list-unstyled">
+	        <li>
+	        	<strong>Nationality-</strong>
+	        	<%= @digital_cv.personal_detail.nationality %>
+	        </li>
+	        <li>
+	        	<strong>Gender-</strong>
+	        	<%= @digital_cv.personal_detail.gender %>
+	        </li>
+        	<li>
+        		<strong>Physically Challenged-</strong>
+        		<%= @digital_cv.personal_detail.physical_challenged? ? 'Yes' : 'No' %>
+        	</li>
+	        <!--li>
+	        	<strong>Hobbies and Interest-</strong>
+	        	<%= @digital_cv.personal_detail.hobbies_and_interest %>
+	        </li-->
+	      </ul>
+	    </div>
+	    <div class="col-xs-6" style="float:left;">
+	      <ul  class="list-unstyled">
+	        <li>
+	        	<strong>Preferred Location-</strong>
+	        	<%= @digital_cv.personal_detail.prefferred_location %>
+	        </li>
+	        <li>
+	        	<strong>Marital Status-</strong>
+        		<%= @digital_cv.personal_detail.marital_status %>
+	        </li>
+	      </ul>
+	    </div>
+	    <br><br>
+	</div>
+	
+
+	<div class="cv_declaration col-xs-12" >
+	   <span class="text-center">
+			<h4 >DECLARATION</h4>
+			<p>I hereby declare that information furnished above is true to best of my knowledge.</p>
+			</span>
+			<br>
+			<br>
+			<p><strong>Place:</strong>
+			<strong><span class="pull-right"><%= @digital_cv.user.first_name %>&nbsp<%= @digital_cv.user.last_name %>
+			</span></strong></p>
+			<p><strong>Date:</strong><%= Time.now.strftime("%d-%m-%Y") %></p>
+		</div>
+
+</div>
+</div>

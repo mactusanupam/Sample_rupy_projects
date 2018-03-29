@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Digital Cvs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Summary</th>
+      <th>Objective</th>
+      <th>Is experienced</th>
+      <th>Total experience</th>
+      <th>Employment status</th>
+      <th>Current location</th>
+      <th>Preferred location</th>
+      <th>User</th>
+      <th>Template</th>
+      <th>Slug</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @digital_cvs.each do |digital_cv| %>
+      <tr>
+        <td><%= digital_cv.name %></td>
+        <td><%= digital_cv.summary %></td>
+        <td><%= digital_cv.objective %></td>
+        <td><%= digital_cv.is_experienced %></td>
+        <td><%= digital_cv.total_experience %></td>
+        <td><%= digital_cv.employment_status %></td>
+        <td><%= digital_cv.current_location %></td>
+        <td><%= digital_cv.preferred_location %></td>
+        <td><%= digital_cv.user %></td>
+        <td><%= digital_cv.template %></td>
+        <td><%= digital_cv.slug %></td>
+        <td><%= link_to 'Show', digital_cv %></td>
+        <td><%= link_to 'Edit', edit_digital_cv_path(digital_cv) %></td>
+        <td><%= link_to 'Destroy', digital_cv, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Digital Cv', new_digital_cv_path %>

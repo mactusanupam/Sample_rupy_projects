@@ -1,0 +1,32 @@
+<div class="nested-fields">
+  <div class="form-group col-sm-12 text-right">
+    <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
+  </div>
+  <div class="form-group required">
+    <%= f.label :name, 'Training Name', class: 'control-label text-right col-sm-2 no-padding' %>
+    <div class="col-sm-9">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group required">
+    <%= f.label :info, 'Brief Details', class: 'control-label text-right col-sm-2 no-padding' %>
+    <div class="col-sm-9">
+      <%= f.text_area :info, class: 'form-control', rows: 4 %>
+    </div>
+  </div>
+
+  <div class="form-group required">
+    <%= f.label :institute, 'Institute Name', class: 'control-label text-right col-sm-2 no-padding' %>
+    <div class="col-sm-9">
+      <%= f.text_field :institute, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group required">
+    <%= f.label :duration, 'Duration(In Days)', class: 'control-label text-right col-sm-2 no-padding' %>
+    <div class="col-sm-9">
+      <%= f.number_field :duration, class: 'form-control' %>
+    </div>
+  </div>
+</div>

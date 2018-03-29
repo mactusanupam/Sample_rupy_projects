@@ -1,0 +1,37 @@
+<%= simple_form_for(@digital_cv, remote: true, html: { class: 'form-horizontal' }) do |f| %>
+  <div class="col-md-12 margin-bottom-30">
+    <h4 class="text-center">SUMMARY</h4>
+    <hr />
+    <%= f.error_notification %>
+    <div class="col-md-12">
+      <%= f.input :objective %>
+      <%= f.input :summary %>
+      <%= f.input :employment_status, as: :radio_buttons, collection: [['Employed', 'Employed'], ['Not Working', 'Not Working'], ['On Sabbatical', 'On Sabbatical']], label_method: :second, value_method: :first %>
+      <%= f.input :total_experience do %>
+        <%
+          years = (0..20).to_a.map{|y| pluralize(y, 'year') }
+          months = (0..11).to_a.map{|m| pluralize(m, 'month') }
+        %>
+        <%= f.collection_select(:year, years, :to_i, :to_s, {:prompt => 'Years'}, { class: 'form-control' }) %>
+        <%= f.collection_select(:month, months, :to_i, :to_s ,{:prompt => 'Months'}, { class: 'form-control' }) %>
+      <% end %>
+      <%= f.input :current_location do %>
+        <%= f.collection_select :current_country, CS.get(), :first, :last, { include_blank: 'Select Country' }, :class => 'form-control select_country' %>
+        <%= f.collection_select :current_state, CS.states(@digital_cv.current_country.present? ? @digital_cv.current_country : :none), :first, :last, { include_blank: 'Select State' }, :class => 'form-control select_state' %>
+        <%= f.collection_select :current_city, CS.cities(@digital_cv.current_state), :to_s, :to_s, { include_blank: 'Select City' }, :class => 'form-control select_city' %>
+      <% end %>
+      <%= f.input :prefferred_location do %>
+        <%= f.collection_select :prefferred_country, CS.get(), :first, :last, { include_blank: 'Select Country' }, :class => 'form-control select_country' %>
+        <%= f.collection_select :prefferred_state, CS.states(@digital_cv.prefferred_country.present? ? @digital_cv.prefferred_country : :none), :first, :last, { include_blank: 'Select State' }, :class => 'form-control select_state' %>
+        <%= f.collection_select :prefferred_city, CS.cities(@digital_cv.prefferred_state), :to_s, :to_s, { include_blank: 'Select City' }, :class => 'form-control select_city' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="text-center">
+    <%= f.button :submit, "Save and Continue", class: "btn btn-primary talent-fore-btn" %>
+  </div>
+<% end %>
+
+
+
+

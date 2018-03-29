@@ -1,0 +1,476 @@
+ <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+ <style>
+  .pp-image{
+    padding:10px;
+  }
+
+  .personal_det_data{
+    background-color: #4b7891;
+    padding:5px;
+  }
+
+  .chart {
+    position:relative;
+  }
+  .chart canvas {
+    display: block;
+    position:absolute;
+    top:0;
+    left:0;
+  }
+  .chart span {
+    color:#555;
+    display:block;
+    line-height:80px;
+    text-align:center;
+    width:80px;
+    font-family:sans-serif;
+    font-size:15px;
+    font-weight:100;
+    margin-left:5px;
+  }
+  .ciecle_tx p {
+    text-align:center;
+  }
+  .chart input {
+    width: 200px;
+  }
+  .career-obj{
+    margin-top:10px;
+  }
+
+  .cv-header-section{
+   background: #4b7891;
+   color:#fff;
+ }
+ ul.unstyle_person_det,ul.unstyle_other_det,ul.unstyle_empl_det {
+  list-style-type: none;
+  padding-left: 0;
+}
+.personal_det_data{
+  font-size:14px;
+}
+img{
+  height:80px;
+  width:80px;
+}
+.social_url{
+  color:#fff !important;
+  font-size:18px !important;
+}
+a.fa.fa-linkedin::before,a.fa.fa-skype::before{
+  color:#fff;
+}
+p{
+  font-size:12px !important;
+  word-break: break-all;
+}
+div{
+  font-size:12px !important;
+}
+td{
+  font-size:12px !important;
+}
+.personal_det_data ul li{ margin:0 11px 0px 0; vertical-align:top}
+
+.employ_det_d{
+  padding-top:0px !important;
+}
+
+</style>
+<div class="container-fluid">
+  <div class="row cv-header-section" style="margin: 0;">
+    <div class="col-md-2 col-xs-2 pp-image">
+      <% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
+      <%= wicked_pdf_image_tag @digital_cv.photo.image.url(:thumb) %>
+      <% else %>
+      <%= wicked_pdf_image_tag "digital_cv/photo_cv.png", height: 160 %>
+      <% end %>
+      <p class="text-capitalize">
+        <h3><b><%= @digital_cv.personal_detail.try(:name) %></b></h3>
+      </p>
+    </div>
+    <div class="col-md-10 col-xs-10 personal_det_data">
+      <div class="col-md-4 col-xs-4">
+        <h4>CONTACT DETAILS</h4>
+        <ul class="unstyle_person_det">
+          <% if @digital_cv.personal_detail.try(:email).present? %>
+            <li>
+              <i class="fa fa-envelope fa-1x"></i>&nbsp;
+              <%= @digital_cv.personal_detail.email %>
+            </li>
+          <% end %>
+          <% if @digital_cv.personal_detail.try(:mobile).present? %>
+            <li>
+              <i class="fa fa-phone fa-1x"></i>&nbsp;
+              <%= @digital_cv.personal_detail.mobile %>
+            </li>
+          <% end %>
+          <% if @digital_cv.personal_detail.try(:linkedin_profile).present?  %>
+            <li>
+              <i class="fa fa-linkedin-square"></i>
+              <%= @digital_cv.personal_detail.linkedin_profile %>
+            </li>
+          <% end %>
+          <% if @digital_cv.personal_detail.try(:skype_username).present?  %>
+            <li>
+              <i class="fa fa-skype fa-1x"></i>
+              <%= @digital_cv.personal_detail.skype_username %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <% if @digital_cv.experienced? && (@digital_cv.employment_status.present? || @digital_cv.city.present?)  %>
+        <div class="col-md-4 col-xs-4">
+          <h4>EMPLOYMENT DETAILS</h4>
+          <ul class="unstyle_empl_det">
+            <% if @digital_cv.employment_status.present? %>
+              <li>
+                <strong><i class="fa fa-briefcase fa-1x"></i></strong>&nbsp;
+                <%= @digital_cv.employment_status %>
+              </li>
+            <% end %>
+            <% if @digital_cv.experienced? %>
+              <li>
+                <strong><i class="fa fa-briefcase fa-1x"></i></strong>&nbsp;
+                <%= @digital_cv.year %>  Years and <%= @digital_cv.month %> Months
+              </li>
+            <% end %>
+            <% if @digital_cv.city.present? %>
+              <li>
+                <strong><i class="fa fa-map-marker fa-1x"></i></strong>&nbsp;&nbsp;
+                <%= @digital_cv.city %>
+              </li>
+            <% end %>
+            <% if @digital_cv.prefferred_location.present? %>
+              <li>
+                <strong><i class="fa fa-map-marker fa-1x"></i></strong>&nbsp;
+                <%= @digital_cv.preferred_location %> (preferred)
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="col-md-4 col-xs-4">
+        <h4>OTHER DETAILS</h4>
+        <ul class="unstyle_other_det">
+          <% if @digital_cv.personal_detail.try(:nationality).present? %>
+            <li>
+              <i class="fa fa-flag-o fa-1x"></i>&nbsp;
+              <%= @digital_cv.personal_detail.nationality %>
+            </li>
+          <% end %>
+          <% if @digital_cv.personal_detail.try(:date_of_birth).present? %>
+            <li>
+              <i class="fa fa-birthday-cake fa-1x"></i>&nbsp;
+              <%= @digital_cv.personal_detail.date_of_birth %>
+            </li>
+          <% end %>
+          <% if @digital_cv.personal_detail.try(:gender).present? %>
+            <li>
+              <i class="fa fa-<%= @digital_cv.personal_detail.try(:gender).to_s.downcase %> fa-1x"></i>&nbsp;
+              <%= @digital_cv.personal_detail.gender %>
+            </li>
+          <% end %>
+          <% if @digital_cv.personal_detail.marital_status.present? %>
+            <li>
+              <i class="fa fa-diamond fa-1x"></i>&nbsp;
+              <%= @digital_cv.personal_detail.try(:marital_status) %>
+            </li>
+          <% end %>
+          <% unless @digital_cv.personal_detail.physical_challenged.nil? %>
+            <li>
+              <i class="fa fa-wheelchair fa-1x"></i>&nbsp;
+              <% if @digital_cv.personal_detail.try(:physical_challenged) %>
+                Yes
+              <% else %>
+                No
+              <% end %>
+            </li><br>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 col-xs-12">
+    <br><br>
+    <p><%= @digital_cv.summary %></p><br>
+    <% if @digital_cv.objective.present? %>
+      <section class="career-obj">
+        <h4 ><i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp; CAREER OBJECTIVE</h4>
+        <hr>
+        <p><%= @digital_cv.objective %></p>
+      </section>
+      <br>
+    <% end %>
+    <% if @digital_cv.cv_skills.present? %>
+      <section>
+        <h4>
+          <i class="fa fa-certificate" aria-hidden="true"></i>&nbsp; PROFESSIONAL SKILLS
+        </h4>
+        <hr>
+        <% index = 0 %>
+        <div class="row">
+          <% for cv_skill in @digital_cv.cv_skills %>
+            <% skill_per = cv_skill.self_rating*20  %>
+            <% skillObjsize = @digital_cv.cv_skills.size %>
+            <div class="col-md-2">
+              <div class="chart" id="graph<%= index %>" data-percent="<%= skill_per.to_s %>"></div>
+              <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;<%= cv_skill.skill.title %></strong></p>
+            </div>
+            <% index+=1; %>
+          <% end %>
+        </div>
+        <script >
+          var compcount = "<%= skillObjsize %>";
+          $(function() {
+            var iii=0;
+            while(iii < compcount) {
+              var str = "graph"+iii;
+              var el = document.getElementById(str); // get canvas
+              iii++;
+              var options = {
+                percent:  el.getAttribute('data-percent') || 25,
+                size: el.getAttribute('data-size') || 80,
+                lineWidth: el.getAttribute('data-line') || 8,
+                rotate: el.getAttribute('data-rotate') || 0
+              }
+
+              var canvas = document.createElement('canvas');
+              var span = document.createElement('span');
+              span.textContent = options.percent + '%';
+
+              if (typeof(G_vmlCanvasManager) !== 'undefined') {
+                G_vmlCanvasManager.initElement(canvas);
+              }
+
+              var ctx = canvas.getContext('2d');
+              canvas.width = canvas.height = options.size;
+
+              el.appendChild(span);
+              el.appendChild(canvas);
+
+              ctx.translate(options.size / 2, options.size / 2); // change center
+              ctx.rotate((-1 / 2 + options.rotate / 180) * Math.PI); // rotate -90 deg
+
+              //imd = ctx.getImageData(0, 0, 240, 240);
+              var radius = (options.size - options.lineWidth) / 2;
+
+              var drawCircle = function(color, lineWidth, percent) {
+                percent = Math.min(Math.max(0, percent || 1), 1);
+                ctx.beginPath();
+                ctx.arc(0, 0, radius, 0, Math.PI * 2 * percent, false);
+                ctx.strokeStyle = color;
+                ctx.lineCap = 'round'; // butt, round or square
+                ctx.lineWidth = lineWidth
+                ctx.stroke();
+              };
+
+              drawCircle('#efefef', options.lineWidth, 100 / 100);
+              drawCircle('#264350', options.lineWidth, options.percent / 100);
+            }
+          });
+        </script>
+      </section>
+      <br>
+    <% end %>
+    <% if @digital_cv.employment_details.present? %>
+      <div>
+        <h4><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp; EXPERIENCE</h4>
+        <table class="table">
+          <% for employment_detail in @digital_cv.employment_details %>
+            <tr>
+              <td valign="top" width="5%">
+                <strong><%= employment_detail.start_date.strftime("%m/%Y") %>-
+                  <% if employment_detail.present_job %>
+                    Present
+                  <% else %>
+                    <%= employment_detail.end_date.strftime("%m/%Y") %>
+                  <% end %>
+                </strong>
+              </td>
+              <td width="95%" valign="top" class="employ_det_d">
+                <h5><strong><%= employment_detail.job_title %></strong></h5>
+                <h6><%= employment_detail.company.name %></h6>
+                <p><%= employment_detail.key_area.html_safe %></p>
+                <p><%= employment_detail.achievement.html_safe %></p>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
+    <% if @digital_cv.academic_details.present? %>
+      <div>
+        <h4>
+          <i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp; EDUCATION DETAILS
+        </h4>
+        <table class="table">
+          <% for academic_detail in @digital_cv.academic_details %>
+            <tr>
+              <td valign="top" width="5%">
+                <strong>
+                  <%= academic_detail.start_date.strftime("%m/%Y") %>-<%= academic_detail.end_date.strftime("%m/%Y") %>
+                </strong>
+              </td>
+              <td valign="top" width="95%" >
+                <p><strong><%= academic_detail.degree %></strong>&nbsp;in&nbsp;<%= academic_detail.specialization %> with <%= academic_detail.percentage %>% from <strong><%= academic_detail.university %></strong></p>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
+    <% if @digital_cv.cv_languages.present? %>
+      <div>
+        <h4>
+          <i class="fa fa-language" aria-hidden="true"></i>&nbsp; LANGUAGES KNOWN
+        </h4>
+        <hr>
+        <ul>
+          <% @digital_cv.cv_languages.each do |cv_language| %>
+          <%
+            a = []
+            a << 'Read' if cv_language.read?
+            a << 'Write' if cv_language.write?
+            a << 'Speak' if cv_language.speak?
+          %>
+          <li class="padding-5">
+            <strong><%= cv_language.language.name %></strong>
+            (<%= a.join(', ') %>)
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <br>
+    <% end %>
+    <% if @digital_cv.trainings.present? %>
+      <section >
+        <h4><i class="fa fa-industry" aria-hidden="true"></i>&nbsp; TRAINING</h4>
+        <hr>
+        <ul>
+          <% for trainingdata in @digital_cv.trainings %>
+            <li>
+              <p>
+                Attended <strong> <%= trainingdata.duration %> </strong> days training on <strong><%= trainingdata.name %></strong> from
+                <strong><%= trainingdata.institute %></strong>
+              </p>
+              <p><%= trainingdata.info %></p>
+            </li>
+          <% end %>
+        </ul>
+      </section>
+      <br>
+    <% end %>
+    <% if @digital_cv.certifications.present? %>
+      <div>
+        <h4><i class="fa fa-certificate"></i>&nbsp; CERTIFICATION</h4>
+        <table class="table">
+          <% for certification in @digital_cv.certifications %>
+            <tr>
+              <td valign="top" width="15%">
+                <strong><%= certification.date %></strong>
+              </td>
+              <td width="85%" valign="top">
+                <p>
+                  <strong><%= certification.title %></strong> by <%= certification.certifier %>
+                </p>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+      <br>
+    <% end %>
+    <% if @digital_cv.honor_and_awards.present? %>
+      <div>
+        <h4>
+          <i class="fa fa-trophy" aria-hidden="true"></i>&nbsp; HONORS AND AWARDS
+        </h4>
+        <table class="table">
+          <% for award in @digital_cv.honor_and_awards %>
+            <tr>
+              <td valign="top" width="15%">
+                <strong><%= award.award_date.strftime("%d-%m-%Y") %></strong>
+              </td>
+              <td width="85%" valign="top" style="padding-top: 0px;">
+                <h5><strong><%= award.title %></strong>
+                  <% if award.awarded_by.present? %>
+                  by <%= award.awarded_by %>
+                  <% end %>
+                  at <%= award.company %>
+                </h5>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+        <hr>
+      </div>
+      <br>
+    <% end %>
+    <% if @digital_cv.research_or_project_details.present? %>
+      <section>
+        <h4>
+          <i class="fa fa-tasks" aria-hidden="true"></i>&nbsp; RESEARCH EXPERIENCE AND PROJECTS:
+        </h4>
+        <hr>
+        <ul>
+          <% for reseach in @digital_cv.research_or_project_details %>
+            <li>
+              <p>
+                <strong><%= reseach.title %></strong> (  <%= reseach.duration %> days), <%= reseach.guide %>
+              </p>
+              <p><%= reseach.description %></p>
+            </li>
+          <% end %>
+        </ul>
+      </section>
+      <br>
+    <% end %>
+
+    <% if @digital_cv.references.present? %>
+      <section>
+        <h4><i class="fa fa-users"></i>&nbsp; REFERENCES</h4>
+        <hr>
+        <ul>
+          <% for reference in @digital_cv.references %>
+            <li>
+              <p>
+                <strong><%= reference.name %>, <%= reference.designation %></strong>
+              </p>
+              <p><%= reference.companyname %></p>
+              <p><%= reference.contact_no %>, <%= reference.email %></p>
+            </li>
+          <% end %>
+        </ul>
+      </section><br>
+    <% end %>
+    <% if @digital_cv.personal_detail.hobbies_and_interest.present? %>
+      <section>
+        <h4><i class="fa fa-hourglass"></i>&nbsp; HOBBIES AND INTERESTS</h4>
+        <hr>
+        <p><%= raw @digital_cv.personal_detail.hobbies_and_interest %></p>
+      </section>
+      <br>
+    <% end %>
+    <div class="cv_declaration" >
+      <span class="text-center">
+        <h4 >DECLARATION</h4>
+        <p>I hereby declare that information furnished above is true to best of my knowledge.</p>
+      </span>
+      <br>
+      <br>
+      <p>
+        <strong>Place:</strong><%= @digital_cv.try(:city) %>
+        <strong>
+          <span class="pull-right">
+            <%= @digital_cv.personal_detail.try(:name) %>
+          </span>
+        </strong>
+      </p>
+      <p><strong>Date:</strong><%= Time.now.strftime("%d-%m-%Y") %></p>
+    </div>
+  </div>
+</div>

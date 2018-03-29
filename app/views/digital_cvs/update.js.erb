@@ -1,0 +1,23 @@
+<%# if only_name %>
+  // $('.edit-cv-name').hide();
+  // $('.show-cv-name span').html("<%#= @digital_cv.cv_name %> ");
+  // $('.show-cv-name').show();
+<%# else %>
+  // var activeTab = $('.resume-editor-left li.active');
+  // var divId = activeTab.children('a').attr('href');
+
+  // $(activeTab).removeClass('active');
+  // $(divId).removeClass('active in');
+  // $(divId+' .ecv_error_data').empty();
+
+  // if(divId == '#additional-details') {
+  //   window.location.href = "/digital-cvs/"+<%#= @digital_cv.id %>+"/preview";
+  // } else {
+  //   $(activeTab).next().addClass('active');
+  //   $(divId).next().addClass('active in');
+  // }
+<%# end %>
+
+var activeTab = $('.resume-editor-left li.active');
+var divId = activeTab.children('a').attr('href');
+$(divId).html("<%= escape_javascript(render partial: 'digital_cvs/contact_detail_form' ) %>");

@@ -1,0 +1,51 @@
+<div class="nested-fields">
+  <div class="form-group col-sm-12 text-right">
+    <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
+  </div>
+  <div class="form-group required">
+    <%= f.label :degree, 'Degree', class: 'control-label col-sm-2 no-padding text-right' %>
+    <div class="col-sm-9">
+      <%= f.text_field :degree, placeholder: 'e.g. Bachelor of Technology', class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group required">
+    <%= f.label :specialization, 'Specialization', class: 'control-label col-sm-2 no-padding text-right' %>
+    <div class="col-sm-9">
+      <%= f.text_field :specialization, placeholder: 'e.g. Computer Science and Engineering', class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group required">
+    <%= f.label :institute, 'Institute', class: 'control-label col-sm-2 no-padding text-right' %>
+    <div class="col-sm-9">
+      <%= f.text_field :institute, placeholder: 'e.g. Delhi college of Engineering, Delhi', class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group required">
+    <%= f.label :university, 'Board/University', class: 'control-label col-sm-2 no-padding text-right' %>
+    <div class="col-sm-9">
+      <%= f.text_field :university, placeholder: 'e.g. Delhi University, Delhi', class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group required">
+    <%= f.label :percentage, 'Percentage/CGPA', class: 'control-label col-sm-2 no-padding text-right' %>
+    <div class="col-sm-9">
+      <%= f.number_field :percentage, class: 'form-control', min: 0, max: 100 %>
+    </div>
+  </div>
+  <div class="form-group required">
+    <%= f.label :start_date, 'Start Date', class: 'control-label col-sm-2 no-padding text-right' %>
+    <div class="col-sm-9">
+      <%= f.text_field :start_date, class: 'form-control date' %>
+      <span class="pull-right">
+        <%= f.check_box :pursuing %>
+        <%= f.label :pursuing, 'Still going here?' %>
+      </span>
+    </div>
+  </div>
+  <div class="form-group required end-date" style="display: <%= f.object.pursuing ? 'none': '' %>;">
+    <%= f.label :end_date, 'End Date', class: 'control-label col-sm-2 no-padding text-right' %>
+    <div class="col-sm-9">
+      <%= f.text_field :end_date, class: 'form-control date', disabled: f.object.pursuing? %>
+    </div>
+  </div>
+</div>

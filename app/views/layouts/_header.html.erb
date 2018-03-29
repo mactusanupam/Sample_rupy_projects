@@ -1,0 +1,21 @@
+<%= nav_bar fixed: :top, responsive: true do %>
+  <%= link_to image_tag('logo.png', width: 200, height: 50), '/', class: "navbar-brand" %>
+  <%= menu_group pull: :right do %>
+    <%#= menu_item "Home", root_path %>
+    <%= menu_item "Resume Builder", root_path %>
+    <%= drop_down "Community" do %>
+      <%= menu_item "Blogs", "javascript:void(0)" %>
+      <%= menu_item "Discussions", "javascript:void(0)" %>
+    <% end %>
+    <%= menu_item "Contact Us", contact_us_path %>
+    <% if true %>
+      <%= menu_item "Log Out", "javascript:void(0)" %>
+    <% else %>
+      <%= form_for @user, url: session_path(:user), html => {class: "navbar-form pull-right"} do |f| -%>
+        <p><%= f.text_field :email %></p>
+        <p><%= f.password_field :password %></p>
+        <p><%= f.submit "Sign in" %></p>
+      <% end -%>
+    <% end %>
+  <% end %>
+<% end %>

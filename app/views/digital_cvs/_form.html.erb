@@ -1,0 +1,22 @@
+
+<%= simple_form_for(@digital_cv) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :summary %>
+    <%= f.input :objective %>
+    <%= f.input :is_experienced %>
+    <%= f.input :total_experience %>
+    <%= f.input :employment_status %>
+    <%= f.input :current_location %>
+    <%= f.input :preferred_location %>
+    <%= f.association :user %>
+    <%= f.association :template %>
+    <%= f.input :slug %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

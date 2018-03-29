@@ -1,0 +1,23 @@
+<div class="col-md-12 margin-bottom-30">
+  <h4 class="text-center">ADDITIONAL DETAILS</h4>
+  <hr />
+  <%= simple_form_for @digital_cv.personal_detail ||= @digital_cv.build_personal_detail, url: save_personal_detail_digital_cv_path, remote: true, html: { class: 'form-horizontal additional-detail-form', method: :post }  do |f| %>
+
+    <%= f.error_notification %>
+
+    <%= f.input :nationality do %>
+      <%= f.select :nationality, options_for_select(Nationality::Nationality.default_option("indian"), :selected => f.object.nationality), {include_blank: "What's your nationality?"}, {:class => 'form-control' } %>
+    <% end %>
+    <%= f.input :date_of_birth %>
+    <%= f.input :gender, as: :radio_buttons, collection: [['m', 'Male'], ['f', 'Female'], ['o', 'Other']], label_method: :second, value_method: :first %>
+    <%= f.input :marital_status, as: :radio_buttons, collection: [['s', 'Single'], ['m', 'Married'], ['o', 'Other']], label_method: :second, value_method: :first %>
+    <%= f.input :disabled, as: :radio_buttons, collection: [['0', 'No'], ['1', 'Yes']], label_method: :second, value_method: :first %>
+    <%= f.input :hobbies %>
+    <%= f.input :affiliations %>
+
+    <div class="text-center">
+      <%= f.button :submit, "Save and Continue", class: "btn btn-primary talent-fore-btn" %>
+    </div>
+  <% end %>
+</div>
+

@@ -1,0 +1,19 @@
+<%= simple_form_for(@digital_cv, remote: true, html:{ class: 'form-horizontal' }) do |f| %>
+  <div class="row">
+    <div class="col-md-12 margin-bottom-30">
+      <h4 class="cont_hed_colr text-center">REFERENCES</h4>
+      <hr>
+      <div class="referncescomp margin-bottom-30">
+        <%= f.simple_fields_for :references do |ref| %>
+          <%= render "reference_fields", f: ref %>
+        <% end  %>
+      </div>
+      <div class="col-sm-offset-2">
+        <%= link_to_add_association 'Add Another Reference', f, :references, class: 'adda btn btn-info talent-fore-btn', data: { association_insertion_node: '.referncescomp', association_insertion_method: :append } %>
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <%= f.submit "Save and Continue", class: "btn btn-primary talent-fore-btn" %>
+  </div>
+<% end %>

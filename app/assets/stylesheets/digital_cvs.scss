@@ -1,0 +1,222 @@
+// Place all the styles related to the digital_cvs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.digital-cv-form {
+  .padded-cv {
+    padding: 20px 0;
+  }
+
+  h1 {
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #24607D;
+  }
+
+  p {
+    margin: 0 0 0px;
+    font-size: 14px;
+    line-height: 1.6em;
+    color: #555;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  ul {
+    .list-group-item:first-child {
+      border-top-right-radius: 0 !important;
+      border-top-left-radius: 0 !important;
+    }
+    .list-group-item:last-child {
+      .fa {
+        color: #3ACF4F;
+      }
+    }
+    .list-group-item {
+      padding: 5px 0;
+      font-family: Montserrat,sans-serif;
+      font-size: 12px;
+      width: 16%;
+
+      .fa {
+        color: #008CFF;
+      }
+      a {
+        color: #666 !important;
+      }
+      a:hover {
+        background-color: #F97352;
+        text-decoration: none;
+        opacity: 1;
+        border-radius: 0;
+      }
+    }
+    .list-group-item:hover {
+      background-color: #F97352;
+    }
+  }
+
+  .tab-content {
+    .tab-pane {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+  }
+
+  img{
+    width:100%;
+    height:auto;
+  }
+
+  .item img {
+    margin-bottom:10px;
+  }
+
+  .profile-pic-btn{
+    margin-left: 40px;
+  }
+
+  .profile-photo {
+    border:1px solid #DCDCDC;
+    padding:33px;
+    margin-top:24px;
+    background: white;
+  }
+
+  .ecv_error_heading {
+    color:red;
+  }
+  .ui-datepicker-next, .ui-datepicker-prev { display:none; }
+  span.red-star {
+    color: red;
+    font-weight: 600;
+    font-size: 24px;
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+    vertical-align: -moz-middle-with-baseline;
+  }
+}
+
+#template-carousel {
+  padding: 10px 10px 30px 10px;
+
+  .carousel-control {
+    background: none;
+    color: #222;
+    font-size: 2.3em;
+    text-shadow: none;
+  }
+  .carousel-control.left {
+    left: -75px;
+  }
+
+  .carousel-control.right {
+    right: -75px !important;
+  }
+
+  .carousel-indicators {
+    li {
+      background: #c0c0c0;
+    }
+    .active {
+      background: #333;
+    }
+  }
+
+  .fa-quote-left, .fa-quote-right {
+    color: black;
+  }
+
+  div.hidden-xs.carousel-caption {
+    position:fixed !important;
+    top:200px !important;
+    z-index: 99;
+  }
+}
+
+.select-exp_months{
+  margin-top: 25px;
+}
+
+.resume-editor {
+  .panel-body {
+    width: 100%;
+    display: -webkit-flex; /* Safari */
+    display: flex; /* Standard syntax */
+  }
+  .resume-editor-left, .panel-default .panel-heading {
+    color: #fff;
+  }
+  .resume-editor-left {
+    padding: 20px 0;
+    border-right: 1px solid #3071a9;
+    ul.nav-stacked {
+      margin-left: 15px;
+      li {
+        margin-bottom: 0.5em;
+        a {
+          border: 1px solid #3071a9;
+          border-right: none;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          position: relative;
+          background: #24607D;
+          height: 50px;
+          transition: all 300ms ease-in;
+          border-top-left-radius: 3px;
+          border-bottom-left-radius: 3px;
+          color: #ffffff;
+          background-color: #24607D;
+          background-image: -webkit-gradient(linear, left top, left bottom, from(#122931), to(#24607D));
+          box-shadow: inset -4px 0 2px rgba(214,214,214,0.5);
+        }
+      }
+      li.active {
+        margin-right: -1px;
+        padding-left: 1px;
+        a, a:hover {
+          border-color: #3071a9;
+          border:0;
+          border-radius: 0 !important;
+          background: #fff;
+          color: #417BFF;
+          font-weight: 600;
+          box-shadow: -1px 2px 2px rgba(0,0,0,0.08);
+        }
+      }
+    }
+    .dropdown {
+      margin: 20px;
+    }
+  }
+
+  .languages, .skills {
+    margin-bottom: 50px;
+    .skill-rating {
+      margin-top: 6px;
+    }
+  }
+  a i {
+    margin-right: 15px;
+  }
+  .exp-form {
+    margin-bottom: 30px;
+  }
+  .margin-bottom-30 {
+    margin-bottom: 30px;
+  }
+  .no-padding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .digital-cv-form ul .list-group-item {
+    width: 100%;
+  }
+}

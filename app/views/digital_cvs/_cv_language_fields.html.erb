@@ -1,0 +1,30 @@
+<div class="nested-fields nested_cv_languages" >
+	<div class="form-group">
+		<div class="col-sm-offset-1 col-sm-6">
+			<%= f.collection_select :language_id, Language.all, :id, :title, {:prompt => 'Select Language'}, { class: 'form-control cv_languages' } %>
+		</div>
+		<div class="col-sm-1 skill-rating">
+			<%= f.check_box :read, {},"true", "false" %>
+		</div>
+		<div class="col-sm-1 skill-rating">
+			<%= f.check_box :write, {},"true", "false"  %>
+		</div>
+		<div class="col-sm-1 skill-rating">
+			<%= f.check_box :speak, {},"true", "false" %>
+		</div>
+		<div class="col-sm-2 skill-rating text-right">
+			<%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
+		</div>
+	</div>
+
+	<script>
+		$(".nested_cv_languages select").chosen({
+			allow_insertion: true
+		});
+
+		$(".cv_languages").unbind().on('change',function(){
+			var selLangName = $(this).find('option:last-child').val();
+			saveNewLanguage($(this),selLangName);
+		})
+	</script>
+</div>

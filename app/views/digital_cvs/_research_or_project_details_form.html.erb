@@ -1,0 +1,18 @@
+<%= simple_form_for(@digital_cv, remote: true, html:{ class: 'form-horizontal' }) do |f| %>
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="cont_hed_colr text-center">RESEARCHES/PROJECTS</h4>
+      <div class="researchandproject" style="margin-bottom: 30px;">
+        <%= f.simple_fields_for :research_or_project_details do |rop| %>
+          <%= render "research_or_project_detail_fields", f: rop %>
+        <% end  %>
+      </div>
+      <div class="col-sm-offset-2">
+        <%= link_to_add_association 'Add More', f, :research_or_project_details, class: 'adda btn btn-info talent-fore-btn', data: { association_insertion_node: '.researchandproject', association_insertion_method: :append } %>
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <%= f.submit "Save and Continue", class: "btn btn-primary talent-fore-btn" %>
+  </div>
+<% end %>

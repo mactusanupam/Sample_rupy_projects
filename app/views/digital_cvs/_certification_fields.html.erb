@@ -1,0 +1,23 @@
+<div class="nested-fields certification-nested-fields">
+  <div class="form-group col-sm-12 text-right">
+    <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
+  </div>
+  <div class="form-group required">
+    <%= f.label :title, 'Certification Title', class: 'control-label text-right col-sm-2 no-padding' %>
+    <div class="col-sm-9">
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group required">
+    <%= f.label :certifier, 'Certifier', class: 'control-label text-right col-sm-2 no-padding' %>
+    <div class="col-sm-9">
+      <%= f.text_field :certifier, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group required">
+    <%= f.label :date, 'Certification Date', class: 'control-label text-right col-sm-2 no-padding' %>
+    <div class="col-sm-9">
+      <%= f.text_field :date, class: 'form-control date' %>
+    </div>
+  </div>
+</div>

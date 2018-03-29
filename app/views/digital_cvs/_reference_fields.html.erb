@@ -1,0 +1,39 @@
+<div class="nested-fields">
+  <div class="form-group col-sm-12 text-right">
+    <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
+  </div>
+  <div class="form-group required">
+    <%= f.label :name, 'Name', class: 'control-label col-sm-2 no-padding text-right' %>
+    <div class="col-sm-9">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group required">
+    <%= f.label :email, 'Email', class: 'control-label col-sm-2 no-padding text-right' %>
+    <div class="col-sm-9">
+      <%= f.text_field :email, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group required">
+    <%= f.label :mobile, 'Contact Number', class: 'control-label col-sm-2 no-padding text-right' %>
+    <div class="col-sm-9">
+      <%= f.number_field :mobile, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group required">
+    <%= f.label :company_id, 'Company Name', class: 'control-label text-right col-sm-2 no-padding' %>
+    <div class="col-sm-9">
+      <%= f.select :company_id, get_Company, {:prompt => 'Select Company'}, { class: 'form-control cv_company' } %>
+    </div>
+  </div>
+
+  <div class="form-group required">
+    <%= f.label :job_title, 'Designation', class: 'control-label col-sm-2 no-padding text-right' %>
+    <div class="col-sm-9">
+      <%= f.text_field :job_title_id, class: 'form-control project-description' %>
+    </div>
+  </div>
+</div>
