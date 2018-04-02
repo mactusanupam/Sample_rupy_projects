@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="comment_border">
+    <div class="margin-left-20">
+      <%= community_answer_comment.answer_text %> – <%= link_to community_answer_comment.user.try(:first_name) || Anonymus, class: "btn btn-link"  %>
+      <span class="text-grey-light2">
+        <%= time_ago_in_words(community_answer_comment.created_at) %> ago
+      </span>
+    </div>
+  </div>
+</div>

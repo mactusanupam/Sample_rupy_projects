@@ -1,0 +1,70 @@
+<div class="container-fluid">
+  <div class="row">
+    <%= render :partial => 'community_questions/community_blue_bar' %>
+  </div>
+</div>
+<div class="container">
+  <div class="col-md-10 col-centered">
+    <div class="col-md-12">
+      <div class="row">
+        <h3 class="margin-bottom-20"><%= @community_question.question_text %></h3>
+        <div class="row">
+          <div class="col-md-4">
+            <% if @community_question.anonymus %>
+                <%= link_to "anonymus", "javascript:void(0)" %>
+              <% else %>
+                <%= link_to @community_question.user.try(:first_name), "javascript:void(0)" %>
+              <% end %>
+              <small>
+                <i>
+                  asked <%= time_ago_in_words(@community_question.created_at) %> ago
+                </i>
+              </small>
+          </div>
+          <div class="col-md-4">
+            <%= link_to community_question_vote_path(@community_question), method: :put, remote: true, class: "btn btn-default btn-xs", id: "upvote" do %>
+                Like | <b> <%= @community_question.vote_count || 0 %></b>
+            <% end %>
+            <span class="text-muted">
+              Viewed: <%= pluralize(@community_question.view_count || 0, 'time') %>
+            </span>
+          </div>
+          <div class="col-md-4 text-right">
+            <%= render partial: 'community_questions/social_share', locals: {community_question: @community_question } %>
+          </div>
+        </div>
+        <hr style="margin-top: 0;" />
+      </div>
+      <div class="row">
+        <h3 id="total_answer_count">
+          <%= pluralize(@community_question.community_answers.size || 0, 'Answer') %>
+        </h3>
+        <hr style="margin: 10px 0;" />
+      </div>
+
+      <div class="row answers_list">
+        <% if @community_question.community_answers.size == 0 %>
+          <div class="row" id="total_answer_zero">
+            <p>
+              Can you please help us answer this question?
+              people are searching for an answer.
+              <%= link_to 'Answer Now', community_question_path(:id => @community_question.id,:anchor => "answer-now"), class: "btn btn-link", style: "padding-left: 0;" %>
+            </p>
+            <p>
+              Think someone in your network can answer this. Please share it on
+              <%= render partial: 'community_questions/social_share', locals: {community_question: @community_question } %>
+            </p>
+          </div>
+        <% else %>
+          <%= render partial: 'community_answer', collection: @community_question.community_answers %>
+        <% end %>
+      </div>
+      <div class="row margin-top-20">
+        <%= render partial: 'community_questions/post_answer'%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="ask_question" class="modal fade">
+</div>

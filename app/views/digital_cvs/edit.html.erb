@@ -24,7 +24,7 @@
                 <button id='cv-name-change' class="btn-link glyphicon glyphicon-pencil" style="color: white;"></button>
               </div>
               <div class="edit-cv-name" style="display: none; color: black;">
-                <%= form_for @digital_cv, url: update_cv_name_digital_cv_path(@digital_cv), remote: true, html: { style: 'display: inline;' }  do |form| %>
+                <%= form_for @digital_cv, url: update_name_digital_cv_path(@digital_cv), remote: true, html: { style: 'display: inline;' }  do |form| %>
                   <%= form.text_field :name, required: true %>
                   <button type="submit" class="btn btn-link change-name">
                     <span class="glyphicon glyphicon-ok text-primary"></span>
@@ -42,62 +42,62 @@
             <div class="col-md-3 no-padding talent-fore-btn">
               <div class="resume-editor-left">
                 <ul class="nav nav-pills nav-stacked">
-                  <li class="active">
-                    <a href="#contact-details" data-toggle="pill">
-                      <%= fa_icon 'address-card', text: 'CONTACT DETAILS' %>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#basic-information" data-toggle="pill">
+                  <li class="<%= (!all_sections.include?(params[:slug]) || params[:slug] == 'basic_information') ? 'active' : nil%>">
+                    <%= link_to "/digital-cvs/#{@digital_cv.id}/edit/basic_information", remote: true do %>
                       <%= fa_icon 'info-circle', text: 'SUMMARY' %>
-                    </a>
+                    <% end %>
+                  </li>
+                  <li class="<%= params[:slug] == 'contact_details' ? 'active' : nil%>">
+                    <%= link_to "/digital-cvs/#{@digital_cv.id}/edit/contact_details", remote: true do %>
+                      <%= fa_icon 'address-card', text: 'CONTACT DETAILS' %>
+                    <% end %>
                   </li>
                   <% if @digital_cv.is_experienced? %>
-                    <li>
-                      <a href="#work-experience" data-toggle="pill">
+                    <li class="<%= params[:slug] == 'employment_details' ? 'active' : nil%>">
+                      <%= link_to "/digital-cvs/#{@digital_cv.id}/edit/employment_details", remote: true do %>
                         <%= fa_icon 'suitcase', text: 'WORK EXPERIENCE' %>
-                      </a>
+                      <% end %>
                     </li>
                   <% end %>
-                  <li>
-                    <a href="#education" data-toggle="pill">
+                  <li class="<%= params[:slug] == 'education_details' ? 'active' : nil%>">
+                    <%= link_to "/digital-cvs/#{@digital_cv.id}/edit/academic_details", remote: true do %>
                       <%= fa_icon 'graduation-cap', text: 'EDUCATION' %>
-                    </a>
+                    <% end %>
                   </li>
-                  <li>
-                    <a href="#languages-and-skills" data-toggle="pill">
+                  <li class="<%= params[:slug] == 'languages_and_skills' ? 'active' : nil%>">
+                    <%= link_to "/digital-cvs/#{@digital_cv.id}/edit/languages_and_skills", remote: true do %>
                       <%= fa_icon 'gears', text: 'LANGUAGES & SKILLS' %>
-                    </a>
+                    <% end %>
                   </li>
-                  <li>
-                    <a href="#trainings" data-toggle="pill">
+                  <li class="<%= params[:slug] == 'trainings' ? 'active' : nil%>">
+                    <%= link_to "/digital-cvs/#{@digital_cv.id}/edit/trainings", remote: true do %>
                       <%= fa_icon 'university', text: 'TRAININGS' %>
-                    </a>
+                    <% end %>
                   </li>
-                  <li>
-                    <a href="#certifications" data-toggle="pill">
+                  <li class="<%= params[:slug] == 'certifications' ? 'active' : nil%>">
+                    <%= link_to "/digital-cvs/#{@digital_cv.id}/edit/certifications", remote: true do %>
                       <%= fa_icon 'certificate', text: 'CERTIFICATIONS' %>
-                    </a>
+                    <% end %>
                   </li>
-                  <li>
-                    <a href="#honors-and-awards" data-toggle="pill">
+                  <li class="<%= params[:slug] == 'honors_and_awards' ? 'active' : nil%>">
+                    <%= link_to "/digital-cvs/#{@digital_cv.id}/edit/honors_and_awards", remote: true do %>
                       <%= fa_icon 'trophy', text: 'HONORS & AWARDS' %>
-                    </a>
+                    <% end %>
                   </li>
-                  <li>
-                    <a href="#researches-or-projects" data-toggle="pill">
+                  <li class="<%= params[:slug] == 'research_or_project_details' ? 'active' : nil%>">
+                    <%= link_to "/digital-cvs/#{@digital_cv.id}/edit/research_or_project_details", remote: true do %>
                       <%= fa_icon 'tasks', text: 'RESEARCHES/PROJECTS' %>
-                    </a>
+                    <% end %>
                   </li>
-                  <li>
-                    <a href="#references" data-toggle="pill">
+                  <li class="<%= params[:slug] == 'references' ? 'active' : nil%>">
+                    <%= link_to "/digital-cvs/#{@digital_cv.id}/edit/references", remote: true do %>
                       <%= fa_icon 'users', text: 'REFERENCES' %>
-                    </a>
+                    <% end %>
                   </li>
-                  <li>
-                    <a href="#personal-details" data-toggle="pill">
+                  <li class="<%= params[:slug] == 'personal_details' ? 'active' : nil%>">
+                    <%= link_to "/digital-cvs/#{@digital_cv.id}/edit/personal_details", remote: true do %>
                       <%= fa_icon 'user-plus', text: 'PERSONAL DETAILS' %>
-                    </a>
+                    <% end %>
                   </li>
                 </ul>
                 <!-- <div class="dropdown">
@@ -135,41 +135,13 @@
                 <strong>TIPS: </strong>
                 Fields marked with <span class="red-star">*</span> are mandatory. However, to have enough content in your resume, please fill in all fields.
               </div>
-              <div class="tab-content clearfix no-padding">
-                <div id="contact-details" class="tab-pane fade in active">
-                  <%= render 'contact_detail_form' %>
-                </div>
-                <div id="basic-information" class="tab-pane fade">
-                  <%= render 'basic_information_form' %>
-                </div>
-                <% if @digital_cv.is_experienced? %>
-                <div id="work-experience" class="tab-pane fade">
-                  <%= render 'work_experience_form' %>
-                </div>
-                <% end %>
-                <div id="education" class="tab-pane fade">
-                  <%= render 'education_details_form' %>
-                </div>
-                <div id="languages-and-skills" class="tab-pane fade">
-                  <%= render 'languages_and_skills_form' %>
-                </div>
-                <div id="trainings" class="tab-pane fade">
-                  <%= render 'trainings_form' %>
-                </div>
-                <div id="certifications" class="tab-pane fade">
-                  <%= render 'certifications_form' %>
-                </div>
-                <div id="honors-and-awards" class="tab-pane fade">
-                  <%= render 'honors_and_awards_form' %>
-                </div>
-                <div id="researches-or-projects" class="tab-pane fade">
-                  <%= render 'research_or_project_details_form' %>
-                </div>
-                <div id="references" class="tab-pane fade">
-                  <%= render 'reference_form' %>
-                </div>
-                <div id="personal-details" class="tab-pane fade">
-                  <%= render 'additional_details_form' %>
+              <div class="tab-content clearfix no-padding" id="resume-editor-form">
+                <div class="tab-pane fade active in">
+                  <% if all_sections.include?(params[:slug]) %>
+                    <%= render "#{params[:slug]}_form" %>
+                  <% else %>
+                    <%= render "basic_information_form" %>
+                  <% end %>
                 </div>
               </div>
             </div>

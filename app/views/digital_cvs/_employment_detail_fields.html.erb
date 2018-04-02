@@ -2,49 +2,16 @@
   <div class="form-group col-sm-12 text-right">
     <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
   </div>
-  <div class="form-group required">
-    <%= f.label :company_id, 'Employer Name', class: 'control-label text-right col-sm-2 no-padding' %>
-    <div class="col-sm-9">
-      <%= f.select :company_id, get_Company, {:prompt => 'Select Your Employer'}, { class: 'form-control cv_company' } %>
-    </div>
-  </div>
-  <%= f.simple_fields_for :company, Company.new do |company_fields| %>
-    <%= render "company_fields", :f => company_fields %>
-  <% end %>
-  <div class="form-group required">
-    <%= f.label :job_title, 'Position Title', class: 'control-label text-right col-sm-2 no-padding' %>
-    <div class="col-sm-9">
-      <%= f.text_field :job_title, class: 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group required">
-    <%= f.label :start_date, 'Start Date', class: 'control-label text-right col-sm-2 no-padding' %>
-    <div class="col-sm-9">
-      <%= f.text_field :start_date, class: 'form-control date' %>
-      <span class="pull-right">
-        <%= f.check_box :present_job %>
-        <%= f.label :present_job, 'Still Working here?' %>
-      </span>
-    </div>
-  </div>
-  <div class="form-group required end-date" style="display: <%= f.object.present_job ? 'none': '' %>;">
-    <%= f.label :end_date, 'End Date', class: 'control-label text-right col-sm-2 no-padding' %>
-    <div class="col-sm-9">
-      <%= f.text_field :end_date, class: 'form-control date', disabled: f.object.present_job? %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :responsibilities, 'Responsibilities', class: 'control-label text-right col-sm-2 no-padding' %>
-    <div class="col-sm-9">
-      <%= f.text_area :responsibilities, as: :wysihtml5, class: 'form-control keyresarea'%>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :achievement, 'Acheivements', class: 'control-label text-right col-sm-2 no-padding' %>
-    <div class="col-sm-9">
-      <%= f.text_area :achievement, as: :wysihtml5, class: 'form-control achievements'%>
-    </div>
-  </div>
+  <%= f.association :company, label: 'Employer Name', input_html: { class: 'cv_company' }, label_html: { class: 'text-right' } %>
+  <%= f.association :job_title, label: 'Job Title', label_html: { class: 'text-right' } %>
+  <%= f.input :start_date, label_html: { class: 'text-right col-sm-3' }, input_html: { class: 'col-sm-9' } %>
+  <span class="pull-right">
+    <%= f.input :present_job, inline_label: 'Still Working here?' %>
+  </span>
+  <%= f.input :end_date, label_html: { class: 'text-right col-sm-3' }, wrapper_html: { class: 'col-sm-9' } %>
+  <%= f.input :responsibilities, label: 'Responsibilities' %>
+  <%= f.input :achievement, label: 'Achievements' %>
+
   <hr />
   <script>
     $(".achievements:last,.keyresarea:last").wysihtml5({ toolbar: {
@@ -63,3 +30,4 @@
     });
   </script>
 </div>
+

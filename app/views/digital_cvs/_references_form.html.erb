@@ -4,6 +4,7 @@
       <h4 class="cont_hed_colr text-center">REFERENCES</h4>
       <hr>
       <div class="referncescomp margin-bottom-30">
+        <% @digital_cv.references.build unless @digital_cv.references.present? %>
         <%= f.simple_fields_for :references do |ref| %>
           <%= render "reference_fields", f: ref %>
         <% end  %>

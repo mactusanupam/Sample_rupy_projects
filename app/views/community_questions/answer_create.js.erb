@@ -1,0 +1,26 @@
+<% if @community_answer && @community_answer.errors.any? %>
+  var id = "<%= @community_answer.parent_id %>";
+
+  $('#add_comment_errors'+id).show();
+  $("#add_comment_errors"+id).html("<%= escape_javascript(render partial: 'community_questions/add_question_error' ) %>");
+  <% if @community_answer.parent_id.nil? %>
+    $("#answer_errors").show();
+    $("#answer_errors").html("<%= escape_javascript(render partial: 'community_questions/add_question_error' ) %>");
+  <% end %>
+<% else %>
+
+  <% if @community_answer.parent_id.nil? %>
+    $('.answers_list').prepend("<%= escape_javascript(render partial: 'community_questions/community_answer', locals: { community_answer: @community_answer }) %>")
+    $('#post_answer')[0].reset();
+    $("#answer_errors").hide();
+    $("#total_answer_count").html("<%= pluralize(@community_question.community_answers.count || 0, 'Answer') %>");
+    $("#total_answer_zero").hide();
+  <% else %>
+    var id = "<%= @community_answer.parent_id %>";
+
+    $('#form'+id)[0].reset();
+    $("#add_comment"+id).hide();
+    $(".new_comment"+id).show();
+    $("#show_answers_comments-"+id).append("<%= escape_javascript(render partial: 'community_questions/community_answer_comment', locals: {community_answer_comment: @community_answer}) %>");
+  <% end %>
+<% end %>

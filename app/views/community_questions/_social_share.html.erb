@@ -1,0 +1,12 @@
+<%= link_to "https://www.facebook.com/sharer/sharer.php?u=#{community_question_url(community_question)}",  title: 'Share Me on facebook!', target: '_blank' do %>
+  <%= fa_icon "facebook-square 2x facebook-icon" %>
+<% end %>
+<%= link_to "https://twitter.com/intent/tweet/?text=sales world;url=#{community_question_url(community_question)}",  title: 'Share Me on twitter!', target: '_blank' do %>
+  <%= fa_icon "twitter-square 2x twitter-icon" %>
+<% end %>
+<%= link_to "https://plus.google.com/share?url=#{community_question_url(community_question)}",  title: 'Share Me on google plus!', target: '_blank' do %>
+  <%= fa_icon "google-plus-square 2x google-plus-icon" %>
+<% end %>
+<%= link_to "https://www.linkedin.com/shareArticle?url=#{community_question_url(community_question)};title=Salesworld Community&summary=Salesworld social share&source=#{root_url}",  title: 'Share Me on linkedin', target: '_blank' do %>
+  <%= fa_icon "linkedin-square 2x linkedin-icon" %>
+<% end %>

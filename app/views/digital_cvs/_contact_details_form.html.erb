@@ -1,13 +1,13 @@
-<div class="col-md-12 margin-bottom-30">
+<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 no-padding margin-bottom-30">
   <h4 class="text-center">CONTACT DETAILS</h4>
   <hr />
   <div class="row">
-    <div class="col-md-9">
-      <%= simple_form_for @digital_cv.contact_detail ||= @digital_cv.build_contact_detail, url: save_contact_detail_digital_cv_path(@digital_cv), remote: true, html: { class: 'form-horizontal', method: :post }  do |f| %>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 no-padding">
+      <%= simple_form_for @digital_cv.contact_detail ||= @digital_cv.build_contact_detail, url: save_contact_detail_digital_cv_path(@digital_cv), html: { method: :post, remote: true }, wrapper: :horizontal_form do |f| %>
 
         <%= f.error_notification %>
 
-        <div class="col-sm-12 margin-bottom-30">
+        <div class="col-sm-12 no-padding margin-bottom-30">
           <%= f.input :first_name %>
           <%= f.input :last_name %>
           <%= f.input :email %>

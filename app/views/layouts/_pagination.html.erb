@@ -1,0 +1,22 @@
+<div class = "col-md-12">
+  <%
+    page_start, page_end, page_count = start_end_page_number(page_size, total_count, params[:page].to_i)
+  %>
+
+  <nav aria-label="...">
+    <ul class="pagination">
+      <li class="<%= page_count == 1 ? 'disabled' : '' %>">
+        <%= link_to "First", (page_count == 1 || params[:page].to_i == 1) ? 'javascript:void(0)' : request.path, class: "page-link"%>
+      </li>
+
+      <% (page_start..page_end).each do |n| %>
+        <li class="<%= page_count == 1 || params[:page].to_i == n ? 'active' : '' %>">
+          <%= link_to n, page_count == 1 || params[:page].to_i == n ? 'javascript:void(0)' : request.params.merge(page: n) %>
+        </li>
+      <% end %>
+      <li class="<%= page_count == 1 ? 'disabled' : '' %>">
+        <%= link_to "Last", (page_count == 1 || page_count == params[:page].to_i) ? 'javascript:void(0)' : request.params.merge(page: page_count) %>
+      </li>
+    </ul>
+  </nav>
+</div>

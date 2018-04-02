@@ -1,0 +1,7 @@
+<% if @community_question.errors.any? %>
+ 	$("#add_question_errors").html("<%= escape_javascript(render partial: 'add_question_error' ) %>");
+<% else %>
+	$("#ask_question").modal('hide');
+	$(window.location.replace("<%=  community_question_path(:id => @community_question.id)  %>"))
+<% end %>
+

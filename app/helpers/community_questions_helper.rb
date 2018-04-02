@@ -1,0 +1,2 @@
+module CommunityQuestionsHelper
+end

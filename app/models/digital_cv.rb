@@ -49,7 +49,7 @@ class DigitalCv < ApplicationRecord
   has_many :certifications, :dependent => :destroy
   accepts_nested_attributes_for :certifications, allow_destroy: true, :reject_if => :all_blank
 
-  validates :objective,  presence: true, length: { maximum: 500 }
+  validates :summary,  presence: true, length: { maximum: 500 }
 
   before_create :set_slug
 
@@ -78,10 +78,10 @@ class DigitalCv < ApplicationRecord
   end
 
   def preferred_location
-    [prefferred_city, CS.countries[prefferred_country.to_sym]].join(', ')
+    [prefferred_city, CS.countries[prefferred_country.try(:to_sym)]].join(', ')
   end
 
   def present_location
-    [current_city, CS.countries[current_country.to_sym]].join(', ')
+    [current_city, CS.countries[current_country.try(:to_sym)]].join(', ')
   end
 end

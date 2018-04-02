@@ -4,6 +4,7 @@
       <h4 class="cont_hed_colr text-center">HONORS AND AWARDS</h4>
       <hr>
       <div class="honorandawards">
+        <% @digital_cv.honor_and_awards.build unless @digital_cv.honor_and_awards.present? %>
         <%= f.simple_fields_for :honor_and_awards do |honor_and_award| %>
           <%= render "honor_and_award_fields", f: honor_and_award %>
         <% end  %>

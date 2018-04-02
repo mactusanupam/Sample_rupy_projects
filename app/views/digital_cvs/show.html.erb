@@ -1,59 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <%= render 'blue_bar' %>
+</div>
+<%= render "digital_cvs/templates/html/#{@digital_cv.template.name}" %>
+<div class="text-center" style="margin-bottom: 30px;">
+  <%= link_to "Download Now", 'javascript:void(0)', class: 'btn btn-clock btn-primary btn-default' %>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @digital_cv.name %>
-</p>
-
-<p>
-  <strong>Summary:</strong>
-  <%= @digital_cv.summary %>
-</p>
-
-<p>
-  <strong>Objective:</strong>
-  <%= @digital_cv.objective %>
-</p>
-
-<p>
-  <strong>Is experienced:</strong>
-  <%= @digital_cv.is_experienced %>
-</p>
-
-<p>
-  <strong>Total experience:</strong>
-  <%= @digital_cv.total_experience %>
-</p>
-
-<p>
-  <strong>Employment status:</strong>
-  <%= @digital_cv.employment_status %>
-</p>
-
-<p>
-  <strong>Current location:</strong>
-  <%= @digital_cv.current_location %>
-</p>
-
-<p>
-  <strong>Preferred location:</strong>
-  <%= @digital_cv.preferred_location %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @digital_cv.user %>
-</p>
-
-<p>
-  <strong>Template:</strong>
-  <%= @digital_cv.template %>
-</p>
-
-<p>
-  <strong>Slug:</strong>
-  <%= @digital_cv.slug %>
-</p>
-
-<%= link_to 'Edit', edit_digital_cv_path(@digital_cv) %> |
-<%= link_to 'Back', digital_cvs_path %>
+<%= render "change_template_modal" %>

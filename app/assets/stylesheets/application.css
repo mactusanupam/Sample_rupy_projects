@@ -11,12 +11,14 @@
  * It is generally better to create a new file per style scope.
  *
  *= require font-awesome
+ *= require alertify
+ *= require alertify/bootstrap
  *= require_tree .
  *= require_self
  */
 
 .main-container {
-  margin-top: 90px;
+  margin-top: 91px;
 }
 .heading1 {
   font-size:30px;
@@ -60,4 +62,33 @@ input[type="number"] {
 
 .site-color {
   color: #24607D !important;
+}
+
+.resume-editor abbr, .contact-us abbr {
+  color: red;
+  border-bottom: none;
+}
+
+.page-desc h4, .page-desc h5, .site-features {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.page-desc .page-head {
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  font-family: Montserrat,sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #24607D;
+}
+
+.margin-top-bottom-10 {
+  margin: 10px 0 !important;
+}
+
+.alertify.ajs-movable:not(.ajs-maximized) .ajs-header {
+  color:#ff751a;
+}
+.alertify .ajs-body .ajs-content {
+  color: red;
 }

@@ -19,6 +19,7 @@
     <div class="row">
       <div class="addmorelang" >
         <br>
+        <% @digital_cv.cv_languages.build unless @digital_cv.cv_languages.present? %>
         <%= f.simple_fields_for :cv_languages do |language| %>
           <%= render "cv_language_fields" ,:f=>language %>
         <% end %>
@@ -50,6 +51,7 @@
     <hr />
     <div class="row">
       <div class="addmoreskill">
+        <% @digital_cv.cv_skills.build unless @digital_cv.cv_skills.present? %>
         <%= f.simple_fields_for :cv_skills do |cv_skill| %>
           <%= render "cv_skill_fields", :f => cv_skill %>
         <% end %>

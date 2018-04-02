@@ -1,0 +1,13 @@
+<% if all_sections.include?(params[:slug]) %>
+  var href = '<%= "/digital-cvs/#{@digital_cv.id}/edit/#{params[:slug]}" %>';
+  $('.resume-editor-left li.active').removeClass('active');
+  $('a[href$="'+href+'"]').parent('li').addClass('active');
+  $('#resume-editor-form').html('<%= escape_javascript(render partial: "digital_cvs/#{params[:slug]}_form" ) %>');
+  // window.history.pushState($('.digital-cv-form').html(), '', href);
+<% else %>
+  alertify.alert('Alert', 'Looks like you tampered the URL. Falling back to resume summary');
+  var href = '<%= "/digital-cvs/#{@digital_cv.id}/edit/basic_information" %>';
+  $('.resume-editor-left li.active').removeClass('active');
+  $('a[href$="'+href+'"]').parent('li').addClass('active');
+  $('#resume-editor-form').html('<%= escape_javascript(render partial: "digital_cvs/basic_information_form" ) %>');
+<% end %>

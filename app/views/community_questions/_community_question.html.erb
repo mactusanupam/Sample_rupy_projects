@@ -1,0 +1,44 @@
+<div class="row questions-list">
+  <div class="col-md-12">
+    <div class="col-md-offset-1 col-md-11 question <%= cycle('odd','even') %>">
+      <div class="col-md-2">
+        <div class="row">
+          <% if community_question.anonymus %>
+            <%= link_to "Anonymus", "javascript:void(0)" %>
+          <% else%>
+            <%= link_to community_question.user.try(:first_name), "javascript:void(0)" %>
+          <% end %>
+          <br />
+          <small class="text-muted">
+            asked <%= time_ago_in_words(community_question.created_at) %>
+            ago
+          </small>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <%= link_to community_question.question_text, community_question_path(community_question) %>
+        <div class="padding-5">
+          <%= link_to 'Answer Now', community_question_path(community_question,:anchor => "answer-now"), class: "btn btn-link", style: "padding-left: 0;" %>
+          <% if community_question.user == current_user %>
+            <%= link_to 'Edit', edit_community_question_path(community_question), class: "btn btn-link",remote:true %>
+          <% end %>
+          <div class="pull-right padding-5">
+            <%= render partial: 'community_questions/social_share', locals: {community_question: community_question } %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="col-md-4 text-center">
+          <%= pluralize(community_question.view_count || 0, 'view')  %>
+        </div>
+        <div class="col-md-4 text-center">
+          <%= pluralize(community_question.vote_count || 0, 'like')  %>
+        </div>
+        <div class="col-md-4 text-center">
+          <%= link_to pluralize(community_question.community_answers.where("parent_id IS ?", nil).count || 0, 'answer'),
+              community_question_path(community_question) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

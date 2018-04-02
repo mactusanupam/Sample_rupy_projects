@@ -25,15 +25,6 @@ class DigitalCvsController < ApplicationController
 
   # GET /digital_cvs/1/edit
   def edit
-    @digital_cv.research_or_project_details.build unless @digital_cv.research_or_project_details.present?
-    @digital_cv.trainings.build unless @digital_cv.trainings.present?
-    @digital_cv.honor_and_awards.build unless @digital_cv.honor_and_awards.present?
-    @digital_cv.references.build unless @digital_cv.references.present?
-    @digital_cv.certifications.build unless @digital_cv.certifications.present?
-    @digital_cv.employment_details.build unless @digital_cv.employment_details.present?
-    @digital_cv.academic_details.build unless @digital_cv.academic_details.present?
-    @digital_cv.cv_skills.build unless @digital_cv.cv_skills.present?
-    @digital_cv.cv_languages.build unless @digital_cv.cv_languages.present?
   end
 
   # POST /digital_cvs
@@ -49,14 +40,8 @@ class DigitalCvsController < ApplicationController
 
   # PATCH/PUT /digital_cvs/1
   def update
-    respond_to do |format|
-      if !params[:digital_cv].present? || @digital_cv.update(digital_cv_params)
-        format.html { redirect_to @digital_cv, notice: 'Digital cv was successfully updated.' }
-        format.js { }
-      else
-        format.js { render 'ecv_error', locals: { obj: @digital_cv } }
-      end
-    end
+    @digital_cv.update(digital_cv_params)
+    render :update, locals: { only_name: false, errors: @digital_cv.errors.any? }
   end
 
   # DELETE /digital_cvs/1
@@ -70,25 +55,19 @@ class DigitalCvsController < ApplicationController
 
   def save_personal_detail
     @personal_detail = @digital_cv.personal_detail
-
-    respond_to do |format|
-      if @personal_detail.update_with_context(personal_detail_params, params[:context].to_sym)
-        format.js { render :update }
-      else
-        format.js { render 'ecv_error', locals: { obj: @personal_detail } }
-      end
-    end
+    @personal_detail.update_attributes(personal_detail_params)
+    render :update, locals: { only_name: false, errors: @personal_detail.errors.any? }
   end
 
   def save_contact_detail
     @contact_detail = @digital_cv.contact_detail
     @contact_detail.update_attributes(contact_detail_params)
-    render :update
+    render :update, locals: { only_name: false, errors: @contact_detail.errors.any? }
   end
 
   def update_name
     @digital_cv.update_column(:name, params[:digital_cv][:name])
-    render :update, locals: { only_name: true  }
+    render :update, locals: { only_name: true }
   end
 
   def save_photo
@@ -101,7 +80,7 @@ class DigitalCvsController < ApplicationController
 
   def change_cv_template
     @digital_cv.update_attribute(:template_id, params[:template_id])
-    redirect_to share_and_download_digital_cv_path(@digital_cv)
+    redirect_to preview_digital_cv_path(@digital_cv)
   end
 
   def share_and_download
@@ -157,16 +136,16 @@ class DigitalCvsController < ApplicationController
 
   def employment_details_attributes
     [
-      :id, :industry_id, :digital_cv_id, :company_id, :achievement, :key_area,
-      :job_title, :start_date, :end_date, :present_job, :industry_name, :_destroy,
+      :id, :job_title_id, :digital_cv_id, :company_id, :achievement, :responsibilities,
+      :start_date, :end_date, :present_job, :industry_name, :_destroy,
       company_attributes: [:website, :name, :id]
     ]
   end
 
   def academic_details_attributes
     [
-      :institution, :id, :digital_cv_id, :digital_cv, :degree, :specialization,
-      :university, :percentage, :start_date, :end_date, :_destroy, :pursuing
+      :institution, :id, :digital_cv_id, :degree_id, :specialization_id,
+      :institute, :university, :percentage, :start_date, :end_date, :_destroy, :pursuing
     ]
   end
 

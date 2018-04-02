@@ -127,7 +127,7 @@
           <% end %>
         </ul>
       </div>
-      <% if @digital_cv.experienced? && (@digital_cv.employment_status.present? || @digital_cv.city.present?)  %>
+      <% if @digital_cv.is_experienced? && (@digital_cv.employment_status.present? || @digital_cv.city.present?)  %>
         <div class="col-md-4 col-xs-4">
           <h4>EMPLOYMENT DETAILS</h4>
           <ul class="unstyle_empl_det">
@@ -137,16 +137,16 @@
                 <%= @digital_cv.employment_status %>
               </li>
             <% end %>
-            <% if @digital_cv.experienced? %>
+            <% if @digital_cv.is_experienced? %>
               <li>
                 <strong><i class="fa fa-briefcase fa-1x"></i></strong>&nbsp;
                 <%= @digital_cv.year %>  Years and <%= @digital_cv.month %> Months
               </li>
             <% end %>
-            <% if @digital_cv.city.present? %>
+            <% if @digital_cv.current_city.present? %>
               <li>
                 <strong><i class="fa fa-map-marker fa-1x"></i></strong>&nbsp;&nbsp;
-                <%= @digital_cv.city %>
+                <%= @digital_cv.current_city %>
               </li>
             <% end %>
             <% if @digital_cv.prefferred_location.present? %>
@@ -185,10 +185,10 @@
               <%= @digital_cv.personal_detail.try(:marital_status) %>
             </li>
           <% end %>
-          <% unless @digital_cv.personal_detail.physical_challenged.nil? %>
+          <% unless @digital_cv.personal_detail.disabled.nil? %>
             <li>
               <i class="fa fa-wheelchair fa-1x"></i>&nbsp;
-              <% if @digital_cv.personal_detail.try(:physical_challenged) %>
+              <% if @digital_cv.personal_detail.try(:disabled) %>
                 Yes
               <% else %>
                 No
@@ -460,11 +460,11 @@
         </ul>
       </section><br>
     <% end %>
-    <% if @digital_cv.personal_detail.hobbies_and_interest.present? %>
+    <% if @digital_cv.personal_detail.hobbies.present? %>
       <section>
         <h4><i class="fa fa-hourglass"></i>&nbsp; HOBBIES AND INTERESTS</h4>
         <hr>
-        <p><%= raw @digital_cv.personal_detail.hobbies_and_interest %></p>
+        <p><%= raw @digital_cv.personal_detail.hobbies %></p>
       </section>
       <br>
     <% end %>
@@ -476,7 +476,7 @@
       <br>
       <br>
       <p>
-        <strong>Place:</strong><%= @digital_cv.try(:city) %>
+        <strong>Place:</strong><%= @digital_cv.current_city %>
         <strong>
           <span class="pull-right">
             <%= @digital_cv.personal_detail.try(:name) %>

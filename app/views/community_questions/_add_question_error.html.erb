@@ -1,0 +1,19 @@
+<% if @community_question && @community_question.errors.any? %>
+  <div class="row alert alert-danger">
+    <ul class="list-unstyled">
+    <li><%= @community_question.errors.full_message(:question_title, "can't be blank")  if @community_question[:question_text].blank?%></li>
+     <li><%= @community_question.errors.full_message(:terms_and_conditions, "must be accepted")  if @community_question.errors[:terms_and_conditions].present?%></li>
+     <li><%= @community_question.errors.full_message(:question_title, "needs more details, add more information to ask a clear question")  if !@community_question[:question_text].blank? && @community_question[:question_text].size < 30%></li>
+   </ul>
+  </div>
+<% end %>
+
+<% if @community_answer && @community_answer.errors.any? %>
+    <div class="alert alert-danger">
+      <ul class="list-unstyled">
+        <% @community_answer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>

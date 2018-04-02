@@ -1,0 +1,56 @@
+<% content_for :title, "Forum | Ask & Answer | Discussions | Sales World Community" %>
+<div class="container-fluid">
+  <div class="row">
+    <%= render :partial => 'community_questions/community_blue_bar' %>
+  </div>
+</div>
+<div class="container">
+  <div class="row page-desc">
+    <div class="col-md-12 text-center">
+      <h1 class="page-head">Discussions</h1>
+      <h4>
+        Have something to share or ask? Make use of this forum to express your thoughts and get queries answered by experts
+      </h4>
+      <h5>
+        <strong>Our sales community makes it easy to access information, and enables sharing of new ideas fast and easy. Start a new conversation or add your invaluable views on an on-going one – either way everyone participates and learns. It is a platform to collaborate with like-minded people, and anyone else critical to your business’ success.
+        </strong>
+      </h5>
+      <hr>
+      <div class="col-md-offset-3 col-md-6">
+        <%= form_tag(community_questions_path , method: :get, class: "search-input") do %>
+          <div class="input-group">
+            <%= text_field_tag :question_text, params[:question_text] , class: "form-control", "aria-describedby": "basic-addon1" %>
+            <span class="input-group-addon" id="basic-addon1">
+              <%= submit_tag 'Search' ,name: nil , class: "btn search-btn"%>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-11">
+    <div class="col-md-offset-1">
+      <h2>Recent Questions:</h2>
+    </div>
+      <div class="row questions">
+        <div class="col-md-12">
+          <% if @community_questions.size > 0 %>
+            <%= render @community_questions %>
+          <% else %>
+            <div class="row">
+              <div class="col-md-12">
+                <h1>No question asked so far!!! <%= link_to 'start asking question', new_community_question_path,remote:true %></h1>
+              </div>
+            </div>
+          <% end %>
+          <div class="row pull-right">
+            <%= render partial: 'layouts/pagination', locals: { page_size: 15, total_count: @community_questions_total.size } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="ask_question" class="modal fade">
+</div>

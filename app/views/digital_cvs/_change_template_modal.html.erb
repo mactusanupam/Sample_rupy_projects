@@ -37,7 +37,7 @@
               <% img = "digital_cv/cvtemplateimage/#{template.name}.png" %>
               <%= image_tag img, alt: "Template Blue" %>
               <div class="hidden-xs carousel-caption">
-                <%= link_to "Use this template", change_cv_template_digital_cv_path(template_id: template.id), class: "btn btn-primary btn-lg change-template-button", remote: true %>
+                <%= link_to "Use this template", change_cv_template_digital_cv_path(template_id: template.id), class: "btn btn-primary btn-lg change-template-button" %>
               </div>
             </div>
           <%end %>

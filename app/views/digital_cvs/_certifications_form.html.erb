@@ -3,7 +3,8 @@
     <h4 class="text-center">Certifications</h4>
     <hr />
     <div class="ecv_error_data"></div>
-    <div class="certificationdata">
+    <div class="add_more_certificates">
+      <% @digital_cv.certifications.build unless @digital_cv.certifications.present? %>
       <%= f.simple_fields_for :certifications do |f| %>
         <%= render "certification_fields", f: f %>
       <% end %>
@@ -11,7 +12,7 @@
   </div>
   <div class="row margin-bottom-30">
     <div class="col-sm-offset-2">
-      <%= link_to_add_association 'Add Another Certification', f, :certifications, class: 'adda btn btn-info talent-fore-btn', data: { association_insertion_node: '.certificationdata', association_insertion_method: :append } %>
+      <%= link_to_add_association 'Add Another Certification', f, :certifications, class: 'adda btn btn-info talent-fore-btn', data: { association_insertion_node: '.add_more_certificates', association_insertion_method: :append } %>
     </div>
   </div>
   <div class="text-center">

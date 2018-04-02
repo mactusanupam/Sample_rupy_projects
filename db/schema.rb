@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180329161227) do
+ActiveRecord::Schema.define(version: 20180402080437) do
 
   create_table "academic_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "institute"
@@ -38,6 +38,31 @@ ActiveRecord::Schema.define(version: 20180329161227) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["digital_cv_id"], name: "index_certifications_on_digital_cv_id"
+  end
+
+  create_table "community_answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "answer_text"
+    t.integer "vote_count"
+    t.boolean "anonymus"
+    t.bigint "community_question_id"
+    t.bigint "user_id"
+    t.bigint "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["community_question_id"], name: "index_community_answers_on_community_question_id"
+    t.index ["user_id"], name: "index_community_answers_on_user_id"
+  end
+
+  create_table "community_questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "question_text"
+    t.text "brief_details"
+    t.integer "vote_count"
+    t.integer "view_count"
+    t.bigint "user_id"
+    t.boolean "anonymus"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_community_questions_on_user_id"
   end
 
   create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -181,6 +206,14 @@ ActiveRecord::Schema.define(version: 20180329161227) do
     t.index ["digital_cv_id"], name: "index_personal_details_on_digital_cv_id"
   end
 
+  create_table "photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "imageable_type"
+    t.bigint "imageable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_photos_on_imageable_type_and_imageable_id"
+  end
+
   create_table "qualifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -280,10 +313,24 @@ ActiveRecord::Schema.define(version: 20180329161227) do
     t.index ["user_type_id"], name: "index_users_on_user_type_id"
   end
 
+  create_table "votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.string "voteable_type"
+    t.bigint "voteable_id"
+    t.string "ip_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_votes_on_user_id"
+    t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable_type_and_voteable_id"
+  end
+
   add_foreign_key "academic_details", "degrees"
   add_foreign_key "academic_details", "digital_cvs"
   add_foreign_key "academic_details", "specializations"
   add_foreign_key "certifications", "digital_cvs"
+  add_foreign_key "community_answers", "community_questions"
+  add_foreign_key "community_answers", "users"
+  add_foreign_key "community_questions", "users"
   add_foreign_key "contact_details", "digital_cvs"
   add_foreign_key "cv_languages", "digital_cvs"
   add_foreign_key "cv_languages", "languages"
@@ -305,4 +352,5 @@ ActiveRecord::Schema.define(version: 20180329161227) do
   add_foreign_key "users", "companies"
   add_foreign_key "users", "job_titles"
   add_foreign_key "users", "user_types"
+  add_foreign_key "votes", "users"
 end

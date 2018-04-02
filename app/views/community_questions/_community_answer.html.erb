@@ -1,0 +1,63 @@
+<div class="clearfix"></div>
+<div class="col-md-12 col-centered answer">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <h5 style="margin-bottom: 15px;">
+          <%= link_to "javascript:void(0)" do %>
+            <span class="text-capitalize">
+              <%= community_answer.anonymus ? 'Anonymus' : community_answer.user.try(:first_name) %>
+            </span>
+            <small class="text-grey-light">
+              answered <%= time_ago_in_words(community_answer.created_at) %> ago
+            </small>
+          <% end %>
+        </h5>
+        <p><%= community_answer.answer_text.html_safe %></p>
+        <div class="col-md-12 no-padding" style="margin: 15px 0;">
+          <div class="text-left">
+            <%= link_to community_question_community_answer_upvote_path(community_answer.community_question, community_answer), method: :put, remote: true, class: "btn btn-default btn-xs", id: "answers_upvote#{community_answer.id}" do %>
+              Like | <b><%= community_answer.upvote_count || 0 %></b>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="row">
+        <div id="show_answers_comments-<%= community_answer.id %>" class="col-md-12">
+          <%= render partial: 'community_questions/community_answer_comment', collection: community_answer.comments.limit(3) %>
+        </div>
+
+        <% if community_answer.comments.size > 3 %>
+          <div class="padding-bottom-10 margin-left-20">
+            <%= link_to "Show all comments", all_comments_community_question_community_answer_path(community_answer.community_question, community_answer), class: "btn btn-link no_padding", remote: true %>
+          </div>
+        <% end %>
+        <div class="col-md-8 padding_1 margin-top-5 hidden comments" id="add_comment<%= community_answer.id%>">
+          <div class="media">
+            <div class="media-body">
+              <div id="add_comment_errors<%= community_answer.id%>"></div>
+              <%= form_with(model: [ @community_question, @community_question.community_answers.build ] , remote: true, :html => { class: "form-horizontal", id: "form#{community_answer.id}"}) do |form| %>
+                <%= form.hidden_field :parent_id, value: community_answer.id %>
+                <%= form.text_area :answer_text, class: "form-control", placeholder: "Add your comment" %>
+                <%= form.submit  "Add comment", class: 'btn btn-primary btn-xs margin-top-5 site_button' %>
+                <%= link_to  "Cancel","",class: 'btn btn-default btn-xs margin-top-5 cancel_add_comment', id: "#{community_answer.id}" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="add_comment_text pull-left">
+          <%=
+            link_to_if(current_user.nil?, "Add your comment", new_user_session_path, class: "btn btn-link btn-xs text-grey-light1 no_padding") do%>
+            <a href="javascript:void(0)" id="<%= community_answer.id %>" class="btn btn-link no_padding new_comment<%= community_answer.id %>" onclick="show_add_comment(<%= community_answer.id %>)">
+              add a comment
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

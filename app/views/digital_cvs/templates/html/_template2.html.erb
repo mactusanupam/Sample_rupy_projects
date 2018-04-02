@@ -1,40 +1,40 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <style type="text/css">
 
-	img{
+	.template-2-data img{
 		width:80px;
 		height:80px;
 	}
-	.pp-image{
+	.template-2-data .pp-image{
 		padding-left:41px;
 	}
 
-	hr{
+	.template-2-data hr{
 		margin-top: -2px;
 	}
 
-	.container{
+	.template-2-data .container{
 		background: #fff;
 		box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 	}
 
-  .profile_social_url{
+  .template-2-data .profile_social_url{
     max-width:154;
     word-wrap:break-word;
   }
 
- .existingEntry{
+ .template-2-data .existingEntry{
     margin-bottom: -35px !important;
   }
-  h4{
+  .template-2-data h4{
     font-weight:500;
   }
 
-  .employ_det_d{
+  .template-2-data .employ_det_d{
     padding-top:0px !important;
   }
 
-  h6 {
+  .template-2-data h6 {
     word-break: break-all;
   }
 </style>
@@ -331,16 +331,16 @@
                 <%= @digital_cv.personal_detail.try(:gender).to_s.capitalize %>
               </li>
             <% end %>
-            <% unless @digital_cv.personal_detail.physical_challenged.nil? %>
+            <% unless @digital_cv.personal_detail.disabled.nil? %>
               <li>
                 <strong>Physically Challenged: </strong>
-                <%= @digital_cv.personal_detail.try(:physical_challenged?) ? 'Yes' : 'No' %>
+                <%= @digital_cv.personal_detail.try(:disabled?) ? 'Yes' : 'No' %>
               </li>
             <% end %>
-            <% if @digital_cv.personal_detail.hobbies_and_interest.present? %>
+            <% if @digital_cv.personal_detail.hobbies.present? %>
               <li>
                 <p><strong>Hobbies and Interest-</strong>
-                <%= raw @digital_cv.personal_detail.hobbies_and_interest %>
+                <%= raw @digital_cv.personal_detail.hobbies %>
               </li>
             <% end %>
           </ul>
@@ -375,10 +375,10 @@
       <br>
       <div class="col-sm-offset-3">
         <p>
-          <strong>Place:</strong><%= @digital_cv.city %>
+          <strong>Place:</strong><%= @digital_cv.current_city %>
           <strong>
             <span class="col-sm-offset-9">
-              <%= @digital_cv.personal_detail.name %>
+              <%= @digital_cv.contact_detail.try(:name) %>
             </span>
           </strong>
         </p>
