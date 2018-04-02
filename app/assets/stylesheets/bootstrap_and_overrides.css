@@ -41,7 +41,9 @@
   vertical-align: -webkit-baseline-middle;
   vertical-align: -moz-middle-with-baseline;
 }
-
+.btn-sharp {
+  border-radius: 0;
+}
 .margin-top-20 {
   margin-top: 20px;
 }
@@ -53,6 +55,22 @@
   padding-top: 5px;
 }
 
+.big-btn {
+  padding: 15px 24px;
+}
+
+.padding-bottom-10 {
+  padding-top: 10px;
+}
+
 .no-padding {
   padding: 0px !important;
+}
+
+.margin-top-50 {
+  margin-top: 50px;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px;
 }

@@ -69,6 +69,19 @@
 
 .cv-builder-features {
   padding: 50px 0;
+  p {
+    color: black;
+    font-size: 1.1em;
+    line-height: 1.7;
+  }
+  h4 {
+    margin: 0 0 1.5em;
+    font-weight: 600;
+    font-size: 1.25em;
+  }
+  hr {
+    border: 1px solid #ebebeb;
+  }
 }
 
 /*******************END CSS FOR RESUME BUILDER LANDING PAGE***************************/

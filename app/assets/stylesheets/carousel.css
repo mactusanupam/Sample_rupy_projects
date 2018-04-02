@@ -9,8 +9,10 @@
 }
 .cv-landing .carousel-control.left,
 .cv-landing .carousel-control.right {
-  margin-right: 40px;
-  margin-left: 32px;
+  /*margin-right: 40px;
+  margin-left: 32px;*/
+  margin-right: -20px;
+  margin-left: -28px;
   background-image: none;
   opacity: 1;
 }
@@ -62,14 +64,21 @@
 
 /*lg*/
 @media (min-width: 1200px) {
-  .cv-landing .carousel-inner .active.left { left: -25%; }
-  .cv-landing .carousel-inner .active.right{ left:  25%; }
-  .cv-landing .carousel-inner .next        { left:  25%; }
-  .cv-landing .carousel-inner .prev        { left: -25%; }
-  .cv-landing .carousel-col                { width: 25%; }
+  .cv-landing .carousel-inner .active.left { left: -35%; }
+  .cv-landing .carousel-inner .active.right{ left:  35%; }
+  .cv-landing .carousel-inner .next        { left:  35%; }
+  .cv-landing .carousel-inner .prev        { left: -35%; }
+  .cv-landing .carousel-col                { width: 33%; }
   .cv-landing .active > div:first-child + div { display:block; }
   .cv-landing .active > div:first-child + div + div { display:block; }
   .cv-landing .active > div:first-child + div + div + div { display:block; }
+}
+
+.cv-landing .carousel-col {
+  padding: 1em 1.25em;
+}
+.cv-landing .item img {
+  box-shadow: 2px 6px 11px 0 #dadada
 }
 
 .cv-landing .block {
