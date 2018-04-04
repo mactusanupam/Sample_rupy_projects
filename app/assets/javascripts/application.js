@@ -14,7 +14,6 @@
 //= require rails-ujs
 //= require cocoon
 //= require twitter/bootstrap
-//= require turbolinks
 //= require bootstrap-wysihtml5
 //= require alertify
 //= require_tree .

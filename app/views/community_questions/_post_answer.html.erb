@@ -15,13 +15,11 @@
     <div class="form-group">
       <%= form.text_area :answer_text, class: "form-control text_area", rows: 7 %>
     </div>
-
-    <div class="form-group pull-right">
-      <%= form.check_box :anonymus, id: :community_answer_anonymus, class: "pull-left" %>
-      <span class="padding-top3 padding-left-5">Add Anonymously</span>
-    </div>
-
     <% if user_signed_in? %>
+      <div class="form-group pull-right">
+        <%= form.check_box :anonymus, id: :community_answer_anonymus, class: "pull-left" %>
+        <span class="padding-top3 padding-left-5">Add Anonymously</span>
+      </div>
       <div class="form-group">
         <%= form.submit  "Post Your Answer", class: 'btn btn-primary talent-fore-btn' %>
       </div>

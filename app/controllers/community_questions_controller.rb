@@ -44,9 +44,9 @@ class CommunityQuestionsController < ApplicationController
     redirect_to community_questions_url, notice: 'Community question was successfully destroyed.'
   end
 
-  def upvote
+  def vote
     @community_question = CommunityQuestion.find(params[:community_question_id])
-    @community_question.increment!(:upvote_count)
+    @community_question.increment!(:vote_count)
     respond_to do |format|
       @question_upvote = 1
       format.html

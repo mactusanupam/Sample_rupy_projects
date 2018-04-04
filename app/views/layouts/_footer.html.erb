@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-5 col-sm-5 col-xs-12 text-center">
+      <a class="brand" href="https://websummit.com">
+      <%= image_tag "static_pages/startup_badge_alpha.png", class: 'img-responsive', alt: 'websummit', title: 'salesworld' %>
+      </a>
+      <a class="brand" href="https://riseconf.com/">
+        <%= image_tag "static_pages/rise.png", class: 'img-responsive', alt: 'rise', title: 'salesworld' %>
+      </a>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+      <ul class="list-unstyled">
+        <li><%= link_to 'About Us', 'javascript:void(0)', class: "text-black" %></li>
+        <li><%= link_to 'Media Room', 'javascript:void(0)', class: "text-black" %></li>
+        <li><%= link_to 'Careers', 'javascript:void(0)', class: "text-black" %></li>
+        <li>
+          <%= link_to 'Terms and Conditions', 'javascript:void(0)', class: "text-black" %>
+        </li>
+        <li><h4>CONTACTS</h4></li>
+        <li><span class="glyphicon glyphicon-envelope"></span>&nbsp;
+        <%= link_to 'info@salesworld[dot]net', "mailto:info@salesworld.net" %></li>
+        <li><span class="glyphicon glyphicon-phone-alt"></span>&nbsp; +91 - 8880088080</li>
+        <li>
+          <%= link_to "Contact Us", '/contact-us', class: "btn btn-danger btn-round" %>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="text-center"><h4>QUICK LINKS</h4></div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <ul class="list-unstyled">
+          <li>
+            <%= link_to 'Skill Assessment', 'javascript:void(0)', class: "text-black" %>
+          </li>
+          <li>
+            <%= link_to 'Resume Builder', "/", class: "text-black" %>
+          </li>
+          <li>
+            <%= link_to 'Search Jobs', 'javascript:void(0)', class: "text-black" %>
+          </li>
+         </ul>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <ul class="list-unstyled">
+          <!-- <li><%#= link_to 'Refer a Friend', referral_path, class: "text-black" %></li> -->
+          <li>
+            <%= link_to 'Write a Review', 'javascript:void(0)', class: "text-black" %>
+          </li>
+          <li><%= link_to 'Post Jobs', '/post-jobs', class: "text-black" %></li>
+          <li><%= link_to 'Discussions', community_questions_path, class: "text-black" %></li>
+          <li><%= link_to 'Blogs', 'javascript:void(0)', class: "text-black" %></li>
+          <!-- <li><%#= link_to 'My Learnings', 'javascript:void(0)', class: "text-black" %></li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -15,15 +15,11 @@ class CommunityAnswersController < ApplicationController
     render template: 'community_questions/answer_create.js.erb'
   end
 
-  def upvote
+  def vote
     @community_answer = CommunityAnswer.find(params[:community_answer_id])
-    @community_answer.increment!(:upvote_count)
+    @community_answer.increment!(:vote_count)
     @answer_upvote = 1
-    render :template => 'community_questions/upvote.js.erb'
-  end
-
-  def downvote
-    CommunityAnswer.decrement_counter(:upvote_count, params[:community_answer_id])
+    render :template => 'community_questions/vote.js.erb'
   end
 
   private
