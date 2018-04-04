@@ -11,4 +11,12 @@ class StaticPagesController < ApplicationController
 
   def resume_builder
   end
+
+  def states
+    render json: CS.get(params[:countrycode])
+  end
+
+  def cities
+    render json: CS.get(params[:country], params[:state])
+  end
 end

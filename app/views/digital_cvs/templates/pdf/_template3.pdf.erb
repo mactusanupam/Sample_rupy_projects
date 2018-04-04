@@ -292,9 +292,9 @@ td{
                 </strong>
               </td>
               <td width="95%" valign="top" class="employ_det_d">
-                <h5><strong><%= employment_detail.job_title %></strong></h5>
+                <h5><strong><%= employment_detail.job_title.name %></strong></h5>
                 <h6><%= employment_detail.company.name %></h6>
-                <p><%= employment_detail.key_area.html_safe %></p>
+                <p><%= employment_detail.responsibilities.html_safe %></p>
                 <p><%= employment_detail.achievement.html_safe %></p>
               </td>
             </tr>
@@ -316,7 +316,7 @@ td{
                 </strong>
               </td>
               <td valign="top" width="95%" >
-                <p><strong><%= academic_detail.degree %></strong>&nbsp;in&nbsp;<%= academic_detail.specialization %> with <%= academic_detail.percentage %>% from <strong><%= academic_detail.university %></strong></p>
+                <p><strong><%= academic_detail.degree.title %></strong>&nbsp;in&nbsp;<%= academic_detail.specialization.title %> with <%= academic_detail.percentage %>% from <strong><%= academic_detail.university %></strong></p>
               </td>
             </tr>
           <% end %>
@@ -338,7 +338,7 @@ td{
             a << 'Speak' if cv_language.speak?
           %>
           <li class="padding-5">
-            <strong><%= cv_language.language.name %></strong>
+            <strong><%= cv_language.language.title %></strong>
             (<%= a.join(', ') %>)
           </li>
           <% end %>

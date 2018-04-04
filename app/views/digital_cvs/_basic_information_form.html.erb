@@ -4,8 +4,8 @@
     <hr />
     <%= f.error_notification %>
     <div class="col-md-12">
-      <%= f.input :summary, label: 'Executive Summary' %>
-      <%= f.input :objective %>
+      <%= f.input :summary, label: 'Executive Summary', input_html: { rows: 5 } %>
+      <%= f.input :objective, input_html: { rows: 5 } %>
       <%= f.input :employment_status, as: :radio_buttons, collection: [['Employed', 'Employed'], ['Not Working', 'Not Working'], ['On Sabbatical', 'On Sabbatical']], label_method: :second, value_method: :first, item_wrapper_class: 'radio-inline'  %>
       <%= f.input :total_experience do %>
         <%
@@ -21,24 +21,24 @@
       <% end %>
       <%= f.input :current_location do %>
         <div class="col-sm-4 no-padding">
-          <%= f.collection_select :current_country, CS.get(), :first, :last, { include_blank: 'Select Country' }, :class => 'form-control select_country' %>
+          <%= f.collection_select :current_country, CS.get(), :first, :last, { include_blank: 'Select Country' }, :class => 'form-control current select_country' %>
         </div>
         <div class="col-sm-4" style="padding-right: 0;">
-          <%= f.collection_select :current_state, CS.states(@digital_cv.current_country.present? ? @digital_cv.current_country : :none), :first, :last, { include_blank: 'Select State' }, :class => 'form-control select_state' %>
+          <%= f.collection_select :current_state, CS.states(@digital_cv.current_country.present? ? @digital_cv.current_country : :none), :first, :last, { include_blank: 'Select State' }, :class => 'form-control current select_state' %>
         </div>
         <div class="col-sm-4" style="padding-right: 0;">
-          <%= f.collection_select :current_city, CS.cities(@digital_cv.current_state), :to_s, :to_s, { include_blank: 'Select City' }, :class => 'form-control select_city' %>
+          <%= f.collection_select :current_city, CS.cities(@digital_cv.current_state), :to_s, :to_s, { include_blank: 'Select City' }, :class => 'form-control current select_city' %>
         </div>
       <% end %>
       <%= f.input :prefferred_location do %>
         <div class="col-sm-4 no-padding">
-          <%= f.collection_select :prefferred_country, CS.get(), :first, :last, { include_blank: 'Select Country' }, :class => 'form-control select_country' %>
+          <%= f.collection_select :prefferred_country, CS.get(), :first, :last, { include_blank: 'Select Country' }, :class => 'form-control prefferred select_country' %>
         </div>
         <div class="col-sm-4" style="padding-right: 0;">
-          <%= f.collection_select :prefferred_state, CS.states(@digital_cv.prefferred_country.present? ? @digital_cv.prefferred_country : :none), :first, :last, { include_blank: 'Select State' }, :class => 'form-control select_state' %>
+          <%= f.collection_select :prefferred_state, CS.states(@digital_cv.prefferred_country.present? ? @digital_cv.prefferred_country : :none), :first, :last, { include_blank: 'Select State' }, :class => 'form-control prefferred select_state' %>
         </div>
         <div class="col-sm-4" style="padding-right: 0;">
-          <%= f.collection_select :prefferred_city, CS.cities(@digital_cv.prefferred_state), :to_s, :to_s, { include_blank: 'Select City' }, :class => 'form-control select_city' %>
+          <%= f.collection_select :prefferred_city, CS.cities(@digital_cv.prefferred_state), :to_s, :to_s, { include_blank: 'Select City' }, :class => 'form-control prefferred select_city' %>
         </div>
       <% end %>
     </div>

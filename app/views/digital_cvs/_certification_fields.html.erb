@@ -4,5 +4,6 @@
   </div>
   <%= f.input :title, label: 'Certification Title' %>
   <%= f.input :certifier, label: 'Certifier' %>
-  <%= f.input :date, label: 'Certification Date' %>
+  <%= f.input :date, as: :date, start_year: Date.today.year - 50,
+      end_year: Date.today.year, discard_day: true, order: [:month, :year], label: 'Certification Date', label_html: { class: 'text-right col-sm-3' } %>
 </div>

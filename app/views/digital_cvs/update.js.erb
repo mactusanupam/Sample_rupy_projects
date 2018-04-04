@@ -8,7 +8,8 @@
     $("#resume-editor-form").html('').html('<%= escape_javascript(render partial: "digital_cvs/#{current_section}" ) %>');
   <% else %>
     var href = activeTab.next('li').find('a').attr('href');
-    $.get(href, function(data) {}, 'script');
+    if(typeof href !== "undefined")
+      $.get(href, function(data) {}, 'script');
   <% end %>
 <% end %>
 

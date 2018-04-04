@@ -16,7 +16,7 @@ docx.font name: 'Helvetica'
 #-----------------------------------------------------
 digital_cv = @digital_cv
 docx_image = @digital_cv.photo.image.url(:thumb)
-present_job_tit = @digital_cv.present_job ? @digital_cv.present_job.job_title : "No Title"
+present_job_tit = @digital_cv.present_job ? @digital_cv.present_job.job_title.name : "No Title"
 personal_info = @digital_cv.personal_detail.attributes
 cv_skill = @digital_cv.cv_skills
 languages = @digital_cv.cv_languages
@@ -83,7 +83,7 @@ a = []
 a << 'Read' if lang.read?
 a << 'Write' if lang.write?
 a << 'Speak' if lang.speak?
-p lang.language.name+ "("+a.join(', ')+")"
+p lang.language.title+ "("+a.join(', ')+")"
 end
 end
 end
@@ -134,7 +134,7 @@ else
 empl.end_date.strftime("%Y-%m")
 end
 
-table [[empl.start_date.strftime("%Y-%m").to_s + "-\n" + end_date.to_s , empl.job_title+"\n"+empl.company.name+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.key_area)+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.achievement)]] do
+table [[empl.start_date.strftime("%Y-%m").to_s + "-\n" + end_date.to_s , empl.job_title.name+"\n"+empl.company.name+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.responsibilities)+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.achievement)]] do
 cell_style cols[0], width: 1200
 border_top do
 color   'FFFFFF'
@@ -186,7 +186,7 @@ size    1
 spacing 1
 end
 education_detail.each do |educat|
-table [[educat.start_date.strftime("%Y-%m").to_s+"-\n"+educat.end_date.strftime("%Y-%m").to_s,educat.degree+" " +"in "+educat.specialization+" with "+ educat.percentage.to_s + " from "+ educat.university]] do
+table [[educat.start_date.strftime("%Y-%m").to_s+"-\n"+educat.end_date.strftime("%Y-%m").to_s,educat.degree.title+" " +"in "+educat.specialization.title+" with "+ educat.percentage.to_s + " from "+ educat.university]] do
 cell_style cols[0], width: 1200
 border_top do
 color   'FFFFFF'

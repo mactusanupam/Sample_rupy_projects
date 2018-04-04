@@ -1,4 +1,4 @@
-<%= simple_form_for(@digital_cv, remote: true, html:{ class: 'form-horizontal' }) do |f| %>
+<%= simple_form_for(@digital_cv, html: { method: :post, remote: true }, wrapper: :horizontal_form) do |f| %>
   <div class="row margin-bottom-30">
     <div class="col-md-12">
       <h4 class="cont_hed_colr text-center">HONORS AND AWARDS</h4>

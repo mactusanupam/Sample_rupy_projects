@@ -9,18 +9,36 @@
       <%= f.select :nationality, options_for_select(Nationality::Nationality.default_option("indian"), :selected => f.object.nationality), {include_blank: "What's your nationality?"}, {:class => 'form-control' } %>
     <% end %>
 
-    <%= f.input :date_of_birth %>
+    <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90,
+        end_year: Date.today.year, label_html: { class: 'col-sm-3' } %>
 
     <%= f.input :gender, as: :radio_buttons, collection: [['m', 'Male'], ['f', 'Female'], ['o', 'Other']], label_method: :second, value_method: :first, item_wrapper_class: 'radio-inline' %>
     <%= f.input :marital_status, as: :radio_buttons, collection: [['s', 'Single'], ['m', 'Married'], ['o', 'Other']], label_method: :second, value_method: :first, :item_wrapper_class => 'radio-inline' %>
 
     <%= f.input :disabled, as: :radio_buttons, collection: [['0', 'No'], ['1', 'Yes']], label_method: :second, value_method: :first, :item_wrapper_class => 'radio-inline' %>
-    <%= f.input :hobbies %>
-    <%= f.input :affiliations %>
+    <%= f.input :hobbies, input_html: { class: 'hobbies' } %>
+    <%= f.input :affiliations, input_html: { class: 'hobbies' } %>
 
     <div class="text-center">
-      <%= f.button :submit, "Save and Continue", class: "btn btn-primary talent-fore-btn" %>
+      <%= f.button :submit, "Save", class: "btn btn-primary talent-fore-btn" %>
     </div>
   <% end %>
+
+  <script>
+    $(".hobbies").wysihtml5({ toolbar: {
+      'font-styles': false,
+      'color': false,
+      'emphasis': {
+        'small': false
+      },
+      'blockquote': false,
+      'lists': true,
+      'html': false,
+      'link': true,
+      'image': false,
+      'smallmodals': false
+      }
+    });
+  </script>
 </div>
 

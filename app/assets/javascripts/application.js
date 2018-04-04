@@ -20,6 +20,21 @@
 //= require_tree .
 
 $(document).ready(function(){
+  $('.hobbies, .text_area').wysihtml5({ toolbar: {
+    'font-styles': false,
+    'color': false,
+    'emphasis': {
+      'small': false
+    },
+    'blockquote': false,
+    'lists': true,
+    'html': false,
+    'link': true,
+    'image': false,
+    'smallmodals': false
+    }
+  });
+
   //disable char input in number fields
   $(document.body).on('keypress', "input[type=number]", function(){
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;

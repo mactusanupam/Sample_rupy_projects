@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   get '/resume-builder', to:'static_pages#resume_builder'
   get '/contact-us', to:'static_pages#contact_us'
   get '/index', to:'static_pages#index'
+  get '/states/:countrycode', to: 'static_pages#states'
+  get '/cities/', to: 'static_pages#cities'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

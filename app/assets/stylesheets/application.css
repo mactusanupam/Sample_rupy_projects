@@ -92,3 +92,11 @@ input[type="number"] {
 .alertify .ajs-body .ajs-content {
   color: red;
 }
+
+.wysihtml5-toolbar .btn-group {
+  display: inline;
+}
+.wysihtml5-toolbar {
+  list-style-type: none;
+  padding-left: 0;
+}

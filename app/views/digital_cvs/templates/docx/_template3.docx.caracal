@@ -19,7 +19,7 @@ user_info = @digital_cv.user.attributes
 docx_image = @digital_cv.photo.image.url(:thumb)
 font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://www.salesworld.net/"
 
-present_job_tit = @digital_cv.present_job ? @digital_cv.present_job.job_title : "No Title"
+present_job_tit = @digital_cv.present_job ? @digital_cv.present_job.job_title.name : "No Title"
 personal_info = @digital_cv.personal_detail.attributes
 cv_skill = @digital_cv.cv_skills
 languages = @digital_cv.cv_languages
@@ -34,7 +34,7 @@ references = @digital_cv.references
 
 c1= Caracal::Core::Models::TableCellModel.new do
 img 'http:' + docx_image, width: 75, height: 75, align: :center
-h4  user_info['first_name']+" "+user_info['last_name'] 
+h4  user_info['first_name']+" "+user_info['last_name']
 end
 
 fa1 = Caracal::Core::Models::TableCellModel.new do
@@ -92,7 +92,7 @@ border_right do
 color   '48788E'
 line    :single
 size    1
-end 
+end
 end
 end
 
@@ -181,7 +181,7 @@ border_right do
 color   '48788E'
 line    :single
 size    1
-end 
+end
 end
 
 end
@@ -189,7 +189,7 @@ end
 if digital_cv.experienced
 docx.table [[c1,c2,c3,c4]] do
 cell_style cols[0], width: 2000
-cell_style cols, background: '48788E' 
+cell_style cols, background: '48788E'
 cell_style cols, color: 'ffffff'
 border_top do
 color   '48788E'
@@ -220,7 +220,7 @@ end
 else
 docx.table [[c1,c2,c4]] do
 cell_style cols[0], width: 2000
-cell_style cols, background: '48788E' 
+cell_style cols, background: '48788E'
 cell_style cols, color: 'ffffff'
 border_top do
 color   'FFFFFF'
@@ -250,7 +250,7 @@ end
 
 end
 
-docx.p  "         "+digital_cv.summary 
+docx.p  "         "+digital_cv.summary
 
 c5 = Caracal::Core::Models::TableCellModel.new do
 img font_url + "/assets/font-awesome-icon/bullseye.png",width:14 , height: 14, align: :right
@@ -258,14 +258,14 @@ end
 
 c6 = Caracal::Core::Models::TableCellModel.new do
 h4 "CAREER OBJECTIVE" do
-color   '000000' 
+color   '000000'
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end 
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
 p digital_cv.objective
 end
 
@@ -304,14 +304,14 @@ end
 
 cshead = Caracal::Core::Models::TableCellModel.new do
 h4 "PROFESSIONAL SKILLS" do
-color   '000000' 
+color   '000000'
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end 
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
 end
 
 
@@ -382,28 +382,28 @@ end
 end
 
 c7 = Caracal::Core::Models::TableCellModel.new do
-img font_url + "/assets/font-awesome-icon/briefcase.png",width:14 , height: 14, align: :right 
+img font_url + "/assets/font-awesome-icon/briefcase.png",width:14 , height: 14, align: :right
 end
 
 if digital_cv.experienced
 c8 = Caracal::Core::Models::TableCellModel.new do
 h4 'EXPERIENCE' do
-color   '000000' 
+color   '000000'
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end 
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
 employement_detail.each do |empl|
-end_date = if empl.present_job 
+end_date = if empl.present_job
 then "present"
-else 
+else
 empl.end_date.strftime("%Y-%m")
 end
 
-table [[empl.start_date.strftime("%Y-%m").to_s + "-\n" + end_date.to_s , empl.job_title+"\n"+empl.company.name+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.key_area)+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.achievement)]] do
+table [[empl.start_date.strftime("%Y-%m").to_s + "-\n" + end_date.to_s , empl.job_title.name+"\n"+empl.company.name+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.responsibilities)+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.achievement)]] do
 cell_style cols[0], width: 1200
 border_top do
 color   'FFFFFF'
@@ -431,11 +431,11 @@ spacing 2
 end
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end  
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
 end
 
 end
@@ -472,20 +472,20 @@ end
 
 
 c9 = Caracal::Core::Models::TableCellModel.new do
-img font_url + "/assets/font-awesome-icon/graduation-cap.png",width:14 , height: 14, align: :right 
-end 
+img font_url + "/assets/font-awesome-icon/graduation-cap.png",width:14 , height: 14, align: :right
+end
 
 if education_detail.size>0
 c10 = Caracal::Core::Models::TableCellModel.new do
 h4 'EDUCATION DETAILS' do
-color   '000000' 
+color   '000000'
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end 
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
 education_detail.each do |educat|
 table [[educat.start_date.strftime("%Y-%m").to_s+"-\n"+educat.end_date.strftime("%Y-%m").to_s,educat.degree+" " +"in "+educat.specialization+" with "+ educat.percentage.to_s + " from "+ educat.university]] do
 cell_style cols[0], width: 1200
@@ -512,7 +512,7 @@ color   'FFFFFF'
 line    :single
 size    1
 spacing 2
-end 
+end
 end
 end
 end
@@ -548,7 +548,7 @@ end
 
 if languages.size>0
 c11 = Caracal::Core::Models::TableCellModel.new do
-img font_url + "/assets/font-awesome-icon/language.png",width:14 , height: 14, align: :right 
+img font_url + "/assets/font-awesome-icon/language.png",width:14 , height: 14, align: :right
 end
 
 c12 = Caracal::Core::Models::TableCellModel.new do
@@ -556,17 +556,17 @@ h4 'LANGUAGE KNOWN' do
 color   '000000'
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end 
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
 languages.each do |lang|
 a = []
 a << 'Read' if lang.read?
 a << 'Write' if lang.write?
 a << 'Speak' if lang.speak?
-p lang.language.name+ "("+a.join(', ')+")"
+p lang.language.title+ "("+a.join(', ')+")"
 end
 p
 end
@@ -602,21 +602,21 @@ end
 
 if trainings.size>0
 c13 = Caracal::Core::Models::TableCellModel.new do
-img font_url + "/assets/font-awesome-icon/industry.png",width:14 , height: 14, align: :right 
+img font_url + "/assets/font-awesome-icon/industry.png",width:14 , height: 14, align: :right
 end
 
 c14 = Caracal::Core::Models::TableCellModel.new do
 h4 "TRAININGS" do
-color   '000000' 
+color   '000000'
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end 
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
 trainings.each do |tra|
-p "Attended " + tra.duration.to_s + " days training on " + tra.name + " from " + tra.institute 
+p "Attended " + tra.duration.to_s + " days training on " + tra.name + " from " + tra.institute
 p
 end
 p
@@ -653,20 +653,20 @@ end
 
 if certifications.size>0
 c15 = Caracal::Core::Models::TableCellModel.new do
-img font_url + "/assets/font-awesome-icon/certificate.png",width:14 , height: 14, align: :right 
+img font_url + "/assets/font-awesome-icon/certificate.png",width:14 , height: 14, align: :right
 end
 
 c16 = Caracal::Core::Models::TableCellModel.new do
 h4 "CERTIFICATION" do
-color   '000000' 
+color   '000000'
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end 
-certifications.each do |cert| 
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
+certifications.each do |cert|
 table [[cert.date.strftime("%Y-%m"),cert.title + " - " +  cert.certifier]] do
 cell_style cols[0], width: 1200
 border_top do
@@ -692,20 +692,20 @@ color   'FFFFFF'
 line    :single
 size    1
 spacing 2
-end 
+end
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end 
-end 
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
+end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
 end
 end
 
@@ -741,19 +741,19 @@ end
 
 if honr_aw.size>0
 c17 = Caracal::Core::Models::TableCellModel.new do
-img font_url + "/assets/font-awesome-icon/trophy.png",width:14 , height: 14, align: :right 
+img font_url + "/assets/font-awesome-icon/trophy.png",width:14 , height: 14, align: :right
 end
 
 c18 = Caracal::Core::Models::TableCellModel.new do
 h4 "HONORS AND AWARDS" do
-color   '000000' 
+color   '000000'
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end 
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
 honr_aw.each do |honor|
 table [[honor.award_date.strftime("%Y-%m"),honor.title + " at " + honor.company]] do
 cell_style cols[0], width: 1200
@@ -783,18 +783,18 @@ spacing 2
 end
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end  
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end 
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
 end
 
 docx.table [[c17,c18]] do
@@ -828,20 +828,20 @@ end
 
 if research_or_projectdet.size>0
 c19 = Caracal::Core::Models::TableCellModel.new do
-img font_url + "/assets/font-awesome-icon/tasks.png",width:14 , height: 14, align: :right 
+img font_url + "/assets/font-awesome-icon/tasks.png",width:14 , height: 14, align: :right
 end
 
 c20 = Caracal::Core::Models::TableCellModel.new do
 h4 "RESEARCH EXPERIENCE AND PROJECTS:" do
-color   '000000' 
+color   '000000'
 end
 
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end 
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
 
 research_or_projectdet.each do |project_det|
 h5 project_det.title + " ( "+project_det.duration.to_s  + " days"+" ), " + project_det.guide
@@ -887,14 +887,14 @@ end
 
 c22 = Caracal::Core::Models::TableCellModel.new do
 h4 "REFERENCES" do
-color '000000' 
+color '000000'
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end 
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
 references.each do |reference|
 h5 reference.name + ", " + reference.designation do
 color '000000'
@@ -941,14 +941,14 @@ end
 
 c24= Caracal::Core::Models::TableCellModel.new do
 h4 "HOBBIES AND INTERESTS" do
-color '000000' 
+color '000000'
 end
 hr do
-color   'E7E7E7'  
-line    :single   
-size    1        
-spacing 1       
-end 
+color   'E7E7E7'
+line    :single
+size    1
+spacing 1
+end
 p ActionView::Base.full_sanitizer.sanitize(personal_info['hobbies_and_interest'])
 p
 end

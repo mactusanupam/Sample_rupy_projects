@@ -1,4 +1,4 @@
-<%= simple_form_for(@digital_cv, remote: true, html:{ class: 'form-horizontal certification-form' }) do |f| %>
+<%= simple_form_for(@digital_cv, html: { method: :patch, remote: true }, wrapper: :horizontal_form) do |f| %>
   <div class="col-md-12">
     <h4 class="text-center">Certifications</h4>
     <hr />

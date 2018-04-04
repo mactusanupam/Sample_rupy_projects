@@ -56,7 +56,7 @@
 					<div class="col-md-12 col-xs-12">
 						<h2><strong><%= @digital_cv.personal_detail.try(:name) %></strong></h2>
 						<h4>
-							<%= @digital_cv.present_job ? @digital_cv.present_job.job_title : '' %>
+							<%= @digital_cv.present_job ? @digital_cv.present_job.job_title.name : '' %>
 						</h4>
 					</div>
 				</div>
@@ -153,7 +153,7 @@
 									a << 'Speak' if cv_language.speak?
 								%>
 								<li class="padding-5">
-									<strong><%= cv_language.language.name %></strong>
+									<strong><%= cv_language.language.title %></strong>
 									(<%= a.join(', ') %>)
 								</li>
 							<% end %>
@@ -190,9 +190,9 @@
 								<%= e.start_date.strftime("%Y-%m") %> - <br /><%= e.present_job ? 'present' : e.end_date.strftime("%Y-%m") %>
 							</div>
 							<div class="col-md-10 col-xs-9 emp-details">
-								<strong><%= e.job_title %></strong>
+								<strong><%= e.job_title.name %></strong>
 								<p><%= e.company.name %></p>
-								<%= e.key_area.html_safe %>
+								<%= e.responsibilities.html_safe %>
 								<%= e.achievement.html_safe %>
 							</div>
 						</div>
@@ -210,7 +210,9 @@
 								<%= a.start_date.strftime("%Y-%m") %> - <br /><%= a.end_date.strftime("%Y-%m") %>
 							</div>
 							<div class="col-md-10 col-xs-9">
-								<strong><%= a.degree %></strong> in <%= a.specialization %> with <%= a.percentage %> from <strong><%= a.university %></strong>
+								<strong><%= a.degree.title %></strong> in
+								<%= a.specialization.title %> with <%= a.percentage %>% from
+								<strong><%= a.university %></strong>.
 							</div>
 						</div>
 					<% end %>

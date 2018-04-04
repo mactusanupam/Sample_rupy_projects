@@ -4,13 +4,13 @@
   </div>
   <%= f.association :company, label: 'Employer Name', input_html: { class: 'cv_company' }, label_html: { class: 'text-right' } %>
   <%= f.association :job_title, label: 'Job Title', label_html: { class: 'text-right' } %>
-  <%= f.input :start_date, label_html: { class: 'text-right col-sm-3' }, input_html: { class: 'col-sm-9' } %>
-  <span class="pull-right">
-    <%= f.input :present_job, inline_label: 'Still Working here?' %>
-  </span>
-  <%= f.input :end_date, label_html: { class: 'text-right col-sm-3' }, wrapper_html: { class: 'col-sm-9' } %>
-  <%= f.input :responsibilities, label: 'Responsibilities' %>
-  <%= f.input :achievement, label: 'Achievements' %>
+  <%= f.input :start_date, as: :date, start_year: Date.today.year - 50,
+      end_year: Date.today.year, label_html: { class: 'text-right col-sm-3' } %>
+  <%= f.input :end_date, as: :date, start_year: Date.today.year - 50,
+      end_year: Date.today.year, label_html: { class: 'text-right col-sm-3' } %>
+  <%= f.input :present_job, inline_label: 'Still Working here?' %>
+  <%= f.input :responsibilities, label: 'Responsibilities', input_html: { class: 'keyresarea'} %>
+  <%= f.input :achievement, label: 'Achievements', input_html: { class: 'achievements'} %>
 
   <hr />
   <script>

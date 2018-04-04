@@ -7,9 +7,13 @@
   <%= f.input :institute, label_html: { class: 'no-padding text-right' }, input_html: { placeholder: 'e.g. Delhi college of Engineering, Delhi' } %>
   <%= f.input :university, label_html: { class: 'no-padding text-right' }, input_html: { placeholder: 'e.g. Delhi University, Delhi' } %>
   <%= f.input :percentage, label: 'Percentage/CGPA', label_html: { class: 'no-padding text-right' } %>
-  <%= f.input :start_date, label_html: { class: 'text-right no-padding' }, input_html: { class: 'col-sm-9' } %>
-  <span class="pull-right">
-    <%= f.input :pursuing, inline_label: 'Still going here?' %>
-  </span>
-  <%= f.input :end_date, label_html: { class: 'text-right no-padding' }, wrapper_html: { class: 'col-sm-9' }, input_html: { disabled: f.object.pursuing? } %>
+  <%= f.input :start_date, as: :date, start_year: Date.today.year - 50,
+      end_year: Date.today.year, discard_day: true, order: [:month, :year],
+      label_html: { class: 'text-right col-sm-3' } %>
+  <%= f.input :end_date, as: :date, start_year: Date.today.year - 50,
+      end_year: Date.today.year, discard_day: true, order: [:month, :year],
+      label_html: { class: 'text-right col-sm-3' }, input_html: { disabled: f.object.pursuing? } %>
+  <!-- <span class="pull-right"> -->
+    <%#= f.input :pursuing, inline_label: 'Still going here?' %>
+  <!-- </span> -->
 </div>
