@@ -3,6 +3,11 @@
   $('.resume-editor-left li.active').removeClass('active');
   $('a[href$="'+href+'"]').parent('li').addClass('active');
   $('#resume-editor-form').html('<%= escape_javascript(render partial: "digital_cvs/#{params[:slug]}_form" ) %>');
+  <% if params[:slug] == 'contact_details' %>
+    $('.control-label').each(function() {
+      $(this).removeClass('col-sm-2');
+    });
+  <% end %>
   // window.history.pushState($('.digital-cv-form').html(), '', href);
 <% else %>
   alertify.alert('Alert', 'Looks like you tampered the URL. Falling back to resume summary');

@@ -2,6 +2,10 @@
   $('.edit-cv-name').hide();
   $('.show-cv-name span').html("<%= @digital_cv.name %> ");
   $('.show-cv-name').show();
+<% elsif only_photo %>
+  $('body').removeClass('modal-open')
+  $('.modal-backdrop').remove()
+  $('.photo-div').html('').html('<%= escape_javascript(render partial: "digital_cvs/photo_partial" ) %>')
 <% else %>
   var activeTab = $('.resume-editor-left li.active');
   <% if errors %>

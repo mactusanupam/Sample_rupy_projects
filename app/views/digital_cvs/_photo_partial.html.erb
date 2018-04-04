@@ -1,5 +1,8 @@
+<p>
+  <strong>Note:</strong> If you'd like to create a Photo CV, please upload your photo.
+</p>
 <div class="well profile-photo">
-  <h4 class="cont_hed_colr">Your Profile Photo</h4>
+  <h4 class="text-center">Your Resume Photo</h4>
   <% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
     <%= image_tag @digital_cv.photo.image.url(:thumb) %>
   <% else %>
@@ -7,11 +10,11 @@
   <% end %>
 </div>
 <div class="text-center">
-  <button type="button" class="btn btn-primary talent-fore-btn" data-toggle="modal" data-target="#cv-image-upload-modal">Change Photo</button>
+  <button type="button" class="btn btn-primary talent-fore-btn" data-toggle="modal" data-target="#cv-image-upload-modal">Upload New Photo</button>
 </div>
 
 <!-- Modal -->
-<%= form_for @digital_cv.photo ||= @digital_cv.build_photo, url: save_photo_digital_cv_path, remote: true, method: :post  do |f| %>
+<%= simple_form_for @digital_cv.photo ||= @digital_cv.build_photo, url: save_photo_digital_cv_path, remote: true, method: :post  do |f| %>
   <div id="cv-image-upload-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
@@ -22,9 +25,9 @@
         </div>
         <div class="modal-body">
           <%= f.hidden_field :image_type, value: "digital_cv" %>
-          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <%#= hidden_field_tag :authenticity_token, form_authenticity_token %>
           <div class="well" style="border:1px solid #DCDCDC; padding:20px">
-            <%= f.file_field :image  %>
+            <%= f.input :image, as: :file  %>
           </div>
         </div>
         <div class="modal-footer">

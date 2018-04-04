@@ -94,40 +94,40 @@
       <%= image_tag "digital_cv/photo_cv.png", height: 160 %>
       <% end %>
       <p class="text-capitalize">
-        <h3><b><%= @digital_cv.personal_detail.try(:name) %></b></h3>
+        <h3><b><%= @digital_cv.contact_detail.try(:name) %></b></h3>
       </p>
     </div>
     <div class="col-md-10 col-xs-10 personal_det_data">
       <div class="col-md-4 col-xs-4">
         <h4>CONTACT DETAILS</h4>
         <ul class="unstyle_person_det">
-          <% if @digital_cv.personal_detail.try(:email).present? %>
+          <% if @digital_cv.contact_detail.try(:email).present? %>
             <li>
               <i class="fa fa-envelope fa-1x"></i>&nbsp;
-              <%= @digital_cv.personal_detail.email %>
+              <%= @digital_cv.contact_detail.email %>
             </li>
           <% end %>
-          <% if @digital_cv.personal_detail.try(:mobile).present? %>
+          <% if @digital_cv.contact_detail.try(:mobile).present? %>
             <li>
               <i class="fa fa-phone fa-1x"></i>&nbsp;
-              <%= @digital_cv.personal_detail.mobile %>
+              <%= @digital_cv.contact_detail.mobile %>
             </li>
           <% end %>
-          <% if @digital_cv.personal_detail.try(:linkedin_profile).present?  %>
+          <% if @digital_cv.contact_detail.try(:linkedin_profile).present?  %>
             <li>
               <i class="fa fa-linkedin-square"></i>
-              <%= @digital_cv.personal_detail.linkedin_profile %>
+              <%= @digital_cv.contact_detail.linkedin_profile %>
             </li>
           <% end %>
-          <% if @digital_cv.personal_detail.try(:skype_username).present?  %>
+          <% if @digital_cv.contact_detail.try(:skype_username).present?  %>
             <li>
               <i class="fa fa-skype fa-1x"></i>
-              <%= @digital_cv.personal_detail.skype_username %>
+              <%= @digital_cv.contact_detail.skype_username %>
             </li>
           <% end %>
         </ul>
       </div>
-      <% if @digital_cv.is_experienced? && (@digital_cv.employment_status.present? || @digital_cv.city.present?)  %>
+      <% if @digital_cv.is_experienced? && (@digital_cv.employment_status.present? || @digital_cv.current_city.present?)  %>
         <div class="col-md-4 col-xs-4">
           <h4>EMPLOYMENT DETAILS</h4>
           <ul class="unstyle_empl_det">
@@ -479,7 +479,7 @@
         <strong>Place:</strong><%= @digital_cv.current_city %>
         <strong>
           <span class="pull-right">
-            <%= @digital_cv.personal_detail.try(:name) %>
+            <%= @digital_cv.contact_detail.try(:name) %>
           </span>
         </strong>
       </p>

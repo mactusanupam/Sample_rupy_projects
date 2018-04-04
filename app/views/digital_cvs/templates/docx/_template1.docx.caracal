@@ -439,11 +439,11 @@ end
 if !personal_info['gender'].blank?
 p "Gender-" + personal_info['gender']
 end
-if !personal_info['physical_challenged'].blank?
-p "Physically Challenged-" + personal_info['physical_challenged'].to_s
+if !personal_info['disabled'].blank?
+p "Physically Challenged-" + personal_info['disabled'].to_s
 end
-if !personal_info['hobbies_and_interest'].blank?
-p "Hobbies and Interest-" + ActionView::Base.full_sanitizer.sanitize(personal_info['hobbies_and_interest'])
+if !personal_info['hobbies'].blank?
+p "Hobbies and Interest-" + ActionView::Base.full_sanitizer.sanitize(personal_info['hobbies'])
 end
 if !personal_info['prefferred_location'].blank?
 p 'Preferred Location-' + personal_info['prefferred_location']

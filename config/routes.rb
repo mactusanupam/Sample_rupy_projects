@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :digital_cvs, path: '/digital-cvs' do
     member do
       patch :update_name
+      post :save_photo
       post :save_personal_detail
       post :save_contact_detail
 

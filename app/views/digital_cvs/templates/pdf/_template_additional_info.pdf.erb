@@ -19,11 +19,11 @@
 	        </li>
         	<li>
         		<strong>Physically Challenged-</strong>
-        		<%= @digital_cv.personal_detail.physical_challenged? ? 'Yes' : 'No' %>
+        		<%= @digital_cv.personal_detail.disabled? ? 'Yes' : 'No' %>
         	</li>
 	        <!--li>
 	        	<strong>Hobbies and Interest-</strong>
-	        	<%= @digital_cv.personal_detail.hobbies_and_interest %>
+	        	<%= @digital_cv.personal_detail.hobbies %>
 	        </li-->
 	      </ul>
 	    </div>
@@ -41,7 +41,7 @@
 	    </div>
 	    <br><br>
 	</div>
-	
+
 
 	<div class="cv_declaration col-xs-12" >
 	   <span class="text-center">

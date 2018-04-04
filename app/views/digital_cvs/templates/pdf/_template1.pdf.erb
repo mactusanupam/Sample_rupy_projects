@@ -54,13 +54,13 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12 col-xs-12">
-						<h2><strong><%= @digital_cv.personal_detail.try(:name) %></strong></h2>
+						<h2><strong><%= @digital_cv.contact_detail.try(:name) %></strong></h2>
 						<h4>
 							<%= @digital_cv.present_job ? @digital_cv.present_job.job_title.name : '' %>
 						</h4>
 					</div>
 				</div>
-				<% if @digital_cv.personal_detail.try(:mobile).present? %>
+				<% if @digital_cv.contact_detail.try(:mobile).present? %>
 					<div class="row header-text">
 						<div class="col-md-12 col-xs-12">
 							<h4>
@@ -69,42 +69,42 @@
 						</div>
 					</div>
 				<% end %>
-				<% if @digital_cv.personal_detail.try(:email).present? %>
+				<% if @digital_cv.contact_detail.try(:email).present? %>
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<h5><strong>Email</strong></h5>
-							<%= @digital_cv.personal_detail.email %>
+							<%= @digital_cv.contact_detail.email %>
 						</div>
 					</div>
 				<% end %>
-				<% if @digital_cv.personal_detail.try(:mobile).present? %>
+				<% if @digital_cv.contact_detail.try(:mobile).present? %>
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<h5><strong>Phone Number</strong></h5>
-							<%= @digital_cv.personal_detail.mobile %>
+							<%= @digital_cv.contact_detail.mobile %>
 						</div>
 					</div>
-					<% if @digital_cv.personal_detail.try(:skype_username).present? %>
+					<% if @digital_cv.contact_detail.try(:skype_username).present? %>
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<h5><strong>Skype Username</strong></h5>
-							<%= @digital_cv.personal_detail.skype_username %>
+							<%= @digital_cv.contact_detail.skype_username %>
 						</div>
 					</div>
 					<% end %>
-					<% if @digital_cv.personal_detail.try(:linkedin_profile).present? %>
+					<% if @digital_cv.contact_detail.try(:linkedin_profile).present? %>
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<h5><strong>Linkedin Profile URL</strong></h5>
-							<%= @digital_cv.personal_detail.linkedin_profile %>
+							<%= @digital_cv.contact_detail.linkedin_profile %>
 						</div>
 					</div>
 					<% end %>
-					<% if @digital_cv.personal_detail.try(:address).present? %>
+					<% if @digital_cv.contact_detail.try(:address).present? %>
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<h5><strong>Address</strong></h5>
-							<%= @digital_cv.personal_detail.address %>
+							<%= @digital_cv.contact_detail.address %>
 						</div>
 					</div>
 					<% end %>
@@ -210,7 +210,7 @@
 								<%= a.start_date.strftime("%Y-%m") %> - <br /><%= a.end_date.strftime("%Y-%m") %>
 							</div>
 							<div class="col-md-10 col-xs-9">
-								<strong><%= a.degree %></strong> in <%= a.specialization.title %> with <%= a.percentage %> from <strong><%= a.university %></strong>
+								<strong><%= a.degree.title %></strong> in <%= a.specialization.title %> with <%= a.percentage %> from <strong><%= a.university %></strong>
 							</div>
 						</div>
 					<% end %>
@@ -324,21 +324,21 @@
 								</div>
 							</div>
 						<% end %>
-						<% if @digital_cv.personal_detail.try(:physical_challenged).present? %>
+						<% if @digital_cv.personal_detail.try(:disabled).present? %>
 							<div class="row">
 								<div class="col-md-6 col-xs-9">
 									<strong>Physically Challenged</strong>
 								</div>
 								<div class="col-md-6 col-xs-3">
-									<%= @digital_cv.personal_detail.physical_challenged? ? 'Yes' : 'No' %>
+									<%= @digital_cv.personal_detail.disabled? ? 'Yes' : 'No' %>
 								</div>
 							</div>
 						<% end %>
-						<% if @digital_cv.personal_detail.try(:hobbies_and_interest).present? %>
+						<% if @digital_cv.personal_detail.try(:hobbies).present? %>
 						<div class="row">
 							<div class="col-md-12 col-xs-12">
 								<p><strong>Hobbies and Interests</strong></p>
-								<p><%= @digital_cv.personal_detail.hobbies_and_interest.to_s.html_safe %></p>
+								<p><%= @digital_cv.personal_detail.hobbies.to_s.html_safe %></p>
 							</div>
 						</div>
 						<%end %>
@@ -373,12 +373,12 @@
 				<div class="row">
 					<div class="col-md-12 col-xs-12 col-sm-12">
 						<div class="col-md-6 col-xs-6 no-padding">
-							<p><strong>Place: </strong><%= @digital_cv.city %></p>
+							<p><strong>Place: </strong><%= @digital_cv.current_city %></p>
 							<p><strong>Date: </strong> <%= Time.now.strftime("%B %d, %Y") %></p>
 						</div>
 						<div class="col-md-6 col-xs-6 text-right">
 							<p>
-								<strong><%= @digital_cv.personal_detail.try(:name) %></strong>
+								<strong><%= @digital_cv.contact_detail.try(:name) %></strong>
 							</p>
 						</div>
 					</div>

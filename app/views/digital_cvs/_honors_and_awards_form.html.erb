@@ -9,7 +9,7 @@
           <%= render "honor_and_award_fields", f: honor_and_award %>
         <% end  %>
       </div>
-      <div class="col-sm-offset-2">
+      <div class="col-sm-offset-2 col-sm-9">
         <%= link_to_add_association 'Add Honor and Awards', f, :honor_and_awards, class: 'adda btn btn-info talent-fore-btn', data: { association_insertion_node: '.honorandawards', association_insertion_method: :append } %>
       </div>
     </div>

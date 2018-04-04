@@ -53,7 +53,7 @@ h4{
     <div class="basic-info">
       <div class="col-md-10 col-xs-10">
         <p class="text-capitalize">
-          <h3><b><%= @digital_cv.personal_detail.try(:name) %></b></h3>
+          <h3><b><%= @digital_cv.contact_detail.try(:name) %></b></h3>
         </p>
         <% if @digital_cv.summary.present? %>
           <p><%= @digital_cv.summary %></p>
@@ -69,50 +69,50 @@ h4{
     </div>
     <div class="personal-info col-md-3 col-xs-4">
       <br>
-      <% if @digital_cv.personal_detail.try(:email).present? %>
+      <% if @digital_cv.contact_detail.try(:email).present? %>
         <b>
           <h4 class="title">
             <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;PERSONAL INFO
           </h4>
         </b>
         <hr>
-        <% if @digital_cv.personal_detail.try(:mobile).present? %>
+        <% if @digital_cv.contact_detail.try(:mobile).present? %>
           <div>
             <strong>Mobile Number:</strong>
-            <p><%= @digital_cv.personal_detail.mobile %></p>
+            <p><%= @digital_cv.contact_detail.mobile %></p>
           </div>
         <% end %>
-        <% if @digital_cv.personal_detail.try(:email).present? %>
+        <% if @digital_cv.contact_detail.try(:email).present? %>
           <div>
             <strong>Email:</strong>
-            <p><%= @digital_cv.personal_detail.email %></p>
+            <p><%= @digital_cv.contact_detail.email %></p>
           </div>
         <% end %>
-        <% if @digital_cv.personal_detail.try(:date_of_birth).present? %>
+        <% if @digital_cv.contact_detail.try(:date_of_birth).present? %>
           <div>
             <strong>Date of birth:</strong>
-            <p><%= @digital_cv.personal_detail.date_of_birth %></p>
+            <p><%= @digital_cv.contact_detail.date_of_birth %></p>
           </div>
         <% end %>
 
-        <% if @digital_cv.personal_detail.try(:linkedin_profile).present?  %>
+        <% if @digital_cv.contact_detail.try(:linkedin_profile).present?  %>
           <div class="profile_social_url">
             <strong>Linkedin profile url:</strong>
-            <p><%= @digital_cv.personal_detail.linkedin_profile %></p>
+            <p><%= @digital_cv.contact_detail.linkedin_profile %></p>
           </div>
         <% end %>
 
-        <% if @digital_cv.personal_detail.try(:skype_username).present?  %>
+        <% if @digital_cv.contact_detail.try(:skype_username).present?  %>
           <div class="profile_social_url">
             <strong>Skype username:</strong>
-            <p><%= @digital_cv.personal_detail.skype_username %></p>
+            <p><%= @digital_cv.contact_detail.skype_username %></p>
           </div>
         <% end %>
 
-        <% if @digital_cv.personal_detail.try(:address).present? %>
+        <% if @digital_cv.contact_detail.try(:address).present? %>
           <div>
             <strong>Address:</strong>
-            <p><%= @digital_cv.personal_detail.address %></p>
+            <p><%= @digital_cv.contact_detail.address %></p>
           </div><br>
         <% end %>
       <% end %>
@@ -339,16 +339,16 @@ h4{
                 <%= @digital_cv.personal_detail.try(:gender).to_s.capitalize %>
               </li>
             <% end %>
-            <% unless @digital_cv.personal_detail.physical_challenged.nil? %>
+            <% unless @digital_cv.personal_detail.disabled.nil? %>
               <li>
                 <strong>Physically Challenged: </strong>
-                <%= @digital_cv.personal_detail.try(:physical_challenged?) ? 'Yes' : 'No' %>
+                <%= @digital_cv.personal_detail.try(:disabled?) ? 'Yes' : 'No' %>
               </li>
             <% end %>
-            <% if @digital_cv.personal_detail.hobbies_and_interest.present? %>
+            <% if @digital_cv.personal_detail.hobbies.present? %>
               <li>
                 <p><strong>Hobbies and Interest-</strong>
-                <%= raw @digital_cv.personal_detail.hobbies_and_interest %>
+                <%= raw @digital_cv.personal_detail.hobbies %>
               </li>
             <% end %>
           </ul>
@@ -383,10 +383,10 @@ h4{
       <br>
       <div class="col-sm-offset-3">
         <p>
-          <strong>Place:</strong><%= @digital_cv.city %>
+          <strong>Place:</strong><%= @digital_cv.current_city %>
           <strong>
             <span class="col-sm-offset-9">
-              <%= @digital_cv.personal_detail.name %>
+              <%= @digital_cv.contact_detail.name %>
             </span>
           </strong>
         </p>

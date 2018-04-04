@@ -1,8 +1,8 @@
 class DigitalCvsController < ApplicationController
   before_action :set_digital_cv, except: [:index, :new, :create, :share_and_download]
-  before_action :authenticate_user!, only: [:index, :share_and_download]
+  # before_action :authenticate_user!, only: [:index, :share_and_download]
 
-  layout 'pdf', only: [:share_and_download]
+  # layout 'pdf', only: [:share_and_download]
   respond_to :docx
 
   # GET /digital_cvs
@@ -41,7 +41,7 @@ class DigitalCvsController < ApplicationController
   # PATCH/PUT /digital_cvs/1
   def update
     @digital_cv.update(digital_cv_params)
-    render :update, locals: { only_name: false, errors: @digital_cv.errors.any? }
+    render :update, locals: { only_name: false, only_photo: false, errors: @digital_cv.errors.any? }
   end
 
   # DELETE /digital_cvs/1
@@ -56,26 +56,25 @@ class DigitalCvsController < ApplicationController
   def save_personal_detail
     @personal_detail = @digital_cv.personal_detail
     @personal_detail.update_attributes(personal_detail_params)
-    render :update, locals: { only_name: false, errors: @personal_detail.errors.any? }
+    render :update, locals: { only_name: false, only_photo: false, errors: @personal_detail.errors.any? }
   end
 
   def save_contact_detail
     @contact_detail = @digital_cv.contact_detail
     @contact_detail.update_attributes(contact_detail_params)
-    render :update, locals: { only_name: false, errors: @contact_detail.errors.any? }
+    render :update, locals: { only_name: false, only_photo: false, errors: @contact_detail.errors.any? }
   end
 
   def update_name
     @digital_cv.update_column(:name, params[:digital_cv][:name])
-    render :update, locals: { only_name: true }
+    render :update, locals: { only_name: true, only_photo: false }
   end
 
   def save_photo
     photo = @digital_cv.photo
 
-    if photo.update(photo_params)
-      redirect_to edit_digital_cv_url(@digital_cv)
-    end
+    photo.update(photo_params)
+    render :update, locals: { only_name: false, only_photo: true, errors: photo.errors.any? }
   end
 
   def change_cv_template

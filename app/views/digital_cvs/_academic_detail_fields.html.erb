@@ -2,17 +2,17 @@
   <div class="form-group col-sm-12 text-right">
     <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
   </div>
-  <%= f.association :degree, label_html: { class: 'no-padding text-right' } %>
-  <%= f.association :specialization, label_html: { class: 'no-padding text-right' } %>
-  <%= f.input :institute, label_html: { class: 'no-padding text-right' }, input_html: { placeholder: 'e.g. Delhi college of Engineering, Delhi' } %>
-  <%= f.input :university, label_html: { class: 'no-padding text-right' }, input_html: { placeholder: 'e.g. Delhi University, Delhi' } %>
-  <%= f.input :percentage, label: 'Percentage/CGPA', label_html: { class: 'no-padding text-right' } %>
+  <%= f.association :degree, label_html: { class: 'col-sm-2 no-padding text-right' } %>
+  <%= f.association :specialization, label_html: { class: 'col-sm-2 no-padding text-right' } %>
+  <%= f.input :institute, label_html: { class: 'col-sm-2 no-padding text-right' }, input_html: { placeholder: 'e.g. Delhi college of Engineering, Delhi' } %>
+  <%= f.input :university, label_html: { class: 'col-sm-2 no-padding text-right' }, input_html: { placeholder: 'e.g. Delhi University, Delhi' } %>
+  <%= f.input :percentage, label: 'Percentage/CGPA', label_html: { class: 'col-sm-2 no-padding text-right' } %>
   <%= f.input :start_date, as: :date, start_year: Date.today.year - 50,
       end_year: Date.today.year, discard_day: true, order: [:month, :year],
-      label_html: { class: 'text-right col-sm-3' } %>
+      label_html: { class: 'col-sm-2 text-right no-padding' } %>
   <%= f.input :end_date, as: :date, start_year: Date.today.year - 50,
       end_year: Date.today.year, discard_day: true, order: [:month, :year],
-      label_html: { class: 'text-right col-sm-3' }, input_html: { disabled: f.object.pursuing? } %>
+      label_html: { class: 'text-right col-sm-2 no-padding' }, input_html: { disabled: f.object.pursuing? } %>
   <!-- <span class="pull-right"> -->
     <%#= f.input :pursuing, inline_label: 'Still going here?' %>
   <!-- </span> -->

@@ -27,6 +27,7 @@ gem 'awesome_nested_set'
 gem 'devise'
 gem "pundit"
 gem 'simple_form'
+gem 'paperclip'
 gem "cocoon"
 gem 'city-state'
 gem 'nationality'

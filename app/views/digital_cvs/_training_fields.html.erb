@@ -2,10 +2,10 @@
   <div class="form-group col-sm-12 text-right">
     <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
   </div>
-  <%= f.input :name, label: 'Training Name' %>
-  <%= f.input :info, label: 'Brief Details', input_html: { class: 'training-details' } %>
-  <%= f.input :institute, label: 'Institute Name' %>
-  <%= f.input :duration, label: 'Duration(In Days)' %>
+  <%= f.input :name, label: 'Training Name', label_html: { class: 'col-sm-2 no-padding' } %>
+  <%= f.input :info, label: 'Brief Details', input_html: { class: 'training-details' }, label_html: { class: 'col-sm-2 no-padding' } %>
+  <%= f.input :institute, label: 'Institute Name', label_html: { class: 'col-sm-2 no-padding' } %>
+  <%= f.input :duration, label: 'Duration(In Days)', label_html: { class: 'col-sm-2 no-padding' } %>
 
   <hr />
   <script>

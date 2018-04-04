@@ -3,7 +3,7 @@ module DigitalCvsHelper
     Template.all
   end
 
-  def get_Company
+  def get_company
     Company.all.collect {|p| [ p.name, p.id] } << ["Others", ""]
   end
 

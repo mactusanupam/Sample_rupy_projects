@@ -4,9 +4,9 @@
     <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
   </div>
   <div class="col-sm-12">
-    <%= f.input :title %>
-    <%= f.input :description, label: 'More Details', input_html: { class: 'project-description' } %>
-    <%= f.input :guide, label: 'Guide Name' %>
+    <%= f.input :title, label_html: { class: 'col-sm-2 no-padding' } %>
+    <%= f.input :description, label: 'More Details', input_html: { class: 'project-description' }, label_html: { class: 'col-sm-2 no-padding' } %>
+    <%= f.input :guide, label: 'Guide Name', label_html: { class: 'col-sm-2 no-padding' } %>
   </div>
   <script>
     $(".project-description").wysihtml5({ toolbar: {

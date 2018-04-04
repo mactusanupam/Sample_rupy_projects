@@ -2,29 +2,35 @@
   <h4 class="text-center">CONTACT DETAILS</h4>
   <hr />
   <div class="row">
-    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 no-padding">
+    <% if @digital_cv.template.template_type == 'photo' %>
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no-padding">
+    <% else %>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+    <% end %>
       <%= simple_form_for @digital_cv.contact_detail ||= @digital_cv.build_contact_detail, url: save_contact_detail_digital_cv_path(@digital_cv), html: { method: :post, remote: true }, wrapper: :horizontal_form do |f| %>
 
         <%= f.error_notification %>
 
         <div class="col-sm-12 no-padding margin-bottom-30">
-          <%= f.input :first_name %>
-          <%= f.input :last_name %>
-          <%= f.input :email %>
-          <%= f.input :mobile %>
-          <%= f.input :skype_username %>
-          <%= f.input :linkedin_url %>
-          <%= f.input :address %>
-          <%= f.input :pincode %>
+          <%= f.input :first_name, label_html: { class: 'col-sm-3' } %>
+          <%= f.input :last_name, label_html: { class: 'col-sm-3' } %>
+          <%= f.input :email, label_html: { class: 'col-sm-3' } %>
+          <%= f.input :mobile, label_html: { class: 'col-sm-3' } %>
+          <%= f.input :skype_username, label_html: { class: 'col-sm-3' } %>
+          <%= f.input :linkedin_url, label_html: { class: 'col-sm-3' } %>
+          <%= f.input :address, label_html: { class: 'col-sm-3' } %>
+          <%= f.input :pincode, label_html: { class: 'col-sm-3' } %>
         </div>
         <div class="text-center">
           <%= f.button :submit, "Save and Continue", class: "btn btn-primary talent-fore-btn" %>
         </div>
       <% end %>
     </div>
-    <div class="col-md-3">
-      <%#= render 'photo_partial' %>
-    </div>
+    <% if @digital_cv.template.template_type == 'photo' %>
+      <div class="col-md-4 col-sm-4 col-lg-4 photo-div">
+        <%= render 'photo_partial' %>
+      </div>
+    <% end %>
   </div>
 </div>
 

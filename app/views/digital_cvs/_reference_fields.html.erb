@@ -6,7 +6,7 @@
     <%= f.input :name %>
     <%= f.input :email %>
     <%= f.input :mobile, label: 'Contact Number' %>
-    <%= f.association :company, label: 'Company Name' %>
+    <%= f.association :company, collection: get_company, prompt: 'Select Company', label: 'Company Name' %>
     <%= f.association :job_title, label: 'Designation' %>
   </div>
 </div>

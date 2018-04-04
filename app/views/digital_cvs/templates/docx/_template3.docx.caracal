@@ -152,7 +152,7 @@ img font_url + "/assets/font-awesome-icon/physically-challenged.png",width:10, h
 end
 
 oth61 = Caracal::Core::Models::TableCellModel.new do
-p personal_info['physical_challenged']
+p personal_info['disabled']
 end
 
 
@@ -934,7 +934,7 @@ end
 end
 end
 
-if !personal_info['hobbies_and_interest'].blank?
+if !personal_info['hobbies'].blank?
 c23= Caracal::Core::Models::TableCellModel.new do
 img font_url + "/assets/font-awesome-icon/hourglass.png",width:14 , height: 14, align: :right
 end
@@ -949,7 +949,7 @@ line    :single
 size    1
 spacing 1
 end
-p ActionView::Base.full_sanitizer.sanitize(personal_info['hobbies_and_interest'])
+p ActionView::Base.full_sanitizer.sanitize(personal_info['hobbies'])
 p
 end
 

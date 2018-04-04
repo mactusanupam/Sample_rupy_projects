@@ -10,7 +10,7 @@
     <% end %>
 
     <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90,
-        end_year: Date.today.year, label_html: { class: 'col-sm-3' } %>
+        end_year: Date.today.year, label_html: { class: 'col-sm-2 no-padding' } %>
 
     <%= f.input :gender, as: :radio_buttons, collection: [['m', 'Male'], ['f', 'Female'], ['o', 'Other']], label_method: :second, value_method: :first, item_wrapper_class: 'radio-inline' %>
     <%= f.input :marital_status, as: :radio_buttons, collection: [['s', 'Single'], ['m', 'Married'], ['o', 'Other']], label_method: :second, value_method: :first, :item_wrapper_class => 'radio-inline' %>
