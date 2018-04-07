@@ -193,7 +193,11 @@ h4{
               <tr>
                 <td valign="top" width="5%">
                   <strong><%= academic_detail.start_date.strftime("%m/%Y") %>-
-                    <%= academic_detail.end_date.strftime("%m/%Y") %>
+                    <% if academic_detail.pursuing %>
+                      Present
+                    <% else %>
+                      <%= academic_detail.end_date.strftime("%Y-%m") %>
+                    <% end %>
                   </strong>
                 </td>
                 <td valign="top" width="95%" >

@@ -5,5 +5,5 @@
   <%= f.input :title, label: 'Certification Title', label_html: { class: 'col-sm-2 no-padding' } %>
   <%= f.input :certifier, label: 'Certifier', label_html: { class: 'col-sm-2 no-padding' } %>
   <%= f.input :date, as: :date, start_year: Date.today.year - 50,
-      end_year: Date.today.year, discard_day: true, order: [:month, :year], label: 'Certification Date', label_html: { class: 'text-right no-padding col-sm-2' } %>
+      end_year: Date.today.year, discard_day: true, order: [:month, :year], label: 'Certification Date', input_html: { class: 'no-padding' }, label_html: { class: 'col-sm-2 no-padding' } %>
 </div>

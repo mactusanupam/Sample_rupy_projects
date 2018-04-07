@@ -8,6 +8,8 @@ class EmploymentDetail < ApplicationRecord
   validate :end_after_start, unless: Proc.new{|a| a.present_job }
   validates :responsibilities, presence: true
 
+  accepts_nested_attributes_for :company, reject_if: :all_blank
+
   private
 
   def end_after_start

@@ -7,8 +7,10 @@
     $('.control-label').each(function() {
       $(this).removeClass('col-sm-2');
     });
+  <% elsif params[:slug] == 'honors_and_awards'|| params[:slug] == 'certifications' %>
+    $('.form-group.date .form-inline').removeClass('col-sm-12 no-padding').addClass('col-sm-9');
   <% end %>
-  // window.history.pushState($('.digital-cv-form').html(), '', href);
+  window.history.pushState($('.digital-cv-form').html(), '', href);
 <% else %>
   alertify.alert('Alert', 'Looks like you tampered the URL. Falling back to resume summary');
   var href = '<%= "/digital-cvs/#{@digital_cv.id}/edit/basic_information" %>';
@@ -20,7 +22,6 @@
 //show/hide end date button based on checkbox selection
 $(".exp-form, .academic-form").on("change", 'input[type=checkbox]', function(e){
   var endDate = $(this).parent('.form-group').prev('div');
-  alert(endDate.html());
   endDate.find('input').prop('disabled', function(i, v) { return !v; });
   endDate.toggle();
 });

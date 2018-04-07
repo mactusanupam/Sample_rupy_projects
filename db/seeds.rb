@@ -39,6 +39,7 @@ end
 unless Company.any?
   Company.create([
     { name: 'Salesworld', website: 'https://www.salesworld.net' },
+    { name: 'TalentFore', website: 'https://www.talentfore.com' },
     { name: 'Rajesh Shethia Consultancy', website: 'https://rajeshshethia.com/' }
   ])
 end
