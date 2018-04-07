@@ -16,3 +16,11 @@
   $('a[href$="'+href+'"]').parent('li').addClass('active');
   $('#resume-editor-form').html('<%= escape_javascript(render partial: "digital_cvs/basic_information_form" ) %>');
 <% end %>
+
+//show/hide end date button based on checkbox selection
+$(".exp-form, .academic-form").on("change", 'input[type=checkbox]', function(e){
+  var endDate = $(this).parent('.form-group').prev('div');
+  alert(endDate.html());
+  endDate.find('input').prop('disabled', function(i, v) { return !v; });
+  endDate.toggle();
+});

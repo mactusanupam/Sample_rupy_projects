@@ -1,6 +1,6 @@
 class DigitalCvsController < ApplicationController
   before_action :set_digital_cv, except: [:index, :new, :create, :share_and_download]
-  # before_action :authenticate_user!, only: [:index, :share_and_download]
+  before_action :authenticate_user!, only: [:index, :share_and_download]
 
   # layout 'pdf', only: [:share_and_download]
   respond_to :docx
@@ -15,7 +15,6 @@ class DigitalCvsController < ApplicationController
 
   # GET /digital_cvs/1
   def show
-    #render :action => :share_and_download
   end
 
   # GET /digital_cvs/new
@@ -48,9 +47,6 @@ class DigitalCvsController < ApplicationController
   def destroy
     @digital_cv.destroy
     redirect_to digital_cvs_url, notice: 'Digital cv was successfully deleted.'
-  end
-
-  def add_section
   end
 
   def save_personal_detail

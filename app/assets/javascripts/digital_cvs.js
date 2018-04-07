@@ -3,13 +3,6 @@
 
 $(document).ready(function(){
 
-  //show/hide end date button based on checkbox selection
-  $(".exp-form, .academic-form").on("change", 'input[type=checkbox]', function(e){
-    var endDate = $(this).parents('.form-group').siblings('.end-date');
-    endDate.find('input').prop('disabled', function(i, v) { return !v; });
-    endDate.toggle();
-  });
-
   //CV name inline change
   $('.edit-cv-name').hide();
   $('#cv-name-change').click(function(){

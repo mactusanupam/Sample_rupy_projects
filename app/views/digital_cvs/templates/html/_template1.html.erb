@@ -207,7 +207,12 @@
 					<% @digital_cv.academic_details.each do |a| %>
 						<div class="row padding-5">
 							<div class="col-md-2 col-xs-3">
-								<%= a.start_date.strftime("%Y-%m") %> - <br /><%= a.end_date.strftime("%Y-%m") %>
+								<%= a.start_date.strftime("%Y-%m") %> - <br />
+								<% if a.pursuing %>
+									Present
+								<% else %>
+									<%= a.end_date.strftime("%Y-%m") %>
+								<% end %>
 							</div>
 							<div class="col-md-10 col-xs-9">
 								<strong><%= a.degree.title %></strong> in

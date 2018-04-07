@@ -1,43 +1,119 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="row devise-forms">
+  <div class="container">
+    <%= image_tag "login_manager.png", alt: 'login manager', class: 'img-circle' %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+      <div class="col-sm-offset-1 col-sm-10">
+        <%= f.error_notification %>
+      </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="form-group <%= f.object.errors.messages[:email].present? ? 'has-error' : '' %>">
+        <div class="input-group col-sm-7 col-sm-offset-1">
+          <div class="input-group-addon">
+            <span class="glyphicon glyphicon-envelope"></span>
+          </div>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'Enter Email', class: 'form-control' %>
+        </div>
+        <% if f.object.errors.messages[:email] %>
+          <span class="help-block">
+            <%= f.object.errors.messages[:email].join(', ') %>
+          </span>
+        <% end %>
+      </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <div class="col-sm-offset-1 col-sm-7">
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+        <% end %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <div class="form-group <%= f.object.errors.messages[:first_name].present? ? 'has-error' : '' %>">
+        <div class="input-group col-sm-7 col-sm-offset-1">
+          <div class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+          </div>
+          <%= f.text_field :first_name, placeholder: 'Enter First Name', class: 'form-control' %>
+        </div>
+        <% if f.object.errors.messages[:first_name] %>
+          <span class="help-block">
+            <%= f.object.errors.messages[:first_name].join(', ') %>
+          </span>
+        <% end %>
+      </div>
+
+      <div class="form-group <%= f.object.errors.messages[:last_name].present? ? 'has-error' : '' %>">
+        <div class="input-group col-sm-7 col-sm-offset-1">
+          <div class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+          </div>
+          <%= f.text_field :last_name, placeholder: 'Enter Last Name', class: 'form-control' %>
+        </div>
+        <% if f.object.errors.messages[:last_name] %>
+          <span class="help-block">
+            <%= f.object.errors.messages[:last_name].join(', ') %>
+          </span>
+        <% end %>
+      </div>
+
+      <div class="form-group <%= f.object.errors.messages[:password].present? ? 'has-error' : '' %>">
+        <div class="input-group col-sm-7 col-sm-offset-1">
+          <div class="input-group-addon">
+            <span class="glyphicon glyphicon-lock"></span>
+          </div>
+          <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Enter password" %>
+        </div>
+        <p class="help-block">
+          leave it blank if you don't want to change it
+        </p>
+        <% if f.object.errors.messages[:password] %>
+          <span class="help-block">
+            <%= f.object.errors.messages[:password].join(', ') %>
+          </span>
+        <% end %>
+      </div>
+
+      <div class="form-group <%= f.object.errors.messages[:password_confirmation].present? ? 'has-error' : '' %>">
+        <div class="input-group col-sm-7 col-sm-offset-1">
+          <div class="input-group-addon">
+            <span class="glyphicon glyphicon-lock"></span>
+          </div>
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: "Re-enter password" %>
+        </div>
+        <% if f.object.errors.messages[:password_confirmation] %>
+          <span class="help-block">
+            <%= f.object.errors.messages[:password_confirmation].join(', ') %>
+          </span>
+        <% end %>
+      </div>
+
+      <div class="form-group <%= f.object.errors.messages[:current_password].present? ? 'has-error' : '' %>">
+        <div class="input-group col-sm-7 col-sm-offset-1">
+          <div class="input-group-addon">
+            <span class="glyphicon glyphicon-lock"></span>
+          </div>
+          <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: "Enter current password" %>
+        </div>
+        <% if f.object.errors.messages[:current_password] %>
+          <span class="help-block">
+            <%= f.object.errors.messages[:current_password].join(', ') %>
+          </span>
+        <% end %>
+        <p class="help-block">
+          we need your current password to confirm your changes
+        </p>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <%= f.button :submit, "Update", class: 'btn btn-default btn-lg btn-block color-white talent-fore-btn' %>
+        </div>
+      </div>
     <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+</div>
 
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>

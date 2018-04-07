@@ -43,15 +43,10 @@
     <%= render :partial => 'layouts/header' %>
     <div class="main-container container-fluid">
       <div class="row-fluid">
-        <div class="">
-          <% flash.each do |name, msg| %>
-            <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-              <a class="close" data-dismiss="alert">×</a>
-              <%= msg %>
-            </div>
-          <% end %>
-          <%= yield %>
-        </div>
+        <% unless request.path == '/users/sign_in' %>
+          <%= bootstrap_flash %>
+        <% end %>
+        <%= yield %>
       </div><!--/row-->
 
       <footer>

@@ -71,9 +71,22 @@
   margin-top: 50px;
 }
 
+.margin-bottom-50 {
+  margin-bottom: 50px;
+}
+
 .margin-bottom-20 {
   margin-bottom: 20px;
 }
+
+.margin-left_-40 {
+  margin-left: -40px !important;
+}
+
+.margin-left_-30 {
+  margin-left: -30px !important;
+}
+
 footer {
   background-color: #3c3d41;
   color: white;

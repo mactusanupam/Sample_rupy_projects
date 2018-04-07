@@ -1,0 +1,23 @@
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>AirTel Selfcare CRM Error</title>
+    </head>
+    <body>
+            <div style="padding:20px; margin-top:20px; text-align:center; color:#000000; font-family:verdana, arial, 'sans serif'; font-size:80%;">
+                <p style=" font-size:150%;">
+                    Sorry : Can Not Perform Operation Contact Administrator
+                </p>
+           </div>
+    </body>
+</html>

@@ -4,11 +4,17 @@
   </div>
   <%= f.association :company, collection: get_company, prompt: "Select Your Employer", label: 'Employer Name', input_html: { class: 'cv_company' }, label_html: { class: 'text-right col-sm-2 no-padding' } %>
   <%= f.association :job_title, label: 'Job Title', label_html: { class: 'text-right col-sm-2 no-padding' } %>
-  <%= f.input :start_date, as: :date, start_year: Date.today.year - 50,
-      end_year: Date.today.year, label_html: { class: 'text-right col-sm-2 no-padding' } %>
-  <%= f.input :end_date, as: :date, start_year: Date.today.year - 50,
-      end_year: Date.today.year, label_html: { class: 'text-right col-sm-2 no-padding' } %>
-  <%= f.input :present_job, inline_label: 'Still Working here?' %>
+  <%= f.input "Duration", required: true do %>
+    <%= f.input :start_date, as: :date, start_year: Date.today.year - 50,
+      end_year: Date.today.year, discard_day: true, order: [:month, :year], label: false, wrapper_html: { class: 'col-sm-4 no-padding' }, input_html: { class:
+        'no-padding' } %>
+    <div class="col-sm-4">
+      <%= f.hint "To", class: 'col-sm-1 padding-top-5 text-center margin-left_-40' %>
+    <%= f.input :end_date, as: :date, start_year: Date.today.year - 50,
+        end_year: Date.today.year, discard_day: true, order: [:month, :year], label: false, wrapper_html: { class: "col-sm-offset-1 col-sm-4 no-padding #{f.object.present_job? ? 'hide' : ''}" }, input_html: { class: "no-padding", disabled: f.object.present_job? } %>
+    </div>
+    <%= f.input :present_job, inline_label: 'Still Working here?', wrapper_html: { class: 'margin-left_-30 col-sm-4' } %>
+  <% end %>
   <%= f.input :responsibilities, label: 'Responsibilities', input_html: { class: 'keyresarea'}, label_html: { class: 'text-right col-sm-2 no-padding' } %>
   <%= f.input :achievement, label: 'Achievements', input_html: { class: 'achievements'}, label_html: { class: 'text-right col-sm-2 no-padding' } %>
 
