@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   get '/digital-cvs/:id/edit/:slug', to: 'digital_cvs#edit'
 
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'registrations' }
 
   resources :messages, only: [:index, :create, :destroy]
 
