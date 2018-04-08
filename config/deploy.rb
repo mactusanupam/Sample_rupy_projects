@@ -42,9 +42,22 @@ namespace :deploy do
   task :start do
     invoke 'unicorn:reload'
   end
+
+  # task :seed do
+  #   run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{fetch(:rails_env)}"
+  # end
+  task :seed do
+    on primary fetch(:migration_role) do
+      within release_path do
+        with rails_env: fetch(:rails_env)  do
+          execute :rake, 'db:seed'
+        end
+      end
+    end
+  end
 end
 
 after "deploy", "deploy:cleanup"
 after 'deploy:publishing', 'deploy:restart'
-after "deploy:update_code", "deploy:migrate"
+after "deploy:updated", "deploy:migrate"
 after "deploy:migrate", "deploy:seed"
