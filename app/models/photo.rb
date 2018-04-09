@@ -6,8 +6,6 @@ class Photo < ApplicationRecord
                              thumb: "160x160", large: "1200x250" },
                     default_url: :default_image_url
 
-  validates_attachment :image, presence: true, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
-
   def default_image_url
     case image_type
     when 'profile_image'
