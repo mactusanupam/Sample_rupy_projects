@@ -7,10 +7,12 @@
     <% else %>
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
     <% end %>
-    <% contact_detail = @digital_cv.contact_detail || @digital_cv.build_contact_detail %>
+    <% contact_detail = @digital_cv.contact_detail || ContactDetail.new(digital_cv: @digital_cv) %>
     <%= simple_form_for contact_detail, url: save_contact_detail_digital_cv_path(@digital_cv), html: { method: :post, remote: true }, wrapper: :horizontal_form do |f| %>
 
-      <%= f.error_notification %>
+      <div class="col-sm-offset-2">
+        <%= f.error_notification %>
+      </div>
 
       <div class="col-sm-12 no-padding margin-bottom-30">
         <%= f.input :first_name, label_html: { class: 'col-sm-3' } %>

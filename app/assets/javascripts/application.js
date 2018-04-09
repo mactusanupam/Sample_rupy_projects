@@ -14,24 +14,15 @@
 //= require rails-ujs
 //= require cocoon
 //= require twitter/bootstrap
+//= require chosen
 //= require bootstrap-wysihtml5
 //= require alertify
 //= require_tree .
 
 $(document).ready(function(){
-  $('.hobbies, .text_area').wysihtml5({ toolbar: {
-    'font-styles': false,
-    'color': false,
-    'emphasis': {
-      'small': false
-    },
-    'blockquote': false,
-    'lists': true,
-    'html': false,
-    'link': true,
-    'image': false,
-    'smallmodals': false
-    }
+
+  $(window).on('popstate', function() {
+    location.reload(true);
   });
 
   //disable char input in number fields

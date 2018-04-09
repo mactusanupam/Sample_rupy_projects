@@ -2,19 +2,21 @@
   <div class="form-group col-sm-12 text-right">
     <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
   </div>
-  <%= f.association :degree, label_html: { class: 'col-sm-2 no-padding text-right' } %>
-  <%= f.association :specialization, label_html: { class: 'col-sm-2 no-padding text-right' } %>
-  <%= f.input :institute, label_html: { class: 'col-sm-2 no-padding text-right' }, input_html: { placeholder: 'e.g. Delhi college of Engineering, Delhi' } %>
-  <%= f.input :university, label_html: { class: 'col-sm-2 no-padding text-right' }, input_html: { placeholder: 'e.g. Delhi University, Delhi' } %>
-  <%= f.input :percentage, label: 'Percentage/CGPA', label_html: { class: 'col-sm-2 no-padding text-right' } %>
+  <%= f.association :degree, label_html: { class: 'col-sm-2 no-left-right-padding text-right' } %>
+  <%= f.association :specialization, label_html: { class: 'col-sm-2 no-left-right-padding text-right' } %>
+  <%= f.input :institute, label_html: { class: 'col-sm-2 no-left-right-padding-padding text-right' }, input_html: { placeholder: 'e.g. Delhi college of Engineering, Delhi' } %>
+  <%= f.input :university, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { placeholder: 'e.g. Delhi University, Delhi' } %>
+  <%= f.input :percentage, label: 'Percentage/CGPA', label_html: { class: 'col-sm-2 no-left-right-padding text-right' } %>
 
   <%= f.input "Duration", required: true do %>
     <%= f.input :start_date, as: :date, start_year: Date.today.year - 50,
       end_year: Date.today.year, discard_day: true, order: [:month, :year], label: false, wrapper_html: { class: 'col-sm-4 no-padding' }, input_html: { class:
         'no-padding' } %>
-    <%= f.hint "To", class: 'col-sm-1 padding-top-5 text-center margin-left_-40' %>
-    <%= f.input :end_date, as: :date, start_year: Date.today.year - 50,
-        end_year: Date.today.year, discard_day: true, order: [:month, :year], label: false, wrapper_html: { class: 'col-sm-offset-1 col-sm-4 no-padding' }, input_html: { class: 'no-padding', disabled: f.object.pursuing? } %>
+    <div class='col-sm-4' style='display: <%= "#{f.object.pursuing? ? 'none' : 'block'}" %>'>
+      <%= f.hint "To", class: 'col-sm-1 padding-top-5 text-center margin-left_-40' %>
+      <%= f.input :end_date, as: :date, start_year: Date.today.year - 50,
+        end_year: Date.today.year, discard_day: true, order: [:month, :year], label: false, input_html: { class: "no-padding", disabled: f.object.pursuing? } %>
+    </div>
     <%= f.input :pursuing, inline_label: 'Still going here?', wrapper_html: { class: 'margin-left_-30 col-sm-4' } %>
   <% end %>
 </div>

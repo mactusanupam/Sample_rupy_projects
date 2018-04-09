@@ -9,8 +9,8 @@
       <%= f.select :nationality, options_for_select(Nationality::Nationality.default_option("indian"), :selected => f.object.nationality), {include_blank: "What's your nationality?"}, {:class => 'form-control' } %>
     <% end %>
 
-    <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90,
-        end_year: Date.today.year, label_html: { class: 'col-sm-2 no-padding' } %>
+    <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 50,
+      end_year: Date.today.year, input_html: { class: 'no-padding' }, label_html: { class: 'col-sm-2 no-right-padding' } %>
 
     <%= f.input :gender, as: :radio_buttons, collection: [['m', 'Male'], ['f', 'Female'], ['o', 'Other']], label_method: :second, value_method: :first, item_wrapper_class: 'radio-inline' %>
     <%= f.input :marital_status, as: :radio_buttons, collection: [['s', 'Single'], ['m', 'Married'], ['o', 'Other']], label_method: :second, value_method: :first, :item_wrapper_class => 'radio-inline' %>
@@ -24,8 +24,8 @@
     </div>
   <% end %>
 
-  <script>
-    $(".hobbies").wysihtml5({ toolbar: {
+  <script type="text/javascript">
+    $('.hobbies').wysihtml5({ toolbar: {
       'font-styles': false,
       'color': false,
       'emphasis': {

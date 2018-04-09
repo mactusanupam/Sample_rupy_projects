@@ -158,45 +158,47 @@
           </ul>
         </div>
       <% end %>
-      <div class="col-md-4 col-xs-4">
-        <h4>OTHER DETAILS</h4>
-        <ul class="unstyle_other_det">
-          <% if @digital_cv.personal_detail.try(:nationality).present? %>
-            <li>
-              <i class="fa fa-flag-o fa-1x"></i>&nbsp;
-              <%= @digital_cv.personal_detail.nationality %>
-            </li>
-          <% end %>
-          <% if @digital_cv.personal_detail.try(:date_of_birth).present? %>
-            <li>
-              <i class="fa fa-birthday-cake fa-1x"></i>&nbsp;
-              <%= @digital_cv.personal_detail.date_of_birth %>
-            </li>
-          <% end %>
-          <% if @digital_cv.personal_detail.try(:gender).present? %>
-            <li>
-              <i class="fa fa-<%= @digital_cv.personal_detail.try(:gender).to_s.downcase %> fa-1x"></i>&nbsp;
-              <%= @digital_cv.personal_detail.gender %>
-            </li>
-          <% end %>
-          <% if @digital_cv.personal_detail.marital_status.present? %>
-            <li>
-              <i class="fa fa-diamond fa-1x"></i>&nbsp;
-              <%= @digital_cv.personal_detail.try(:marital_status) %>
-            </li>
-          <% end %>
-          <% unless @digital_cv.personal_detail.disabled.nil? %>
-            <li>
-              <i class="fa fa-wheelchair fa-1x"></i>&nbsp;
-              <% if @digital_cv.personal_detail.try(:disabled) %>
-                Yes
-              <% else %>
-                No
-              <% end %>
-            </li><br>
-          <% end %>
-        </ul>
-      </div>
+      <% if @digital_cv.personal_detail.present?  %>
+        <div class="col-md-4 col-xs-4">
+          <h4>OTHER DETAILS</h4>
+          <ul class="unstyle_other_det">
+            <% if @digital_cv.personal_detail.try(:nationality).present? %>
+              <li>
+                <i class="fa fa-flag-o fa-1x"></i>&nbsp;
+                <%= @digital_cv.personal_detail.nationality %>
+              </li>
+            <% end %>
+            <% if @digital_cv.personal_detail.try(:date_of_birth).present? %>
+              <li>
+                <i class="fa fa-birthday-cake fa-1x"></i>&nbsp;
+                <%= @digital_cv.personal_detail.date_of_birth %>
+              </li>
+            <% end %>
+            <% if @digital_cv.personal_detail.try(:gender).present? %>
+              <li>
+                <i class="fa fa-<%= @digital_cv.personal_detail.try(:gender).to_s.downcase %> fa-1x"></i>&nbsp;
+                <%= @digital_cv.personal_detail.gender %>
+              </li>
+            <% end %>
+            <% if @digital_cv.personal_detail.try(:marital_status).present? %>
+              <li>
+                <i class="fa fa-diamond fa-1x"></i>&nbsp;
+                <%= @digital_cv.personal_detail.try(:marital_status) %>
+              </li>
+            <% end %>
+            <% unless @digital_cv.personal_detail.try(:disabled).nil? %>
+              <li>
+                <i class="fa fa-wheelchair fa-1x"></i>&nbsp;
+                <% if @digital_cv.personal_detail.try(:disabled) %>
+                  Yes
+                <% else %>
+                  No
+                <% end %>
+              </li><br>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     </div>
   </div>
 
@@ -465,7 +467,7 @@
         </ul>
       </section><br>
     <% end %>
-    <% if @digital_cv.personal_detail.hobbies.present? %>
+    <% if @digital_cv.personal_detail.try(:hobbies).present? %>
       <section>
         <h4><i class="fa fa-hourglass"></i>&nbsp; HOBBIES AND INTERESTS</h4>
         <hr>
@@ -473,22 +475,5 @@
       </section>
       <br>
     <% end %>
-    <div class="cv_declaration" >
-      <span class="text-center">
-        <h4 >DECLARATION</h4>
-        <p>I hereby declare that information furnished above is true to best of my knowledge.</p>
-      </span>
-      <br>
-      <br>
-      <p>
-        <strong>Place:</strong><%= @digital_cv.current_city %>
-        <strong>
-          <span class="pull-right">
-            <%= @digital_cv.contact_detail.try(:name) %>
-          </span>
-        </strong>
-      </p>
-      <p><strong>Date:</strong><%= Time.now.strftime("%d-%m-%Y") %></p>
-    </div>
   </div>
 </div>

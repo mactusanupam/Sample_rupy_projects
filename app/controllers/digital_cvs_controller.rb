@@ -56,8 +56,14 @@ class DigitalCvsController < ApplicationController
   end
 
   def save_contact_detail
-    @contact_detail = @digital_cv.contact_detail
-    @contact_detail.update_attributes(contact_detail_params)
+    if @digital_cv.contact_detail
+      @contact_detail = @digital_cv.contact_detail
+      @contact_detail.update_attributes(contact_detail_params)
+    else
+      @contact_detail = @digital_cv.build_contact_detail(contact_detail_params)
+      @contact_detail.save
+    end
+
     render :update, locals: { only_name: false, only_photo: false, errors: @contact_detail.errors.any? }
   end
 

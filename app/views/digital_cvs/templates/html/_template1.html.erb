@@ -351,7 +351,7 @@
 						<%end %>
 					</div>
 					<div class="col-md-6 col-xs-6">
-						<% if @digital_cv.prefferred_location.present?%>
+						<% if @digital_cv.prefferred_location.present? %>
 							<div class="row">
 								<div class="col-md-6 col-xs-8 no-padding">
 									<strong>Preffered Location</strong>
@@ -371,25 +371,7 @@
 						<% end %>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-12 col-xs-12 col-sm-12">
-						<h3 class="text-center">DECLARATION</h3>
-						<p>I hereby declare that information furnished above is true to the best of my knowledge.</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 col-xs-12 col-sm-12">
-						<div class="col-md-6 col-xs-6 no-padding">
-							<p><strong>Place: </strong><%= @digital_cv.current_city %></p>
-							<p><strong>Date: </strong> <%= Time.now.strftime("%B %d, %Y") %></p>
-						</div>
-						<div class="col-md-6 col-xs-6 text-right">
-							<p>
-								<strong><%= @digital_cv.contact_detail.try(:name) %></strong>
-							</p>
-						</div>
-					</div>
-				</div>
+				<!-- removed declaration from here -->
 			</div>
 		</div>
 	</div>

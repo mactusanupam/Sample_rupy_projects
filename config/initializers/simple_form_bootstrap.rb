@@ -63,7 +63,7 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'col-sm-2 no-padding control-label text-right'
+    b.use :label, class: 'col-sm-2 no-left-right-padding control-label text-right'
 
     b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
       ba.use :input, class: 'form-control'
@@ -105,9 +105,9 @@ SimpleForm.setup do |config|
     b.use :html5
     b.optional :readonly
 
-    b.use :label, class: 'col-sm-2 no-padding control-label'
+    b.use :label, class: 'col-sm-2 no-left-right-padding control-label'
 
-    b.wrapper tag: 'div', class: 'col-sm-9 no-padding' do |ba|
+    b.wrapper tag: 'div', class: 'col-sm-9 no-left-right-padding' do |ba|
       ba.use :input
       ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
       ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }

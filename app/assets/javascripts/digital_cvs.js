@@ -15,10 +15,16 @@ $(document).ready(function(){
     $('.show-cv-name').show();
   });
 
-  $('.digital_cv_honor_and_awards_award_date .form-inline, .digital_cv_certifications_date .form-inline').removeClass('col-sm-12 no-padding').addClass('col-sm-9');
+  $('.digital_cv_honor_and_awards_award_date .form-inline, .digital_cv_certifications_date .form-inline, .personal_detail_date_of_birth .form-inline').removeClass('col-sm-12 no-padding').addClass('col-sm-9');
+
+  $(".resume-editor").on("change", 'input[type=checkbox]', function(e){
+    var endDate = $(this).parents('.checkbox').parents('.form-group').prev('div.col-sm-4');
+    endDate.children('input, select').prop('disabled', function(i, v) { return !v; });
+    endDate.toggle();
+  });
 
   //Show New company form
-  $('.exp-form').on('change', '.cv_company', function(e){
+  $('.resume-editor').on('change', '.cv_company', function(e){
     var valueSelected = this.value;
     var companyFields = $(this).parents('.employer-details').children('.cv-company-fields');
 

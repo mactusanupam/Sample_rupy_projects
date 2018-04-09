@@ -67,6 +67,14 @@
   padding: 0px !important;
 }
 
+.no-right-padding {
+  padding-right: 0px !important;
+}
+.no-left-right-padding {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
 .margin-top-50 {
   margin-top: 50px;
 }
