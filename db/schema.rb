@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404132408) do
+ActiveRecord::Schema.define(version: 20180411062008) do
 
   create_table "academic_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "institute"
@@ -85,6 +85,16 @@ ActiveRecord::Schema.define(version: 20180404132408) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["digital_cv_id"], name: "index_contact_details_on_digital_cv_id"
+  end
+
+  create_table "cv_analytics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "digital_cv_id"
+    t.boolean "viewed"
+    t.boolean "downloaded"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["digital_cv_id"], name: "index_cv_analytics_on_digital_cv_id"
   end
 
   create_table "cv_languages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -337,6 +347,7 @@ ActiveRecord::Schema.define(version: 20180404132408) do
   add_foreign_key "community_answers", "users"
   add_foreign_key "community_questions", "users"
   add_foreign_key "contact_details", "digital_cvs"
+  add_foreign_key "cv_analytics", "digital_cvs"
   add_foreign_key "cv_languages", "digital_cvs"
   add_foreign_key "cv_languages", "languages"
   add_foreign_key "cv_skills", "digital_cvs"

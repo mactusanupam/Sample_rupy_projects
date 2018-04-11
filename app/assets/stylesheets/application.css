@@ -21,6 +21,10 @@
 .main-container {
   margin-top: 91px;
 }
+.main-container .row-fluid {
+  margin-bottom: 50px;
+}
+
 .heading1 {
   font-size:30px;
   font-family: "Lato",Arial,Helvetica,sans-serif;

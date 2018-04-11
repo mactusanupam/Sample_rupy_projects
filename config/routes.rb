@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :digital_cvs, path: '/digital-cvs' do
+  resources :digital_cvs, path: '/resumes' do
     member do
       patch :update_name
       post :save_photo
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/digital-cvs/:id/edit/:slug', to: 'digital_cvs#edit'
+  get '/resumes/:id/edit/:slug', to: 'digital_cvs#edit'
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 

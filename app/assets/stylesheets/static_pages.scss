@@ -4,6 +4,9 @@
 
 /*******************CSS FOR RESUME BUILDER LANDING PAGE*******************************/
 .poster {
+  img.img-responsive {
+    width: 100% !important;
+  }
   position: relative;
   .caption {
     position: absolute;
