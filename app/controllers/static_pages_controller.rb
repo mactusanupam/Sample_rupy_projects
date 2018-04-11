@@ -13,7 +13,7 @@ class StaticPagesController < ApplicationController
   end
 
   def states
-    render json: CS.get(params[:countrycode])
+    render json: Hash[CS.get(params[:countrycode]).sort_by{|k, v| v}]
   end
 
   def cities

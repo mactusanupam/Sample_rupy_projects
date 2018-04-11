@@ -36,7 +36,6 @@ function getAllStatesData(selcountry, class_elem){
       };
       $(class_elem+".select_state").empty();
       $(class_elem+".select_city").empty();
-      alert($(class_elem+".select_city").html());
       $(class_elem+".select_state").append(opt);
     }
   });
