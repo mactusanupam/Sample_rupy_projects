@@ -368,28 +368,5 @@
         <br><br>
       </section>
     </div>
-    <div class="cv_declaration col-md-12" style="margin-top: 30px;">
-      <div class="col-sm-offset-3">
-        <h4 class="text-center">DECLARATION</h4>
-        <br />
-        <p>
-          I hereby declare that information furnished above is true to best of my knowledge.
-        </p>
-      </div>
-      <br>
-      <div class="col-sm-offset-3">
-        <p>
-          <strong>Place:</strong><%= @digital_cv.current_city %>
-          <strong>
-            <span class="col-sm-offset-9">
-              <%= @digital_cv.contact_detail.try(:name) %>
-            </span>
-          </strong>
-        </p>
-        <p>
-          <strong>Date:</strong><%= Time.now.strftime("%d-%m-%Y") %>
-        </p>
-      </div>
-    </div>
   </div>
 </div>

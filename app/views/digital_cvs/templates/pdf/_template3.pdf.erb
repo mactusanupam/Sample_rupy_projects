@@ -460,22 +460,5 @@ td{
       </section>
       <br>
     <% end %>
-    <div class="cv_declaration" >
-      <span class="text-center">
-        <h4 >DECLARATION</h4>
-        <p>I hereby declare that information furnished above is true to best of my knowledge.</p>
-      </span>
-      <br>
-      <br>
-      <p>
-        <strong>Place:</strong><%= @digital_cv.try(:city) %>
-        <strong>
-          <span class="pull-right">
-            <%= @digital_cv.contact_detail.try(:name) %>
-          </span>
-        </strong>
-      </p>
-      <p><strong>Date:</strong><%= Time.now.strftime("%d-%m-%Y") %></p>
-    </div>
   </div>
 </div>

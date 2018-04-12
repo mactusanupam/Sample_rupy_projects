@@ -172,3 +172,28 @@ footer .social .link .fa {
   border-radius: 50%;
   padding: 10px;
 }
+
+.fa-facebook-footer {
+  color: white;
+  background-color: #3B5998;
+}
+.fa-linkedin-footer {
+  background-color: #0077B5;
+  color: white;
+}
+.fa-twitter-footer {
+  background-color: #55acee;
+  color: white;
+}
+.fa-google-plus-footer {
+  color: white;
+  background-color: tomato;
+}
+.fa-instagram-footer {
+  background-color: #c32aa3;
+  color: white;
+}
+.fa-youtube-footer {
+  background-color: #bb0000;
+  color: white;
+}
