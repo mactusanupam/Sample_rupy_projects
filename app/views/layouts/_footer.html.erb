@@ -52,13 +52,29 @@
         <li>
           <span class="glyphicon glyphicon-phone-alt"></span>&nbsp; +91 - 8880088080
         </li>
-        <li class="margin-top-20">
-          <%= fa_icon "facebook 2x color-white facebook-footer" %>
-          <%= fa_icon "twitter 2x color-white twitter-footer" %>
-          <%= fa_icon "linkedin 2x color-white linkedin-footer" %>
-          <%= fa_icon "google-plus 2x color-white google-plus-footer" %>
-          <%= fa_icon "instagram 2x color-white instagram-footer" %>
-          <%= fa_icon "youtube 2x color-white youtube-footer" %>
+        <li class="social-icons">
+          <%= link_to "javascript:void(0)" do %>
+            <%= fa_icon "facebook", text: 'Facebook' %>
+          <% end %>
+          <%= link_to "javascript:void(0)", class: 'margin-left-20' do %>
+            <%= fa_icon "twitter", text: 'twitter' %>
+          <% end %>
+        </li>
+        <li class="social-icons">
+          <%= link_to "javascript:void(0)" do %>
+            <%= fa_icon "linkedin", text: 'Linkedin' %>
+          <% end %>
+          <%= link_to "javascript:void(0)", class: 'margin-left-30' do %>
+            <%= fa_icon "google-plus", text: 'Google+' %>
+          <% end %>
+        </li>
+        <li class="social-icons">
+          <%= link_to "javascript:void(0)" do %>
+            <%= fa_icon "instagram", text: 'Instagram' %>
+          <% end %>
+          <%= link_to "javascript:void(0)", class: 'margin-left-20' do %>
+            <%= fa_icon "youtube", text: 'Youtube' %>
+          <% end %>
         </li>
       </ul>
     </div>
