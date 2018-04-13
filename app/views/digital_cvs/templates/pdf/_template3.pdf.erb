@@ -187,10 +187,10 @@ td{
                 <%= DigitalCvsHelper::MARITAL_STATUS[@digital_cv.personal_detail.marital_status] %>
               </li>
             <% end %>
-          <% unless @digital_cv.personal_detail.disabled.nil? %>
+          <% unless @digital_cv.personal_detail.try(:disabled).nil? %>
             <li>
               <i class="fa fa-wheelchair fa-1x"></i>&nbsp;
-              <% if @digital_cv.personal_detail.try(:disabled) %>
+              <% if @digital_cv.personal_detail.disabled %>
                 Yes
               <% else %>
                 No
@@ -459,7 +459,7 @@ td{
         </ul>
       </section><br>
     <% end %>
-    <% if @digital_cv.personal_detail.hobbies.present? %>
+    <% if @digital_cv.personal_detail.try(:hobbies).present? %>
       <section>
         <h4><i class="fa fa-hourglass"></i>&nbsp; HOBBIES AND INTERESTS</h4>
         <hr>

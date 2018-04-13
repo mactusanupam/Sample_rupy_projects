@@ -193,7 +193,7 @@
             <% unless @digital_cv.personal_detail.try(:disabled).nil? %>
               <li>
                 <i class="fa fa-wheelchair fa-1x"></i>&nbsp;
-                <% if @digital_cv.personal_detail.try(:disabled) %>
+                <% if @digital_cv.personal_detail.disabled %>
                   Yes
                 <% else %>
                   No
