@@ -92,21 +92,21 @@
 						</div>
 					</div>
 					<% end %>
-					<% if @digital_cv.contact_detail.try(:linkedin_profile).present? %>
+					<% if @digital_cv.contact_detail.try(:linkedin_url).present? %>
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<h5><strong>Linkedin Profile URL</strong></h5>
-							<%= @digital_cv.contact_detail.linkedin_profile %>
+							<%= @digital_cv.contact_detail.linkedin_url %>
 						</div>
 					</div>
 					<% end %>
-					<% if @digital_cv.contact_detail.try(:address).present? %>
-					<div class="row">
-						<div class="col-md-12 col-xs-12">
-							<h5><strong>Address</strong></h5>
-							<%= @digital_cv.contact_detail.address %>
+					<% if @digital_cv.contact_detail.try(:address_with_pincode).present? %>
+						<div class="row">
+							<div class="col-md-12 col-xs-12">
+								<h5><strong>Address</strong></h5>
+								<%= @digital_cv.contact_detail.address_with_pincode %>
+							</div>
 						</div>
-					</div>
 					<% end %>
 				<% end %>
 				<% if @digital_cv.cv_skills.size>0 %>
@@ -187,7 +187,7 @@
 					<% @digital_cv.employment_details.each do |e| %>
 						<div class="row padding-5">
 							<div class="col-md-2 col-xs-3">
-								<%= e.start_date.strftime("%Y-%m") %> - <br /><%= e.present_job ? 'present' : e.end_date.strftime("%Y-%m") %>
+								<%= e.start_date.strftime("%B, %Y") %> - <br /><%= e.present_job ? 'present' : e.end_date.strftime("%B, %Y") %>
 							</div>
 							<div class="col-md-10 col-xs-9 emp-details">
 								<strong><%= e.job_title.name %></strong>
@@ -207,11 +207,11 @@
 					<% @digital_cv.academic_details.each do |a| %>
 						<div class="row padding-5">
 							<div class="col-md-2 col-xs-3">
-								<%= a.start_date.strftime("%Y-%m") %> - <br />
+								<%= a.start_date.strftime("%B, %Y") %> - <br />
 								<% if a.pursuing %>
 									Present
 								<% else %>
-									<%= a.end_date.strftime("%Y-%m") %>
+									<%= a.end_date.strftime("%B, %Y") %>
 								<% end %>
 							</div>
 							<div class="col-md-10 col-xs-9">
@@ -251,7 +251,7 @@
 					<% @digital_cv.certifications.each do |cert| %>
 						<div class="row padding-5">
 							<div class="col-md-2 col-xs-3">
-								<%= cert.date.strftime("%Y-%m") %>
+								<%= cert.date.strftime("%B, %Y") %>
 							</div>
 							<div class="col-md-10 col-xs-9">
 								<%= cert.title %> - <strong><%= cert.certifier %></strong>
@@ -268,7 +268,7 @@
 					<% @digital_cv.honor_and_awards.each do |ha| %>
 						<div class="row padding-5">
 							<div class="col-md-2 col-xs-3">
-								<%= ha.award_date.strftime("%Y-%m") %>
+								<%= ha.award_date.strftime("%B, %Y") %>
 							</div>
 							<div class="col-md-10 col-xs-9">
 								<%= ha.title %> at <%= ha.company %>
@@ -327,7 +327,7 @@
 							<div class="row">
 								<div class="col-md-6 col-xs-9"><strong>Gender</strong></div>
 								<div class="col-md-6 col-xs-3">
-									<%= @digital_cv.personal_detail.gender %>
+									<%= DigitalCvsHelper::GENDER[@digital_cv.personal_detail.gender] %>
 								</div>
 							</div>
 						<% end %>
@@ -365,7 +365,7 @@
 							<div class="row">
 								<div class="col-md-6 col-xs-8"><strong>Marial Status</strong></div>
 								<div class="col-md-6 col-xs-4">
-									<%= @digital_cv.personal_detail.marital_status.to_s.capitalize %>
+									<%= DigitalCvsHelper::MARITAL_STATUS[@digital_cv.personal_detail.marital_status] %>
 								</div>
 							</div>
 						<% end %>

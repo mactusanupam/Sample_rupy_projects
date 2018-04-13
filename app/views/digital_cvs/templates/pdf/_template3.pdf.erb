@@ -120,6 +120,12 @@ td{
               <%= @digital_cv.contact_detail.skype_username %>
             </li>
           <% end %>
+          <% if @digital_cv.contact_detail.try(:address_with_pincode).present? %>
+            <li>
+              <i class="fa fa-address-card fa-1x"></i>
+              <%= @digital_cv.contact_detail.address_with_pincode %>
+            </li>
+          <% end %>
         </ul>
       </div>
       <% if @digital_cv.is_experienced? && (@digital_cv.employment_status.present? || @digital_cv.current_city.present?)  %>
@@ -169,17 +175,18 @@ td{
             </li>
           <% end %>
           <% if @digital_cv.personal_detail.try(:gender).present? %>
-            <li>
-              <i class="fa fa-<%= @digital_cv.personal_detail.try(:gender).to_s.downcase %> fa-1x"></i>&nbsp;
-              <%= @digital_cv.personal_detail.gender %>
-            </li>
-          <% end %>
-          <% if @digital_cv.personal_detail.marital_status.present? %>
-            <li>
-              <i class="fa fa-diamond fa-1x"></i>&nbsp;
-              <%= @digital_cv.personal_detail.try(:marital_status) %>
-            </li>
-          <% end %>
+              <li>
+                <% gender = @digital_cv.personal_detail.gender == 'o' ? 'genderless' : DigitalCvsHelper::GENDER[@digital_cv.personal_detail.gender].downcase %>
+                <i class="fa fa-<%= gender %> fa-1x"></i>&nbsp;
+                <%= DigitalCvsHelper::GENDER[@digital_cv.personal_detail.gender] %>
+              </li>
+            <% end %>
+            <% if @digital_cv.personal_detail.try(:marital_status).present? %>
+              <li>
+                <i class="fa fa-diamond fa-1x"></i>&nbsp;
+                <%= DigitalCvsHelper::MARITAL_STATUS[@digital_cv.personal_detail.marital_status] %>
+              </li>
+            <% end %>
           <% unless @digital_cv.personal_detail.disabled.nil? %>
             <li>
               <i class="fa fa-wheelchair fa-1x"></i>&nbsp;

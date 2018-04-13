@@ -1,4 +1,16 @@
 module DigitalCvsHelper
+  GENDER = {
+    'f' => 'Female',
+    'm' => 'Male',
+    'o' => 'Other'
+  }
+
+  MARITAL_STATUS = {
+    's' => 'Single',
+    'm' => 'Married',
+    'o' => 'Other'
+  }
+
   def get_template
     Template.all
   end

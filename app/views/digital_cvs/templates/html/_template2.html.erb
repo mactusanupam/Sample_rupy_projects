@@ -87,10 +87,10 @@
           </div>
         <% end %>
 
-        <% if @digital_cv.contact_detail.try(:linkedin_profile).present?  %>
+        <% if @digital_cv.contact_detail.try(:linkedin_url).present?  %>
           <div class="profile_social_url">
             <strong>Linkedin profile url:</strong>
-            <p><%= @digital_cv.contact_detail.linkedin_profile %></p>
+            <p><%= @digital_cv.contact_detail.linkedin_url %></p>
           </div>
         <% end %>
 
@@ -100,11 +100,10 @@
             <p><%= @digital_cv.contact_detail.skype_username %></p>
           </div>
         <% end %>
-
-        <% if @digital_cv.contact_detail.try(:address).present? %>
+        <% if @digital_cv.contact_detail.try(:address_with_pincode).present? %>
           <div>
             <strong>Address:</strong>
-            <p><%= @digital_cv.contact_detail.address %></p>
+            <p><%= @digital_cv.contact_detail.address_with_pincode %></p>
           </div><br>
         <% end %>
       <% end %>
@@ -155,16 +154,16 @@
           <table class="table">
             <% for employment_detail in @digital_cv.employment_details %>
               <tr>
-                <td valign="top" width="5%">
-                  <strong><%= employment_detail.start_date.strftime("%m/%Y") %>-
+                <td valign="top" width="15%">
+                  <strong><%= employment_detail.start_date.strftime("%B, %Y") %>-
                     <% if employment_detail.present_job %>
                       Present
                     <% else %>
-                      <%= employment_detail.end_date.strftime("%m/%Y") %>
+                      <%= employment_detail.end_date.strftime("%B, %Y") %>
                     <% end %>
                   </strong>
                 </td>
-                <td width="95%" valign="top" class="employ_det_d">
+                <td width="85%" valign="top" class="employ_det_d">
                   <h5><strong><%= employment_detail.job_title.name %></strong></h5>
                   <h6><%= employment_detail.company.name %></h6>
                   <p><%= employment_detail.responsibilities.html_safe %></p>
@@ -183,16 +182,16 @@
          <table class="table">
             <% for academic_detail in @digital_cv.academic_details %>
               <tr>
-                <td valign="top" width="5%">
-                  <strong><%= academic_detail.start_date.strftime("%m/%Y") %>-
+                <td valign="top" width="15%">
+                  <strong><%= academic_detail.start_date.strftime("%B, %Y") %>-
                     <% if academic_detail.pursuing %>
                       Present
                     <% else %>
-                      <%= academic_detail.end_date.strftime("%Y-%m") %>
+                      <%= academic_detail.end_date.strftime("%B, %Y") %>
                     <% end %>
                   </strong>
                 </td>
-                <td valign="top" width="95%" >
+                <td valign="top" width="85%" >
                   <p><strong><%= academic_detail.degree.title %></strong>&nbsp;in&nbsp;<%= academic_detail.specialization.title %> with <%= academic_detail.percentage %>% from <strong><%= academic_detail.university %></strong></p>
                 </td>
               </tr>
@@ -244,7 +243,7 @@
             <% for certification in @digital_cv.certifications %>
               <tr>
                 <td valign="top" width="15%">
-                  <strong><%= certification.date %></strong>
+                  <strong><%= certification.date.strftime("%B, %Y") %></strong>
                 </td>
                 <td width="85%" valign="top">
                   <p><strong><%= certification.title %></strong> by <%= certification.certifier %></p>
@@ -261,7 +260,7 @@
           <table class="table">
             <% for award in @digital_cv.honor_and_awards %>
               <tr>
-                <td valign="top" width="15%"><strong><%= award.award_date.strftime("%d-%m-%Y") %></strong>
+                <td valign="top" width="15%"><strong><%= award.award_date.strftime("%B, %Y") %></strong>
                 </td>
                 <td width="85%" valign="top" style="padding-top: 0px;">
                   <h5><strong><%= award.title %></strong>
@@ -323,16 +322,16 @@
         <hr>
         <div class="col-md-6">
           <ul style="float:left;" class="list-unstyled">
-            <% unless @digital_cv.personal_detail.nationality.nil? %>
+            <% if @digital_cv.personal_detail.try(:nationality).present? %>
               <li>
                 <strong>Nationality: </strong>
-                <%= @digital_cv.personal_detail.try(:nationality).to_s.capitalize %>
+                <%= @digital_cv.personal_detail.nationality.capitalize %>
               </li>
             <% end %>
-            <% unless @digital_cv.personal_detail.gender.nil? %>
+            <% if @digital_cv.personal_detail.try(:gender).present? %>
               <li>
                 <strong>Gender: </strong>
-                <%= @digital_cv.personal_detail.try(:gender).to_s.capitalize %>
+                <%= DigitalCvsHelper::GENDER[@digital_cv.personal_detail.gender] %>
               </li>
             <% end %>
             <% unless @digital_cv.personal_detail.disabled.nil? %>
@@ -357,10 +356,10 @@
               <%= @digital_cv.preferred_location %>
             </li>
             <% end %>
-            <% if @digital_cv.personal_detail.marital_status.present?%>
+            <% if @digital_cv.personal_detail.try(:marital_status).present?%>
             <li>
               <strong>Marital Status: </strong>
-              <%= @digital_cv.personal_detail.try(:marital_status).to_s.capitalize %>
+              <%= DigitalCvsHelper::MARITAL_STATUS[@digital_cv.personal_detail.marital_status] %>
             </li>
             <% end %>
           </ul>

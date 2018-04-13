@@ -10,4 +10,11 @@ class ContactDetail < ApplicationRecord
   def name
     first_name.to_s + " " + last_name.to_s
   end
+
+  def address_with_pincode
+    a = address if address.present?
+    a = a + ", " + pincode.to_s if pincode.present?
+
+    a
+  end
 end
