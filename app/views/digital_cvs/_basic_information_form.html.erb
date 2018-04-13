@@ -32,7 +32,7 @@
     <% end %>
     <%= f.input :prefferred_location do %>
       <div class="col-sm-4 no-padding">
-        <%= f.collection_select :prefferred_country, CS.get(), :first, :last, { include_blank: 'Select Country' }, :class => 'form-control prefferred select_country' %>
+        <%= f.collection_select :prefferred_country, CS.get.sort_by{|k, v| v }, :first, :last, { include_blank: 'Select Country' }, :class => 'form-control prefferred select_country' %>
       </div>
       <div class="col-sm-4" style="padding-right: 0;">
         <%= f.collection_select :prefferred_state, CS.states(@digital_cv.prefferred_country.present? ? @digital_cv.prefferred_country : :none), :first, :last, { include_blank: 'Select State' }, :class => 'form-control prefferred select_state' %>
