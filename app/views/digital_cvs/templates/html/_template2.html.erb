@@ -334,10 +334,10 @@
                 <%= DigitalCvsHelper::GENDER[@digital_cv.personal_detail.gender] %>
               </li>
             <% end %>
-            <% unless @digital_cv.personal_detail.disabled.nil? %>
+            <% unless @digital_cv.personal_detail.try(:disabled).nil? %>
               <li>
                 <strong>Physically Challenged: </strong>
-                <%= @digital_cv.personal_detail.try(:disabled?) ? 'Yes' : 'No' %>
+                <%= @digital_cv.personal_detail.disabled? ? 'Yes' : 'No' %>
               </li>
             <% end %>
             <% if @digital_cv.personal_detail.hobbies.present? %>
