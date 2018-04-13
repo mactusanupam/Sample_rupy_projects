@@ -340,7 +340,7 @@
                 <%= @digital_cv.personal_detail.disabled? ? 'Yes' : 'No' %>
               </li>
             <% end %>
-            <% if @digital_cv.personal_detail.hobbies.present? %>
+            <% if @digital_cv.personal_detail.try(:hobbies).present? %>
               <li>
                 <p><strong>Hobbies and Interest-</strong>
                 <%= raw @digital_cv.personal_detail.hobbies %>
