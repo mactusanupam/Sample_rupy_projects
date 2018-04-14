@@ -2,8 +2,8 @@
   <div class="form-group col-sm-12 text-right">
     <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
   </div>
-  <%= f.association :degree, label_html: { class: 'col-sm-2 no-left-right-padding text-right' } %>
-  <%= f.association :specialization, label_html: { class: 'col-sm-2 no-left-right-padding text-right' } %>
+  <%= f.association :degree, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { class: 'degree' } %>
+  <%= f.association :specialization, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { class: 'specialization' } %>
   <%= f.input :institute, label_html: { class: 'col-sm-2 no-left-right-padding-padding text-right' }, input_html: { placeholder: 'e.g. Delhi college of Engineering, Delhi' } %>
   <%= f.input :university, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { placeholder: 'e.g. Delhi University, Delhi' } %>
   <%= f.input :percentage, label: 'Percentage/CGPA', label_html: { class: 'col-sm-2 no-left-right-padding text-right' } %>
@@ -20,3 +20,16 @@
     <%= f.input :pursuing, inline_label: 'Still going here?', wrapper_html: { class: 'margin-left_-30 col-sm-4' } %>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".degree, .specialization").select2({
+      tags: true
+    });
+
+    $(".degree, .specialization").off('select2:select').on('select2:select', function(e) {
+      elem = $(this).hasClass('specialization') ? 'degree':'specialization';
+      saveNewItem($(this), elem);
+    });
+  })
+</script>

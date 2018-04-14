@@ -19,7 +19,7 @@ $(document).ready(function(){
 
   $(".resume-editor").on("change", 'input[type=checkbox]', function(e){
     var endDate = $(this).parents('.checkbox').parents('.form-group').prev('div.col-sm-4');
-    endDate.children('input, select').prop('disabled', function(i, v) { return !v; });
+    endDate.find('input, select').prop('disabled', function(i, v) { return !v; });
     endDate.toggle();
   });
 

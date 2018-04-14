@@ -13,7 +13,7 @@
  *= require font-awesome
  *= require alertify
  *= require alertify/bootstrap
- *= require chosen
+ *= require select2
  *= require_tree .
  *= require_self
  */

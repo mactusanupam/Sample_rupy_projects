@@ -17,7 +17,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem "twitter-bootstrap-rails"
 gem "font-awesome-rails"
-gem "chosen-awesome-rails"
+gem "select2-rails"
 gem 'bootstrap-wysihtml5-rails'
 gem 'alertifyjs-rails'
 gem 'awesome_nested_set'

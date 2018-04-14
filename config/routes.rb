@@ -38,7 +38,9 @@ Rails.application.routes.draw do
   get '/states/:countrycode', to: 'static_pages#states'
   get '/cities/', to: 'static_pages#cities'
 
-  post '/save_new_skill', to: 'skills_and_languages#save_new_skill', format: :json
-  post '/save_new_language', to: 'skills_and_languages#save_new_language', format: :json
+  %w(skill language degree specialization).each do |item|
+    post "/save_new_#{item}", to: "skills_and_languages#save_new_#{item}", format: :json
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

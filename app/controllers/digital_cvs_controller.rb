@@ -124,7 +124,7 @@ class DigitalCvsController < ApplicationController
       :prefferred_location, :prefferred_country, :prefferred_state, :prefferred_city,
       :current_location, :current_country, :current_state, :current_city, :summary,
       :year, :month, :id, :name, :user_id, :objective, :is_experienced, :total_experience,
-      :employment_status, :template_id, employment_details_attributes: employment_details_attributes,
+      :employment_status, :template_id, :template, employment_details_attributes: employment_details_attributes,
       academic_details_attributes: academic_details_attributes, cv_languages_attributes: cv_languages_attributes,
       research_or_project_details_attributes: [ :id, :title, :description, :duration, :guide,:_destroy],
       trainings_attributes: [ :id, :name, :info, :duration, :institute, :_destroy],

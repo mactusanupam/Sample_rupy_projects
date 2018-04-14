@@ -29,13 +29,14 @@
     </div>
   </div>
   <script>
-    $(".nested_cv_skills select").chosen({
-      allow_insertion: true
-    });
+    $(document).ready(function(){
+      $(".nested_cv_skills .cv_skills").select2({
+        tags: true
+      });
 
-    $(".cv_skills").unbind().on('change',function(){
-      var selSkillTitle = $(this).find('option:last-child').val();
-      saveNewSkill($(this),selSkillTitle);
-    });
+      $('.cv_skills').off('select2:select').on('select2:select',function(e){
+        saveNewItem($(this), 'skill');
+      });
+    })
   </script>
 </div>

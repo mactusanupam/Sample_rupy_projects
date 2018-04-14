@@ -63,14 +63,16 @@ function getAllCitiesData(selcountry, selstate, class_elem){
   });
 }
 
-function saveNewSkill($this,selSkillTitle){
+function saveNewItem($this, element){
+  var selTitle = $this.find('option:last-child').val();
   var elem = $this.find('option:last-child');
-  if(isNaN(parseInt(selSkillTitle))){
+
+  if(isNaN(parseInt(selTitle))){
     $.ajax({
-      url: "/save_new_skill",
+      url: "/save_new_"+element,
       type: 'post',
       dataType: 'json',
-      data:{skill_title:selSkillTitle},
+      data:{title: selTitle},
       success:function(data){
         elem.val(data);
       }
@@ -78,17 +80,3 @@ function saveNewSkill($this,selSkillTitle){
   }
 }
 
-function saveNewLanguage($this,selLangName){
-  var elem = $this.find('option:last-child');
-  if(isNaN(parseInt(selLangName))){
-    $.ajax({
-      url: "/save_new_language",
-      type: 'post',
-      dataType: 'json',
-      data:{language_name:selLangName},
-      success:function(data){
-        elem.val(data);
-      }
-    });
-  }
-}

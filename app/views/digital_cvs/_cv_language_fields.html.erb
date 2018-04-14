@@ -18,13 +18,12 @@
 	</div>
 
 	<script>
-		$(".nested_cv_languages select").chosen({
-			allow_insertion: true
+		$(".nested_cv_languages .cv_languages").select2({
+			tags: true
 		});
 
-		$(".cv_languages").unbind().on('change',function(){
-			var selLangName = $(this).find('option:last-child').val();
-			saveNewLanguage($(this),selLangName);
-		})
+		$(".cv_languages").off('select2:select').on('select2:select', function(e) {
+      saveNewItem($(this), 'language');
+    });
 	</script>
 </div>
