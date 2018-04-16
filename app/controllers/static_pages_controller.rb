@@ -3,7 +3,6 @@ class StaticPagesController < ApplicationController
   end
 
   def contact_us
-    @message = Message.new
   end
 
   def about_us

@@ -1,1 +1,4 @@
+<% unless @message.errors.any? %>
+  $('#new_message').trigger("reset");
+<% end %>
 $('.contact-form').html("<%= escape_javascript(render partial: 'messages/form' ) %>");

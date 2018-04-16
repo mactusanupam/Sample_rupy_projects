@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
-  resources :messages, only: [:index, :create, :destroy]
+  resources :messages, only: [:create, :destroy]
 
   get '/about-us', to:'static_pages#about_us'
   get '/resume-builder', to:'static_pages#resume_builder'
