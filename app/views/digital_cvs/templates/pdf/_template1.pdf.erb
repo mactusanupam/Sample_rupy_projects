@@ -56,7 +56,7 @@
 					<div class="col-md-12 col-xs-12">
 						<h2><strong><%= @digital_cv.contact_detail.try(:name) %></strong></h2>
 						<h4>
-							<%= @digital_cv.present_job ? @digital_cv.present_job.job_title.name : '' %>
+							<%= @digital_cv.present_job ? @digital_cv.present_job.job_title.title : '' %>
 						</h4>
 					</div>
 				</div>
@@ -190,7 +190,7 @@
 								<%= e.start_date.strftime("%B, %Y") %> - <br /><%= e.present_job ? 'present' : e.end_date.strftime("%B, %Y") %>
 							</div>
 							<div class="col-md-10 col-xs-9 emp-details">
-								<strong><%= e.job_title.name %></strong>
+								<strong><%= e.job_title.title %></strong>
 								<p><%= e.company.name %></p>
 								<%= e.responsibilities.html_safe %>
 								<%= e.achievement.html_safe %>

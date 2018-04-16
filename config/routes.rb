@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   get '/states/:countrycode', to: 'static_pages#states'
   get '/cities/', to: 'static_pages#cities'
 
-  %w(skill language degree specialization).each do |item|
+  %w(skill language degree specialization job_title).each do |item|
     post "/save_new_#{item}", to: "skills_and_languages#save_new_#{item}", format: :json
   end
 

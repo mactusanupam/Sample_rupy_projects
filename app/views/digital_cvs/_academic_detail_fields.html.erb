@@ -2,8 +2,8 @@
   <div class="form-group col-sm-12 text-right">
     <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
   </div>
-  <%= f.association :degree, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { class: 'degree' } %>
-  <%= f.association :specialization, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { class: 'specialization' } %>
+  <%= f.association :degree, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { class: 'degree' }, prompt: 'Please select or type your degree' %>
+  <%= f.association :specialization, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { class: 'specialization' }, prompt: 'Please select or type your specialization' %>
   <%= f.input :institute, label_html: { class: 'col-sm-2 no-left-right-padding-padding text-right' }, input_html: { placeholder: 'e.g. Delhi college of Engineering, Delhi' } %>
   <%= f.input :university, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { placeholder: 'e.g. Delhi University, Delhi' } %>
   <%= f.input :percentage, label: 'Percentage/CGPA', label_html: { class: 'col-sm-2 no-left-right-padding text-right' } %>

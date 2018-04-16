@@ -18,7 +18,7 @@ docx.font name: 'Helvetica'
 digital_cv = @digital_cv
 user_info = @digital_cv.user.attributes
 docx_image = @digital_cv.photo.image.url(:thumb)
-present_job_tit = @digital_cv.present_job ? @digital_cv.present_job.job_title.name : "No Title"
+present_job_tit = @digital_cv.present_job ? @digital_cv.present_job.job_title.title : "No Title"
 personal_info = @digital_cv.personal_detail.attributes
 cv_skill = @digital_cv.cv_skills
 languages = @digital_cv.cv_languages
@@ -343,7 +343,7 @@ else
 empl.end_date.strftime("%Y-%m")
 end
 
-table [[empl.start_date.strftime("%Y-%m").to_s+"-\n"+end_date.to_s,empl.job_title.name+"\n"+empl.company.name+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.responsibilities)+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.achievement)]] do
+table [[empl.start_date.strftime("%Y-%m").to_s+"-\n"+end_date.to_s,empl.job_title.title+"\n"+empl.company.name+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.responsibilities)+"\n"+ActionView::Base.full_sanitizer.sanitize(empl.achievement)]] do
 cell_style cols[0], width: 1200
 border_top do
 color   'FFFFFF'
