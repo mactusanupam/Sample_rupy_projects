@@ -13,7 +13,6 @@
   <% else %>
     $.toaster('Resume information saved successfully.', 'Success', 'success');
     var href = activeTab.next('li').find('a').attr('href');
-    <% cookies[:digital_cv]["#{@digital_cv.id}"] %>
     if(typeof href !== "undefined")
       $.get(href, function(data) {}, 'script');
   <% end %>
