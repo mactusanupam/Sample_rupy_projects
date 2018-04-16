@@ -4,7 +4,7 @@
     <%#= menu_item "Home", root_path %>
     <%= menu_item "Resume Builder", root_path %>
     <%= drop_down "Community" do %>
-      <%= menu_item "Blogs", "javascript:void(0)" %>
+      <%= menu_item "Blogs", "/blogs" %>
       <%= menu_item "Discussions", community_questions_path %>
     <% end %>
     <%= menu_item "Contact Us", contact_us_path %>
