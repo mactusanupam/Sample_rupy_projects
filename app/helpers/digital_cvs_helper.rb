@@ -34,7 +34,7 @@ module DigitalCvsHelper
   end
 
   def optional_sections
-    %w(trainings certifications honors_and_awards \
+    %w(trainings certifications honor_and_awards \
     research_or_project_details personal_details references)
   end
 

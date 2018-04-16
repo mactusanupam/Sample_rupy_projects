@@ -79,8 +79,8 @@
                       <%= fa_icon 'certificate', text: 'CERTIFICATIONS' %>
                     <% end %>
                   </li>
-                  <li class="<%= params[:slug] == 'honors_and_awards' ? 'active' : nil%>">
-                    <%= link_to "/resumes/#{@digital_cv.id}/edit/honors_and_awards", remote: true do %>
+                  <li class="<%= params[:slug] == 'honor_and_awards' ? 'active' : nil%>">
+                    <%= link_to "/resumes/#{@digital_cv.id}/edit/honor_and_awards", remote: true do %>
                       <%= fa_icon 'trophy', text: 'HONORS & AWARDS' %>
                     <% end %>
                   </li>

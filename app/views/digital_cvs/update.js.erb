@@ -1,8 +1,10 @@
 <% if only_name %>
+  alert('it came in if');
   $('.edit-cv-name').hide();
   $('.show-cv-name span').html("<%= @digital_cv.name %> ");
   $('.show-cv-name').show();
 <% elsif only_photo %>
+alert('it came in elsif');
   $('body').removeClass('modal-open')
   $('.modal-backdrop').remove()
   $('.photo-div').html('').html('<%= escape_javascript(render partial: "digital_cvs/photo_partial" ) %>')
@@ -12,6 +14,7 @@
     $("#resume-editor-form").html('').html('<%= escape_javascript(render partial: "digital_cvs/#{current_section}" ) %>');
   <% else %>
     var href = activeTab.next('li').find('a').attr('href');
+    alert(href);
     if(typeof href !== "undefined")
       $.get(href, function(data) {}, 'script');
   <% end %>

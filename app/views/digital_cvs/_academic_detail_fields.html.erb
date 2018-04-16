@@ -28,7 +28,7 @@
     });
 
     $(".degree, .specialization").off('select2:select').on('select2:select', function(e) {
-      elem = $(this).hasClass('specialization') ? 'degree':'specialization';
+      elem = $(this).hasClass('specialization') ? 'specialization':'degree';
       saveNewItem($(this), elem);
     });
   })

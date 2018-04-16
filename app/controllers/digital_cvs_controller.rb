@@ -128,7 +128,7 @@ class DigitalCvsController < ApplicationController
       academic_details_attributes: academic_details_attributes, cv_languages_attributes: cv_languages_attributes,
       research_or_project_details_attributes: [ :id, :title, :description, :duration, :guide,:_destroy],
       trainings_attributes: [ :id, :name, :info, :duration, :institute, :_destroy],
-      honor_and_awards_attributes: [ :id, :award_date, :company, :title, :awarded_by, :_destroy],
+      honor_and_awards_attributes: [ :id, :award_date, :company_id, :title, :awarded_by, :_destroy],
       references_attributes: [ :id, :name, :designation, :companyname, :email, :contact_no, :_destroy],
       cv_skills_attributes: [:id, :skill, :skill_id, :self_rating, :_destroy],
       certifications_attributes: [:id, :digital_cv_id, :date, :title, :certifier, :_destroy],
