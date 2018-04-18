@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180414193440) do
+ActiveRecord::Schema.define(version: 20180418064404) do
 
   create_table "academic_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "institute"
@@ -131,10 +131,7 @@ ActiveRecord::Schema.define(version: 20180414193440) do
     t.text "summary"
     t.text "objective"
     t.boolean "is_experienced"
-    t.integer "total_experience"
     t.string "employment_status"
-    t.string "current_location"
-    t.string "prefferred_location"
     t.bigint "user_id"
     t.bigint "template_id"
     t.string "slug"
@@ -164,12 +161,11 @@ ActiveRecord::Schema.define(version: 20180414193440) do
   create_table "honor_and_awards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.date "award_date"
-    t.bigint "company_id"
     t.string "awarded_by"
     t.bigint "digital_cv_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_honor_and_awards_on_company_id"
+    t.string "company_name"
     t.index ["digital_cv_id"], name: "index_honor_and_awards_on_digital_cv_id"
   end
 
@@ -238,13 +234,12 @@ ActiveRecord::Schema.define(version: 20180414193440) do
   create_table "references", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.bigint "job_title_id"
-    t.bigint "company_id"
     t.string "email"
     t.bigint "mobile"
     t.bigint "digital_cv_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_references_on_company_id"
+    t.string "company_name"
     t.index ["digital_cv_id"], name: "index_references_on_digital_cv_id"
     t.index ["job_title_id"], name: "index_references_on_job_title_id"
   end
@@ -357,10 +352,8 @@ ActiveRecord::Schema.define(version: 20180414193440) do
   add_foreign_key "employment_details", "companies"
   add_foreign_key "employment_details", "digital_cvs"
   add_foreign_key "employment_details", "job_titles"
-  add_foreign_key "honor_and_awards", "companies"
   add_foreign_key "honor_and_awards", "digital_cvs"
   add_foreign_key "personal_details", "digital_cvs"
-  add_foreign_key "references", "companies"
   add_foreign_key "references", "digital_cvs"
   add_foreign_key "references", "job_titles"
   add_foreign_key "research_or_project_details", "digital_cvs"

@@ -121,23 +121,22 @@ class DigitalCvsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def digital_cv_params
     params.require(:digital_cv).permit(
-      :prefferred_location, :prefferred_country, :prefferred_state, :prefferred_city,
-      :current_location, :current_country, :current_state, :current_city, :summary,
-      :year, :month, :id, :name, :user_id, :objective, :is_experienced, :total_experience,
-      :employment_status, :template_id, :template, employment_details_attributes: employment_details_attributes,
-      academic_details_attributes: academic_details_attributes, cv_languages_attributes: cv_languages_attributes,
+      :summary, :id, :name, :user_id, :objective, :is_experienced, :employment_status, :template_id, :template,
+      employment_details_attributes: employment_details_attributes,
+      academic_details_attributes: academic_details_attributes,
+      cv_languages_attributes: cv_languages_attributes,
       research_or_project_details_attributes: [ :id, :title, :description, :duration, :guide,:_destroy],
       trainings_attributes: [ :id, :name, :info, :duration, :institute, :_destroy],
       honor_and_awards_attributes: [ :id, :award_date, :company_id, :title, :awarded_by, :_destroy],
-      references_attributes: [ :id, :name, :designation, :companyname, :email, :contact_no, :_destroy],
+      references_attributes: [ :id, :name, :job_title_id, :company_name, :email, :mobile, :_destroy],
       cv_skills_attributes: [:id, :skill, :skill_id, :self_rating, :_destroy],
-      certifications_attributes: [:id, :digital_cv_id, :date, :title, :certifier, :_destroy],
+      certifications_attributes: [:id, :date, :title, :certifier, :_destroy],
      )
   end
 
   def employment_details_attributes
     [
-      :id, :job_title_id, :digital_cv_id, :company_id, :achievement, :responsibilities,
+      :id, :job_title_id, :company_id, :achievement, :responsibilities,
       :start_date, :end_date, :present_job, :industry_name, :_destroy,
       company_attributes: [:website, :name, :id]
     ]
@@ -145,7 +144,7 @@ class DigitalCvsController < ApplicationController
 
   def academic_details_attributes
     [
-      :institution, :id, :digital_cv_id, :degree_id, :specialization_id,
+      :institution, :id, :degree_id, :specialization_id,
       :institute, :university, :percentage, :start_date, :end_date, :_destroy, :pursuing
     ]
   end

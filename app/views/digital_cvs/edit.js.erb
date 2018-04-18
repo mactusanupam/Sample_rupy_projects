@@ -5,9 +5,7 @@
   $('#resume-editor-form').html('<%= escape_javascript(render partial: "digital_cvs/#{params[:slug]}_form" ) %>');
 
   <% if params[:slug] == 'contact_details' %>
-    $('.control-label').each(function() {
-      $(this).removeClass('col-sm-2');
-    });
+    $('.edit_contact_detail .control-label').removeClass('col-sm-2');
   <% elsif params[:slug] == 'honors_and_awards' || params[:slug] == 'certifications' || params[:slug] == 'personal_details' %>
     $('.form-group.date .form-inline').removeClass('col-sm-12 no-padding').addClass('col-sm-9');
   <% end %>
@@ -16,10 +14,12 @@
 <% else %>
   alertify.alert('Alert', 'Looks like you tampered the URL. Falling back to resume summary');
 
-  var href = '<%= "/resumes/#{@digital_cv.id}/edit/basic_information" %>';
+  var href = '<%= "/resumes/#{@digital_cv.id}/edit/contact_details" %>';
 
   $('.resume-editor-left li.active').removeClass('active');
   $('a[href$="'+href+'"]').parent('li').addClass('active');
 
-  $('#resume-editor-form').html('<%= escape_javascript(render partial: "digital_cvs/basic_information_form" ) %>');
+  $('#resume-editor-form').html('<%= escape_javascript(render partial: "digital_cvs/contact_details_form" ) %>');
 <% end %>
+
+$('.digital_cv_honor_and_awards_award_date .form-inline, .digital_cv_certifications_date .form-inline, .personal_detail_date_of_birth .form-inline').removeClass('col-sm-12 no-padding').addClass('col-sm-9');

@@ -271,7 +271,7 @@
 								<%= ha.award_date.strftime("%B, %Y") %>
 							</div>
 							<div class="col-md-10 col-xs-9">
-								<%= ha.title %> at <%= ha.company %>
+								<%= ha.title %> at <%= ha.company_name %>
 							</div>
 						</div>
 					<% end %>
@@ -304,7 +304,7 @@
 						<hr />
 					<% end %>
 				<% end %>
-				<% if @digital_cv.personal_detail.present? || @digital_cv.prefferred_location.present? %>
+				<% if @digital_cv.personal_detail.present? %>
 					<div class="row padding-5">
 						<div class="col-md-12 col-xs-12">
 							<h3>Additional Information</h3>
@@ -351,16 +351,6 @@
 						<%end %>
 					</div>
 					<div class="col-md-6 col-xs-6">
-						<% if @digital_cv.prefferred_location.present? %>
-							<div class="row">
-								<div class="col-md-6 col-xs-8 no-padding">
-									<strong>Preffered Location</strong>
-								</div>
-								<div class="col-md-6 col-xs-4 no-padding">
-									<%= @digital_cv.preferred_location %>
-								</div>
-							</div>
-						<% end %>
 						<% if @digital_cv.personal_detail.try(:marital_status).present?%>
 							<div class="row">
 								<div class="col-md-6 col-xs-8"><strong>Marial Status</strong></div>

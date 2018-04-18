@@ -7,41 +7,7 @@
     <%= f.input :summary, label: 'Executive Summary', input_html: { rows: 5 }, require: true %>
     <%#= f.hint "Maximum 500 characters allowed" %>
     <%= f.input :objective, input_html: { rows: 5 } %>
-    <%= f.input :employment_status, as: :radio_buttons, collection: [['Employed', 'Employed'], ['Not Working', 'Not Working'], ['On Sabbatical', 'On Sabbatical']], label_method: :second, value_method: :first, item_wrapper_class: 'radio-inline'  %>
-    <%= f.input :total_experience do %>
-      <%
-        years = (0..20).to_a.map{|y| pluralize(y, 'year') }
-        months = (0..11).to_a.map{|m| pluralize(m, 'month') }
-      %>
-      <div class="col-sm-6 no-padding">
-        <%= f.collection_select(:year, years, :to_i, :to_s, {:prompt => 'Years'}, { class: 'form-control' }) %>
-      </div>
-      <div class="col-sm-6" style="padding-right: 0;">
-        <%= f.collection_select(:month, months, :to_i, :to_s ,{:prompt => 'Months'}, { class: 'form-control' }) %>
-      </div>
-    <% end %>
-    <%= f.input :current_location do %>
-      <div class="col-sm-4 no-padding">
-        <%= f.collection_select :current_country, CS.get.sort_by{|k, v| v }, :first, :last, { include_blank: 'Select Country' }, :class => 'form-control current select_country' %>
-      </div>
-      <div class="col-sm-4" style="padding-right: 0;">
-        <%= f.collection_select :current_state, CS.states(@digital_cv.current_country.present? ? @digital_cv.current_country : :none), :first, :last, { include_blank: 'Select State' }, :class => 'form-control current select_state' %>
-      </div>
-      <div class="col-sm-4" style="padding-right: 0;">
-        <%= f.collection_select :current_city, CS.cities(@digital_cv.current_state), :to_s, :to_s, { include_blank: 'Select City' }, :class => 'form-control current select_city' %>
-      </div>
-    <% end %>
-    <%= f.input :prefferred_location do %>
-      <div class="col-sm-4 no-padding">
-        <%= f.collection_select :prefferred_country, CS.get.sort_by{|k, v| v }, :first, :last, { include_blank: 'Select Country' }, :class => 'form-control prefferred select_country' %>
-      </div>
-      <div class="col-sm-4" style="padding-right: 0;">
-        <%= f.collection_select :prefferred_state, CS.states(@digital_cv.prefferred_country.present? ? @digital_cv.prefferred_country : :none), :first, :last, { include_blank: 'Select State' }, :class => 'form-control prefferred select_state' %>
-      </div>
-      <div class="col-sm-4" style="padding-right: 0;">
-        <%= f.collection_select :prefferred_city, CS.cities(@digital_cv.prefferred_state), :to_s, :to_s, { include_blank: 'Select City' }, :class => 'form-control prefferred select_city' %>
-      </div>
-    <% end %>
+    <%= f.input :employment_status, as: :radio_buttons, collection: [['Fresher', 'Fresher'], ['Employed', 'Employed'], ['Not Working', 'Not Working'], ['On Sabbatical', 'On Sabbatical']], label_method: :second, value_method: :first, item_wrapper_class: 'radio-inline'  %>
   </div>
   <div class="text-center">
     <%= f.button :submit, "Save and Continue", class: "btn btn-primary talent-fore-btn" %>

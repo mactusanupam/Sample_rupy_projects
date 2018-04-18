@@ -130,7 +130,7 @@
           <% end %>
         </ul>
       </div>
-      <% if @digital_cv.is_experienced? && (@digital_cv.employment_status.present? || @digital_cv.current_city.present?)  %>
+      <% if @digital_cv.is_experienced? && @digital_cv.employment_status.present?  %>
         <div class="col-md-4 col-xs-4">
           <h4>EMPLOYMENT DETAILS</h4>
           <ul class="unstyle_empl_det">
@@ -138,24 +138,6 @@
               <li>
                 <strong><i class="fa fa-briefcase fa-1x"></i></strong>&nbsp;
                 <%= @digital_cv.employment_status %>
-              </li>
-            <% end %>
-            <% if @digital_cv.is_experienced? %>
-              <li>
-                <strong><i class="fa fa-briefcase fa-1x"></i></strong>&nbsp;
-                <%= @digital_cv.year %>  Years and <%= @digital_cv.month %> Months
-              </li>
-            <% end %>
-            <% if @digital_cv.current_city.present? %>
-              <li>
-                <strong><i class="fa fa-map-marker fa-1x"></i></strong>&nbsp;&nbsp;
-                <%= @digital_cv.current_city %>
-              </li>
-            <% end %>
-            <% if @digital_cv.prefferred_location.present? %>
-              <li>
-                <strong><i class="fa fa-map-marker fa-1x"></i></strong>&nbsp;
-                <%= @digital_cv.preferred_location %> (preferred)
               </li>
             <% end %>
           </ul>
@@ -424,7 +406,7 @@
                   <% if award.awarded_by.present? %>
                   by <%= award.awarded_by %>
                   <% end %>
-                  at <%= award.company %>
+                  at <%= award.company_name %>
                 </h5>
               </td>
             </tr>
@@ -462,10 +444,10 @@
           <% for reference in @digital_cv.references %>
             <li>
               <p>
-                <strong><%= reference.name %>, <%= reference.designation %></strong>
+                <strong><%= reference.name %>, <%= reference.job_title.try(:title) %></strong>
               </p>
-              <p><%= reference.companyname %></p>
-              <p><%= reference.contact_no %>, <%= reference.email %></p>
+              <p><%= reference.company_name %></p>
+              <p><%= reference.mobile %>, <%= reference.email %></p>
             </li>
           <% end %>
         </ul>

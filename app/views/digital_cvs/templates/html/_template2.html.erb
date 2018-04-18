@@ -267,7 +267,7 @@
                     <% if award.awarded_by.present? %>
                     by <%= award.awarded_by %>
                     <% end %>
-                    at <%= award.company %>
+                    at <%= award.company_name %>
                   </h5>
                 </td>
               </tr>
@@ -306,10 +306,10 @@
             <% for reference in @digital_cv.references %>
               <li>
                 <p>
-                  <strong><%= reference.name %>, <%= reference.designation %></strong>
+                  <strong><%= reference.name %>, <%= reference.job_title.try(:title) %></strong>
                 </p>
-                <p><%= reference.companyname %></p>
-                <p><%= reference.contact_no %>, <%= reference.email %></p>
+                <p><%= reference.company_name %></p>
+                <p><%= reference.mobile %>, <%= reference.email %></p>
               </li>
             <% end %>
           </ul>
@@ -350,12 +350,6 @@
         </div>
         <div class="col-md-6" style="float:left;">
           <ul class="list-unstyled">
-            <% if @digital_cv.prefferred_location.present?%>
-            <li>
-              <strong>Preferred Location: </strong>
-              <%= @digital_cv.preferred_location %>
-            </li>
-            <% end %>
             <% if @digital_cv.personal_detail.try(:marital_status).present?%>
             <li>
               <strong>Marital Status: </strong>

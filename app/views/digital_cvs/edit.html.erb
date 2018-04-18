@@ -42,14 +42,14 @@
             <div class="col-md-3 no-padding talent-fore-btn">
               <div class="resume-editor-left">
                 <ul class="nav nav-pills nav-stacked">
-                  <li class="<%= (!all_sections.include?(params[:slug]) || params[:slug] == 'basic_information') ? 'active' : nil%>">
-                    <%= link_to "/resumes/#{@digital_cv.id}/edit/basic_information", remote: true do %>
-                      <%= fa_icon 'info-circle', text: 'SUMMARY' %>
-                    <% end %>
-                  </li>
-                  <li class="<%= params[:slug] == 'contact_details' ? 'active' : nil%>">
+                  <li class="<%= (!all_sections.include?(params[:slug]) || params[:slug] == 'contact_details') ? 'active' : nil %>">
                     <%= link_to "/resumes/#{@digital_cv.id}/edit/contact_details", remote: true do %>
                       <%= fa_icon 'address-card', text: 'CONTACT DETAILS' %>
+                    <% end %>
+                  </li>
+                  <li class="<%= params[:slug] == 'basic_information' ? 'active' : nil %>">
+                    <%= link_to "/resumes/#{@digital_cv.id}/edit/basic_information", remote: true do %>
+                      <%= fa_icon 'info-circle', text: 'SUMMARY' %>
                     <% end %>
                   </li>
                   <% if @digital_cv.is_experienced? %>
@@ -69,6 +69,11 @@
                       <%= fa_icon 'gears', text: 'LANGUAGES & SKILLS' %>
                     <% end %>
                   </li>
+                  <li class="<%= params[:slug] == 'research_or_project_details' ? 'active' : nil%>">
+                    <%= link_to "/resumes/#{@digital_cv.id}/edit/research_or_project_details", remote: true do %>
+                      <%= fa_icon 'tasks', text: 'RESEARCHES/PROJECTS' %>
+                    <% end %>
+                  </li>
                   <li class="<%= params[:slug] == 'trainings' ? 'active' : nil%>">
                     <%= link_to "/resumes/#{@digital_cv.id}/edit/trainings", remote: true do %>
                       <%= fa_icon 'university', text: 'TRAININGS' %>
@@ -84,11 +89,6 @@
                       <%= fa_icon 'trophy', text: 'HONORS & AWARDS' %>
                     <% end %>
                   </li>
-                  <li class="<%= params[:slug] == 'research_or_project_details' ? 'active' : nil%>">
-                    <%= link_to "/resumes/#{@digital_cv.id}/edit/research_or_project_details", remote: true do %>
-                      <%= fa_icon 'tasks', text: 'RESEARCHES/PROJECTS' %>
-                    <% end %>
-                  </li>
                   <li class="<%= params[:slug] == 'references' ? 'active' : nil%>">
                     <%= link_to "/resumes/#{@digital_cv.id}/edit/references", remote: true do %>
                       <%= fa_icon 'users', text: 'REFERENCES' %>
@@ -96,7 +96,7 @@
                   </li>
                   <li class="<%= params[:slug] == 'personal_details' ? 'active' : nil%>">
                     <%= link_to "/resumes/#{@digital_cv.id}/edit/personal_details", remote: true do %>
-                      <%= fa_icon 'user-plus', text: 'PERSONAL DETAILS' %>
+                      <%= fa_icon 'user-plus', text: 'ADDITIONAL INFORMATION' %>
                     <% end %>
                   </li>
                 </ul>
@@ -112,7 +112,7 @@
                   <% if all_sections.include?(params[:slug]) %>
                     <%= render "#{params[:slug]}_form" %>
                   <% else %>
-                    <%= render "basic_information_form" %>
+                    <%= render "contact_details_form" %>
                   <% end %>
                 </div>
               </div>

@@ -1,9 +1,4 @@
 class DigitalCv < ApplicationRecord
-  attr_accessor :year, :month
-
-  store :current_location, accessors: [:current_city, :current_state, :current_country], coder: JSON
-  store :prefferred_location, accessors: [:prefferred_city, :prefferred_state, :prefferred_country], coder: JSON
-
   serialize :additional_sections, JSON
 
   belongs_to :user, optional: true
@@ -51,37 +46,9 @@ class DigitalCv < ApplicationRecord
 
   validates :summary,  presence: true, length: { maximum: 500 }
 
-  before_create :set_slug
+  # before_create :set_slug
 
-  before_save :update_experience
-
-  # def to_param
-  #   [id, user.name.parameterize].join("-")
+  # def set_slug
+  #   self.slug = SecureRandom.uuid
   # end
-
-  def set_slug
-    self.slug = SecureRandom.uuid
-  end
-
-  def update_experience
-    if @year || @month
-      self.total_experience = @year.to_i*12 + @month.to_i
-    end
-  end
-
-  def year
-    self.total_experience.to_i/12
-  end
-
-  def month
-    self.total_experience.to_i%12
-  end
-
-  def preferred_location
-    [prefferred_city, CS.countries[prefferred_country.try(:to_sym)]].join(', ')
-  end
-
-  def present_location
-    [current_city, CS.countries[current_country.try(:to_sym)]].join(', ')
-  end
 end
