@@ -16,7 +16,7 @@ module DigitalCvsHelper
   end
 
   def get_company
-    Company.all.collect {|p| [ p.name, p.id] } << ["Others", ""]
+    Company.all.collect {|p| [ p.name, p.id] } << ["Add New", ""]
   end
 
   def share_cv_url(digital_cv)
