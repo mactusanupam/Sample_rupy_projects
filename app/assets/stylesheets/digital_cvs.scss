@@ -17,7 +17,6 @@
   }
 
   p {
-    margin: 0 0 0px;
     font-size: 14px;
     line-height: 1.6em;
     color: #555;
@@ -218,6 +217,11 @@
   }
   .end-date {
     margin-right: 10px;
+  }
+
+  .edit_digital_cv p {
+    margin-top: -15px;
+    margin-bottom: 15px;
   }
 }
 

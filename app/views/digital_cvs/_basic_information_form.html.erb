@@ -4,9 +4,24 @@
     <hr />
     <%= f.error_notification %>
 
-    <%= f.input :summary, label: 'Executive Summary', input_html: { rows: 5 }, require: true %>
-    <%#= f.hint "Maximum 500 characters allowed" %>
-    <%= f.input :objective, input_html: { rows: 5 } %>
+    <%= f.input :summary, label: 'Executive Summary', input_html: { rows: 6, maxlength: 500 }, require: true %>
+    <p class="col-sm-offset-2 col-sm-9 help-block">
+      Remaining Characters:
+      <span class="char-count">
+        <%= 500 - f.object.summary.length %>
+      </span>
+      <span class="pull-right">Maximum 500 characters allowed</span>
+    </p>
+
+    <%= f.input :objective, input_html: { rows: 6, maxlength: 500 } %>
+    <p class="col-sm-offset-2 col-sm-9 help-block">
+      Remaining Characters:
+      <span class="char-count">
+        <%= 500 - f.object.objective.length %>
+      </span>
+      <span class="pull-right">Maximum 500 characters allowed</span>
+    </p>
+
     <%= f.input :employment_status, as: :radio_buttons, collection: [['Fresher', 'Fresher'], ['Employed', 'Employed'], ['Not Working', 'Not Working'], ['On Sabbatical', 'On Sabbatical']], label_method: :second, value_method: :first, item_wrapper_class: 'radio-inline'  %>
   </div>
   <div class="text-center">
