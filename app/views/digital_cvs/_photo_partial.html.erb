@@ -1,10 +1,10 @@
 <p>
   <strong>Note:</strong> If you'd like to create a Photo CV, please upload your photo.
 </p>
-<div class="well profile-photo">
-  <h4 class="text-center">Your Resume Photo</h4>
+<div class="well profile-photo text-center">
+  <h4>Your Resume Photo</h4>
   <% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
-    <%= image_tag @digital_cv.photo.image.url(:thumb) %>
+    <%= image_tag @digital_cv.photo.image.url(:thumb), width: 160, height: 160 %>
   <% else %>
     <%= image_tag "digital_cv/photo_cv.png", width: 160, height: 160 %>
   <% end %>
