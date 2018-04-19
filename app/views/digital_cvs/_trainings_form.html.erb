@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <h4 class="text-center">Training Details</h4>
     <hr />
-    <div class="ecv_error_data"></div>
+    <%= f.error_notification %>
     <div class="add_more_trainings">
       <% @digital_cv.trainings.build unless @digital_cv.trainings.present? %>
       <%= f.simple_fields_for :trainings do |f| %>

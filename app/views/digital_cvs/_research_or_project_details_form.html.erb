@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-12">
       <h4 class="cont_hed_colr text-center">RESEARCHES/PROJECTS</h4>
+      <%= f.error_notification %>
       <div class="researchandproject" style="margin-bottom: 30px;">
         <% @digital_cv.research_or_project_details.build unless @digital_cv.research_or_project_details.present? %>
         <%= f.simple_fields_for :research_or_project_details do |rop| %>

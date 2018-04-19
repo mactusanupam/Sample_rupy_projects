@@ -1,7 +1,8 @@
-<%= form_for(@digital_cv, remote: true, html: { class: 'academic-form form-horizontal' }) do |f|  %>
+<%= simple_form_for(@digital_cv, remote: true, html: { class: 'academic-form form-horizontal' }) do |f|  %>
   <div class="col-md-12 languages">
     <h4 class="cont_hed_colr">Languages</h4>
     <hr>
+    <%= f.error_notification %>
     <div class="row">
       <div class="col-sm-offset-1 col-sm-6 text-center">
         <label for="name">Language</label>
