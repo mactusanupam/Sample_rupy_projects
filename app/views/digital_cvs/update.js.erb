@@ -12,14 +12,15 @@
     $("#resume-editor-form").html('').html('<%= escape_javascript(render partial: "digital_cvs/#{current_section}" ) %>');
   <% else %>
     $.toaster('Resume information saved successfully.', 'Success', 'success');
-    var li = activeTab.next('li');
-    var href = "";
+    var href = activeTab.next('li').find('a').attr('href');
 
-    if(li.attr('class') == 'optional-section')
-      href = li.next('li').find('a').attr('href');
-
-    if(typeof href !== "undefined")
+    alert(href);
+    if(typeof href !== "undefined") {
       $.get(href, function(data) {}, 'script');
+    } else if(activeTab.next('li').hasClass('optional-section')) {
+      href = activeTab.next('li').next('li').find('a').attr('href');
+      $.get(href, function(data) {}, 'script');
+    }
 
   <% end %>
 <% end %>
