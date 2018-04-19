@@ -59,7 +59,7 @@
                       <% end %>
                     </li>
                   <% end %>
-                  <li class="<%= params[:slug] == 'education_details' ? 'active' : nil%>">
+                  <li class="<%= params[:slug] == 'academic_details' ? 'active' : nil%>">
                     <%= link_to "/resumes/#{@digital_cv.id}/edit/academic_details", remote: true do %>
                       <%= fa_icon 'graduation-cap', text: 'EDUCATION' %>
                     <% end %>
