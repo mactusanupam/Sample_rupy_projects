@@ -2,9 +2,12 @@
   <div class="col-md-12">
     <h4 class="text-center">EMPLOYMENT HISTORY</h4>
     <hr />
+
+    <%= f.error_notification %>
+
     <div class="employment-details">
       <% @digital_cv.employment_details.build unless @digital_cv.employment_details.present? %>
-      <%= f.simple_fields_for :employment_details do |employment_detail| %>
+      <%= f.simple_fields_for :employment_details, validate: true do |employment_detail| %>
         <%= render "employment_detail_fields", :f => employment_detail %>
       <% end %>
     </div>

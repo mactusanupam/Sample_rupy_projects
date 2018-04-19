@@ -38,6 +38,15 @@ $(document).ready(function(){
     }
   });
 
+  //check fresher or experienced
+  $('.digital-cv-form').on('change', '.digital_cv_employment_status input[type="radio"]', function(){
+    var selected = $(this).val();
+
+    if(selected == 'Fresher') {
+
+    }
+  });
+
   //Show New company form
   $('.resume-editor').on('change', '.cv_company', function(e){
     var valueSelected = this.value;

@@ -69,6 +69,7 @@
                       <%= fa_icon 'gears', text: 'LANGUAGES & SKILLS' %>
                     <% end %>
                   </li>
+                  <li class="optional-section">OPTIONAL SECTIONS</li>
                   <li class="<%= params[:slug] == 'research_or_project_details' ? 'active' : nil%>">
                     <%= link_to "/resumes/#{@digital_cv.id}/edit/research_or_project_details", remote: true do %>
                       <%= fa_icon 'tasks', text: 'RESEARCHES/PROJECTS' %>
