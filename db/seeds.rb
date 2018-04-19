@@ -150,18 +150,18 @@ end
 
 unless JobTitle.any?
   JobTitle.create([
-    {name: 'Software Engineer'},
-    {name: 'Senior Software Engineer'},
-    {name: 'Technical Manager'},
-    {name: 'Program Manager'},
-    {name: 'Associate Director'},
-    {name: 'Senior Director'},
-    {name: 'Sales Manager'},
-    {name: 'Area Manager'},
-    {name: 'Marketing Manager'},
-    {name: 'Marketing Intern'},
-    {name: 'Associate Marketing'},
-    {name: 'Associate Sales'}
+    {title: 'Software Engineer'},
+    {title: 'Senior Software Engineer'},
+    {title: 'Technical Manager'},
+    {title: 'Program Manager'},
+    {title: 'Associate Director'},
+    {title: 'Senior Director'},
+    {title: 'Sales Manager'},
+    {title: 'Area Manager'},
+    {title: 'Marketing Manager'},
+    {title: 'Marketing Intern'},
+    {title: 'Associate Marketing'},
+    {title: 'Associate Sales'}
   ])
 end
 

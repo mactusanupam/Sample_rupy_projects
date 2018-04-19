@@ -12,15 +12,17 @@
           <li data-target="#template-carousel" data-slide-to="2" class=""></li>
         </ol>
         <div class="carousel-inner">
-        <% get_template.each_with_index do |template, index| %>
-          <div class="item <%= 'active' if index == 0 %>">
-            <%= image_tag "digital_cv/cvtemplateimage/#{template.name}.png", alt: "Template Blue" %>
-            <div class="hidden-xs carousel-caption">
-              <%= link_to "Use this template", new_digital_cv_path(template_id: template.id), class: "btn btn-primary btn-lg select-template-button", remote: true %>
+        <%= form_for @digital_cv do |f| %>
+          <% get_template.each_with_index do |template, index| %>
+            <%= f.hidden_field :template_id, value: template.id %>
+            <div class="item <%= 'active' if index == 0 %>">
+              <%= image_tag "digital_cv/cvtemplateimage/#{template.name}.png", alt: "Template Blue" %>
+              <div class="hidden-xs carousel-caption">
+                <%= f.submit "Use this template", class: "btn btn-primary btn-lg select-template-button" %>
+              </div>
             </div>
-          </div>
           <% end %>
-
+        <% end %>
         </div>
         <a class="left carousel-control" href="#template-carousel" role="button" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -33,8 +35,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<!-- Modal -->
-<div id="digital-cv-modal" class="modal fade" role="dialog" aria-hidden="true">
 </div>

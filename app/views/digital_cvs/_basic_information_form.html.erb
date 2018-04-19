@@ -8,7 +8,7 @@
     <p class="col-sm-offset-2 col-sm-9 help-block">
       Remaining Characters:
       <span class="char-count">
-        <%= 500 - f.object.summary.length %>
+        <%= 500 - f.object.summary.try(:length).to_i %>
       </span>
       <span class="pull-right">Maximum 500 characters allowed</span>
     </p>
@@ -17,7 +17,7 @@
     <p class="col-sm-offset-2 col-sm-9 help-block">
       Remaining Characters:
       <span class="char-count">
-        <%= 500 - f.object.objective.length %>
+        <%= 500 - f.object.objective.try(:length).to_i %>
       </span>
       <span class="pull-right">Maximum 500 characters allowed</span>
     </p>

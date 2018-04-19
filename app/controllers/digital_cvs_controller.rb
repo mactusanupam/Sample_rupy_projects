@@ -19,7 +19,7 @@ class DigitalCvsController < ApplicationController
 
   # GET /digital_cvs/new
   def new
-    @digital_cv = DigitalCv.new(template_id: params[:template_id])
+    @digital_cv = DigitalCv.new
   end
 
   # GET /digital_cvs/1/edit
