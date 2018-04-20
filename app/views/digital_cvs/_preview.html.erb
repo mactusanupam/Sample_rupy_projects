@@ -1,0 +1,30 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header talent-fore-btn color-white">
+      <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button> -->
+      <div class="modal-title clearfix">
+        <div class="pull-left">
+          <h4>PREVIEW RESUME</h4>
+        </div>
+        <div class="pull-right">
+          <%= link_to 'javascript:void(0)', class: 'btn btn-default', "data-dismiss": "modal" do %>
+            <%= fa_icon "pencil", text: "CONTINUE EDITING" %>
+          <% end %>
+          <%= link_to 'javascript:void(0)', class: 'btn btn-default talent-fore-btn color-white' do %>
+            <%= fa_icon "download", text: "DOWNLOAD" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body no-padding">
+      <div id="template-list">
+        <h4 style="text-transform: uppercase;">Select any other template for your resume</h4>
+      </div>
+      <div id="selected-template-cv">
+        <%= render "digital_cvs/templates/html/#{@digital_cv.template.name}" %>
+      </div>
+    </div>
+  </div>
+</div>

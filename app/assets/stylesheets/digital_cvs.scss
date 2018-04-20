@@ -194,6 +194,28 @@
   padding: 3px 8px;
 }
 
+.fa-cloud-download, .fa-eye {
+  margin-right: 5px !important;
+}
+
+.fa-eye.fa-2x {
+  font-size: 1.5em;
+  vertical-align: bottom;
+}
+
+#preview-cv .modal-dialog {
+  width: 85%;
+  #selected-template-cv {
+    margin: 10px;
+    .container {
+      width: 97%;
+      border: 1px solid #24607D;
+      padding: 20px;
+      border-radius: 4px;
+    }
+  }
+}
+
 @media only screen and (max-width: 767px) {
   .digital-cv-form ul .list-group-item {
     width: 100%;

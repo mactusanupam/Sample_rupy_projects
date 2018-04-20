@@ -34,8 +34,10 @@
               </div>
             </h3>
             <div class="pull-right">
-              <%= link_to "Preview", "#{digital_cv_path(@digital_cv)}/preview", class: 'btn btn-clock btn-primary btn-default' %>
-              <%= link_to "Download", 'javascript:void(0)', class: 'btn btn-clock btn-default' %>
+              <%= link_to "#{digital_cv_path(@digital_cv)}/preview", class: 'btn btn-clock btn-default', remote: true do %>
+                <%= fa_icon "eye 2x", text: "Preview & Download" %>
+              <% end %>
+              <%#= link_to "Download", 'javascript:void(0)', class: 'btn btn-clock btn-default' %>
             </div>
           </div>
           <div class="panel-body no-padding">
@@ -124,3 +126,5 @@
     </div>
   </div>
 </div>
+
+<div id='preview-cv' class="modal fade" data-toggle='modal'></div>
