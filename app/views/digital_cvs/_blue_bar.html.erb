@@ -7,7 +7,9 @@
           Change Template
         </button>
       <% end %>
-      <%= link_to "Download Resume", share_and_download_digital_cv_path(@digital_cv), class: 'btn btn-clock btn-default' %>
+      <% unless request.params["action"] == 'index' %>
+        <%= link_to "Download Resume", share_and_download_digital_cv_path(@digital_cv), class: 'btn btn-clock btn-default' %>
+      <% end %>
     </div>
   </div>
 </div>

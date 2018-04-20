@@ -1,13 +1,18 @@
 class DigitalCvsController < ApplicationController
   before_action :set_digital_cv, except: [:index, :new, :create, :share_and_download]
-  before_action :authenticate_user!, only: [:index, :share_and_download]
+  before_action :authenticate_user!, only: [:share_and_download]
 
   # layout 'pdf', only: [:share_and_download]
   respond_to :docx
 
   # GET /digital_cvs
   def index
-    @digital_cvs = DigitalCv.where(user_id: current_user.id)
+    unless user_signed_in?
+      @digital_cvs = DigitalCv.where(id: cookies[:digital_cv])
+    else
+      @digital_cvs = DigitalCv.where(user_id: current_user.id)
+    end
+
     if @digital_cvs.size == 0
       redirect_to new_digital_cv_path
     end
@@ -31,6 +36,7 @@ class DigitalCvsController < ApplicationController
     @digital_cv = DigitalCv.new(digital_cv_params)
 
     if @digital_cv.save(validate: false)
+      cookies[:digital_cv] = { :value => @digital_cv.id, :expires => 1.month.from_now }
       redirect_to edit_digital_cv_url(@digital_cv)
     else
       render :new

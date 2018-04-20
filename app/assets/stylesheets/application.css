@@ -23,6 +23,7 @@
 }
 .main-container .row-fluid {
   margin-bottom: 50px;
+  min-height: 287px;
 }
 
 .heading1 {
