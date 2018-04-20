@@ -1,18 +1,15 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header talent-fore-btn color-white">
-      <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button> -->
       <div class="modal-title clearfix">
         <div class="pull-left">
           <h4>PREVIEW RESUME</h4>
         </div>
         <div class="pull-right">
-          <%= link_to 'javascript:void(0)', class: 'btn btn-default', "data-dismiss": "modal" do %>
+          <%= link_to edit_url(@digital_cv), class: 'btn btn-default', "data-dismiss": "modal" do %>
             <%= fa_icon "pencil", text: "CONTINUE EDITING" %>
           <% end %>
-          <%= link_to 'javascript:void(0)', class: 'btn btn-default talent-fore-btn color-white' do %>
+          <%= link_to share_and_download_digital_cv_path(@digital_cv), class: 'btn btn-default btn-success' do %>
             <%= fa_icon "download", text: "DOWNLOAD" %>
           <% end %>
         </div>
@@ -20,7 +17,20 @@
     </div>
     <div class="modal-body no-padding">
       <div id="template-list">
-        <h4 style="text-transform: uppercase;">Select any other template for your resume</h4>
+        <h4>
+          <span>Select any other template for your resume</span>
+          <!-- <span style="margin-left: 50px;">
+            <input type='checkbox' name='photo_cv'/> Show only Photo CV templates.
+          </span> -->
+        </h4>
+
+        <div class="row">
+          <% get_template.each do |template| %>
+            <div class="col-sm-2 template-image">
+              <%= link_to image_tag("digital_cv/cvtemplateimage/#{template.name}.png", alt: "Template Blue"), change_cv_template_digital_cv_path(template_id: template.id), remote: true %>
+            </div>
+          <% end %>
+        </div>
       </div>
       <div id="selected-template-cv">
         <%= render "digital_cvs/templates/html/#{@digital_cv.template.name}" %>

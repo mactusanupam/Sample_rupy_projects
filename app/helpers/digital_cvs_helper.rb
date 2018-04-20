@@ -48,4 +48,12 @@ module DigitalCvsHelper
 
     res.size > 1 ? 'languages_and_skills_form' : "#{res.first}_form"
   end
+
+  def edit_url(cv)
+    if request.format == 'js'
+      'javascript:void(0)'
+    else
+      edit_digital_cv_path(cv)
+    end
+  end
 end

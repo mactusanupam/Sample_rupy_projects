@@ -214,6 +214,22 @@
       border-radius: 4px;
     }
   }
+  div {
+    word-wrap: break-word;
+  }
+}
+
+#template-list {
+  margin-left: 25px;
+  margin-bottom: 20px;
+
+  .template-image {
+    margin-top: 10px;
+    img {
+      width: 100px;
+      height: 150px;
+    }
+  }
 }
 
 @media only screen and (max-width: 767px) {

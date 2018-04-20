@@ -87,7 +87,6 @@ class DigitalCvsController < ApplicationController
 
   def change_cv_template
     @digital_cv.update_attribute(:template_id, params[:template_id])
-    redirect_to request.referer
   end
 
   def share_and_download
