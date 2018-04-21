@@ -89,12 +89,18 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  credentials =  Aws::SharedCredentials.new.credentials
+
   config.paperclip_defaults = {
     :s3_region => ENV['S3_REGION'],
     :bucket => ENV['S3_BUCKET'],
     :preserve_files => true,
     :storage => :s3,
     :url =>':s3_domain_url',
-    :path => '/:class/:attachment/:id_partition/:style/:filename'
+    :path => '/:class/:attachment/:id_partition/:style/:filename',
+    :s3_credentials => {
+      :access_key_id => credentials.access_key_id,
+      :secret_access_key => credentials.secret_access_key
+    }
   }
 end
