@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418064404) do
+ActiveRecord::Schema.define(version: 20180420080809) do
 
   create_table "academic_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "institute"
@@ -18,12 +18,13 @@ ActiveRecord::Schema.define(version: 20180418064404) do
     t.boolean "pursuing"
     t.date "start_date"
     t.date "end_date"
-    t.decimal "percentage", precision: 10
+    t.decimal "percentage", precision: 4, scale: 2
     t.bigint "degree_id"
     t.bigint "specialization_id"
     t.bigint "digital_cv_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_cgpa"
     t.index ["degree_id"], name: "index_academic_details_on_degree_id"
     t.index ["digital_cv_id"], name: "index_academic_details_on_digital_cv_id"
     t.index ["specialization_id"], name: "index_academic_details_on_specialization_id"
@@ -130,7 +131,7 @@ ActiveRecord::Schema.define(version: 20180418064404) do
     t.string "name", default: "My Resume"
     t.text "summary"
     t.text "objective"
-    t.boolean "is_experienced"
+    t.boolean "is_experienced", default: true
     t.string "employment_status"
     t.bigint "user_id"
     t.bigint "template_id"

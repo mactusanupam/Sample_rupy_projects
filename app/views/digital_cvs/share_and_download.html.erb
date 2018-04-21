@@ -1,91 +1,19 @@
-<style>
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-
-  .dropdown-content a:hover {background-color: #f1f1f1}
-
-  .show { display:block; }
-
-  .fa-facebook-icon {
-    color: #2d4373;
-  }
-  .fa-twitter-icon {
-    color: #55acee;
-  }
-  .fa-google-plus-icon {
-    color: #dd4b39;
-  }
-  .fa-linkedin-icon {
-    color: #046293;
-  }
-
-</style>
 <% content_for :title, "Digital CV | Create professional resume in minutes | Share and download your resume" %>
 
 <div class="container">
   <div class="row" style="padding: 20px 0;">
     <div class="col-md-12">
       <div class="pull-right">
-        <% unless params[:slug].present? %>
-          <%= link_to "Home", root_path, class: 'btn btn-link' %>
-          <%= link_to "Return to edit resume", edit_digital_cv_path(@digital_cv), class: 'btn btn-link' %>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changecvtemplatemodal" id="chgtempmodbtn">
-            Change Template
-          </button>
-          <li class="dropdown">
-            <a class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
-                Share Resume
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <%= link_to "https://www.facebook.com/sharer/sharer.php?u=#{share_cv_url(@digital_cv)}",  title: 'Share Me on facebook!', target: '_blank' do %>
-                  <%= fa_icon "facebook-square 2x facebook-icon", text: 'Share on Facebook!' %>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to "https://twitter.com/intent/tweet/?text=sales world;url=#{share_cv_url(@digital_cv)}",  title: 'Share Me on twitter!', target: '_blank' do %>
-                  <%= fa_icon "twitter-square 2x twitter-icon", text: 'Share on Twitter!' %>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to "https://www.linkedin.com/shareArticle?url=#{share_cv_url(@digital_cv)};title=Salesworld Salesjob&summary=Salesworld social share&source=#{root_url}",  title: 'Share Me on linkedin', target: '_blank' do %>
-                  <%= fa_icon "linkedin-square 2x linkedin-icon", text: 'Share on LinkedIn!' %>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to "https://plus.google.com/share?url=#{share_cv_url(@digital_cv)}",  title: 'Share Me on google plus!', target: '_blank' do %>
-                  <%= fa_icon "google-plus-square 2x google-plus-icon", text: 'Share on Google!' %>
-                <% end %>
-              </li>
-            </ul>
-          </li>
-        <% end %>
         <div class="dropdown">
-          <button type="button" class="btn dropbtn" onclick="myFunction()"><i class="fa fa-download" aria-hidden="true"></i> Download</button>
-          <div id="myDropdown" class="dropdown-content">
-            <%= link_to  share_and_download_digital_cv_path(@digital_cv, format: :pdf) do%>
-              <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Download PDF
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-download" aria-hidden="true"></i> Download
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= link_to share_and_download_digital_cv_path(@digital_cv, format: :pdf), class: 'dropdown-item' do%>
+              <%= fa_icon "file-pdf-o", text: 'Download PDF' %>
             <% end %>
-            <%#= link_to download_cv_docx_digital_cv_path(@digital_cv,format: :docx) do%>
-              <!-- <i class="fa fa-file-word-o" aria-hidden="true"></i> Download Word -->
+            <%#= link_to 'javascript:void(0)', class: 'dropdown-item' do %>
+              <%#= fa_icon "file-word-o", text: 'Download DOCX' %>
             <%# end %>
           </div>
         </div>
@@ -96,26 +24,4 @@
 </div>
 
 <%= render "digital_cvs/templates/html/#{@digital_cv.template.name}" %>
-<%= render "change_template_modal" %>
-
-<script type="text/javascript">
-  function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-  }
-
-  window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
-      }
-    }
-  }
-
-</script>
 

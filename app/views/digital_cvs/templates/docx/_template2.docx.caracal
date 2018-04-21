@@ -29,7 +29,7 @@ certifications = @digital_cv.certifications
 honr_aw = @digital_cv.honor_and_awards
 research_or_projectdet = @digital_cv.research_or_projectdetails
 references = @digital_cv.references
-font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://www.salesworld.net/"
+font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://talentfore.com"
 
 c1= Caracal::Core::Models::TableCellModel.new do
 img 'http:' + docx_image, width: 75, height: 75, align: :center

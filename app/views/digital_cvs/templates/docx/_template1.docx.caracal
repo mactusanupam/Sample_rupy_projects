@@ -26,7 +26,7 @@ trainings = @digital_cv.trainings
 certifications = @digital_cv.certifications
 honr_aw = @digital_cv.honor_and_awards
 research_or_projectdet = @digital_cv.research_or_project_details
-font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://www.salesworld.net/"
+font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://talentfore.com/"
 
 
 c1 = Caracal::Core::Models::TableCellModel.new do

@@ -232,6 +232,17 @@
   }
 }
 
+.dropdown-menu a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-menu a:hover {
+  background-color: #285e8e;
+  color: white;
+}
+
 @media only screen and (max-width: 767px) {
   .digital-cv-form ul .list-group-item {
     width: 100%;

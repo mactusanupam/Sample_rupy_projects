@@ -17,7 +17,7 @@ docx.font name: 'Helvetica'
 digital_cv = @digital_cv
 user_info = @digital_cv.user.attributes
 docx_image = @digital_cv.photo.image.url(:thumb)
-font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://www.salesworld.net/"
+font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://talentfore.com/"
 
 present_job_tit = @digital_cv.present_job ? @digital_cv.present_job.job_title : "No Title"
 personal_info = @digital_cv.personal_detail.attributes

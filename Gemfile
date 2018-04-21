@@ -30,8 +30,7 @@ gem "cocoon"
 gem 'city-state'
 gem 'nationality'
 
-gem 'aws-sdk', '~> 3'
-
+gem 'aws-sdk-s3'
 gem 'unicorn'
 
 gem 'wicked_pdf'
