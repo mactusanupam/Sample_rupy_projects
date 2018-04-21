@@ -90,8 +90,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.paperclip_defaults = {
-    :s3_region => ENV['S3_REGION'],
-    :bucket => ENV['S3_BUCKET'],
+    :s3_region => 'ap-south-1',
+    :bucket => 'talentfore-prod',
     :preserve_files => true,
     :storage => :s3,
     :url =>':s3_domain_url',
