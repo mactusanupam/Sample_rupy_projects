@@ -149,12 +149,15 @@ footer .social-icons {
   margin-top: 10px;
 }
 
+
 footer .social-icons .fa {
   padding: 5px;
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
   text-decoration: none;
   margin-right: 5px;
+  width:1.7em;
+  border-radius:5px;
 }
 
 footer .social-icons a {
