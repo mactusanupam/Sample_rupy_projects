@@ -6,7 +6,8 @@
   <%= f.association :specialization, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { class: 'specialization' }, prompt: 'Please select or type your specialization' %>
   <%= f.input :institute, label_html: { class: 'col-sm-2 no-left-right-padding-padding text-right' }, input_html: { placeholder: 'e.g. Delhi college of Engineering, Delhi' } %>
   <%= f.input :university, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { placeholder: 'e.g. Delhi University, Delhi' } %>
-  <%= f.input :percentage, label: 'Percentage/CGPA', label_html: { class: 'col-sm-2 no-left-right-padding text-right' } %>
+  <%= f.input :percentage, label: grade_label(f.object), label_html: { class: 'col-sm-2 no-left-right-padding text-right' } %>
+  <%= f.input :is_cgpa, inline_label: 'Is it CGPA?', wrapper_html: { class: 'text-right col-sm-11 is_cgpa' } %>
 
   <%= f.input "Duration", required: true do %>
     <%= f.input :start_date, as: :date, start_year: Date.today.year - 50,

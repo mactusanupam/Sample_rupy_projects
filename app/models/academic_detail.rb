@@ -6,8 +6,8 @@ class AcademicDetail < ApplicationRecord
   validates :university, :percentage, :start_date, :institute, presence:true
   validates :end_date, :presence => true, unless: Proc.new{|a| a.pursuing }
   validate :end_after_start
-  validates :percentage, numericality: { greater_than: 0, less_than: 100 }, allow_nil: true
-
+  validates :percentage, numericality: { greater_than: 0, less_than: 100 }, allow_nil: true, unless: Proc.new{|a| a.is_cgpa }
+  validates :percentage, numericality: { less_than: 10 }, if: Proc.new{|a| a.is_cgpa }
 
   private
 

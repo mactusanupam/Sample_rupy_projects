@@ -56,4 +56,14 @@ module DigitalCvsHelper
       edit_digital_cv_path(cv)
     end
   end
+
+  def grade_label(obj)
+    if obj.is_cgpa.nil?
+      'Percentage/CGPA'
+    elsif obj.is_cgpa
+      'CGPA'
+    else
+      'Percentage'
+    end
+  end
 end

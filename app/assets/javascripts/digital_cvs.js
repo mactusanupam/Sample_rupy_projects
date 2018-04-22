@@ -19,6 +19,16 @@ $(document).ready(function(){
   $('.digital_cv_honor_and_awards_award_date .form-inline, .digital_cv_certifications_date .form-inline, .personal_detail_date_of_birth .form-inline').removeClass('col-sm-12 no-padding').addClass('col-sm-9');
   $('.edit_contact_detail .control-label').removeClass('col-sm-2');
 
+  $('.resume-editor').on('change', '.is_cgpa input[type=checkbox]', function(e) {
+    var label = $(this).parents('.is_cgpa').prev('.form-group').find('label');
+    if($(this).is(':checked')) {
+      label.html('').html('<abbr title="required">*</abbr>CGPA');
+    } else {
+      label.html('').html('<abbr title="required">*</abbr>Percentage');
+    }
+
+  });
+
   //end date disable enable for experience and education
   $(".resume-editor").on("change", 'input[type=checkbox]', function(e){
     var endDate = $(this).parents('.checkbox').parents('.form-group').prev('div.col-sm-4');

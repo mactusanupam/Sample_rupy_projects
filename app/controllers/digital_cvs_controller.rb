@@ -149,7 +149,7 @@ class DigitalCvsController < ApplicationController
 
   def academic_details_attributes
     [
-      :institution, :id, :degree_id, :specialization_id,
+      :institution, :id, :degree_id, :specialization_id, :is_cgpa,
       :institute, :university, :percentage, :start_date, :end_date, :_destroy, :pursuing
     ]
   end
