@@ -27,6 +27,6 @@ $(document).ready(function(){
 
   //disable char input in number fields
   $(document.body).on('keypress', "input[type=number]", function(){
-    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+    return (event.charCode == 8 || event.charCode == 0 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57;
   });
 })
