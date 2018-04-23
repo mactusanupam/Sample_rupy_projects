@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.string "name", default: "My Resume"
     t.text "summary"
     t.text "objective"
-    t.boolean "is_experienced", default: true
+    t.boolean "is_experienced"
     t.string "employment_status"
     t.bigint "user_id"
     t.bigint "template_id"
@@ -172,6 +172,13 @@ ActiveRecord::Schema.define(version: 20180420080809) do
 
   create_table "industries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "job_responsibilities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "responsibility_type"
+    t.text "responsibility_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

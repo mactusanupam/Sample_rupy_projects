@@ -1,0 +1,113 @@
+<%= form_for :position_details, url: job_description_creators_path,remote: true, method: :post, html: { class: 'form-horizontal jd_form overview' } do |form| %>
+
+  <div class="form-group">
+    <%= form.label :company_name, 'Company Name', class: 'control-label text-right col-sm-3' %>
+    <div class="col-sm-8">
+      <%= form.collection_select :company_id, Company.all, :id, :name, {:prompt => 'Select Company Name'}, { class: 'form-control jd_company' } %>
+    </div>
+  </div>
+  <%#= form.simple_fields_for :company_details, Company.new do |company_fields| %>
+    <%#= render "company_fields", :f => company_fields %>
+  <%# end %>
+
+  <div class="form-group">
+    <%= form.label :job_title, 'Job Title', class: "control-label text-right col-sm-3"%>
+    <div class="col-sm-8">
+      <%= form.collection_select :job_title_id, JobTitle.all, :id, :title, {:prompt => 'Select a Job-Title'}, { class: 'form-control job_title' } %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= form.label :divison, 'Division/Department', class: "control-label col-sm-3 " %>
+    <div class="col-sm-8">
+      <%= form.text_field :divison,placeholder: 'Division/Department', class: 'form-control'%>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= form.label :experience ,class: "control-label col-sm-3" %>
+    <% exp_array = (0..20).to_a.map(&:to_s) %>
+    <div class="col-sm-8">
+      <%= form.collection_select :min_exp, exp_array, :to_s, :to_s, { prompt: 'Min Exp' }, { class: 'min_exp' } %> -
+      <%= form.collection_select :max_exp, exp_array, :to_s, :to_s, { prompt: 'Max Exp' }, { class: 'max_exp' } %> Years
+    </div>
+  </div>
+  <div class="form-group">
+    <%= form.label :location, class: "control-label col-sm-3" %>
+    <div class="col-sm-8">
+      <%= form.text_field :location,placeholder: 'Location', class: 'form-control '%>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= form.label :openings, class: "control-label col-sm-3" %>
+    <div class="col-sm-8">
+      <%= form.number_field :openings, placeholder: 'No. of openings', class: 'form-control '%>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= form.label :reporting_to_id, 'Reporting To', class: "control-label col-sm-3" %>
+    <div class="col-sm-8">
+      <%= form.collection_select :reporting_to_id, JobTitle.all, :id, :title, { :prompt => 'Select a Job-Title' }, { class: 'form-control reporting_to' } %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= form.label :salary, 'Salary (CTC)', class: "control-label col-sm-3 " %>
+    <div class="col-sm-8">
+      <%= form.number_field :salary, placeholder: 'Salary(ctc),eg annual-salary:150000', class: 'form-control '%>
+    </div>
+  </div>
+  <div class="form-group skill">
+    <%= form.label :qualification_id ,"Qualification",class: "control-label col-sm-3" %>
+    <div class="col-sm-8">
+      <%= form.collection_select(:qualification_id, Qualification.all, :title, :title,{:prompt => 'Select an Option'},class: "form-control") %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-3" style="padding-top: 0;">Working Days</label>
+    <div class="col-sm-8">
+      <p><strong> In a week</strong></p>
+      <%= form.radio_button :working_days,"Three Days "%>
+      <%= form.label :working_days, "Three Days", class: 'radio-label' %>
+
+      <%= form.radio_button :working_days,"Four Days "%>
+      <%= form.label :working_days, "Four Days", class: 'radio-label' %>
+
+      <%= form.radio_button :working_days,"Five Days "%>
+      <%= form.label :working_days, "Five Days", class: 'radio-label' %>
+
+      <%= form.radio_button :working_days,"Six Days "  %>
+      <%= form.label :working_days, "Six Days", class: 'radio-label' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-3" style="padding-top: 0;">Job Type</label>
+      <div class="col-sm-8">
+        <%= form.radio_button :job_type,"Full Time"%>
+        <%= form.label :job_type, "Full Time", class: 'radio-label' %>
+
+        <%= form.radio_button :job_type,"Part Time"  %>
+        <%= form.label :job_type, "Part Time", class: 'radio-label' %>
+
+        <%= form.radio_button :job_type,"Internship" %>
+        <%= form.label :job_type, "Internship", class: 'radio-label' %>
+
+        <%= form.radio_button :job_type,"Contract" %>
+        <%= form.label :job_type, "Contract", class: 'radio-label' %>
+      </div>
+  </div>
+  <div class="text-center">
+    <%= form.submit "Submit and Continue", class: "btn btn-primary site_button"%>
+  </div>
+
+<% end  %>
+<script type="text/javascript">
+  $('.jd_company, .min_exp, .max_exp').select2();
+  $('.job_title, .reporting_to').select2({ tags: true });
+
+  $(".job_title, .reporting_to").off('select2:select').on('select2:select', function(e) {
+        saveNewItem($(this), 'job_title');
+      });
+  /*$(".job_title, .reporting_to").on('change',function(){
+    saveNewItem($(this), 'job_title');
+    var selJobTitle = $(this).find('option:last-child').val();
+    saveJobTitle($(this), selJobTitle);
+  });*/
+</script>

@@ -2,6 +2,14 @@ Rails.application.routes.draw do
 
   root :to => 'static_pages#resume_builder'
 
+   resources :job_description_creators, only: [:new, :create] do
+    collection do
+      get :download
+      post :save_responsibility
+
+    end
+  end
+
   resources :companies
 
   resources :community_questions, path: '/community' do

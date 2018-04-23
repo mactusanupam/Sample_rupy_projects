@@ -1,0 +1,61 @@
+<%= form_for :job_requirements, url: job_description_creators_path, remote: true, html: { method: :post, class: 'form-horizontal jd_form' } do |form| %>
+
+  <div class="form-group">
+    <%= form.label :essential_skills, 'Essential Skills', class: "control-label text-right col-sm-3"%>
+    <div class="col-sm-8">
+      <%= form.collection_select :essential_skills, Skill.all, :id, :title, {}, { multiple: true, class: 'essential_skills' } %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= form.label :optional_skills, 'Optional Skills', class: "control-label text-right col-sm-3"%>
+    <div class="col-sm-8">
+      <%= form.collection_select :optional_skills, Skill.all, :id, :title, {}, { multiple: true, class: 'optional_skills' } %>
+    </div>
+  </div>
+  <div class="form-group clearfix">
+    <div class="col-sm-offset-1">
+      <div class="col-sm-10">
+        <%= form.label :work_requirements, 'Work Experience Requirements', class: "control-label", style: 'margin-bottom: 10px;' %>
+      </div>
+
+      <div class="col-sm-11">
+        <%= form.text_area :work_requirements, class: "form-control", placeholder: 'write your work experience requirements ( one at a time ) and click Add', name: 'job_requirements[work_requirements][]' %>
+      </div>
+      <div class="col-sm-1 no-padding">
+        <%= link_to "Add", 'javascript:void(0)', class: 'btn btn-primary site_button work_requirement btn-xs' %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-offset-1 col-sm-10 requirements background-grey">
+    <ul class="list-unstyled">
+    </ul>
+  </div>
+  <div class="form-group clearfix">
+    <div class="col-sm-offset-1">
+      <div class="col-sm-10">
+        <%= form.label :education_requirements, 'Educational Requirements', class: "control-label", style: 'margin-bottom: 10px;' %>
+      </div>
+      <div class="col-sm-11">
+        <%= form.text_area :education_requirements, class: "form-control", placeholder: 'write your educational requirements ( one at a time ) and click Add', name: 'job_requirements[education_requirements][]' %>
+      </div>
+      <div class="col-sm-1 no-padding">
+        <%= link_to "Add", 'javascript:void(0)', class: 'btn btn-primary site_button edu_requirement btn-xs' %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-offset-1 col-sm-10 requirements background-grey">
+    <ul class="list-unstyled">
+    </ul>
+  </div>
+  <div class="text-center">
+    <%= form.submit "Submit and Continue", class: "btn btn-primary site_button" %>
+  </div>
+<% end %>
+<script type="text/javascript">
+  $('.essential_skills, .optional_skills').select2({ tags: true });
+
+  $(".essential_skills, .optional_skills").on('change',function(){
+    var selSkillTitle = $(this).find('option:last-child').val();
+    saveNewSkill($(this),selSkillTitle);
+  });
+</script>

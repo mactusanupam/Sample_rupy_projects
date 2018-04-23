@@ -1,0 +1,17 @@
+<% if all_sections.include?(params[:slug]) %>
+  var href = '<%= "/job_description_creators/new/#{params[:slug]}" %>';
+  $('.resume-editor-left li.active').removeClass('active');
+  $('a[href$="'+href+'"]').parent('li').addClass('active');
+  $('#jd-editor-form').html('<%= escape_javascript(render partial: "job_description_creators/#{params[:slug]}_form" ) %>');
+
+  // window.history.pushState($('.digital-cv-form').html(), '', href);
+<% else %>
+  alertify.alert('Alert', 'Looks like you tampered the URL. Falling back to resume summary');
+
+  var href = '<%= "/job_description_creators/new/overview" %>';
+
+  $('.resume-editor-left li.active').removeClass('active');
+  $('a[href$="'+href+'"]').parent('li').addClass('active');
+
+  $('#jd-editor-form').html('<%= escape_javascript(render partial: "job_description_creators/overview_form" ) %>');
+<% end %>

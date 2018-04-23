@@ -1,0 +1,110 @@
+// Place all the styles related to the job_description_creators controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.jd-editor .jd-editor-left ul.nav-stacked li a {
+  border: 1px solid #3071a9;
+  border-right: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  position: relative;
+  background: #24607D;
+  height: 50px;
+  transition: all 300ms ease-in;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  color: #ffffff;
+  background-color: #24607D;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#122931), to(#24607D));
+  box-shadow: inset -4px 0 2px rgba(214, 214, 214, 0.5);
+}
+
+.jd-editor .form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}
+
+.jd-template{
+  padding: 20px;
+	box-shadow: 0px 0px 1px #78a2ba inset;
+}
+
+.jd-heading{
+  margin-left:50px;
+	color:#24607D;
+	font-size:30px;
+}
+
+.field_details{
+  margin-left:60px;
+	color:#24607D;
+	font-size:20px;
+	padding-top:5px;
+	padding-bottom:5px;
+	border-bottom: 1px solid black;
+}
+
+.field_contents{
+	margin-left:50px;
+}
+
+.blank{
+  margin-top:10px;
+  padding-top:10px;
+  padding-bottom:5px;
+
+}
+
+
+.panel-default .panel-heading {
+  background-color: #24607D;
+ 
+}
+.site_button {
+  background-color: #24607E;
+}
+
+.padded-jd {
+  padding: 20px 0;
+}
+
+
+.requirements {
+  margin-bottom: 10px;
+  ul {
+    max-height: 200px;
+    overflow-y: scroll;
+  }
+}
+
+.responsibilities, .selected-responsibilities {
+  ul {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+}
+
+.requirements, .responsibilities, .selected-responsibilities {
+  padding: 10px;
+  li {
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+}
+
+.min_exp, .max_exp {
+  width: 100px;
+}
+.select2-container--default .select2-selection--multiple {
+  width:490px;
+}
+.template{
+  margin-left:-0px;
+}
+
+#textbox0{
+   width:470px;
+   height:50px;
+   margin-bottom:5px;
+}
