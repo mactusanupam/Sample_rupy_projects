@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   end
 
   get '/resumes/:id/edit/:slug', to: 'digital_cvs#edit'
+  get '/job_description_creators/new/:slug', to: 'job_description_creators#new'
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
