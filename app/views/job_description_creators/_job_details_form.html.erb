@@ -54,8 +54,12 @@
 <script type="text/javascript">
   $('.essential_skills, .optional_skills').select2({ tags: true });
 
-  $(".essential_skills, .optional_skills").on('change',function(){
+  $(".essential_skills, .optional_skills").off('select2:select').on('select2:select', function(e) {
+        saveNewItem($(this), 'skill');
+      });
+
+  /*$(".essential_skills, .optional_skills").on('change',function(){
     var selSkillTitle = $(this).find('option:last-child').val();
     saveNewSkill($(this),selSkillTitle);
-  });
+  });*/
 </script>

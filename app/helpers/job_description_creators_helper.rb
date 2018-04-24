@@ -1,6 +1,6 @@
 module JobDescriptionCreatorsHelper
   def all_sections
-   ['overview', 'job_details', 'responsibility', 'application_process']
+   %w[overview job_details responsibility application_process]
   end
 
   def resp_type(num)

@@ -1,0 +1,139 @@
+<div class= "col-md-11 col-centered">
+  <div class="row">
+    <%= form_with(model: job, local: true ,class:"form-horizontal", id: "job_form") do |form| %>
+
+    <% if job.errors.any? %>
+    <div class="col-md-12">
+    <div id="error_explanation" class="row alert alert-danger">
+      <ul>
+        <% job.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    </div>
+    <% end %>
+    <div class= "col-md-6">
+      <div class="row">
+        <div class="form-group required">
+          <%= form.hidden_field :user_id ,:value => current_user.id %>
+          <%= form.label :title, 'Job Title', class: "control-label col-sm-3" %>
+          <%= form.text_field :title, id: :job_title, class: 'col-sm-8' %>
+        </div>
+        <div class="form-group required skill">
+          <%= form.label :qualification_id ,"Qualification",class: "control-label col-sm-3" %>
+          <%= form.collection_select(:qualification_id, Qualification.all, :id, :title,{:prompt => 'Select an option..............'},class: "post-job col-sm-8") %>
+
+        </div>
+        <div class="form-group required skill">
+          <%= form.label :skill,'Job Skill' ,class: "control-label col-sm-3" %>
+          <%= form.collection_select(:skill_ids, Skill.all, :id, :title,{}, { :multiple => true,:prompt => 'Select your skills.......', class: "post-job post-job-skills col-sm-8"} )%>
+        </div>
+        <div class="form-group required">
+          <%= form.label :experience ,class: "control-label col-sm-3" %>
+
+          <% exp_array = (0..20).to_a.map(&:to_s)
+          min_exp, max_exp = @job.experience.present? ? @job.experience.split('-').map(&:to_i) : nil %>
+
+          <%= form.collection_select(:min_exp, exp_array, :to_s, :to_s, prompt: 'Min Exp', :selected => min_exp)%> -
+          <%= form.collection_select(:max_exp, exp_array, :to_s, :to_s, prompt: 'Max Exp', :selected => max_exp)%> Years
+        </div>
+
+        <div class="form-group required">
+          <%= form.label :offered_ctc ,class: "control-label col-sm-3" %>
+          <%= form.number_field :offered_ctc, id: :job_offered_ctc, min: 0, class: "col-sm-5" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6" style="padding-left: 50px;">
+      <div class="row">
+          <div class="form-group required">
+            <%= form.label :industry_id ,class: "control-label col-sm-3" %>
+            <div class="col-sm-9 row select">
+            <%= form.collection_select(:industry_id, Industry.all, :id, :name) %>
+            </div>
+          </div>
+          <div class="form-group required">
+            <%= form.label :company_id, class: "control-label col-sm-3" %>
+            <div class="col-sm-9 row select">
+            <% if current_user.admin? || current_user.super_admin? %>
+              <%= form.collection_select(:company_id, Company.all.order("name ASC"), :id, :name) %>
+            <% else %>
+              <%= form.hidden_field :company_id, value: current_user.company_id %>
+              <%= text_field_tag :company, current_user.company.try(:name), disabled: true, size: 40  %>
+            <% end %>
+            </div>
+          </div>
+          <div class="form-group required">
+            <%= form.label :location, class: "control-label col-sm-3" %>
+            <%= form.text_field :location, id: :job_location, class: 'col-sm-8' %>
+          </div>
+          <div class="form-group required">
+            <%= form.label :no_of_openings,'Openings' ,class: "control-label col-sm-3" %>
+            <%= form.number_field :no_of_openings, id: :no_of_openings, min: 0, class: 'col-sm-4'  %>
+          </div>
+          <div class="form-group required">
+            <label class="control-label col-sm-3" style="padding-top: 0;">Job Type</label>
+            <%= form.radio_button :job_type,"Full Time"%>
+            <%= form.label :job_type, "Full Time", class: 'radio-label' %>
+
+            <%= form.radio_button :job_type,"Part Time"  %>
+            <%= form.label :job_type, "Part Time", class: 'radio-label' %>
+
+            <%= form.radio_button :job_type,"Internship" %>
+            <%= form.label :job_type, "Internship", class: 'radio-label' %>
+
+            <%= form.radio_button :job_type,"Contract" %>
+            <%= form.label :job_type, "Contract", class: 'radio-label' %>
+          </div>
+        </div>
+      </div>
+        
+      <div class="col-md-12"> 
+        <div class="row"> 
+          <div class="form-group">
+            <label class="control-label col-sm-1">Seniority Level</label>
+            <div class="jobformdesc">
+            <%= form.radio_button :seniority_level,"Internship"%>
+            <%= form.label :seniority_level, "Internship", class: 'radio-label' %>
+
+            <%= form.radio_button :seniority_level,"Entry Level"  %>
+            <%= form.label :seniority_level, "Entry Level", class: 'radio-label' %>
+
+            <%= form.radio_button :seniority_level,"Associate" %>
+            <%= form.label :seniority_level, "Associate", class: 'radio-label' %>
+
+            <%= form.radio_button :seniority_level,"Middle Management" %>
+            <%= form.label :seniority_level, "Middle Management", class: 'radio-label' %>
+
+            <%= form.radio_button :seniority_level,"Mid-Senior level" %>
+            <%= form.label :seniority_level, "Mid-Senior level", class: 'radio-label' %>
+
+            <%= form.radio_button :seniority_level,"Senior Management" %>
+            <%= form.label :seniority_level, "Senior Management", class: 'radio-label' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group required ">
+        <%= form.label :description ,class: "control-label col-sm-1" %>
+        <div class="jobformdesc">
+        <%= form.text_area :description, class: "form-control wysihtml5 ", rows:8 %>
+        </div>
+      </div>
+      <div class="col-md-offset-1 col-md-4">       
+      <div class=" jobformdesc">  
+        <div class="row"> 
+          <%= form.check_box :job_status, {class: "pull-left"}, "Draft", "Open"%>
+          <p class="padding-left-25">Save a Draft</p>
+        </div>
+      </div>
+      </div>
+      
+      <div class="control-label  actions pull-right ">
+        <%= form.submit "Submit", class: 'btn btn-primary',style:"background:#4B7892;" %>
+      </div>
+      <% end %>
+  </div>
+</div>

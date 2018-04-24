@@ -10,7 +10,21 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :companies
+
+  
+  resources :jobs do
+    collection do
+      get :job_application_update
+      post :job_application_update
+      get :job_application
+    end
+    member do
+      post :apply
+      get :job_applied
+      patch :job_status_update
+    end
+  end
+
 
   resources :community_questions, path: '/community' do
     put :vote
@@ -19,6 +33,8 @@ Rails.application.routes.draw do
       get :all_comments, on: :member, format: :js
     end
   end
+
+  resources :companies
 
   resources :digital_cvs, path: '/resumes' do
     member do
@@ -41,6 +57,7 @@ Rails.application.routes.draw do
   resources :messages, only: [:create, :destroy]
   
   get '/job_description_creators/new/:slug', to: 'job_description_creators#new'
+  get '/post-jobs', to:'static_pages#post_jobs'
   get '/about-us', to:'static_pages#about_us'
   get '/resume-builder', to:'static_pages#resume_builder'
   get '/contact-us', to:'static_pages#contact_us'
