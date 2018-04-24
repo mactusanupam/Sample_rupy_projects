@@ -1,4 +1,4 @@
-<% if all_sections.include?(params[:slug]) %>
+<% if jd_sections.include?(params[:slug]) %>
   var href = '<%= "/job_description_creators/new/#{params[:slug]}" %>';
   $('.resume-editor-left li.active').removeClass('active');
   $('a[href$="'+href+'"]').parent('li').addClass('active');

@@ -2,8 +2,9 @@
   <%= link_to image_tag('talent_fore.png', width: 300, height: 75), '/', class: "navbar-brand no-padding" %>
   <%= menu_group pull: :right do %>
     <%#= menu_item "Home", root_path %>
-    <%= menu_item "JD Creater", new_job_description_creator_path %>
+
     <%= menu_item "Resume Builder", root_path %>
+    <%= menu_item "JD Creater", new_job_description_creator_path %>
     <%= drop_down "Community" do %>
       <%= menu_item "Blogs", "/blogs" %>
       <%= menu_item "Discussions", community_questions_path %>

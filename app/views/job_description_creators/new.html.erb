@@ -22,7 +22,7 @@
             <div class="col-md-3 no-padding site_button">
               <div class="resume-editor-left">
                 <ul class="nav nav-pills nav-stacked">
-                  <li class="<%= (!all_sections.include?(params[:slug]) || params[:slug] == 'overview') ? 'active' : nil %>">
+                  <li class="<%= (!jd_sections.include?(params[:slug]) || params[:slug] == 'overview') ? 'active' : nil %>">
                     <a href="/job_description_creators/new/overview" data-remote="true">
                       <%= fa_icon 'info-circle', text: 'OVERVIEW' %>
                     </a>
@@ -48,7 +48,7 @@
             <div class="col-md-9 padding-15">
               <div class="tab-content" id="jd-editor-form">
                 <div class="tab-pane fade active in">
-                  <% if all_sections.include?(params[:slug]) %>
+                  <% if jd_sections.include?(params[:slug]) %>
                     <%= render "#{params[:slug]}_form" %>
                   <% else %>
                     <%= render "overview_form" %>

@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.string "name", default: "My Resume"
     t.text "summary"
     t.text "objective"
-    t.boolean "is_experienced"
+    t.boolean "is_experienced", default: true
     t.string "employment_status"
     t.bigint "user_id"
     t.bigint "template_id"
@@ -176,19 +176,6 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "job_applications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "job_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "document_file_name"
-    t.string "document_content_type"
-    t.integer "document_file_size"
-    t.datetime "document_updated_at"
-    t.index ["job_id"], name: "index_job_applications_on_job_id"
-    t.index ["user_id"], name: "index_job_applications_on_user_id"
-  end
-
   create_table "job_responsibilities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "responsibility_type"
     t.text "responsibility_text"
@@ -202,34 +189,6 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "title"
-    t.bigint "industry_id"
-    t.bigint "company_id"
-    t.string "location"
-    t.integer "offered_ctc"
-    t.string "website_url"
-    t.string "experience"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "qualification_id"
-    t.bigint "user_id"
-    t.string "job_status", default: "Open"
-    t.string "job_type", default: "Permanent"
-    t.index ["company_id"], name: "index_jobs_on_company_id"
-    t.index ["industry_id"], name: "index_jobs_on_industry_id"
-    t.index ["qualification_id"], name: "index_jobs_on_qualification_id"
-    t.index ["user_id"], name: "index_jobs_on_user_id"
-  end
-
-  create_table "jobs_skills", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "job_id"
-    t.bigint "skill_id"
-    t.index ["job_id"], name: "index_jobs_skills_on_job_id"
-    t.index ["skill_id"], name: "index_jobs_skills_on_skill_id"
   end
 
   create_table "languages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -404,15 +363,7 @@ ActiveRecord::Schema.define(version: 20180420080809) do
   add_foreign_key "employment_details", "digital_cvs"
   add_foreign_key "employment_details", "job_titles"
   add_foreign_key "honor_and_awards", "digital_cvs"
-  add_foreign_key "job_applications", "jobs"
-  add_foreign_key "job_applications", "users"
   add_foreign_key "job_responsibilities", "job_titles"
-  add_foreign_key "jobs", "companies"
-  add_foreign_key "jobs", "industries"
-  add_foreign_key "jobs", "qualifications"
-  add_foreign_key "jobs", "users"
-  add_foreign_key "jobs_skills", "jobs"
-  add_foreign_key "jobs_skills", "skills"
   add_foreign_key "personal_details", "digital_cvs"
   add_foreign_key "references", "digital_cvs"
   add_foreign_key "references", "job_titles"

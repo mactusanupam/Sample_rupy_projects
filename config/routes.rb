@@ -41,7 +41,6 @@ Rails.application.routes.draw do
   resources :messages, only: [:create, :destroy]
 
   get '/job_description_creators/new/:slug', to: 'job_description_creators#new'
-  get '/post-jobs', to:'static_pages#post_jobs'
   get '/about-us', to:'static_pages#about_us'
   get '/resume-builder', to:'static_pages#resume_builder'
   get '/contact-us', to:'static_pages#contact_us'

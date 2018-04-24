@@ -1,5 +1,5 @@
 module JobDescriptionCreatorsHelper
-  def all_sections
+  def jd_sections
    %w[overview job_details responsibility application_process]
   end
 
