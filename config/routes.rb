@@ -10,22 +10,6 @@ Rails.application.routes.draw do
     end
   end
 
-
-  
-  resources :jobs do
-    collection do
-      get :job_application_update
-      post :job_application_update
-      get :job_application
-    end
-    member do
-      post :apply
-      get :job_applied
-      patch :job_status_update
-    end
-  end
-
-
   resources :community_questions, path: '/community' do
     put :vote
     resources :community_answers, only: [:create] do
@@ -55,7 +39,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   resources :messages, only: [:create, :destroy]
-  
+
   get '/job_description_creators/new/:slug', to: 'job_description_creators#new'
   get '/post-jobs', to:'static_pages#post_jobs'
   get '/about-us', to:'static_pages#about_us'

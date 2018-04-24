@@ -103,11 +103,6 @@
   $('.job_title, .reporting_to').select2({ tags: true });
 
   $(".job_title, .reporting_to").off('select2:select').on('select2:select', function(e) {
-        saveNewItem($(this), 'job_title');
-      });
-  /*$(".job_title, .reporting_to").on('change',function(){
     saveNewItem($(this), 'job_title');
-    var selJobTitle = $(this).find('option:last-child').val();
-    saveJobTitle($(this), selJobTitle);
-  });*/
+  });
 </script>
