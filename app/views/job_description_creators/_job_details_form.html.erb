@@ -21,10 +21,10 @@
         </div>
 
         <div class="col-sm-11">
-          <%= form.text_area :work_requirements, class: "form-control wysihtml5", placeholder: 'write your work experience requirements ( one at a time ) and click Add', name: 'job_requirements[work_requirements][]' %>
+          <%= form.text_area :work_requirements, class: "form-control wysihtml5", placeholder: 'write your work experience requirements ( one at a time ) and click Add', name: 'job_requirements[work_requirements][]', style: "height: 50px;" %>
         </div>
         <div class="col-sm-1 no-padding">
-          <%= link_to "Add", 'javascript:void(0)', class: 'btn btn-primary site_button work_requirement btn-xs' %>
+          <%= link_to "Add", 'javascript:void(0)', class: 'add-btn btn btn-primary site_button work_requirement btn-xs' %>
         </div>
       </div>
     </div>
@@ -38,10 +38,10 @@
           <%= form.label :education_requirements, 'Educational Requirements', class: "control-label", style: 'margin-bottom: 10px;' %>
         </div>
         <div class="col-sm-11">
-          <%= form.text_area :education_requirements, class: "form-control wysihtml5", placeholder: 'write your educational requirements ( one at a time ) and click Add', name: 'job_requirements[education_requirements][]' %>
+          <%= form.text_area :education_requirements, class: "form-control wysihtml5", placeholder: 'write your educational requirements ( one at a time ) and click Add', name: 'job_requirements[education_requirements][]', style: "height: 50px;" %>
         </div>
         <div class="col-sm-1 no-padding">
-          <%= link_to "Add", 'javascript:void(0)', class: 'btn btn-primary site_button edu_requirement btn-xs' %>
+          <%= link_to "Add", 'javascript:void(0)', class: 'add-btn btn btn-primary site_button edu_requirement btn-xs' %>
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@
     <div class="text-center">
       <%= form.submit "Submit and Continue", class: "btn btn-primary site_button" %>
     </div>
-  </div>  
+  </div>
 <% end %>
 <script type="text/javascript">
   $('.essential_skills, .optional_skills').select2({ tags: true });

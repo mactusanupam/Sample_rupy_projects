@@ -47,7 +47,8 @@ $(document).ready(function() {
 
       var elem = '<li><input type="hidden" name="'+name+'" value="'+textarea.val()+'">'+textarea.val();
       elem += '<a href="javascript:void(0)" class="btn btn-xs btn-danger req-li pull-right">Remove</a></li>';
-      textarea.val('');
+      textarea.data("wysihtml5").editor.clear();
+
       ulElem.append(elem);
     }
   });

@@ -9,7 +9,7 @@ class JobResponsibility < ApplicationRecord
   end
 
   def resp_type
-    return '' if responsibility_type == Type::OTHERS || ''
+    return '' if responsibility_type == (Type::OTHERS || '')
     return 'Functional' if responsibility_type == Type::FUNCTIONAL
     return 'Organizational' if responsibility_type == Type::ORGANISATIONAL
     return 'Management' if responsibility_type == Type::MANAGEMENT

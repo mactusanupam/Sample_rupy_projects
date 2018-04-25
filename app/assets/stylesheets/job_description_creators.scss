@@ -59,7 +59,7 @@
 
 .panel-default .panel-heading {
   background-color: #24607D;
- 
+
 }
 .site_button {
   background-color: #24607E;
@@ -97,13 +97,14 @@
 .min_exp, .max_exp {
   width: 100px;
 }
-.select2-container--default .select2-selection--multiple {
-  width:450px;
+.select2-container--default .select2-selection--multiple, .select2-dropdown--below {
+  width: 450px !important;
 }
 .template{
   margin-left:-0px;
 }
 
-.wysihtml5-sandbox{
-  height:75px !important;
+.add-btn {
+  position: relative;
+  top: 70px;
 }

@@ -5,13 +5,13 @@
     <div class="form-group">
       <%= form.label :to_apply, 'To Apply', class: "control-label col-sm-2" %>
       <div class="col-sm-9">
-        <%= form.text_area :to_apply, class: "form-control wysihtml5 " %>
+        <%= form.text_area :to_apply, class: "form-control wysihtml5", style: "height: 150px;" %>
       </div>
     </div>
     <div class="text-center">
       <%= form.submit "Submit", class: "btn btn-primary site_button" %>
     </div>
-  </div>  
+  </div>
 <% end %>
 
 <script type="text/javascript">

@@ -43,7 +43,7 @@
         <%= form.hidden_field :job_title_id, value: @job_title.try(:id) %>
         <div class="form-group">
           <label class="control-label col-sm-3 text-left" style="padding-top: 0;">Responsibility Type</label>
-          <div class="col-sm-8">
+          <div class="col-sm-9 no-padding">
             <div class="col-sm-2 no-padding">
               <%= form.radio_button :responsibility_type, JobResponsibility::Type:: FUNCTIONAL %>
               <%= form.label :responsibility_type, "Functional", class: 'radio-label' %>
@@ -64,10 +64,10 @@
         </div>
         <div class="form-group">
           <div class="col-sm-11">
-            <%= form.text_area :responsibility_text, class: "form-control wysihtml5", placeholder: 'write your own responsibility(one at a time) and click add' %>
+            <%= form.text_area :responsibility_text, class: "form-control wysihtml5", placeholder: 'write your own responsibility(one at a time) and click add', style: "height: 50px;" %>
           </div>
           <div class="col-sm-1 no-padding">
-            <%= form.submit "Add", class: 'btn btn-primary site_button btn-xs' %>
+            <%= form.submit "Add", class: 'add-btn btn btn-primary site_button btn-xs' %>
           </div>
         </div>
       <% end %>

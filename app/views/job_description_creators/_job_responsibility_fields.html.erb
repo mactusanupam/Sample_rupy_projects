@@ -1,5 +1,5 @@
 <li>
   <%= hidden_field_tag "job_responsibilities[responsibility_ids][]", @responsibility.id %>
-  <%= @responsibility.responsibility_text %>
+  <%= @responsibility.responsibility_text.html_safe %>
   <%= link_to "Remove", 'javascript:void(0)', class: 'btn btn-xs btn-danger pull-right resp-li' %>
 </li>
