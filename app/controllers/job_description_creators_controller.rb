@@ -41,7 +41,7 @@ class JobDescriptionCreatorsController < ApplicationController
   private
 
   def company_params(pd)
-    pd.fetch(:company_details).permit( :id, :name, :website, :about)
+    pd.fetch(:company_details).permit( :id, :name, :website)
   end
 
   def job_responsibility_params

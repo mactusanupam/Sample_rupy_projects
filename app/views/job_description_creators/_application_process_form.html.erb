@@ -1,13 +1,17 @@
 <%= form_for :application_process, url: job_description_creators_path, html: { class: 'form-horizontal jd_form', method: :post }, remote: true do |form| %>
-  <div class="form-group">
-    <%= form.label :to_apply, 'To Apply', class: "control-label col-sm-2" %>
-    <div class="col-sm-9">
-      <%= form.text_area :to_apply, class: "form-control wysihtml5 " %>
+  <div class="col-md-12 margin-bottom-30">
+    <h4 class="text-center">APPLICATION PROCESS </h4>
+    <hr />
+    <div class="form-group">
+      <%= form.label :to_apply, 'To Apply', class: "control-label col-sm-2" %>
+      <div class="col-sm-9">
+        <%= form.text_area :to_apply, class: "form-control wysihtml5 " %>
+      </div>
     </div>
-  </div>
-  <div class="text-center">
-    <%= form.submit "Submit", class: "btn btn-primary site_button" %>
-  </div>
+    <div class="text-center">
+      <%= form.submit "Submit", class: "btn btn-primary site_button" %>
+    </div>
+  </div>  
 <% end %>
 
 <script type="text/javascript">

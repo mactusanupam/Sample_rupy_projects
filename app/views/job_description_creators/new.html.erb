@@ -1,5 +1,5 @@
 <% content_for :title, "Job-Description | Job-Details | Job-Description-pdf" %>
-<div class="job-form">
+<div class="jd-form">
   <div class="container-fluid">
     <div class="row">
       <%= render 'blue_bar' %>
@@ -8,7 +8,7 @@
       <div class="col-lg-8 col-lg-offset-2">
         <div class="text-center page-desc">
           <h1 class="page-head">Job Description Creator</h1>
-          <h4>The easy to use and professionally designed Job Description creator enables your most compelling qualities and information to stand out.</h4>
+          <p>The easy to use and professionally designed Job Description creator enables your most compelling qualities and information to stand out.</p>
         </div>
       </div>
     </div>
@@ -45,7 +45,11 @@
                 </ul>
               </div>
             </div>
-            <div class="col-md-9 padding-15">
+            <div class="col-md-9">
+              <div class="col-md-12 no-padding text-center">
+                <strong>TIPS: </strong>
+                Fields marked with <span class="red-star">*</span> are mandatory. 
+              </div>
               <div class="tab-content" id="jd-editor-form">
                 <div class="tab-pane fade active in">
                   <% if jd_sections.include?(params[:slug]) %>

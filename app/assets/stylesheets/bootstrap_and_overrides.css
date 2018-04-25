@@ -44,6 +44,15 @@
 .btn-sharp {
   border-radius: 0;
 }
+.red-star{
+  color:red;
+}
+.padding-15{
+  padding-top: 15px;
+}
+.background-grey {
+  background-color: #e7e7e7;
+}
 .margin-top-20 {
   margin-top: 20px;
 }
