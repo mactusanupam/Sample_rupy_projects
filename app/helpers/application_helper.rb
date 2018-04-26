@@ -1,16 +1,17 @@
 module ApplicationHelper
   def registration_form_user_types
-    UserType.where("title NOT IN (?)", ['Admin', 'Super Admin',]).order("title")
+    UserType.where("title NOT IN (?)", ['Admin', 'Super Admin',])
   end
+
   def page_count(page_size, total_count)
     return if page_size == 0
     total_count % page_size == 0 ? total_count/page_size : total_count/page_size + 1
   end
 
   def get_company
-    Company.all.collect {|p| [ p.name, p.id] } << ["Add New", ""]
+    Company.all.collect {|p| [ p.name, p.id] } << ["Add New", "others"]
   end
-  
+
   def start_end_page_number(page_size, total_count, current_page)
     page_count = page_count(page_size, total_count)
 

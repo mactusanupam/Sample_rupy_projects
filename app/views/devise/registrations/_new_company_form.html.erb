@@ -1,26 +1,26 @@
 <div id="show_new_company_list" style="display: none;">
   <div class="form-group <%= f.object.errors.messages[:company_id].present? ? 'has-error' : '' %>">
-        <div class="input-group col-sm-7 col-sm-offset-1">
-          <div class="input-group-addon">
-            <span class="glyphicon glyphicon-hand-right"></span>
-          </div>
-          <%=f.collection_select :company_id, get_company, :last, :first ,{:prompt => 'Select a Company.......'},{class: 'form-control user_company'} %>
-        </div>
-        <% if f.object.errors.messages[:email] %>
-          <span class="help-block">
-            <%= f.object.errors.messages[:email].join(', ') %>
-          </span>
-        <% end %>
+    <div class="input-group col-sm-7 col-sm-offset-1">
+      <div class="input-group-addon">
+        <span class="glyphicon glyphicon-hand-right"></span>
       </div>
+      <%= f.collection_select :company_id, get_company, :last, :first, { :prompt => 'Select Your Employer Name' }, { class: 'form-control user_company' } %>
+    </div>
+    <% if f.object.errors.messages[:company_id] %>
+      <span class="help-block">
+        <%= f.object.errors.messages[:company_id].join(', ') %>
+      </span>
+    <% end %>
+  </div>
 
   <div id="new_company_check_list" style="display: none;">
-    <%= f.fields_for :company, Company.new do |form| %>
-      <div class="form-group <%= f.object.errors.messages[:first_name].present? ? 'has-error' : '' %>">
+    <%= f.simple_fields_for :company, f.object.company do |form| %>
+      <div class="form-group <%= f.object.company.errors.messages[:name].present? ? 'has-error' : '' %>">
         <div class="input-group col-sm-7 col-sm-offset-1">
           <div class="input-group-addon">
             <span class="glyphicon glyphicon-plus">
           </div>
-          <%= form.text_field :name, placeholder: 'Company Name', class: 'form-control' %>
+          <%= form.text_field :name, placeholder: 'Company Name', class: 'form-control', disabled: true %>
         </div>
         <% if form.object.errors.messages[:name] %>
           <span class="help-block">
@@ -28,19 +28,19 @@
           </span>
         <% end %>
       </div>
-      <div class="form-group <%= f.object.errors.messages[:first_name].present? ? 'has-error' : '' %>">
+      <div class="form-group <%= f.object.company.errors.messages[:website].present? ? 'has-error' : '' %>">
         <div class="input-group col-sm-7 col-sm-offset-1">
           <div class="input-group-addon">
             <span class="glyphicon glyphicon-send"></span>
           </div>
-          <%= form.text_field :website, placeholder: 'Your Company Website', class: 'form-control' %>
+          <%= form.text_field :website, placeholder: 'Your Company Website', class: 'form-control', disabled: true %>
         </div>
         <% if form.object.errors.messages[:website] %>
           <span class="help-block">
             <%= form.object.errors.messages[:website].join(', ') %>
           </span>
         <% end %>
-      </div>   
+      </div>
     <%end%>
   </div>
 </div>
