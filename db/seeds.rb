@@ -144,7 +144,11 @@ unless Template.any?
   Template.create([
     {name: 'template1', template_type: 'photo'},
     {name: 'template2', template_type: 'photo'},
-    {name: 'template3', template_type: 'photo'}
+    {name: 'template3', template_type: 'photo'},
+    {name: 'template4', template_type: 'photo'},
+    {name: 'template5', template_type: 'photo'},
+    {name: 'template6', template_type: 'photo'},
+    {name: 'template7', template_type: 'photo'}
   ])
 end
 
