@@ -2,7 +2,7 @@
   <div class="form-group col-sm-12 text-right">
     <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
   </div>
-  <%= f.association :company, collection: get_company, prompt: "Select Your Employer", label: 'Employer Name', input_html: { class: 'cv_company' }, label_html: { class: 'text-right col-sm-2 no-left-right-padding' } %>
+  <%= f.association :company, collection: get_company, prompt: "Select Your Employer", label: 'Employer', input_html: { class: 'cv_company' }, label_html: { class: 'text-right col-sm-2 no-left-right-padding' } %>
 
   <%= f.simple_fields_for :company, Company.new, validate: true do |company_fields| %>
     <%= render "company_fields", :f => company_fields %>

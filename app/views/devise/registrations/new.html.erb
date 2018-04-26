@@ -7,6 +7,18 @@
         <%= f.error_notification %>
       </div>
 
+      <div class="form-group">
+        <div class="col-md-offset-1 col-md-10">
+          <%= f.label :user_type, 'I am a', class: 'control-label col-sm-2 pull-left no-padding',style: 'text-align: left !important;' %>
+          <div class="col-sm-10 no-padding text-left" id="user_type_selected">
+            <% registration_form_user_types.each do |user_type| %>
+              <%= f.radio_button :user_type_id, user_type.id, class: 'radio-inline'%>
+              <%= user_type.title %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
       <div class="form-group <%= f.object.errors.messages[:email].present? ? 'has-error' : '' %>">
         <div class="input-group col-sm-7 col-sm-offset-1">
           <div class="input-group-addon">
@@ -48,7 +60,6 @@
           </span>
         <% end %>
       </div>
-
       <div class="form-group <%= f.object.errors.messages[:password].present? ? 'has-error' : '' %>">
         <div class="input-group col-sm-7 col-sm-offset-1">
           <div class="input-group-addon">
@@ -79,7 +90,7 @@
           </span>
         <% end %>
       </div>
-
+      <%= render partial: "new_company_form", locals: { f: f, resource: resource } %>
       <div class="form-group">
         <div class="col-sm-offset-1 col-sm-10">
           <%= f.button :submit, "Register", class: 'btn btn-default btn-lg btn-block color-white talent-fore-btn' %>

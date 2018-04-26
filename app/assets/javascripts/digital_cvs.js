@@ -62,7 +62,7 @@ $(document).ready(function(){
     var valueSelected = this.value;
     var companyFields = $(this).parents('.employer-details').children('.cv-company-fields');
 
-    if (!valueSelected) {
+    if (valueSelected == 'others') {
       companyFields.find('input').prop('disabled', false);
       companyFields.removeClass('hide');
     } else {

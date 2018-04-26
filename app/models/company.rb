@@ -1,6 +1,7 @@
 class Company < ApplicationRecord
-  validates :name, :website, presence: true
+  has_many :users, dependent: :destroy
 
+  validates :name, :website, presence: true
   validates :name, uniqueness: true, allow_blank: true
   validates :website,
     :format => {
