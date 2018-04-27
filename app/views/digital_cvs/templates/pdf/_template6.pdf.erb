@@ -30,16 +30,13 @@ h5{
     margin: 0 0 5px 0; 
 }
 .no-padding {
-   padding: 0 !important;
+    padding: 0 !important;
 }
 .pull-left{
     float:left;
 }
 .pull-right{
     float:right;
-}
-.cv-profile-img{
-    padding:0px; margin-top: 15vh;
 }
 .height-30{
     height:30px;
@@ -51,18 +48,12 @@ h5{
     font-size:11px;
 }
 </style>
-<div class="container-fluid font-family"><br><br>
+<div class="container font-family"><br><br>
     <div class="col-md-12 col-xs-12 box-menu">
         <div class="row">
-            <div class="col-md-4 col-xs-4"><br><br><br><br><br><br>
+            <div class="col-md-4 col-xs-4">
                 <div class="col-md-12 col-xs-12">
-                    <div class="cv-profile-img text-center">
-                        <% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
-                            <%= wicked_pdf_image_tag @digital_cv.photo.image.url(:medium), width: 200, height: 200, class: "img-circle" %>
-                    <% else %>
-                            <%= wicked_pdf_image_tag "digital_cv/photo_cv.png", width: 200, height: 200, class: "img-circle" %>
-                    <% end %>
-                    </div>
+                    <br><br><br><br><br><br><br><br><br>
                     <h1 class="text-uppercase"><strong><%= @digital_cv.contact_detail.try(:name) %></strong></h1>
                     <h5 class="text-uppercase"><%= @digital_cv.present_job ? @digital_cv.present_job.job_title.title : '' %></h5>
                     <br>
@@ -176,10 +167,10 @@ h5{
                             <div>
                             <% @digital_cv.cv_skills.each do |cv_skill| %>
                                 <% skill_per = cv_skill.self_rating*20  %>
-                                <div class="col-md-6 col-xs-5 height-30 pull-left">
+                                <div class="col-md-6 col-xs-5 height-40 pull-left">
                                     <p><strong><%= cv_skill.skill.title %></strong></p>
                                 </div>
-                                <div class="col-md-6 col-xs-7 height-30 pull-right">
+                                <div class="col-md-6 col-xs-7 height-40 pull-right">
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="<%= skill_per%>" aria-valuemin="0" aria-valuemax="100" style="width:<%= skill_per.to_s%>%">
                                         <%= skill_per.to_s%>%

@@ -47,15 +47,25 @@
 	left:0;
 	right:0;
 }
-  
 </style>
 <div class="container templates">
   	<div class="col-md-12 col-xs-12">
 	    <div class="col-md-12 col-xs-12 border-bottom">
-			<div class="row">
-				<h2 class="text-uppercase"><strong><%= @digital_cv.contact_detail.try(:name) %></strong></h2>
-				<h5 class="text-uppercase"><%= @digital_cv.present_job ? @digital_cv.present_job.job_title.title : '' %></h5>
-			</div>
+	    	<div class="row">
+				<div class="col-md-8 col-xs-8">
+					<div class="row">
+						<h2 class="text-uppercase"><strong><%= @digital_cv.contact_detail.try(:name) %></strong></h2>
+						<h5 class="text-uppercase"><%= @digital_cv.present_job ? @digital_cv.present_job.job_title.title : '' %></h5>
+					</div>
+				</div>
+				<div class="pull-right">
+					<% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
+						<%= image_tag @digital_cv.photo.image.url(:thumb), width: 100, height: 100%>
+					<% else %>
+						<%= image_tag "digital_cv/photo_cv.png", width: 100, height: 100 %>
+					<% end %>
+	      		</div>
+	    	</div>
 	    </div>
 	    <div class="col-md-12 col-xs-12">
 	      <div class="row">
@@ -64,12 +74,12 @@
 			    <div class="row"><br>
 			    	<% if @digital_cv.summary.present? %>
 						<h4>Profile</h4>
-						<p><%= @digital_cv.summary %></p>
+						<p class="text"><%= @digital_cv.summary %></p>
 						<hr>
 					<%end%>
 					<% if @digital_cv.objective.present? %>
 						<h4>Objective</h4>
-						<p><%= @digital_cv.objective %></p>
+						<p class="text"><%= @digital_cv.objective %></p>
 						<hr>
 					<%end%>
 					<% if @digital_cv.cv_languages.size>0 %>
@@ -176,11 +186,11 @@
                                     <%= e.responsibilities.html_safe %>
                                 </div>
                                 <%if e.achievement.present?%>
-	                                <h5><i><strong>Key Achievements</strong></i></h5>
-	                                <div class="text">
-	                                    <%= e.achievement.html_safe %>
-	                                </div>
-								<%end%>
+                                <h5><i><strong>Key Achievements</strong></i></h5>
+                                <div class="text">
+                                    <%= e.achievement.html_safe %>
+                                </div>
+                                <%end%>
 								<hr>
 							<% end %>
 						</div>
@@ -261,7 +271,7 @@
 								<% @digital_cv.research_or_project_details.each do |project| %>
 									<strong><%= project.title %></strong><br>
 									<%= project.guide %><br>
-									<p><%= project.description.html_safe %></p><hr>
+									<p class="text"><%= project.description.html_safe %></p><hr>
 								<% end %>
 							</div>
 						</div>

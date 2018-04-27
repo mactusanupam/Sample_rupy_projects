@@ -1,84 +1,102 @@
 <style>
-.font-family{
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 12px; 
-}
-.titles{
-  border-bottom:1px solid #eee;
-  padding-bottom: 10px;
-  width:25px; 
-  text-transform:uppercase; 
-}
-.text {
+  .font-family{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px; 
+  }
+  .titles{
+    border-bottom:1px solid #eee;
+    padding-bottom: 10px;
+    width:25px; 
+    text-transform:uppercase; 
+  }
+  .text {
     text-align: justify;
   }
-p strong{
-  font-size: 11px;
-}
-h2{
-  font-size: 24px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-h3{
-  font-size:14px;
-}
-h4 {
-  font-size: 14px;
-  position:relative;
-  text-transform: uppercase;
-  padding-bottom: 10px;
-}
-h4::after {
-  content:'';
-  position:absolute;
-  width:40px;
-  height:1px;
-  background:#eee;
-  bottom:0;
-  left:0;
-  right:0;
-}
-h5 strong{
-  font-size: 12px; 
-}
-.border-bottom{
-  border-bottom:1px solid #eee;
-}
-.border-right{
-  border-right:1px solid #eee;
-}
-.padding-left-40{
-  padding-left: 40px;
-}
-.padding-right-40{
-  padding-right: 40px;
-}
-.height-30{
+  p strong{
+    font-size: 11px;
+  }
+  h2{
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  h3{
+    font-size:14px;
+  }
+  h4 {
+    font-size: 14px;
+    position:relative;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+  }
+  h4::after {
+    content:'';
+    position:absolute;
+    width:40px;
+    height:1px;
+    background:#eee;
+    bottom:0;
+    left:0;
+    right:0;
+  }
+  h5 strong{
+    font-size: 12px; 
+  }
+  .border-bottom{
+    border-bottom:1px solid #eee;
+  }
+  .border-right{
+    border-right:1px solid #eee;
+  }
+  .padding-left-40{
+    padding-left: 40px;
+  }
+  .padding-right-40{
+    padding-right: 40px;
+  }
+  .padding-bottom-5{
+    padding-bottom: 5px;
+  }
+  .height-30{
   height:30px;
 }
 .progress{
   height:15px;
 }
-.pull-left{
-  float:left;
-}
-.pull-right{
-  float:right;
-}
-.education{
-  padding-right:30px; 
-}
-.skills p strong, .languages p strong{
-  font-size: 10px;
-}
+  .pull-left{
+    float:left;
+  }
+  .pull-right{
+    float:right;
+  }
+ .education{
+    padding-right:30px; 
+  }
+  .aligned-row {
+  display: flex;
+  flex-flow: row wrap;
+
+  &::before {
+    display: block;
+  }
 </style>
-<div class="container-fluid font-family"><br><br>
+<div class="container-fluid templates font-family"><br><br>
     <div class="col-md-12 col-xs-12">
         <div class="col-md-12 col-xs-12 border-bottom">
             <div class="row">
-                <h2 class="text-uppercase"><strong><%= @digital_cv.contact_detail.try(:name) %></strong></h2>
-                <h5 class="text-uppercase"><%= @digital_cv.present_job ? @digital_cv.present_job.job_title.title : '' %></h5>
+                <div class="col-md-8 col-xs-8">
+                    <div class="row">
+                        <h2 class="text-uppercase"><strong><%= @digital_cv.contact_detail.try(:name) %></strong></h2>
+                        <h5 class="text-uppercase"><%= @digital_cv.present_job ? @digital_cv.present_job.job_title.title : '' %></h5>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
+                            <%= wicked_pdf_image_tag @digital_cv.photo.image.url(:thumb), width: 100, height: 100 %>
+                    <% else %>
+                            <%= wicked_pdf_image_tag "digital_cv/photo_cv.png", width: 100, height: 100 %>
+                    <% end %>
+                </div>
             </div>
         </div>
         <div class="col-md-12 col-xs-12">
@@ -195,7 +213,6 @@ h5 strong{
                                 <h5>
                                 <strong><%= e.job_title.title %></strong>
                                 <small class="pull-right"><%= e.start_date.strftime("%B, %Y") %> - <%= e.present_job ? 'present' : e.end_date.strftime("%B, %Y") %></small></h5>
-                                <p><%= e.company.name %></p>
                                 <div class="text">
                                     <%= e.responsibilities.html_safe %>
                                 </div>
@@ -205,8 +222,8 @@ h5 strong{
                                     <%= e.achievement.html_safe %>
                                 </div>
                                 <%end%>
-                                <hr style="margin-bottom:0;">
                             <% end %>
+                            <hr style="margin-bottom:0;">
                         </div>
                         <%end%>
                         <% if @digital_cv.academic_details.present? %>
@@ -244,7 +261,7 @@ h5 strong{
                               <small class="pull-right"><%= tr.duration %>  days </small>
                               </h5>
                               
-                              <p class="text"><%= tr.info.html_safe %></p><hr style="margin:0;">
+                              <p><%= tr.info.html_safe %></p><hr style="margin:0;">
                             <% end %>
                           </section>
                         <% end %>
@@ -285,8 +302,7 @@ h5 strong{
                                 <% @digital_cv.research_or_project_details.each do |project| %>
                                     <strong><%= project.title %></strong><br>
                                     <%= project.guide %><br>
-                                    <p class="text"><%= project.description.html_safe %></p>
-                                    <hr style="margin:0;">
+                                    <p><%= project.description.html_safe %></p><hr style="margin:0;">
                                 <% end %>
                             </div>
                         </div>

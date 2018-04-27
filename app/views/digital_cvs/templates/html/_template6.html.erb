@@ -28,13 +28,7 @@
       	<div class="row">
 		    <div class="col-md-4 col-xs-4">
 		      	<div class="col-md-12 col-xs-12">
-				    <div class="cv-profile-img text-center">
-						<% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
-							<%= image_tag @digital_cv.photo.image.url(:medium), width: 200, height: 200, class: "img-circle"%>
-						<% else %>
-							<%= image_tag "digital_cv/photo_cv.png", width: 200, height: 200, class: "img-circle" %>
-						<% end %>
-					</div>
+				    <br><br><br><br><br><br><br><br><br>
 			    	<h1 class="text-uppercase"><strong><%= @digital_cv.contact_detail.try(:name) %></strong></h1>
 			    	<h5 class="text-uppercase"><%= @digital_cv.present_job ? @digital_cv.present_job.job_title.title : '' %></h5>
 			    	<br>
