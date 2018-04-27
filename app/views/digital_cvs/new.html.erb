@@ -1,38 +1,20 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-offset-2 col-md-8">
+    <div class="col-md-offset-1 col-md-10">
       <div class="text-center">
         <h3 style="color: #24607D;">SELECT A TEMPLATE</h3>
       </div>
-      <div id="template-carousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#template-carousel" data-slide-to="0" class="active"></li>
-          <li data-target="#template-carousel" data-slide-to="1" class=""></li>
-          <li data-target="#template-carousel" data-slide-to="2" class=""></li>
-        </ol>
-        <div class="carousel-inner">
-        <%= form_for @digital_cv do |f| %>
-          <% get_template.each_with_index do |template, index| %>
-            <%= f.hidden_field :template_id, value: template.id %>
-            <div class="item <%= 'active' if index == 0 %>">
-              <%= image_tag "digital_cv/cvtemplateimage/#{template.name}.png", alt: "Template Blue" %>
-              <div class="hidden-xs carousel-caption">
-                <%= f.submit "Use this template", class: "btn btn-primary btn-lg select-template-button" %>
-              </div>
+      <%= form_for @digital_cv do |f| %>
+        <% get_template.each_with_index do |template, index| %>
+          <%= f.hidden_field :template_id, value: template.id %>
+          <div class="col-md-3 text-center margin-bottom-50">
+            <%= image_tag "digital_cv/cvtemplateimage/#{template.name}.png", alt: "Template Blue", height: 200 %>
+            <div class="text-center" style="margin-top: -80px;">
+              <%= f.submit "Use this template", class: "btn btn-primary btn-xs talent-fore-btn" %>
             </div>
-          <% end %>
+          </div>
         <% end %>
-        </div>
-        <a class="left carousel-control" href="#template-carousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#template-carousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -140,17 +140,12 @@ unless Specialization.any?
   ])
 end
 
-unless Template.any?
-  Template.create([
-    {name: 'template1', template_type: 'photo'},
-    {name: 'template2', template_type: 'photo'},
-    {name: 'template3', template_type: 'photo'},
-    {name: 'template4', template_type: 'photo'},
-    {name: 'template5', template_type: 'photo'},
-    {name: 'template6', template_type: 'photo'},
-    {name: 'template7', template_type: 'photo'}
-  ])
-end
+Template.find_or_create_by(name: 'template1').update_attributes({template_type: 'photo'})
+Template.find_or_create_by(name: 'template2').update_attributes({template_type: 'photo'})
+Template.find_or_create_by(name: 'template3').update_attributes({template_type: ''})
+Template.find_or_create_by(name: 'template4').update_attributes({template_type: 'photo'})
+Template.find_or_create_by(name: 'template5').update_attributes({template_type: 'photo'})
+Template.find_or_create_by(name: 'template6').update_attributes({template_type: ''})
 
 unless JobTitle.any?
   JobTitle.create([
