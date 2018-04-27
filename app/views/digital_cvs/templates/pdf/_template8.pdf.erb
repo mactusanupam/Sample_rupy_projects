@@ -1,20 +1,20 @@
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <style type="text/css">
 
-	img{
-		width:80px;
-		height:80px;
-	}
-	.pp-image{
-		padding-left:41px;
-	}
+  img{
+    width:80px;
+    height:80px;
+  }
+  .pp-image{
+    padding-left:41px;
+  }
 
-	hr{
-		margin-top: -2px;
-	}
-	td{
+  hr{
+    margin-top: -2px;
+  }
+  td{
 
-	}
+  }
   .profile_social_url{
    max-width:154;
    word-wrap:break-word;
@@ -28,7 +28,7 @@ div{
   font-size:12px !important;
 }
 td{
-	font-size:12px !important;
+  font-size:12px !important;
 }
 .existingEntry{
  margin-bottom: -35px !important;
@@ -57,6 +57,13 @@ h4{
         </p>
         <% if @digital_cv.summary.present? %>
           <p><%= @digital_cv.summary %></p>
+        <% end %>
+      </div>
+      <div class="col-md-2 pp-image ">
+        <% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
+          <%= wicked_pdf_image_tag @digital_cv.photo.image.url(:thumb) %>
+        <% else %>
+          <%= wicked_pdf_image_tag "digital_cv/photo_cv.png", width: 160, height: 160 %>
         <% end %>
       </div>
     </div>

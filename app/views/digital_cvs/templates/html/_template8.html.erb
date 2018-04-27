@@ -1,57 +1,49 @@
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <style type="text/css">
 
-	img{
-		width:80px;
-		height:80px;
-	}
-	.pp-image{
-		padding-left:41px;
-	}
+  .template-2-data img{
+    width:80px;
+    height:80px;
+  }
+  .template-2-data .pp-image{
+    padding-left:41px;
+  }
 
-	hr{
-		margin-top: -2px;
-	}
-	td{
+  .template-2-data hr{
+    margin-top: -2px;
+  }
 
-	}
-  .profile_social_url{
-   max-width:154;
-   word-wrap:break-word;
- }
+  .template-2-data .container{
+    background: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
- p{
-  font-size:12px !important;
-  word-break: break-all;
-}
-div{
-  font-size:12px !important;
-}
-td{
-	font-size:12px !important;
-}
-.existingEntry{
- margin-bottom: -35px !important;
-}
+  .template-2-data .profile_social_url{
+    max-width:154;
+    word-wrap:break-word;
+  }
 
-.employ_det_d{
- padding-top:0px !important;
-}
+ .template-2-data .existingEntry{
+    margin-bottom: -35px !important;
+  }
+  .template-2-data h4{
+    font-weight:500;
+  }
 
-h4{
-  font-weight:500;
-}
+  .template-2-data .employ_det_d{
+    padding-top:0px !important;
+  }
 
-
+  .template-2-data h6 {
+    word-break: break-all;
+  }
 </style>
 
-
-
-<div class="container-fluid">
+<div class="container">
   <div class="template-2-data">
     <br><br>
     <div class="basic-info">
-      <div class="col-md-10 col-xs-10">
+      <div class="col-md-10">
         <p class="text-capitalize">
           <h3><b><%= @digital_cv.contact_detail.try(:name) %></b></h3>
         </p>
@@ -59,8 +51,15 @@ h4{
           <p><%= @digital_cv.summary %></p>
         <% end %>
       </div>
+      <div class="col-md-2 pp-image ">
+        <% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
+          <%= image_tag @digital_cv.photo.image.url(:thumb) %>
+        <% else %>
+          <%= image_tag "digital_cv/photo_cv.png", width: 160, height: 160 %>
+        <% end %>
+      </div>
     </div>
-    <div class="personal-info col-md-3 col-xs-4">
+    <div class="personal-info col-md-3">
       <br>
       <% if @digital_cv.contact_detail.try(:email).present? %>
         <b>
@@ -88,10 +87,10 @@ h4{
           </div>
         <% end %>
 
-        <% if @digital_cv.contact_detail.try(:linkedin_profile).present?  %>
+        <% if @digital_cv.contact_detail.try(:linkedin_url).present?  %>
           <div class="profile_social_url">
             <strong>Linkedin profile url:</strong>
-            <p><%= @digital_cv.contact_detail.linkedin_profile %></p>
+            <p><%= @digital_cv.contact_detail.linkedin_url %></p>
           </div>
         <% end %>
 
@@ -111,7 +110,7 @@ h4{
       <% if @digital_cv.cv_skills.size > 0 %>
         <div class="skills">
           <strong>
-            <h4 class="title">
+            <h5 class="title">
               <i class="fa fa-certificate" aria-hidden="true"></i
               >&nbsp; PROFESSIONAL SKILLS
             </h4>
@@ -137,7 +136,7 @@ h4{
         </div>
       <% end %>
     </div>
-    <div class="career-details col-md-9 col-xs-8">
+    <div class="career-details col-md-9">
       <br>
       <% if @digital_cv.objective.present? %>
         <h4>
@@ -155,7 +154,7 @@ h4{
           <table class="table">
             <% for employment_detail in @digital_cv.employment_details %>
               <tr>
-                <td valign="top" width="20%">
+                <td valign="top" width="15%">
                   <strong><%= employment_detail.start_date.strftime("%B, %Y") %>-
                     <% if employment_detail.present_job %>
                       Present
@@ -164,7 +163,7 @@ h4{
                     <% end %>
                   </strong>
                 </td>
-                <td width="80%" valign="top" class="employ_det_d">
+                <td width="85%" valign="top" class="employ_det_d">
                   <h5><strong><%= employment_detail.job_title.title %></strong></h5>
                   <h6><%= employment_detail.company.name %></h6>
                   <% if employment_detail.responsibilities.present? %>
@@ -189,7 +188,7 @@ h4{
          <table class="table">
             <% for academic_detail in @digital_cv.academic_details %>
               <tr>
-                <td valign="top" width="20%">
+                <td valign="top" width="15%">
                   <strong><%= academic_detail.start_date.strftime("%B, %Y") %>-
                     <% if academic_detail.pursuing %>
                       Present
@@ -198,7 +197,7 @@ h4{
                     <% end %>
                   </strong>
                 </td>
-                <td valign="top" width="80%" >
+                <td valign="top" width="85%" >
                   <p><strong><%= academic_detail.degree.title %></strong>&nbsp;in&nbsp;<%= academic_detail.specialization.title %> with <%= academic_detail.percentage %>% from <strong><%= academic_detail.university %></strong></p>
                 </td>
               </tr>
@@ -249,10 +248,10 @@ h4{
           <table class="table">
             <% for certification in @digital_cv.certifications %>
               <tr>
-                <td valign="top" width="20%">
+                <td valign="top" width="15%">
                   <strong><%= certification.date.strftime("%B, %Y") %></strong>
                 </td>
-                <td width="80%" valign="top">
+                <td width="85%" valign="top">
                   <p><strong><%= certification.title %></strong> by <%= certification.certifier %></p>
                 </td>
               </tr>
@@ -342,7 +341,7 @@ h4{
                   <%= DigitalCvsHelper::GENDER[@digital_cv.personal_detail.gender] %>
                 </li>
               <% end %>
-              <% unless @digital_cv.personal_detail.try(:disabled?).nil? %>
+              <% unless @digital_cv.personal_detail.try(:disabled).nil? %>
                 <li>
                   <strong>Physically Challenged: </strong>
                   <%= @digital_cv.personal_detail.disabled? ? 'Yes' : 'No' %>

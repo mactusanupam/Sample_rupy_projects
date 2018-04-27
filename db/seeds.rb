@@ -140,12 +140,14 @@ unless Specialization.any?
   ])
 end
 
-Template.find_or_create_by(name: 'template1').update_attributes({template_type: 'photo'})
-Template.find_or_create_by(name: 'template2').update_attributes({template_type: 'photo'})
+Template.find_or_create_by(name: 'template1').update_attributes({template_type: ''})
+Template.find_or_create_by(name: 'template2').update_attributes({template_type: ''})
 Template.find_or_create_by(name: 'template3').update_attributes({template_type: ''})
 Template.find_or_create_by(name: 'template4').update_attributes({template_type: 'photo'})
 Template.find_or_create_by(name: 'template5').update_attributes({template_type: 'photo'})
 Template.find_or_create_by(name: 'template6').update_attributes({template_type: ''})
+Template.find_or_create_by(name: 'template7').update_attributes({template_type: 'photo'})
+Template.find_or_create_by(name: 'template8').update_attributes({template_type: 'photo'})
 
 unless JobTitle.any?
   JobTitle.create([

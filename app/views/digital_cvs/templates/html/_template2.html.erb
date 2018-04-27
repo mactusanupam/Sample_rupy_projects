@@ -43,19 +43,12 @@
 	<div class="template-2-data">
     <br><br>
     <div class="basic-info">
-      <div class="col-md-10">
+      <div class="col-md-12">
         <p class="text-capitalize">
           <h3><b><%= @digital_cv.contact_detail.try(:name) %></b></h3>
         </p>
         <% if @digital_cv.summary.present? %>
           <p><%= @digital_cv.summary %></p>
-        <% end %>
-      </div>
-      <div class="col-md-2 pp-image ">
-        <% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
-          <%= image_tag @digital_cv.photo.image.url(:thumb) %>
-        <% else %>
-          <%= image_tag "digital_cv/photo_cv.png", width: 160, height: 160 %>
         <% end %>
       </div>
     </div>
@@ -166,8 +159,14 @@
                 <td width="85%" valign="top" class="employ_det_d">
                   <h5><strong><%= employment_detail.job_title.title %></strong></h5>
                   <h6><%= employment_detail.company.name %></h6>
-                  <p><%= employment_detail.responsibilities.html_safe %></p>
-                  <p><%= employment_detail.achievement.html_safe %></p>
+                  <% if employment_detail.responsibilities.present? %>
+                    <h5><strong>Responsibilities</strong></h5>
+                    <%= employment_detail.responsibilities.html_safe %>
+                  <% end %>
+                  <% if employment_detail.achievement.present? %>
+                    <h5><strong>Achievements</strong></h5>
+                    <%= employment_detail.achievement.html_safe %>
+                  <% end %>
                 </td>
               </tr>
             <% end %>
@@ -315,51 +314,53 @@
           </ul>
         </section><br>
       <% end %>
-      <section>
-        <h4>
-          <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp; ADDITIONAL INFORMATION
-        </h4>
-        <hr>
-        <div class="col-md-6">
-          <ul style="float:left;" class="list-unstyled">
-            <% if @digital_cv.personal_detail.try(:nationality).present? %>
+      <% if @digital_cv.personal_detail.present? %>
+        <section>
+          <h4>
+            <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp; ADDITIONAL INFORMATION
+          </h4>
+          <hr>
+          <div class="col-md-6">
+            <ul style="float:left;" class="list-unstyled">
+              <% if @digital_cv.personal_detail.try(:nationality).present? %>
+                <li>
+                  <strong>Nationality: </strong>
+                  <%= @digital_cv.personal_detail.nationality.capitalize %>
+                </li>
+              <% end %>
+              <% if @digital_cv.personal_detail.try(:gender).present? %>
+                <li>
+                  <strong>Gender: </strong>
+                  <%= DigitalCvsHelper::GENDER[@digital_cv.personal_detail.gender] %>
+                </li>
+              <% end %>
+              <% unless @digital_cv.personal_detail.try(:disabled).nil? %>
+                <li>
+                  <strong>Physically Challenged: </strong>
+                  <%= @digital_cv.personal_detail.disabled? ? 'Yes' : 'No' %>
+                </li>
+              <% end %>
+              <% if @digital_cv.personal_detail.try(:hobbies).present? %>
+                <li>
+                  <p><strong>Hobbies and Interest-</strong>
+                  <%= raw @digital_cv.personal_detail.hobbies %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="col-md-6" style="float:left;">
+            <ul class="list-unstyled">
+              <% if @digital_cv.personal_detail.try(:marital_status).present?%>
               <li>
-                <strong>Nationality: </strong>
-                <%= @digital_cv.personal_detail.nationality.capitalize %>
+                <strong>Marital Status: </strong>
+                <%= DigitalCvsHelper::MARITAL_STATUS[@digital_cv.personal_detail.marital_status] %>
               </li>
-            <% end %>
-            <% if @digital_cv.personal_detail.try(:gender).present? %>
-              <li>
-                <strong>Gender: </strong>
-                <%= DigitalCvsHelper::GENDER[@digital_cv.personal_detail.gender] %>
-              </li>
-            <% end %>
-            <% unless @digital_cv.personal_detail.try(:disabled).nil? %>
-              <li>
-                <strong>Physically Challenged: </strong>
-                <%= @digital_cv.personal_detail.disabled? ? 'Yes' : 'No' %>
-              </li>
-            <% end %>
-            <% if @digital_cv.personal_detail.try(:hobbies).present? %>
-              <li>
-                <p><strong>Hobbies and Interest-</strong>
-                <%= raw @digital_cv.personal_detail.hobbies %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-        <div class="col-md-6" style="float:left;">
-          <ul class="list-unstyled">
-            <% if @digital_cv.personal_detail.try(:marital_status).present?%>
-            <li>
-              <strong>Marital Status: </strong>
-              <%= DigitalCvsHelper::MARITAL_STATUS[@digital_cv.personal_detail.marital_status] %>
-            </li>
-            <% end %>
-          </ul>
-        </div>
-        <br><br>
-      </section>
+              <% end %>
+            </ul>
+          </div>
+          <br><br>
+        </section>
+      <% end %>
     </div>
   </div>
 </div>
