@@ -75,9 +75,9 @@
 				<div class="col-md-12 col-xs-12">
 					<div class="row">
 						<% if @digital_cv.summary.present? %>
-							<h4>Profile</h4>
+							<h4>Summary</h4>
 							<div class="col-md-12 col-xs-12">
-							<p><%= @digital_cv.summary %></p>
+								<p><%= @digital_cv.summary %></p>
 							</div>
 							<div class="clearfix"></div>
 						<%end%>	
@@ -85,7 +85,7 @@
 						<% if @digital_cv.objective.present? %>
 							<h4>Objective</h4>
 							<div class="col-md-12 col-xs-12">
-							<p><%= @digital_cv.objective %></p>
+								<p><%= @digital_cv.objective %></p>
 							</div>
 							<div class="clearfix"></div>
 						<%end%>	
@@ -98,8 +98,16 @@
 					          <p class="text-uppercase"><%= e.company.name%> | 
 					          <%= e.start_date.strftime("%B, %Y") %> - <%= e.present_job ? 'present' : e.end_date.strftime("%B, %Y") %></p>
 
-					          <p><%= e.responsibilities.html_safe %></p>
-					          <p><%= e.achievement.html_safe %></p>
+					          <% if e.responsibilities.present?%>
+                                <h5><i><strong>Responsibilities</strong></i></h5>
+                                <p><%= e.responsibilities.html_safe %></p>
+                              <%end%>
+                              <%if e.achievement.present?%>
+                                <h5><i><strong>Key Achievements</strong></i></h5>
+                                <div class="text">
+                                    <%= e.achievement.html_safe %>
+                                </div>
+                              <%end%>
 							<% end %>
 							</div><div class="clearfix"></div>
 						<%end%>
@@ -108,22 +116,37 @@
 							<h4>Education</h4>
 							<div class="col-md-12 col-xs-12">
 							<% @digital_cv.academic_details.each do |a| %>
-							<p><strong><%= a.degree.title %>, 
-							<%= a.specialization.title %></strong><br>
-							<%= a.institute %><br>
-							<%= a.university %> |
-							<%= a.start_date.strftime("%B, %Y") %> - 
-							<% if a.pursuing %>
-								Present
-							<% else %>
-								<%= a.end_date.strftime("%B, %Y") %>
-							<% end %><br>
-							Percentage/CGPA - <%= a.percentage %>%
-							</p>
+								<p><strong><%= a.degree.title %>, 
+								<%= a.specialization.title %></strong><br>
+								<%= a.institute %><br>
+								<%= a.university %> |
+								<%= a.start_date.strftime("%B, %Y") %> - 
+								<% if a.pursuing %>
+									Present
+								<% else %>
+									<%= a.end_date.strftime("%B, %Y") %>
+								<% end %><br>
+								Percentage/CGPA - <%= a.percentage %>%
+								</p>
 							<% end %>
 							</div>
 							<div class="clearfix"></div>
 						<%end%>
+
+						<% if @digital_cv.cv_skills.size>0 %>
+                            <h4>Skills</h4>
+                            <div class="col-md-12 col-xs-12">
+	                            <ul class="no-padding">
+		                        <% @digital_cv.cv_skills.each do |cv_skill| %>
+	                                <div class="col-md-6 col-xs-6 ">
+	                                	<li><%= cv_skill.skill.title %></li>
+	                                </div>
+		                        <% end %>
+	                            </ul>
+                            </div>
+                            <div class="clearfix"></div><br>
+                        <%end%>
+
 						<% if @digital_cv.cv_languages.size>0 %>
 							<h4>Languages</h4>
 							<div class="col-md-12 col-xs-12">
@@ -142,27 +165,7 @@
 				            </div>
 				            <div class="clearfix"></div>
 			      		<% end %>
-					
-						<% if @digital_cv.cv_skills.size>0 %>
-							<h4>Skills</h4>
-							<div>
-							<% @digital_cv.cv_skills.each do |cv_skill| %>
-								<% skill_per = cv_skill.self_rating*20  %>
-								<div class="col-md-6 col-xs-5 height-40 pull-left">
-									<p><strong><%= cv_skill.skill.title %></strong></p>
-								</div>
-								<div class="col-md-6 col-xs-7 height-40 pull-right">
-									<div class="progress">
-										<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="<%= skill_per%>" aria-valuemin="0" aria-valuemax="100" style="width:<%= skill_per.to_s%>%">
-										<%= skill_per.to_s%>%
-										</div>
-									</div>
-								</div>
-							<% end %>
-							</div>
-							<div class="clearfix"></div>
-						<%end%>
-
+			      		
 						<% if @digital_cv.trainings.present? %>
 							<section >
 							<h4>TRAININGS</h4>
