@@ -7,7 +7,8 @@
       <%= form_for @digital_cv do |f| %>
         <% get_template.each_with_index do |template, index| %>
           <%= f.hidden_field :template_id, value: template.id %>
-          <div class="col-md-3 text-center margin-bottom-50">
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <div class="col-md-3 text-center margin-bottom-100">
             <%= image_tag "digital_cv/cvtemplateimage/#{template.name}.png", alt: "Template Blue", height: 200 %>
             <div class="text-center" style="margin-top: -80px;">
               <%= f.submit "Use this template", class: "btn btn-primary btn-xs talent-fore-btn" %>
