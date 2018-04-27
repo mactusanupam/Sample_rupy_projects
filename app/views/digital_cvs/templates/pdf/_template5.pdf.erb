@@ -6,6 +6,9 @@
 .social-media p {
     word-break: break-all;
 }
+.text {
+    text-align: justify;
+  }
 p strong{
     font-size: 11px;
 }
@@ -59,9 +62,9 @@ h5{
                     <div class="cv-profile-img text-center">
                         <% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
                             <%= wicked_pdf_image_tag @digital_cv.photo.image.url(:medium), width: 200, height: 200, class: "img-circle" %>
-                    <% else %>
+                        <% else %>
                             <%= wicked_pdf_image_tag "digital_cv/photo_cv.png", width: 200, height: 200, class: "img-circle" %>
-                    <% end %>
+                        <% end %>
                     </div>
                     <h1 class="text-uppercase"><strong><%= @digital_cv.contact_detail.try(:name) %></strong></h1>
                     <h5 class="text-uppercase"><%= @digital_cv.present_job ? @digital_cv.present_job.job_title.title : '' %></h5>
@@ -103,9 +106,9 @@ h5{
                 <div class="col-md-12 col-xs-12">
                     <div class="row">
                         <% if @digital_cv.summary.present? %>
-                            <h4>Profile</h4>
+                            <h4>Summary</h4>
                             <div class="col-md-12 col-xs-12">
-                            <p><%= @digital_cv.summary %></p>
+                                <p><%= @digital_cv.summary %></p>
                             </div>
                             <div class="clearfix"></div>
                         <%end%> 
@@ -113,7 +116,7 @@ h5{
                         <% if @digital_cv.objective.present? %>
                             <h4>Objective</h4>
                             <div class="col-md-12 col-xs-12">
-                            <p><%= @digital_cv.objective %></p>
+                                <p><%= @digital_cv.objective %></p>
                             </div>
                             <div class="clearfix"></div>
                         <%end%> 
@@ -126,8 +129,16 @@ h5{
                               <p class="text-uppercase"><%= e.company.name%> | 
                               <%= e.start_date.strftime("%B, %Y") %> - <%= e.present_job ? 'present' : e.end_date.strftime("%B, %Y") %></p>
 
-                              <p><%= e.responsibilities.html_safe %></p>
-                              <p><%= e.achievement.html_safe %></p>
+                              <% if e.responsibilities.present?%>
+                                <h5><i><strong>Responsibilities</strong></i></h5>
+                                <p><%= e.responsibilities.html_safe %></p>
+                              <%end%>
+                              <%if e.achievement.present?%>
+                                <h5><i><strong>Key Achievements</strong></i></h5>
+                                <div class="text">
+                                    <%= e.achievement.html_safe %>
+                                </div>
+                              <%end%>
                             <% end %>
                             </div><div class="clearfix"></div>
                         <%end%>
@@ -136,22 +147,37 @@ h5{
                             <h4>Education</h4>
                             <div class="col-md-12 col-xs-12">
                             <% @digital_cv.academic_details.each do |a| %>
-                            <p><strong><%= a.degree.title %>, 
-                            <%= a.specialization.title %></strong><br>
-                            <%= a.institute %><br>
-                            <%= a.university %> |
-                            <%= a.start_date.strftime("%B, %Y") %> - 
-                            <% if a.pursuing %>
-                                Present
-                            <% else %>
-                                <%= a.end_date.strftime("%B, %Y") %>
-                            <% end %><br>
-                            Percentage/CGPA - <%= a.percentage %>%
-                            </p>
+                                <p><strong><%= a.degree.title %>, 
+                                <%= a.specialization.title %></strong><br>
+                                <%= a.institute %><br>
+                                <%= a.university %> |
+                                <%= a.start_date.strftime("%B, %Y") %> - 
+                                <% if a.pursuing %>
+                                    Present
+                                <% else %>
+                                    <%= a.end_date.strftime("%B, %Y") %>
+                                <% end %><br>
+                                Percentage/CGPA - <%= a.percentage %>%
+                                </p>
                             <% end %>
                             </div>
                             <div class="clearfix"></div>
                         <%end%>
+
+                        <% if @digital_cv.cv_skills.size>0 %>
+                            <h4>Skills</h4>
+                            <div class="col-md-12 col-xs-12">
+                                <ul class="no-padding">
+                                <% @digital_cv.cv_skills.each do |cv_skill| %>
+                                    <div class="col-md-6 col-xs-6 ">
+                                        <li><%= cv_skill.skill.title %></li>
+                                    </div>
+                                <% end %>
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div><br>
+                        <%end%>
+
                         <% if @digital_cv.cv_languages.size>0 %>
                             <h4>Languages</h4>
                             <div class="col-md-12 col-xs-12">
@@ -170,27 +196,7 @@ h5{
                             </div>
                             <div class="clearfix"></div>
                         <% end %>
-                    
-                        <% if @digital_cv.cv_skills.size>0 %>
-                            <h4>Skills</h4>
-                            <div>
-                            <% @digital_cv.cv_skills.each do |cv_skill| %>
-                                <% skill_per = cv_skill.self_rating*20  %>
-                                <div class="col-md-6 col-xs-5 height-30 pull-left">
-                                    <p><strong><%= cv_skill.skill.title %></strong></p>
-                                </div>
-                                <div class="col-md-6 col-xs-7 height-30 pull-right">
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="<%= skill_per%>" aria-valuemin="0" aria-valuemax="100" style="width:<%= skill_per.to_s%>%">
-                                        <%= skill_per.to_s%>%
-                                        </div>
-                                    </div>
-                                </div>
-                            <% end %>
-                            </div>
-                            <div class="clearfix"></div>
-                        <%end%>
-
+                        
                         <% if @digital_cv.trainings.present? %>
                             <section >
                             <h4>TRAININGS</h4>
@@ -244,7 +250,7 @@ h5{
                                 <h5 class="text-uppercase">
                                 <strong><%= project.title %></strong>
                                 </h5>
-                                <p><%= project.guide %></p>
+                                <%= project.guide %>
                                 <p><%= project.description.html_safe %></p>
                             <% end %>
                             </div>
@@ -258,54 +264,54 @@ h5{
                             <% if @digital_cv.personal_detail.try(:nationality).present? %>
                                 <div class="col-md-6 col-xs-6 row">
                                     <strong>Nationality</strong>
+                                    <b class="pull-right">: </b>
                                 </div>
-                                <div class="col-md-6 col-xs-6 row">
-                                    <b>: </b>
+                                <div class="col-md-6 col-xs-6">
                                     <%= @digital_cv.personal_detail.nationality.to_s.capitalize %>
                                 </div>
                             <% end %>
                             <% if @digital_cv.personal_detail.try(:date_of_birth).present? %>
                                 <div class="col-md-6 col-xs-6 row">
                                     <strong>Date Of Birth </strong>
+                                    <b class="pull-right">: </b>
                                 </div>
-                                <div class="col-md-6 col-xs-6 row">
-                                    <b>: </b>
+                                <div class="col-md-6 col-xs-6">
                                     <%= @digital_cv.personal_detail.date_of_birth %>
                                 </div>
                             <% end %>
                             <% if @digital_cv.personal_detail.try(:gender).present?%>
                                 <div class="col-md-6 col-xs-6 row">
                                     <strong>Gender</strong>
+                                    <b class="pull-right">: </b>
                                 </div>
-                                <div class="col-md-6 col-xs-6 row">
-                                    <b>: </b>
+                                <div class="col-md-6 col-xs-6">
                                     <%= DigitalCvsHelper::GENDER[@digital_cv.personal_detail.gender] %>
                                 </div>
                             <% end %>
                             <% if @digital_cv.personal_detail.try(:marital_status).present?%>
                                 <div class="col-md-6 col-xs-6 row">
                                     <strong>Marial Status </strong>
+                                    <b class="pull-right">: </b>
                                 </div>
-                                <div class="col-md-6 col-xs-6 row">
-                                    <b>: </b>
+                                <div class="col-md-6 col-xs-6">
                                     <%= DigitalCvsHelper::MARITAL_STATUS[@digital_cv.personal_detail.marital_status] %>
                                 </div>
                             <% end %>
                             <% if @digital_cv.personal_detail.try(:disabled).present? %>
                                 <div class="col-md-6 col-xs-6 row">
                                     <strong>Physically Challenged </strong>
+                                    <b class="pull-right">: </b>
                                 </div>
-                                <div class="col-md-6 col-xs-6 row">
-                                    <b>: </b>
+                                <div class="col-md-6 col-xs-6">
                                     <%= @digital_cv.personal_detail.disabled? ? 'Yes' : 'No' %>
                                 </div>
                             <% end %>
                             <% if @digital_cv.personal_detail.try(:hobbies).present? %>
                                 <div class="col-md-6 col-xs-6 row">
                                     <strong>Hobbies and Interests </strong>
+                                    <b class="pull-right">: </b>
                                 </div>
-                                <div class="col-md-6 col-xs-6 row">
-                                    <b>: </b>
+                                <div class="col-md-6 col-xs-6">
                                     <%= @digital_cv.personal_detail.hobbies.to_s.html_safe %>
                                 </div>
                             <% end %>

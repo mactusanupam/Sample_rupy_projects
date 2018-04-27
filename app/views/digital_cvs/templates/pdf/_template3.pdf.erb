@@ -3,12 +3,6 @@
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 12px; 
 }
-.titles{
-  border-bottom:1px solid #eee;
-  padding-bottom: 10px;
-  width:25px; 
-  text-transform:uppercase; 
-}
 .text {
     text-align: justify;
   }
@@ -28,11 +22,12 @@ h4 {
   position:relative;
   text-transform: uppercase;
   padding-bottom: 10px;
+  margin-top:20px; 
 }
 h4::after {
   content:'';
   position:absolute;
-  width:40px;
+  width:30px;
   height:1px;
   background:#eee;
   bottom:0;
@@ -69,8 +64,9 @@ h5 strong{
 .education{
   padding-right:30px; 
 }
-.skills p strong, .languages p strong{
-  font-size: 10px;
+.media .media-body p{
+    padding:0 !important;
+    margin:0 !important; 
 }
 </style>
 <div class="container-fluid font-family"><br><br>
@@ -84,10 +80,10 @@ h5 strong{
         <div class="col-md-12 col-xs-12">
           <div class="row">
 
-            <div class="col-md-4 col-xs-4 border-right padding-right-40">
-                <div class="row"><br>
+            <div class="col-md-4 col-xs-4 border-right padding-right-40" style="display: table-cell; ">
+                <div class="row">
                     <% if @digital_cv.summary.present? %>
-                        <h4>Profile</h4>
+                        <h4>Summary</h4>
                         <p class="text"><%= @digital_cv.summary %></p>
                         <hr style="margin:0;">
                     <%end%>
@@ -117,14 +113,16 @@ h5 strong{
                         <div class="row">
                             <% @digital_cv.cv_skills.each do |cv_skill| %>
                                 <% skill_per = cv_skill.self_rating*20  %>
-                                <div class="col-md-6 col-xs-5 height-30 pull-left">
+                                <div class="col-md-6 col-xs-6 height-30 pull-left">
                                     <p><strong><%= cv_skill.skill.title %></strong></p>
                                 </div>
-                                <div class="col-md-6 col-xs-7 height-30 pull-right">
+                                <div class="col-md-6 col-xs-6 height-30 pull-right">
+                                    <div class="row">
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="<%= skill_per%>" aria-valuemin="0" aria-valuemax="100" style="width:<%= skill_per.to_s%>%">
                                         <%= skill_per.to_s%>%
                                         </div>
+                                    </div>
                                     </div>
                                 </div>
                             <% end %>
@@ -183,9 +181,8 @@ h5 strong{
                 </div>
             </div><!-- col-md-4 ends-->
 
-            <div class="col-md-8 col-xs-8 padding-left-40">
+            <div class="col-md-8 col-xs-8 padding-left-40" style="display: table-cell; float: none;">
                 <div class="row">
-                    <br>
                     <div class="col-md-12 col-xs-12">
                         <div class="row">
                         <% if @digital_cv.employment_details.present? %>
@@ -244,7 +241,7 @@ h5 strong{
                               <small class="pull-right"><%= tr.duration %>  days </small>
                               </h5>
                               
-                              <p class="text"><%= tr.info.html_safe %></p><hr style="margin:0;">
+                              <p class="text"><%= tr.info.html_safe %></p><hr style="margin-bottom:0;">
                             <% end %>
                           </section>
                         <% end %>
@@ -286,7 +283,7 @@ h5 strong{
                                     <strong><%= project.title %></strong><br>
                                     <%= project.guide %><br>
                                     <p class="text"><%= project.description.html_safe %></p>
-                                    <hr style="margin:0;">
+                                    <hr style="margin:10px 0;">
                                 <% end %>
                             </div>
                         </div>
@@ -294,58 +291,63 @@ h5 strong{
                         <% if @digital_cv.personal_detail.present? %>
                         <div class="col-md-12 col-xs-12">
                             <div class="row">  
-                                <h4> Personal information</h4>
+                                <h4 style="margin-top: 10px;"> Personal information</h4>
                                 <% if @digital_cv.personal_detail.try(:nationality).present? %>
-                                    <div class="col-md-4 col-xs-4 row">
+                                    <div class="col-md-5 col-xs-5 row">
                                         <strong>Nationality</strong>
+                                        <b class="pull-right">: </b>
                                     </div>
-                                    <div class="col-md-8 col-xs-8 row">
-                                        <b>: </b>
+                                    <div class="col-md-7 col-xs-7">
                                         <%= @digital_cv.personal_detail.nationality.to_s.capitalize %>
                                     </div>
                                 <% end %>
                                 <% if @digital_cv.personal_detail.try(:date_of_birth).present? %>
-                                    <div class="col-md-4 col-xs-4 row">
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-5 col-xs-5 row">
                                         <strong>Date of birth </strong>
+                                        <b class="pull-right">: </b>
                                     </div>
-                                    <div class="col-md-8 col-xs-8 row">
-                                        <b>: </b>
+                                    <div class="col-md-7 col-xs-7">
                                         <%= @digital_cv.personal_detail.date_of_birth %>
                                     </div>
                                 <% end %>
                                 <% if @digital_cv.personal_detail.try(:gender).present?%>
-                                    <div class="col-md-4 col-xs-4 row">
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-5 col-xs-5 row">
                                         <strong>Gender </strong>
+                                        <b class="pull-right">: </b>
                                     </div>
-                                    <div class="col-md-8 col-xs-8 row">
-                                        <b>: </b>
+                                    <div class="col-md-7 col-xs-7">
                                         <%= DigitalCvsHelper::GENDER[@digital_cv.personal_detail.gender] %>
                                     </div>
                                 <% end %>
                                 <% if @digital_cv.personal_detail.try(:marital_status).present?%>
-                                    <div class="col-md-4 col-xs-4 row">
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-5 col-xs-5 row">
                                         <strong>Marial Status </strong>
+                                        <b class="pull-right">: </b>
                                     </div>
-                                    <div class="col-md-8 col-xs-8 row">
-                                        <b>: </b>
+                                    <div class="col-md-7 col-xs-7">
                                         <%= DigitalCvsHelper::MARITAL_STATUS[@digital_cv.personal_detail.marital_status] %>
                                     </div>
                                 <% end %>
                                 <% if @digital_cv.personal_detail.try(:disabled).present? %>
-                                    <div class="col-md-4 col-xs-4 row">
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-5 col-xs-5 row">
                                         <strong>Disabled </strong>
+                                        <b class="pull-right">: </b>
                                     </div>
-                                    <div class="col-md-8 col-xs-8 row">
-                                        <b>: </b>
+                                    <div class="col-md-7 col-xs-7">
                                         <%= @digital_cv.personal_detail.disabled? ? 'Yes' : 'No' %>
                                     </div>
                                 <% end %>
                                 <% if @digital_cv.personal_detail.try(:hobbies).present? %>
-                                    <div class="col-md-4 col-xs-4 row">
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-5 col-xs-5 row">
                                       <strong>Hobbies and Interests </strong>
+                                      <b class="pull-right">: </b>
                                     </div>
-                                    <div class="col-md-8 col-xs-8 row">
-                                      <b>: </b>
+                                    <div class="col-md-7 col-xs-7">
                                       <%= @digital_cv.personal_detail.hobbies.to_s.html_safe %>
                                     </div>
                                 <% end %>

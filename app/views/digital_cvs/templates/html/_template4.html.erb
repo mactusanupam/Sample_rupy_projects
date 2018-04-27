@@ -17,6 +17,9 @@
 .padding-right-20{
 	padding-right: 20px;
 }
+.padding-bottom-5{
+    padding-bottom: 5px;
+}
 .height-40{
 	height:40px;
 }
@@ -58,7 +61,7 @@
 						<h5 class="text-uppercase"><%= @digital_cv.present_job ? @digital_cv.present_job.job_title.title : '' %></h5>
 					</div>
 				</div>
-				<div class="pull-right">
+				<div class="pull-right padding-bottom-5">
 					<% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
 						<%= image_tag @digital_cv.photo.image.url(:thumb), width: 100, height: 100%>
 					<% else %>
@@ -73,7 +76,7 @@
 		    <div class="col-md-4 col-xs-4 border-right padding-right-40">
 			    <div class="row"><br>
 			    	<% if @digital_cv.summary.present? %>
-						<h4>Profile</h4>
+						<h4>Summary</h4>
 						<p class="text"><%= @digital_cv.summary %></p>
 						<hr>
 					<%end%>

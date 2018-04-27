@@ -63,7 +63,7 @@
 		    <div class="col-md-4 col-xs-4 border-right padding-right-40">
 			    <div class="row"><br>
 			    	<% if @digital_cv.summary.present? %>
-						<h4>Profile</h4>
+						<h4>Summary</h4>
 						<p><%= @digital_cv.summary %></p>
 						<hr>
 					<%end%>
@@ -271,56 +271,61 @@
 							<div class="row">  
 								<h4> Personal information</h4>
 								<% if @digital_cv.personal_detail.try(:nationality).present? %>
-									<div class="col-md-4 col-xs-4 row">
+									<div class="col-md-5 col-xs-5 row">
 										<strong>Nationality</strong>
+										<b class="pull-right">: </b>
 									</div>
-									<div class="col-md-8 col-xs-8 row">
-										<b>: </b>
+									<div class="col-md-7 col-xs-7">
 										<%= @digital_cv.personal_detail.nationality.to_s.capitalize %>
 									</div>
 								<% end %>
 								<% if @digital_cv.personal_detail.try(:date_of_birth).present? %>
-									<div class="col-md-4 col-xs-4 row">
+									<div class="clearfix"></div>
+									<div class="col-md-5 col-xs-5 row">
 										<strong>Date of birth </strong>
+										<b class="pull-right">: </b>
 									</div>
-									<div class="col-md-8 col-xs-8 row">
-										<b>: </b>
+									<div class="col-md-7 col-xs-7">
 										<%= @digital_cv.personal_detail.date_of_birth %>
 									</div>
 								<% end %>
 								<% if @digital_cv.personal_detail.try(:gender).present?%>
-									<div class="col-md-4 col-xs-4 row">
+									<div class="clearfix"></div>
+									<div class="col-md-5 col-xs-5 row">
 										<strong>Gender </strong>
+										<b class="pull-right">: </b>
 									</div>
-									<div class="col-md-8 col-xs-8 row">
-										<b>: </b>
+									<div class="col-md-7 col-xs-7">
 										<%= DigitalCvsHelper::GENDER[@digital_cv.personal_detail.gender] %>
 									</div>
 								<% end %>
 								<% if @digital_cv.personal_detail.try(:marital_status).present?%>
-									<div class="col-md-4 col-xs-4 row">
+									<div class="clearfix"></div>
+									<div class="col-md-5 col-xs-5 row">
 										<strong>Marial Status </strong>
+										<b class="pull-right">: </b>
 									</div>
-									<div class="col-md-8 col-xs-8 row">
-										<b>: </b>
+									<div class="col-md-7 col-xs-7">
 										<%= DigitalCvsHelper::MARITAL_STATUS[@digital_cv.personal_detail.marital_status] %>
 									</div>
 								<% end %>
 								<% if @digital_cv.personal_detail.try(:disabled).present? %>
-									<div class="col-md-4 col-xs-4 row">
+									<div class="clearfix"></div>
+									<div class="col-md-5 col-xs-5 row">
 										<strong>Disabled </strong>
+										<b class="pull-right">: </b>
 									</div>
-									<div class="col-md-8 col-xs-8 row">
-										<b>: </b>
+									<div class="col-md-7 col-xs-7">
 										<%= @digital_cv.personal_detail.disabled? ? 'Yes' : 'No' %>
 									</div>
 								<% end %>
 								<% if @digital_cv.personal_detail.try(:hobbies).present? %>
-					                <div class="col-md-4 col-xs-4 row">
+									<div class="clearfix"></div>
+					                <div class="col-md-5 col-xs-5 row">
 					                  <strong>Hobbies and Interests </strong>
+					                  <b class="pull-right">: </b>
 					                </div>
-					                <div class="col-md-8 col-xs-8 row">
-					                  <b>: </b>
+					                <div class="col-md-7 col-xs-7">
 					                  <%= @digital_cv.personal_detail.hobbies.to_s.html_safe %>
 					                </div>
 				              	<% end %>
