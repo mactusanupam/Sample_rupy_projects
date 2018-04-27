@@ -56,34 +56,23 @@
     </div>
   </div>
 </div>
-
 <div class="row cv-landing cv-landing-templates">
   <div class="col-xs-11 col-md-10 col-centered">
     <div id="carousel" class="carousel slide" data-ride="carousel" data-type="multi">
       <ol class="carousel-indicators margin-top-50" style="margin-bottom: -50px; padding-top: 20px;">
-        <li data-target="#carousel" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel" data-slide-to="1" class=""></li>
-        <li data-target="#carousel" data-slide-to="2" class=""></li>
+
+        <% (0..5).each do |n| %>
+          <li data-target="#carousel" data-slide-to="<%= n %>" class="<%= n == 0 ? 'active' : '' %>"></li>
+        <% end %>
       </ol>
       <div class="carousel-inner">
-        <div class="item active">
-          <div class="carousel-col">
-            <!-- <div class="block red img-responsive"></div> -->
-            <%= image_tag "digital_cv/cvtemplateimage/template1.png", alt: "Template Blue", class: 'img-responsive' %>
+        <% get_template.each_with_index do |template, index| %>
+          <div class="item <%= index == 0 ? 'active' : ''%>">
+            <div class="carousel-col">
+              <%= image_tag "digital_cv/cvtemplateimage/#{template.name}.png", alt: "Template Blue", class: 'img-responsive' %>
+            </div>
           </div>
-        </div>
-        <div class="item">
-          <div class="carousel-col">
-            <!-- <div class="block green img-responsive"></div> -->
-            <%= image_tag "digital_cv/cvtemplateimage/template2.png", alt: "Template Blue", class: 'img-responsive' %>
-          </div>
-        </div>
-        <div class="item">
-          <div class="carousel-col">
-            <!-- <div class="block blue img-responsive"></div> -->
-            <%= image_tag "digital_cv/cvtemplateimage/template3.png", alt: "Template Blue", class: 'img-responsive' %>
-          </div>
-        </div>
+        <% end %>
       </div>
 
       <!-- Controls -->

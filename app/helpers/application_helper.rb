@@ -3,6 +3,10 @@ module ApplicationHelper
     UserType.where("title NOT IN (?)", ['Admin', 'Super Admin',])
   end
 
+  def get_template
+    ::Template.all
+  end
+
   def page_count(page_size, total_count)
     return if page_size == 0
     total_count % page_size == 0 ? total_count/page_size : total_count/page_size + 1

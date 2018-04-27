@@ -74,12 +74,14 @@
         </li>
       </ul>
     </div>
-    <div class="col-lg-1 col-md-1 col-sm-1">
-      <span id="siteseal">
-        <script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=3vEg714bah235x9krqz6pHh2e29EIqNamz5JAQFicno9zdz4KgpcoP2uwlwT"></script>
-        <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
-      </span>
-    </div>
+    <% if Rails.env.production? %>
+      <div class="col-lg-1 col-md-1 col-sm-1">
+        <span id="siteseal">
+          <script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=3vEg714bah235x9krqz6pHh2e29EIqNamz5JAQFicno9zdz4KgpcoP2uwlwT"></script>
+          <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
+        </span>
+      </div>
+    <% end %>
   </div>
   <div class="row">
     <div class="col-lg-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-8 col-xs-12 no-padding">
