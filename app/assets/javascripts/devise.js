@@ -4,11 +4,6 @@ $(document).ready(function(){
     $("#show_new_company_list").show();
   }
 
-  if($('#show_new_company_list').find('select').val() == 'others') {
-    $("#new_company_check_list").show();
-  }
-
-
   $(document).on('click', '#user_type_selected', function() {
     $("#user_type_selected").change(function(){
       var user_type_id = $("input[type='radio']:checked").val();
