@@ -112,3 +112,11 @@
   vertical-align: -webkit-baseline-middle;
   vertical-align: -moz-middle-with-baseline;
 }
+
+.icon-green {
+  color: #3c763d;
+}
+
+.icon-red {
+  color: #a94442;
+}

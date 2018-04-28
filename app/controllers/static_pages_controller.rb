@@ -11,6 +11,10 @@ class StaticPagesController < ApplicationController
   def resume_builder
   end
 
+  def resume_pricing
+    @plans = DigitalCvPlan.all
+  end
+
   def states
     render json: Hash[CS.get(params[:countrycode]).sort_by{|k, v| v}]
   end
