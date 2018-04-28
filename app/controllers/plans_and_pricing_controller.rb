@@ -1,0 +1,2 @@
+class PlansAndPricingController < ApplicationController
+end

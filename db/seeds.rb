@@ -226,7 +226,7 @@ DigitalCvPlan.find_or_create_by(plan_code: 'cv01').update_attributes({
                                 'custom url'         => false,
                                 'analytics'          => false,
                                 'linkedin import'    => true
-                             }
+                              }
 })
 
 DigitalCvPlan.find_or_create_by(plan_code: 'cv02').update_attributes({
@@ -244,5 +244,5 @@ DigitalCvPlan.find_or_create_by(plan_code: 'cv02').update_attributes({
                                 'custom url'         => true,
                                 'analytics'          => true,
                                 'linkedin import'    => true
-                             }
+                              }
 })
