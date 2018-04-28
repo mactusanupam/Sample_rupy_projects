@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420080809) do
+ActiveRecord::Schema.define(version: 20180425063952) do
 
   create_table "academic_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "institute"
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.index ["degree_id"], name: "index_academic_details_on_degree_id"
     t.index ["digital_cv_id"], name: "index_academic_details_on_digital_cv_id"
     t.index ["specialization_id"], name: "index_academic_details_on_specialization_id"
+  end
+
+  create_table "billing_plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "plan_code"
+    t.string "plan_name"
+    t.decimal "plan_price", precision: 10, scale: 5
+    t.string "plan_frequency"
+    t.string "type"
+    t.text "features"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "certifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -176,6 +187,15 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "job_responsibilities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "responsibility_type"
+    t.text "responsibility_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "job_title_id"
+    t.index ["job_title_id"], name: "index_job_responsibilities_on_job_title_id"
+  end
+
   create_table "job_titles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -270,6 +290,20 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "billing_plan_id"
+    t.string "type"
+    t.string "state"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "subscribeble_type"
+    t.bigint "subscribeble_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billing_plan_id"], name: "index_subscriptions_on_billing_plan_id"
+    t.index ["subscribeble_type", "subscribeble_id"], name: "index_subscriptions_on_subscribeble_type_and_subscribeble_id"
+  end
+
   create_table "templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "template_type"
@@ -354,10 +388,12 @@ ActiveRecord::Schema.define(version: 20180420080809) do
   add_foreign_key "employment_details", "digital_cvs"
   add_foreign_key "employment_details", "job_titles"
   add_foreign_key "honor_and_awards", "digital_cvs"
+  add_foreign_key "job_responsibilities", "job_titles"
   add_foreign_key "personal_details", "digital_cvs"
   add_foreign_key "references", "digital_cvs"
   add_foreign_key "references", "job_titles"
   add_foreign_key "research_or_project_details", "digital_cvs"
+  add_foreign_key "subscriptions", "billing_plans"
   add_foreign_key "trainings", "digital_cvs"
   add_foreign_key "users", "companies"
   add_foreign_key "users", "job_titles"

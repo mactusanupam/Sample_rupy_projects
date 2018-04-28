@@ -1,0 +1,2 @@
+class AssessmentPlan < BillingPlan
+end

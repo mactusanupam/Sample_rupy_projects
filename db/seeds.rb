@@ -210,3 +210,39 @@ end
 #     end
 #   end
 # end
+
+DigitalCvPlan.find_or_create_by(plan_code: 'cv01').update_attributes({
+  plan_name:                 'Pay Per Resume',
+  plan_price:                '1.95',
+  plan_frequency:            'one resume',
+  features:                  {
+                                'download formats'   => 'PDF and DOCX(MS Word)',
+                                'resume templates'   => 20,
+                                'cover letter'       => true,
+                                'email support'      => true,
+                                'photo cv templates' => 5,
+                                'multiple download'  => '30 days',
+                                'multiple resumes'   => false,
+                                'custom url'         => false,
+                                'analytics'          => false,
+                                'linkedin import'    => true
+                              }
+})
+
+DigitalCvPlan.find_or_create_by(plan_code: 'cv02').update_attributes({
+  plan_name:                 'Premium Plan',
+  plan_price:                '9.95',
+  plan_frequency:            'quarterly',
+  features:                  {
+                                'download formats'   => 'PDF and DOCX(MS Word)',
+                                'resume templates'   => 20,
+                                'cover letter'       => true,
+                                'email support'      => true,
+                                'photo cv templates' => 5,
+                                'multiple download'  => '90 days',
+                                'multiple resumes'   => 10,
+                                'custom url'         => true,
+                                'analytics'          => true,
+                                'linkedin import'    => true
+                              }
+})
