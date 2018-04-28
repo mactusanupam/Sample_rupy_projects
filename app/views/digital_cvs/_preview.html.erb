@@ -24,7 +24,7 @@
           </span> -->
         </h4>
 
-        <div class="row">
+        <div class="row ss-item">
           <% get_template.each do |template| %>
             <div class="col-sm-2 template-image">
               <%= link_to image_tag("digital_cv/cvtemplateimage/#{template.name}.png", alt: "Template Blue"), change_cv_template_digital_cv_path(template_id: template.id), remote: true %>
