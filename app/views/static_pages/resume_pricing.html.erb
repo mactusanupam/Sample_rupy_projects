@@ -35,14 +35,18 @@
           <tr>
             <td></td>
             <td class="text-center">
-              <%= link_to "Sign Up (Only #{number_to_currency(@plans.first.plan_price)})", 'javascript:void(0)', class: 'btn btn-default talent-fore-btn color-white' %>
+              <%= link_to "Sign Up (Only #{number_to_currency(@plans.first.plan_price)})", share_and_download_digital_cv_path(@digital_cv), class: 'btn btn-default talent-fore-btn color-white' %>
               <br />
               <span>(One time payment)</span>
+              <br /><br />
+              <span>Free till May 31st, 2018</span>
             </td>
             <td class="text-center">
-            <%= link_to "Sign Up ( Only #{number_to_currency(@plans.last.plan_price)})", 'javascript:void(0)', class: 'btn btn-default talent-fore-btn color-white' %>
-            <br />
-            <span>(Valid for 3 months)</span>
+              <%= link_to "Sign Up ( Only #{number_to_currency(@plans.last.plan_price)})", share_and_download_digital_cv_path(@digital_cv), class: 'btn btn-default talent-fore-btn color-white' %>
+              <br />
+              <span>(Valid for 3 months)</span>
+              <br /><br />
+              <span>Free till May 31st, 2018</span>
             </td>
           </tr>
         </tbody>

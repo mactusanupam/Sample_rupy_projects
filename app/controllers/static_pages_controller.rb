@@ -13,6 +13,7 @@ class StaticPagesController < ApplicationController
 
   def resume_pricing
     @plans = DigitalCvPlan.all
+    @digital_cv = DigitalCv.find_by(id: cookies[:digital_cv])
   end
 
   def states
