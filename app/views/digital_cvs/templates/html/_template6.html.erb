@@ -34,7 +34,7 @@
 			    	<br>
 			    	<% if @digital_cv.contact_detail.try(:mobile).present? %>
 				      <h4>Contact</h4>
-					  <p>	
+					  <p>
 					  <% if @digital_cv.contact_detail.try(:mobile).present? %>
 						<%= @digital_cv.contact_detail.mobile %><br>
 					  <%end%>
@@ -60,7 +60,7 @@
 						Linkedin: &nbsp;<%= @digital_cv.contact_detail.linkedin_url %>
 						<%end%></p>
 					  </div>
-					<%end%>		
+					<%end%>
 			  	</div>
 		    </div><!-- col-md-4 ends-->
 
@@ -74,7 +74,7 @@
 								<p><%= @digital_cv.summary %></p>
 							</div>
 							<div class="clearfix"></div>
-						<%end%>	
+						<%end%>
 
 						<% if @digital_cv.objective.present? %>
 							<h4>Objective</h4>
@@ -82,14 +82,14 @@
 								<p><%= @digital_cv.objective %></p>
 							</div>
 							<div class="clearfix"></div>
-						<%end%>	
+						<%end%>
 
 						<% if @digital_cv.employment_details.present? %>
 							<h4>Experience</h4>
 					        <div class="col-md-12 col-xs-12">
 					        <% @digital_cv.employment_details.each do |e| %>
 					          <h5><strong class="text-uppercase"><%= e.job_title.title %></strong></h5>
-					          <p class="text-uppercase"><%= e.company.name%> | 
+					          <p class="text-uppercase"><%= e.company.name%> |
 					          <%= e.start_date.strftime("%B, %Y") %> - <%= e.present_job ? 'present' : e.end_date.strftime("%B, %Y") %></p>
 
 					          <% if e.responsibilities.present?%>
@@ -110,11 +110,11 @@
 							<h4>Education</h4>
 							<div class="col-md-12 col-xs-12">
 							<% @digital_cv.academic_details.each do |a| %>
-								<p><strong><%= a.degree.title %>, 
+								<p><strong><%= a.degree.title %>,
 								<%= a.specialization.title %></strong><br>
 								<%= a.institute %><br>
 								<%= a.university %> |
-								<%= a.start_date.strftime("%B, %Y") %> - 
+								<%= a.start_date.strftime("%B, %Y") %> -
 								<% if a.pursuing %>
 									Present
 								<% else %>
@@ -159,7 +159,7 @@
 				            </div>
 				            <div class="clearfix"></div>
 			      		<% end %>
-			      		
+
 						<% if @digital_cv.trainings.present? %>
 							<section >
 							<h4>TRAININGS</h4>
@@ -173,17 +173,17 @@
 							</div>
 							</section>
 							<div class="clearfix"></div>
-				        <% end %>	
+				        <% end %>
 
 				        <% if @digital_cv.certifications.present? %>
 							<h4>CERTIFICATIONS</h4>
 							<div class="col-md-12 col-xs-12">
 							<% @digital_cv.certifications.each do |cert| %>
-							  <p><strong><%= cert.title %></strong> <br> <%= cert.certifier %> | 
+							  <p><strong><%= cert.title %></strong> <br> <%= cert.certifier %> |
 							  <%= cert.date.strftime("%B, %Y") %>
 							  </p>
 							<% end %>
-							</div>			
+							</div>
 							<div class="clearfix"></div>
 				        <% end %>
 
@@ -194,7 +194,7 @@
 					          	<div class="col-md-12 col-xs-12">
 					            <% @digital_cv.honor_and_awards.each do |ha| %>
 					                <p><strong><%= ha.title %></strong>
-					                    <% if ha.awarded_by.present? %> awarded 
+					                    <% if ha.awarded_by.present? %> awarded
 							                    by <%= ha.awarded_by %>
 							            <% end %> at <strong><%= ha.company_name %></strong><br>
 					                <small><%= ha.award_date.strftime("%B, %Y") %></small>
@@ -206,16 +206,22 @@
 				      	<% end %>
 
 				        <% if @digital_cv.research_or_project_details.present? %>
-						<div>          
+						<div>
 							<h4>RESEARCH/PROJECTS</h4>
 							<div class="col-md-12 col-xs-12">
-							<% @digital_cv.research_or_project_details.each do |project| %>
-								<h5 class="text-uppercase">
-								<strong><%= project.title %></strong>
-								</h5>
-								<p><%= project.guide %></p>
-								<p><%= project.description.html_safe %></p>
-							<% end %>
+								<% @digital_cv.research_or_project_details.each do |reseach| %>
+                  <% if reseach.title.present? %>
+                    <h5 class="text-uppercase">
+                      <strong><%= project.title %></strong>
+                    </h5> <br />
+                  <% end %>
+                  <% if reseach.duration.present? %>
+                    ( <%= reseach.duration %> ),
+                  <% end %>
+                  <%= reseach.guide %>
+                  <p><%= reseach.description.html_safe %></p>
+                  <hr style="margin:10px 0;">
+                <% end %>
 							</div>
 						</div>
 						<div class="clearfix"></div>

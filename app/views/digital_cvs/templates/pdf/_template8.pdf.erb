@@ -302,10 +302,15 @@ h4{
             <% for reseach in @digital_cv.research_or_project_details %>
               <li>
                 <p>
-                  <strong><%= reseach.title %></strong>
-                  (  <%= reseach.duration %> days), <%= reseach.guide %>
+                  <% if reseach.title.present? %>
+                    <strong><%= reseach.title %></strong>
+                  <% end %>
+                  <% if reseach.duration.present? %>
+                    ( <%= reseach.duration %> ),
+                  <% end %>
+                  <%= reseach.guide %>
                 </p>
-                <p><%= reseach.description %></p>
+                <p><%= reseach.description.html_safe %></p>
               </li>
             <% end %>
           </ul>

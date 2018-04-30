@@ -292,19 +292,25 @@
 						<div class="row padding-5">
 							<div class="col-md-12 col-xs-12">
 								<div class="row padding-5">
-									<div class="col-md-9 col-xs-8">
-										<strong>Title</strong>: <%= project.title %>
-									</div>
-									<div class="col-md-3 col-xs-4 text-right">
-										<strong>Duration</strong>: <%= project.duration %> days
-									</div>
+									<% if project.title.present? %>
+										<div class="col-md-9 col-xs-8">
+											<strong>Title</strong>: <%= project.title %>
+										</div>
+									<% end %>
+									<% if project.duration.present? %>
+										<div class="col-md-3 col-xs-4 text-right">
+											<strong>Duration</strong>: <%= project.duration %>
+										</div>
+									<% end %>
 								</div>
-								<div class="row padding-5">
-									<div class="col-md-2 col-xs-2"><strong>Description</strong></div>
-									<div class="col-md-10 col-xs-10 text-justify">
-										<%= project.description %>
+								<% if project.description.present? %>
+									<div class="row padding-5">
+										<div class="col-md-2 col-xs-2"><strong>Description</strong></div>
+										<div class="col-md-10 col-xs-10 text-justify">
+											<%= project.description.html_safe %>
+										</div>
 									</div>
-								</div>
+								<% end %>
 							</div>
 						</div>
 						<hr />

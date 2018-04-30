@@ -296,7 +296,7 @@
                   <div class="row padding-5">
                     <div class="col-md-2 col-xs-2"><strong>Description</strong></div>
                     <div class="col-md-10 col-xs-10 text-justify">
-                      <%= project.description %>
+                      <%= project.description.html_safe %>
                     </div>
                   </div>
                 <% end %>
