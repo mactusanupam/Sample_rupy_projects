@@ -26,12 +26,13 @@ Rails.application.routes.draw do
   end
 
   get '/resumes/:id/edit/:slug', to: 'digital_cvs#edit'
+  get '/resume-templates', to: 'digital_cvs#new'
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   resources :messages, only: [:create, :destroy]
 
-  %w(about-us resume-builder contact-us index cities resume-pricing).each do |act|
+  %w(about-us resume-builder contact-us index cities resumes-plans-pricing).each do |act|
     get "/#{act}", to: "static_pages##{act.gsub('-', '_')}"
   end
 

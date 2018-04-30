@@ -2,7 +2,6 @@ class DigitalCvsController < ApplicationController
   before_action :set_digital_cv, except: [:index, :new, :create, :share_and_download]
   before_action :authenticate_user!, only: [:share_and_download]
 
-  # layout 'pdf', only: [:share_and_download]
   respond_to :docx
 
   # GET /digital_cvs
@@ -120,6 +119,8 @@ class DigitalCvsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_digital_cv
     @digital_cv = DigitalCv.find(params[:id])
+    cv = cookies[:digital_cv]
+    raise Pundit::NotAuthorizedError unless DigitalCvPolicy.new(current_user, @digital_cv, cv).send("#{action_name}?")
   end
 
 
