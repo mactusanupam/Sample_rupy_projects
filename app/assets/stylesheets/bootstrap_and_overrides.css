@@ -120,3 +120,11 @@
 .icon-red {
   color: #a94442;
 }
+
+.margin-left-40 {
+  margin-left: 40px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e2e2e2;
+}
