@@ -6,7 +6,7 @@ class DigitalCvPolicy < ApplicationPolicy
   end
 
   def show?
-    update?
+    owner_or_admin?
   end
 
   def create?
@@ -14,37 +14,46 @@ class DigitalCvPolicy < ApplicationPolicy
   end
 
   def update?
-    return record.id == cv.to_i unless user
-    record.user_id == user.id
+    owner_or_admin?
   end
 
   def edit?
-    !!update?
+    owner_or_admin?
   end
 
   def destroy?
-    update?
+    owner_or_admin?
   end
 
   def save_contact_detail?
-    update?
+    owner_or_admin?
   end
 
   alias :save_personal_detail? :save_contact_detail?
 
   def save_photo?
-    update?
+    owner_or_admin?
   end
 
   def update_name?
-    update?
+    owner_or_admin?
   end
 
   def change_cv_template?
-    update?
+    owner_or_admin?
   end
 
   def share_and_download?
-    update?
+    owner_or_admin?
+  end
+
+  private
+
+  def owner_or_admin?
+    unless user
+      record.id == cv.to_i
+    else
+      user.admin? || user.super_admin? || record.user_id == user.id
+    end
   end
 end

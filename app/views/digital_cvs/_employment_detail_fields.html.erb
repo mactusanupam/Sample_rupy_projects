@@ -14,7 +14,7 @@
       end_year: Date.today.year, discard_day: true, order: [:month, :year], label: false, wrapper_html: { class: 'col-sm-4 no-padding' }, input_html: { class:
         'no-padding' } %>
     <div class='col-sm-4 end-date' style='display: <%= "#{f.object.present_job? ? 'none' : 'block'}" %>'>
-      <%= f.hint "To", class: 'col-sm-1 padding-top-5 text-center margin-left_-40' %>
+      <%= f.hint "To", class: 'col-sm-1 padding-top-5 text-center margin-left_-40 to' %>
       <%= f.input :end_date, as: :date, start_year: Date.today.year - 50,
         end_year: Date.today.year, discard_day: true, order: [:month, :year], label: false, input_html: { class: "no-padding", disabled: f.object.present_job? } %>
     </div>

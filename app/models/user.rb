@@ -11,4 +11,12 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   accepts_nested_attributes_for :company, :allow_destroy => true
+
+  def admin?
+    self.user_type.title = 'Admin'
+  end
+
+  def super_admin?
+    self.user_type.title = 'Super Admin'
+  end
 end
