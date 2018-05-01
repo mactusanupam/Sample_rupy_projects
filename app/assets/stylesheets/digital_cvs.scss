@@ -265,6 +265,33 @@
   margin-top: 0 !important;
 }
 
+.popover {
+  border-radius: 2px !important;
+}
+
+.popover-title {
+  background-color: #24607D !important;
+  width: 500px !important;
+  border-radius: 2px !important;
+  padding: 4px 15px;
+  font-weight: 600;
+  line-height: 30px;
+  font-size: 1.8rem;
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.popover-content {
+  background-color: #27323d !important;
+  width: 500px;
+  li {
+    font-size: 1.5rem;
+  }
+  h4 {
+    font-size: 1.8rem;
+  }
+}
+
 @media only screen and (max-width: 767px) {
   .digital-cv-form ul .list-group-item {
     width: 100%;

@@ -1,5 +1,5 @@
 class DigitalCvsController < ApplicationController
-  before_action :set_digital_cv, except: [:index, :new, :create, :share_and_download]
+  before_action :set_digital_cv, except: [:index, :new, :create]
   before_action :authenticate_user!, only: [:share_and_download]
 
   respond_to :docx
@@ -89,14 +89,11 @@ class DigitalCvsController < ApplicationController
   end
 
   def share_and_download
-    begin
-      conditions = {id: params[:id]}
-      conditions.merge!({slug: params[:slug]}) if params[:slug].present?
-
-      @digital_cv = DigitalCv.find_by! conditions
-    rescue ActiveRecord::RecordNotFound => e
-      redirect_to root_url, alert: "Sorry, no matching URL found!!"
+    unless @digital_cv.user_id
+      @digital_cv.user_id = current_user.id
+      @digital_cv.save(validate: false)
     end
+
     respond_to do |format|
       format.html
       format.pdf do

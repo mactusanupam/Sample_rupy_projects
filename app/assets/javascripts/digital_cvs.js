@@ -3,6 +3,15 @@
 
 $(document).ready(function(){
 
+  $('#preview-cv').on('click', '#online-resume', function(){
+    $(this).popover({
+      html : true,
+      content: function() {
+        return $('#preview-cv #popover-content-wrapper').html();
+      }
+    });
+  });
+
   //CV name inline change
   $('.edit-cv-name').hide();
   $('#cv-name-change').click(function(){
