@@ -3,13 +3,12 @@
 
 $(document).ready(function(){
 
-  $('#preview-cv').on('click', '#online-resume', function(){
-    $(this).popover({
-      html : true,
-      content: function() {
-        return $('#preview-cv #popover-content-wrapper').html();
-      }
-    });
+  $('#online-resume').popover({
+    html : true,
+    placement: 'bottom',
+    content: function() {
+      return $('#preview-cv #popover-content-wrapper').html();
+    }
   });
 
   //CV name inline change
