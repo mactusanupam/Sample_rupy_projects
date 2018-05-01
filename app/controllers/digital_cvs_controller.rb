@@ -77,6 +77,11 @@ class DigitalCvsController < ApplicationController
     render :update, locals: { only_name: true, only_photo: false }
   end
 
+  def update_name
+    @digital_cv.update_column(:name, params[:digital_cv][:name])
+    render :update, locals: { only_name: true, only_photo: false }
+  end
+
   def save_photo
     photo = @digital_cv.photo
 

@@ -17,7 +17,7 @@
             <%# end %>
           </div>
         </div>
-        <%#= link_to "Share", 'javascript:void(0)', class: 'btn btn-primary' %>
+        <%#= link_to "Online Resume", "/resumes/#{@digital_cv.id}/edit/share_url", class: 'btn btn-primary', remote: true %>
       </div>
     </div>
   </div>
@@ -25,3 +25,4 @@
 
 <%= render "digital_cvs/templates/html/#{@digital_cv.template.name}" %>
 
+<div id="share-modal"></div>

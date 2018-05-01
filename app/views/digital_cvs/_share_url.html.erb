@@ -1,0 +1,25 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header talent-fore-btn color-white">
+      <div class="modal-title clearfix">
+        <div class="pull-left">
+          <h4>ONLINE RESUME</h4>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <%= simple_form_for(@digital_cv, html: { remote: true }, wrapper: :horizontal_form) do |f|  %>
+        <h3 class="text-center">ONLINE RESUME</h3>
+        <h4 class="text-center">Enter the custom url for your online resume</h4>
+        <%= f.error_notification %>
+        <%
+          url_base = "#{Rails.env.development? ? 'http' : 'https'}://#{request.host_with_port}/ecv/"
+        %>
+        <%= f.input :slug, label: url_base, input_html: { placeholder: 'e.g. Enter your name here'}, label_html: { class: 'col-sm-4' }  %>
+        <div class="text-center">
+          <%= f.submit "Save", class: "btn btn-primary talent-fore-btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
