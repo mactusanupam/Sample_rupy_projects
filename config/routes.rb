@@ -32,11 +32,12 @@ Rails.application.routes.draw do
 
   resources :messages, only: [:create, :destroy]
 
-  %w(about-us resume-builder contact-us index cities resumes-plans-pricing).each do |act|
+  %w(about-us resume-builder contact-us index cities).each do |act|
     get "/#{act}", to: "static_pages##{act.gsub('-', '_')}"
   end
 
   get '/states/:countrycode', to: 'static_pages#states'
+  get '/resumes-plans-pricing/:digital_cv_id', to: 'static_pages#resumes_plans_pricing'
 
   %w(skill language degree specialization job_title).each do |item|
     post "/save_new_#{item}", to: "skills_and_languages#save_new_#{item}", format: :json
