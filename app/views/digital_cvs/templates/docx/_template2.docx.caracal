@@ -3,7 +3,7 @@
 #-----------------------------------------------------
 
 docx.page_margins do
-left    200     # sets the left margin. units in twips.
+left    1     # sets the left margin. units in twips.
 right   1    # sets the right margin. units in twips.
 top     1    # sets the top margin. units in twips.
 bottom  1    # sets the bottom margin. units in twips.
@@ -17,9 +17,12 @@ docx.font name: 'Helvetica'
 #-----------------------------------------------------
 digital_cv = @digital_cv
 user_info = @digital_cv.user.attributes
-docx_image = @digital_cv.photo.image.url(:thumb)
-present_job_tit = @digital_cv.present_job ? @digital_cv.present_job.job_title.title : "No Title"
+name = @digital_cv.contact_detail.try(:name)
+
+present_job_title = @digital_cv.present_job ? @digital_cv.present_job.job_title.title : "No Title"
 personal_info = @digital_cv.personal_detail.attributes
+contact_info = @digital_cv.contact_detail.attributes
+
 cv_skill = @digital_cv.cv_skills
 languages = @digital_cv.cv_languages
 employement_detail = @digital_cv.employment_details
@@ -27,17 +30,26 @@ education_detail = @digital_cv.academic_details
 trainings = @digital_cv.trainings
 certifications = @digital_cv.certifications
 honr_aw = @digital_cv.honor_and_awards
-research_or_projectdet = @digital_cv.research_or_projectdetails
+research_or_projectdet = @digital_cv.research_or_project_details
 references = @digital_cv.references
 font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://talentfore.com"
 
+
 c1= Caracal::Core::Models::TableCellModel.new do
-img 'http:' + docx_image, width: 75, height: 75, align: :center
+h2  name ,color: '000000'
+p digital_cv.summary
+p
+hr do
+color   'E7E7E7'
+line    :single
+size    1
+spacing 2
+end
 end
 
-c2= Caracal::Core::Models::TableCellModel.new do
-h4  user_info['first_name']+" "+user_info['last_name']
-p  digital_cv.summary
+
+c2 = Caracal::Core::Models::TableCellModel.new do
+
 end
 
 c01=Caracal::Core::Models::TableCellModel.new do
@@ -63,7 +75,7 @@ border_top do
 color   'FFFFFF'
 line    :single
 size    1
-spacing 2
+spacing 10
 end
 border_bottom do
 color   'FFFFFF'
@@ -92,27 +104,27 @@ size    1
 spacing 1
 end
 h5 "Mobile Number:"
-p personal_info['mobile']
+p contact_info['mobile']
 p
 h5 'Email:'
-p user_info['email']
+p contact_info['email']
 p
 h5 'Date of birth:'
 p personal_info['date_of_birth']
 p
-if personal_info['linkedin_profile'] != nil && personal_info['linkedin_profile'] !=""
+if contact_info['linkedin_url'] != nil && contact_info['linkedin_url'] !=""
 h5 'Linkedin profile url:'
-p personal_info['linkedin_profile']
+p contact_info['linkedin_url']
 p
 end
-if personal_info['skype_username'] != nil && personal_info['skype_username'] !=""
+if contact_info['skype_username'] != nil && contact_info['skype_username'] !=""
 h5 'Skype username:'
-p personal_info['skype_username']
+p contact_info['skype_username']
 p
 end
-if personal_info['address'] != nil && personal_info['address'] !=""
+if contact_info['address'] != nil && contact_info['address'] !=""
 h5 'Address:'
-p personal_info['address']
+p contact_info['address']
 p
 end
 if cv_skill.size>0
@@ -162,7 +174,7 @@ img font_url + "/assets/font-awesome-icon/bullseye.png",width:14 , height: 14, a
 end
 
 c06=Caracal::Core::Models::TableCellModel.new do
-h4 "Career Objective" do
+h4 "CAREER OBJECTIVE" do
 color   '000000'
 end
 hr do
@@ -261,16 +273,6 @@ end
 
 c4 = Caracal::Core::Models::TableCellModel.new do
 
-h6
-p digital_cv.summary
-
-hr do
-color   'E7E7E7'
-line    :single
-size    1
-spacing 1
-end
-
 table [[c05,c06]] do
 cell_style cols[0], width: 600
 border_top do
@@ -302,7 +304,7 @@ end
 
 p digital_cv.objective
 p
-if digital_cv.experienced
+if digital_cv.is_experienced
 table [[c07,c08]] do
 cell_style cols[0], width: 600
 border_top do
@@ -646,7 +648,7 @@ spacing 1
 end
 
 honr_aw.each do |honor|
-table [[honor.award_date.strftime("%Y-%m"),honor.title + " at " + honor.company]] do
+table [[honor.award_date.strftime("%Y-%m"),honor.title + " at " + honor.company_name]] do
 cell_style cols[0], width: 1200
 border_top do
 color   'FFFFFF'
@@ -826,41 +828,9 @@ p
 end
 
 
-h5 "DECLARATION" do
-color '000000'
-align 'center'
 end
-p "I hereby declare that information furnished above is true to the best of my knowledge.", align: :center
-h5 "Place: Bangalore"
-h5 "Date: " + Time.now.strftime("%B %d, %Y").to_s
-h5 user_info['first_name']+" "+user_info['last_name'] , align: :right
-end
-docx.table [[c2,c1]] do
-cell_style cols[1], width: 2500
-border_top do
-color   'FFFFFF'
-line    :single
-size    1
-spacing 2
-end
-border_bottom do
-color   'FFFFFF'
-line    :single
-size    1
-spacing 2
-end
-border_left do
-color   'FFFFFF'
-line    :single
-size    1
-spacing 2
-end
-border_right do
-color   'FFFFFF'
-line    :single
-size    1
-spacing 2
-end
+docx.table [[c1,c2]] do
+
 end
 
 docx.table [[c3,c4]] do

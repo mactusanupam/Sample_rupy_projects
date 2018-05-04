@@ -46,6 +46,9 @@ class DigitalCvPolicy < ApplicationPolicy
   def share_and_download?
     owner_or_admin?
   end
+  def download_cv_docx?
+    owner_or_admin?
+  end
 
   private
 

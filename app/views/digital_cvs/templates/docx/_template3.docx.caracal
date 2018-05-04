@@ -1,0 +1,304 @@
+#-----------------------------------------------------
+# page settings
+#-----------------------------------------------------
+
+docx.page_margins do
+left    1     # sets the left margin. units in twips.
+right   1    # sets the right margin. units in twips.
+top     1    # sets the top margin. units in twips.
+bottom  1    # sets the bottom margin. units in twips.
+end
+
+
+docx.font name: 'Helvetica'
+
+#-----------------------------------------------------
+# Tables
+#-----------------------------------------------------
+digital_cv = @digital_cv
+name = @digital_cv.contact_detail.try(:name)
+present_job_title = @digital_cv.present_job ? @digital_cv.present_job.job_title.title : "No Title"
+
+personal_info = @digital_cv.personal_detail.attributes
+contact_info = @digital_cv.contact_detail.attributes
+cv_skill = @digital_cv.cv_skills
+languages = @digital_cv.cv_languages
+employment_details = @digital_cv.employment_details
+education_details = @digital_cv.academic_details
+trainings = @digital_cv.trainings
+certifications = @digital_cv.certifications
+honor_awards = @digital_cv.honor_and_awards
+research_or_project_details = @digital_cv.research_or_project_details
+references = @digital_cv.references
+font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://talentfore.com"
+
+docx.h1 name
+docx.h5 present_job_title
+docx.hr
+
+c1 = Caracal::Core::Models::TableCellModel.new do
+
+  if digital_cv.summary.present?
+    h4 "SUMMARY"
+    p digital_cv.summary
+    hr do
+      color   'E5E5E5'
+      line    :single
+      size    1
+      spacing 1
+    end
+  end
+
+  if digital_cv.objective.present?
+    h4 "OBJECTIVE"
+    p digital_cv.objective
+    hr do
+      color   'E5E5E5'
+      line    :single
+      size    1
+      spacing 1
+    end
+  end
+
+  if languages.size>0
+    h4 "LANGUAGES"
+    languages.each do |language|
+      a = []
+      a << 'Read' if language.read?
+      a << 'Write' if language.write?
+      a << 'Speak' if language.speak?
+      p language.language.title+ "("+a.join(', ')+")"
+    end
+    hr do
+      color   'E5E5E5'
+      line    :single
+      size    1
+      spacing 1
+    end
+  end
+
+  if cv_skill.size>0
+    h4 "SKILLS"
+    cv_skill.each do |skills|
+      p skills.skill.title
+      img font_url + "/assets/digital_cv/rating_images/"+skills.self_rating.to_s+"_rating.png",width:150 , height: 10, align: :left
+    end
+  end
+  
+  c01=Caracal::Core::Models::TableCellModel.new do
+    img font_url + "/assets/font-awesome-icon/map.png",width:10 , height: 10, align: :left 
+  end
+  c02=Caracal::Core::Models::TableCellModel.new do
+    p contact_info['address']
+  end
+  c03=Caracal::Core::Models::TableCellModel.new do
+    img font_url + "/assets/font-awesome-icon/telephone.png",width:10 , height: 10, align: :left 
+  end
+  c04=Caracal::Core::Models::TableCellModel.new do
+    p contact_info['mobile']
+  end
+  c05=Caracal::Core::Models::TableCellModel.new do
+    img font_url + "/assets/font-awesome-icon/e-mail.png",width:10 , height: 10, align: :left 
+  end
+  c06=Caracal::Core::Models::TableCellModel.new do
+    p contact_info['email']
+  end
+  c07=Caracal::Core::Models::TableCellModel.new do
+    img font_url + "/assets/font-awesome-icon/skype-logo.png",width:10 , height: 10, align: :left 
+  end
+  c08=Caracal::Core::Models::TableCellModel.new do
+    p contact_info['skype_username']
+  end
+  c09=Caracal::Core::Models::TableCellModel.new do
+    img font_url + "/assets/font-awesome-icon/linkedin-logo.png",width:10 , height: 10, align: :left 
+  end
+  c10=Caracal::Core::Models::TableCellModel.new do
+    p contact_info['linkedin_url']
+  end
+
+  if contact_info['mobile'].present?
+    h4 "CONTACT"
+  end
+  if contact_info['address'].present?
+  table [[c01,c02]] do
+    cell_style cols[0], width: 500
+    end
+  end
+  if contact_info['mobile'].present?
+  table [[c03,c04]] do
+    cell_style cols[0], width: 500
+    end
+  end
+  if contact_info['email'].present?
+  table [[c05,c06]] do
+    cell_style cols[0], width: 500
+    end
+  end
+  if contact_info['skype_username'].present?
+  table [[c07,c08]] do
+    cell_style cols[0], width: 500
+    end
+  end
+  if contact_info['linkedin_url'].present?
+  table [[c09,c10]] do
+    cell_style cols[0], width: 500
+    end
+  end
+end
+
+c2 = Caracal::Core::Models::TableCellModel.new do
+  if digital_cv.is_experienced
+    h4 "EXPERIENCE"
+  end
+  employment_details.each do |e|
+    h5 e.job_title.title
+    end_date = e.present_job ? 'present' : e.end_date.strftime("%B, %Y") 
+    p e.company.name 
+    p e.start_date.strftime("%B, %Y")+" - "+end_date, color: '777777',size:16,  align: :right
+    p ActionView::Base.full_sanitizer.sanitize(e.responsibilities)
+    if e.achievement.size>0
+      h5 "Key Achievements"
+      p ActionView::Base.full_sanitizer.sanitize(e.achievement)
+    end
+    hr do
+      color   'E5E5E5'
+      line    :single
+      size    1
+      spacing 1
+    end
+  end
+  if digital_cv.academic_details.present?
+    h4 "EDUCATION"
+    education_details.each do |e|
+      edu_end_date =  e.pursuing ? 'Present' : e.end_date.strftime("%B, %Y") 
+      p e.degree.title + " in "+ e.specialization.title, bold: true
+      p e.institute
+      p e.university
+      p e.start_date.strftime("%B, %Y")+" - "+edu_end_date, color: '777777'
+    end
+    hr do
+      color   'E5E5E5'
+      line    :single
+      size    1
+      spacing 1
+    end
+  end
+
+  if digital_cv.trainings.present?
+    h4 "TRAININGS"
+
+    trainings.each do |tr|
+      p tr.name+" from "+ tr.institute, bold: true
+      p tr.duration.to_s+" days", color: '777777', align: :right
+      p ActionView::Base.full_sanitizer.sanitize(tr.info)
+      hr do
+          color   'E5E5E5'
+          line    :single
+          size    1
+          spacing 1
+      end
+    end
+  end
+
+  if digital_cv.certifications.present?
+    h4 "CERTIFICATIONS"
+
+    certifications.each do |cert|
+      p cert.title, bold: true
+      p cert.certifier
+      p cert.date.strftime("%B, %Y")
+      hr do
+          color   'E5E5E5'
+          line    :single
+          size    1
+          spacing 1
+      end
+    end
+  end
+  if digital_cv.honor_and_awards.present?
+    h4 "HONORS AND AWARDS"
+
+    honor_awards.each do |ha|
+      p ha.title+" awarded by "+ha.awarded_by+" at "+ha.company_name
+      
+      p ha.award_date.strftime("%B, %Y"), color: '777777',size: 16
+      hr do
+          color   'E5E5E5'
+          line    :single
+          size    1
+          spacing 1
+      end
+    end
+  end
+
+  if digital_cv.research_or_project_details.present?
+    h4 "RESEARCH/PROJECTS"
+    research_or_project_details.each do |research|
+    p research.title, bold: true
+    p research.guide
+    p research.description
+    hr do
+      color   'E5E5E5'
+      line    :single
+      size    1
+      spacing 1
+    end
+    end
+  end
+
+  if digital_cv.personal_detail.present? 
+  h4 "PERSONAL INFORMATION"
+  end
+  if digital_cv.personal_detail.try(:nationality).present?
+    p "Nationality : "+digital_cv.personal_detail.nationality.to_s.capitalize
+  end
+  if digital_cv.personal_detail.try(:date_of_birth).present?
+    p "Date of birth : "+digital_cv.personal_detail.date_of_birth.to_s
+  end
+  if digital_cv.personal_detail.try(:gender).present?
+    p "Gender : "+DigitalCvsHelper::GENDER[digital_cv.personal_detail.gender]
+  end
+  if digital_cv.personal_detail.try(:date_of_birth).present?
+    p "Marial Status : "+DigitalCvsHelper::MARITAL_STATUS[digital_cv.personal_detail.marital_status]
+  end
+  if digital_cv.personal_detail.try(:disabled).present?
+    p "Disabled : "+digital_cv.personal_detail.disabled? ? 'Yes' : 'No'
+  end
+  if digital_cv.personal_detail.try(:hobbies).present? 
+    p "Hobbies : "+ActionView::Base.full_sanitizer.sanitize(digital_cv.personal_detail.hobbies)
+  end
+  hr do
+    color   'E5E5E5'
+    line    :single
+    size    1
+    spacing 1
+  end
+end
+      
+docx.table [[c1,c2]] do
+  cell_style cols[0], width: 3500
+  border_top do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+  border_bottom do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+  border_left do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+  border_right do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+end
