@@ -212,7 +212,7 @@
 								<% @digital_cv.research_or_project_details.each do |reseach| %>
                   <% if reseach.title.present? %>
                     <h5 class="text-uppercase">
-                      <strong><%= project.title %></strong>
+                      <strong><%= reseach.title %></strong>
                     </h5> <br />
                   <% end %>
                   <% if reseach.duration.present? %>
