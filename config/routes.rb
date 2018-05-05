@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get "/ecv/:slug", to: 'digital_cvs#online_resume', format: [:html, :pdf]
   get '/resumes/:id/edit/:slug', to: 'digital_cvs#edit'
   get '/resume-templates', to: 'digital_cvs#new'
 

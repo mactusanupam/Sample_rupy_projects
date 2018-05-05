@@ -1,6 +1,10 @@
 <% if params[:slug] == 'share_url' %>
   $('#share-modal').html("<%= escape_javascript(render 'digital_cvs/share_url') %>");
-  $("#share-modal").modal();
+  $("#share-modal").modal('show');
+
+  //update class for label and input
+  $('#share-modal label').removeClass('col-sm-2').addClass('col-sm-4');
+  $('#share-modal input').parent('div.col-sm-9').removeClass('col-sm-9').addClass('col-sm-7');
 <% elsif all_sections.include?(params[:slug]) %>
   var href = '<%= "/resumes/#{@digital_cv.id}/edit/#{params[:slug]}" %>';
   $('.resume-editor-left li.active').removeClass('active');

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180425063952) do
+ActiveRecord::Schema.define(version: 20180505182043) do
 
   create_table "academic_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "institute"
@@ -149,6 +149,8 @@ ActiveRecord::Schema.define(version: 20180425063952) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "view", default: 0
+    t.integer "download", default: 0
     t.index ["slug"], name: "index_digital_cvs_on_slug"
     t.index ["template_id"], name: "index_digital_cvs_on_template_id"
     t.index ["user_id"], name: "index_digital_cvs_on_user_id"
