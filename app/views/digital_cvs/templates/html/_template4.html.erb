@@ -1,57 +1,4 @@
-<style type="text/css">
-	.text {
-		text-align: justify;
-	}
-	.border-bottom{
-		border-bottom:1px solid #eee;
-	}
-	.border-right{
-		border-right:1px solid #eee;
-	}
-	.padding-left-40{
-		padding-left: 40px;
-	}
-	.padding-right-40{
-		padding-right: 40px;
-	}
-	.padding-right-20{
-		padding-right: 20px;
-	}
-	.padding-bottom-5{
-		padding-bottom: 5px;
-	}
-	.height-40{
-		height:40px;
-	}
-	.pull-left{
-		float:left;
-	}
-	.pull-right{
-		float:right;
-	}
-	.education{
-		padding-right:30px;
-	}
-	.width-5{
-		width:5%;
-	}
-	.templates h4{
-		position:relative;
-		text-transform: uppercase;
-		padding-bottom: 10px;
-	}
-	.templates h4::after {
-		content:'';
-		position:absolute;
-		width:40px;
-		height:1px;
-		background:#eee;
-		bottom:0;
-		left:0;
-		right:0;
-	}
-</style>
-<div class="container templates">
+<div class="container template4">
 	<div class="col-md-12 col-xs-12">
 		<div class="col-md-12 col-xs-12 border-bottom">
 			<div class="row">
@@ -185,11 +132,12 @@
 										<strong><%= e.job_title.title %></strong>
 										<small class="pull-right"><%= e.start_date.strftime("%B, %Y") %> - <%= e.present_job ? 'present' : e.end_date.strftime("%B, %Y") %></small></h5>
 										<p><%= e.company.name %></p>
+										<h5 class="padding-left-20"><i><strong>Responsibilities</strong></i></h5>
 										<div class="text">
 											<%= e.responsibilities.html_safe %>
 										</div>
 										<%if e.achievement.present?%>
-										<h5><i><strong>Key Achievements</strong></i></h5>
+										<h5 class="padding-left-20"><i><strong>Key Achievements</strong></i></h5>
 										<div class="text">
 											<%= e.achievement.html_safe %>
 										</div>
@@ -287,6 +235,27 @@
 										</div>
 									</div>
 									<%end%>
+									<% if @digital_cv.references.present? %>
+										<div class="col-md-12 col-xs-12">
+											<div class="row">
+												<h4>REFERENCES</h4>
+							          <ul>
+							            <% for reference in @digital_cv.references %>
+							              <li>
+							                <strong><%= reference.name %></strong>,
+							                <%= reference.job_title.try(:title) %> at
+							                <strong><%= reference.company_name || 'Unknown' %></strong>
+							                <p>
+							                  <strong>Contact: </strong>
+							                  <%= reference.mobile %>, <%= reference.email %>
+							                </p>
+							              </li>
+							              <hr />
+							            <% end %>
+							          </ul>
+							        </div>
+							      </div>
+					        <% end %>
 									<% if @digital_cv.personal_detail.present? %>
 									<div class="col-md-12 col-xs-12">
 										<div class="row">

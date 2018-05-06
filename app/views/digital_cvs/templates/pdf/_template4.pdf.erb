@@ -1,81 +1,4 @@
-<style>
-  .font-family{
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 12px;
-  }
-  .text {
-    text-align: justify;
-  }
-  p strong{
-    font-size: 11px;
-  }
-  h2{
-    font-size: 30px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-  h3{
-    font-size:14px;
-  }
-  h4 {
-    font-size: 14px;
-    position:relative;
-    text-transform: uppercase;
-    padding-bottom: 10px;
-    margin-top:20px;
-  }
-  h4::after {
-    content:'';
-    position:absolute;
-    width:40px;
-    height:1px;
-    background:#eee;
-    bottom:0;
-    left:0;
-    right:0;
-  }
-  h5 strong{
-    font-size: 12px;
-  }
-  .border-bottom{
-    border-bottom:1px solid #eee;
-  }
-  .border-right{
-    border-right:1px solid #eee;
-  }
-  .padding-left-40{
-    padding-left: 40px;
-  }
-  .padding-right-40{
-    padding-right: 40px;
-  }
-  .padding-bottom-5{
-    padding-bottom: 5px;
-  }
-  .height-30{
-    height:30px;
-  }
-  .progress{
-    height:15px;
-  }
-  .pull-left{
-    float:left;
-  }
-  .pull-right{
-    float:right;
-  }
-  .education{
-    padding-right:30px;
-  }
-  .skills p strong, .languages p strong{
-    font-size: 9px;
-  }
-  .media .media-body p{
-    padding:0 !important;
-    margin:0 !important;
-  }
-</style>
-<div class="container-fluid templates font-family"><br>
+<div class="container-fluid template4 font-family"><br>
   <div class="col-md-12 col-xs-12">
     <div class="col-md-12 col-xs-12 border-bottom">
       <div class="row">
@@ -308,6 +231,27 @@
                     </div>
                   </div>
                   <%end%>
+                  <% if @digital_cv.references.present? %>
+                    <div class="col-md-12 col-xs-12">
+                      <div class="row">
+                        <h4>REFERENCES</h4>
+                        <ul>
+                          <% for reference in @digital_cv.references %>
+                            <li>
+                              <strong><%= reference.name %></strong>,
+                              <%= reference.job_title.try(:title) %> at
+                              <strong><%= reference.company_name || 'Unknown' %></strong>
+                              <p>
+                                <strong>Contact: </strong>
+                                <%= reference.mobile %>, <%= reference.email %>
+                              </p>
+                            </li>
+                            <hr />
+                          <% end %>
+                        </ul>
+                      </div>
+                    </div>
+                  <% end %>
                   <% if @digital_cv.personal_detail.present? %>
                   <div class="col-md-12 col-xs-12">
                     <div class="row">

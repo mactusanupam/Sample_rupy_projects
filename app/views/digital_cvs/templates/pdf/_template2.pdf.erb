@@ -1,62 +1,13 @@
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<style type="text/css">
-
-	img{
-		width:80px;
-		height:80px;
-	}
-	.pp-image{
-		padding-left:41px;
-	}
-
-	hr{
-		margin-top: -2px;
-	}
-	td{
-
-	}
-  .profile_social_url{
-   max-width:154;
-   word-wrap:break-word;
- }
-
- p{
-  font-size:12px !important;
-  word-break: break-all;
-}
-div{
-  font-size:12px !important;
-}
-td{
-	font-size:12px !important;
-}
-.existingEntry{
- margin-bottom: -35px !important;
-}
-
-.employ_det_d{
- padding-top:0px !important;
-}
-
-h4{
-  font-weight:500;
-}
-
-
-</style>
-
-
-
 <div class="container-fluid">
-  <div class="template-2-data">
-    <br><br>
+  <div class="template2 normal-break">
     <div class="basic-info">
-      <div class="col-md-10 col-xs-10">
+      <div class="col-md-12 col-xs-12">
         <p class="text-capitalize">
           <h3><b><%= @digital_cv.contact_detail.try(:name) %></b></h3>
         </p>
         <% if @digital_cv.summary.present? %>
-          <p><%= @digital_cv.summary %></p>
+          <p class="tect-justify"><%= @digital_cv.summary.html_safe %></p>
         <% end %>
       </div>
     </div>
@@ -131,7 +82,6 @@ h4{
                   </div>
                 </div>
               </div>
-              <br>
             <% end %>
           </div>
         </div>
@@ -144,7 +94,7 @@ h4{
           <i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp; Career Objective
         </h4>
         <hr>
-        <section>
+        <section class="tect-justify">
           <%= @digital_cv.objective %>
         </section>
         <br>
@@ -318,10 +268,14 @@ h4{
             <% for reference in @digital_cv.references %>
               <li>
                 <p>
-                  <strong><%= reference.name %>, <%= reference.job_title.try(:title) %></strong>
+                  <strong><%= reference.name %></strong>,
+                  <%= reference.job_title.try(:title) %> at
+                  <strong><%= reference.company_name %></strong>
                 </p>
-                <p><%= reference.company_name %></p>
-                <p><%= reference.mobile %>, <%= reference.email %></p>
+                <p>
+                  <strong>Contact: </strong>
+                  <%= reference.mobile %>, <%= reference.email %>
+                </p>
               </li>
             <% end %>
           </ul>

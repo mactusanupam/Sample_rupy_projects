@@ -1,0 +1,156 @@
+.normal-break {
+  word-break: normal !important;
+}
+.template1, .template7 {
+  .template-table {
+    width: 100%;
+    display: -webkit-flex; /* Safari */
+    display: flex; /* Standard syntax */
+  }
+  .text {
+    text-align: justify;
+  }
+  .left-sidebar {
+    min-height: 500px;
+    background-color: #373d48;
+    color: white;
+    ul {
+      margin-top: 10px !important;
+    }
+  }
+  .header-text {
+    margin-top: 10px;
+    background-color: #232933;
+  }
+  h3 {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    color: #002e58;
+    font-weight: bold;
+  }
+  .header-text h4 {
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  li {
+    word-break: break-all;
+  }
+  .emp-details ul {
+    padding-left: 15px !important;
+  }
+}
+
+.template2, .template8 {
+  padding-top: 20px;
+  hr {
+    margin-top: -2px;
+  }
+  .container{
+    background: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .profile_social_url {
+    max-width:154;
+    word-wrap:break-word;
+  }
+ .existingEntry {
+    margin-bottom: -35px !important;
+  }
+  h4 {
+    font-weight:500;
+  }
+  .employ_det_d{
+    padding-top:0px !important;
+  }
+  h6 {
+    word-break: break-all;
+  }
+}
+
+.template3, .template4 {
+  h2{
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  h4::after {
+    content:'';
+    position:absolute;
+    width:40px;
+    height:1px;
+    background:#eee;
+    bottom:0;
+    left:0;
+    right:0;
+  }
+  .text {
+    text-align: justify;
+  }
+  .border-bottom{
+    border-bottom:1px solid #eee;
+  }
+  .border-right{
+    border-right:1px solid #eee;
+  }
+  .padding-left-40{
+    padding-left: 40px;
+  }
+  .padding-left-20{
+    padding-left: 20px;
+  }
+  .padding-right-40{
+    padding-right: 40px;
+  }
+  .padding-right-20{
+    padding-right: 20px;
+  }
+  .height-40{
+    height:40px;
+  }
+  .pull-left{
+    float:left;
+  }
+  .pull-right{
+    float:right;
+  }
+  .education{
+    padding-right:30px;
+  }
+  .width-5{
+    width:5%;
+  }
+  h4{
+    position:relative;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+  }
+}
+
+.template5, .template6 {
+  .box-menu h4 {
+    position:relative;
+    text-transform: uppercase;
+    padding:10px;
+    background: #eee;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .social-media p {
+    word-break: break-all;
+  }
+  .no-padding {
+       padding: 0 !important;
+  }
+  .pull-left{
+    float:left;
+  }
+  .pull-right{
+    float:right;
+  }
+  .cv-profile-img{
+    padding:0px; margin-top: 15vh;
+  }
+}

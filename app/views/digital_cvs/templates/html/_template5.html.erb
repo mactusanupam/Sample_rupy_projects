@@ -1,29 +1,4 @@
-<style>
- .box-menu h4 {
-    position:relative;
-    text-transform: uppercase;
-    padding:10px;
-    background: #eee;
-    font-size: 16px;
-    font-weight: 700;
-  }
-  .social-media p {
-    word-break: break-all;
-  }
-  .no-padding {
-       padding: 0 !important;
-  }
-  .pull-left{
-  	float:left;
-  }
-  .pull-right{
-  	float:right;
-  }
-  .cv-profile-img{
-  	padding:0px; margin-top: 15vh;
-  }
-</style>
-<div class="container">
+<div class="container template5">
     <div class="col-md-12 col-xs-12 box-menu">
       	<div class="row">
 		    <div class="col-md-4 col-xs-4">
@@ -42,13 +17,13 @@
 				      <h4>Contact</h4>
 					  <p>
 					  <% if @digital_cv.contact_detail.try(:mobile).present? %>
-						<%= @digital_cv.contact_detail.mobile %><br>
+						Mobile: <%= @digital_cv.contact_detail.mobile %><br>
 					  <%end%>
 					  <% if @digital_cv.contact_detail.try(:email).present? %>
-						<span><%= @digital_cv.contact_detail.email %></span>
+						<span>Email: <%= @digital_cv.contact_detail.email %></span>
 					  <%end%><br>
 					  <% if @digital_cv.contact_detail.try(:address_with_pincode).present? %>
-					  	<%= @digital_cv.contact_detail.address_with_pincode %>
+					  	Address: <%= @digital_cv.contact_detail.address_with_pincode %>
 					  <%end%>
 
 					  </p>

@@ -1,46 +1,5 @@
-<style type="text/css">
-	.template-table {
-    width: 100%;
-    display: -webkit-flex; /* Safari */
-    display: flex; /* Standard syntax */
-	}
-	.text {
-		text-align: justify;
-	}
-	.left-sidebar {
-		min-height: 500px;
-		background-color: #373d48;
-		color: white;
-	}
-	.header-text {
-		margin-top: 10px;
-		background-color: #232933;
-	}
-	h3 {
-		border-top: 1px solid #ccc;
-		border-bottom: 1px solid #ccc;
-		padding-bottom: 5px;
-		padding-top: 5px;
-		color: #002e58;
-		font-weight: bold;
-	}
-	.header-text h4 {
-		border: 0;
-		font-size: 20px;
-		font-weight: bold;
-	}
-	h2 {
-		margin: 0;
-	}
-	li {
-		word-break: break-all;
-	}
-	.emp-details ul {
-		padding-left: 15px !important;
-	}
-</style>
-<div class="container">
-	<div class="row">
+<div class="container template7">
+	<div class="row normal-break">
 		<div class="col-md-12 col-xs-12 template-table">
 			<div class="col-md-4 col-xs-4 left-sidebar">
 				<div class="row">
@@ -316,6 +275,26 @@
 						<hr />
 					<% end %>
 				<% end %>
+				<% if @digital_cv.references.present? %>
+          <div class="row padding-5">
+            <div class="col-md-12 col-xs-12">
+              <h3>References</h3>
+            </div>
+          </div>
+          <ul>
+            <% for reference in @digital_cv.references %>
+              <li>
+                <strong><%= reference.name %></strong>,
+                <%= reference.job_title.try(:title) %> at
+                <strong><%= reference.company_name || 'Unknown' %></strong>
+                <p>
+                  <strong>Contact: </strong>
+                  <%= reference.mobile %>, <%= reference.email %>
+                </p>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
 				<% if @digital_cv.personal_detail.present? %>
 					<div class="row padding-5">
 						<div class="col-md-12 col-xs-12">

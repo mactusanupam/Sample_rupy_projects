@@ -1,65 +1,16 @@
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<style type="text/css">
-
-  img{
-    width:80px;
-    height:80px;
-  }
-  .pp-image{
-    padding-left:41px;
-  }
-
-  hr{
-    margin-top: -2px;
-  }
-  td{
-
-  }
-  .profile_social_url{
-   max-width:154;
-   word-wrap:break-word;
- }
-
- p{
-  font-size:12px !important;
-  word-break: break-all;
-}
-div{
-  font-size:12px !important;
-}
-td{
-  font-size:12px !important;
-}
-.existingEntry{
- margin-bottom: -35px !important;
-}
-
-.employ_det_d{
- padding-top:0px !important;
-}
-
-h4{
-  font-weight:500;
-}
-
-
-</style>
-
-
-
 <div class="container-fluid">
-  <div class="template-2-data">
+  <div class="template8">
     <br><br>
     <div class="basic-info">
-      <div class="col-md-10 col-xs-10">
+      <div class="col-md-10 col-xs-9">
         <p class="text-capitalize">
           <h3><b><%= @digital_cv.contact_detail.try(:name) %></b></h3>
         </p>
         <% if @digital_cv.summary.present? %>
-          <p><%= @digital_cv.summary %></p>
+          <p class="text-justify"><%= @digital_cv.summary %></p>
         <% end %>
       </div>
-      <div class="col-md-2 pp-image ">
+      <div class="col-md-2 col-xs-3" style="padding-top: 10px;">
         <% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
           <%= wicked_pdf_image_tag @digital_cv.photo.image.url(:thumb) %>
         <% else %>
@@ -151,7 +102,7 @@ h4{
           <i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp; Career Objective
         </h4>
         <hr>
-        <section>
+        <section class="text-justify">
           <%= @digital_cv.objective %>
         </section>
         <br>
