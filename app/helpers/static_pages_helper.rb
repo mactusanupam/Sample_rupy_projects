@@ -5,7 +5,7 @@ module StaticPagesHelper
       'resume templates'   => 'Resume Templates',
       'photo cv templates' => 'Photo CV Template',
       'multiple download'  => 'Multiple download',
-      'linkedin import'    => 'Import from LinkedIn Profile',
+      #'linkedin import'    => 'Import from LinkedIn Profile',
       'email support'      => 'Priority email Support',
       'cover letter'       => 'Create a Cover letter for each Resume',
       'multiple resumes'   => 'Create and Manage Multiple Resumes',
