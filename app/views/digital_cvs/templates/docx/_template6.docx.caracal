@@ -45,8 +45,7 @@ c1 = Caracal::Core::Models::TableCellModel.new do
   p
   p
   p
-  p
-  h1 name, bold:true,size: 28
+  h1 name, size: 50
   h5 present_job_title
 
   if contact_info['mobile'].present?
