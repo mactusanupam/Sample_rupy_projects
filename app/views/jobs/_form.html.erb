@@ -1,0 +1,166 @@
+
+<div class= "col-md-11 col-centered">
+  <div class="row">
+    <%= simple_form_for @job,html: { id: "job_form_id", style: 'display: inline;' }  do |f| %>
+      <div class= "col-md-6 col-sm-12">
+        <div class="row">
+          <div class="form-group">
+            <%= f.hidden_field :user_id ,:value => current_user.id %>
+            <%= f.input :title,:label => "Job Title",placeholder:'Job Title', wrapper: :horizontal_form_job %>   
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :qualification_id,:collection =>Qualification.all,:label_method => :title,:value_method => :id, :prompt => 'Select an option..............', wrapper: :horizontal_form_job ,input_html:{ class: 'qualification'} %>
+             <%#= f.association :qualification, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { class: 'degree' }, prompt: 'Please select or type your degree' %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :degree_id,:collection =>Degree.all,:label_method => :title,:value_method => :id, :prompt => 'Select OR write options..............', wrapper: :horizontal_form_job ,input_html:{ class: 'job_degree', multiple: true} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :specialization_id,:collection =>Specialization.all,:label_method => :title,:value_method => :id, :prompt => 'Select OR write specialization..............', wrapper: :horizontal_form_job ,input_html:{ class: 'job_specialization', multiple: true} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :skill_ids,:collection =>Skill.all,:label_method => :title,:value_method => :id,:label => "Job Skills",:prompt => 'Select an option..............', input_html:{ class: 'job_skills', multiple: true}, wrapper: :horizontal_form_job %>
+          </div>
+        </div> 
+        <div class="row">
+          <div class="form-group">
+            <%= f.label :experience ,class: "control-label col-sm-4"%>
+            <% exp_array = (0..20).to_a.map(&:to_s)
+            min_exp, max_exp = @job.experience.present? ? @job.experience.split('-').map(&:to_i) : nil %>
+            <div class= "col-md-2 jobexp">
+            <%= f.input :min_exp, :collection => exp_array,:label => "" ,:prompt=> 'Min Exp', :selected => min_exp%>
+            </div>
+            <div class= "col-md-1" style="padding-top:35px;"> -</div>
+            <div class= "col-md-2">
+            <%= f.input :max_exp, :collection => exp_array, :label => "", :prompt=> 'Max Exp', :selected => max_exp%>
+            </div>
+            <div class= "col-md-2" style="padding-top:35px;">
+             <span>Years</span>
+            </div>
+            <%#= f.collection_select(:min_exp, exp_array, :to_s, :to_s, prompt: 'Min Exp', :selected => min_exp)%>
+            <%#= f.collection_select(:max_exp, exp_array, :to_s, :to_s, prompt: 'Max Exp', :selected => max_exp)%> 
+          </div>
+        </div>   
+      </div>
+      <div class= "col-md-6 col-sm-12" style="padding-left: 50px;">
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :industry_id,:collection =>Industry.all,:label_method => :name,:value_method => :id,:prompt=>'Select an Industry', input_html:{ class: 'industry'}, wrapper: :horizontal_form_job %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :company_id,:collection =>Company.all,:label_method => :name,:value_method => :id,:prompt=>'Select a Company', input_html:{ class: 'company'}, wrapper: :horizontal_form_job %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :location, placeholder:'Job-Location', wrapper: :horizontal_form_job  %> 
+          </div>
+          <div class="col-md-offset-4">OR
+          <%= f.check_box :location%>
+            <%= f.label :location, "Remote address", class: 'radio-label' %>
+          </div>
+        </div>  
+        <div class="row">
+          
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :no_of_openings,:label => "Openings", placeholder:'Enter the Enteger value eg,5', wrapper: :horizontal_form_job  %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <%= f.input :offered_ctc, placeholder:'Enter the integer value,eg-100000', wrapper: :horizontal_form_job  %>
+          </div>
+        </div> 
+        <div class="row">
+          <div class="form-group pull-right">
+            <label class="control-label col-sm-2" style="padding-top: 0;margin-right: 5PX;">Job Type</label>
+            <%= f.radio_button :job_type,"Full Time"%>
+            <%= f.label :job_type, "Full Time", class: 'radio-label' %>
+            <%= f.radio_button :job_type,"Part Time"  %>
+            <%= f.label :job_type, "Part Time", class: 'radio-label' %>
+
+            <%= f.radio_button :job_type,"Internship" %>
+            <%= f.label :job_type, "Internship", class: 'radio-label' %>
+
+            <%= f.radio_button :job_type,"Contract" %>
+            <%= f.label :job_type, "Contract", class: 'radio-label' %>
+          </div>
+        </div>      
+      </div>
+      <div class="col-md-12 col-sm-12">
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label col-sm-2">Seniority Level</label>
+            <div class="col-sm-10 ">
+            <%= f.radio_button :seniority_level,"Internship"%>
+            <%= f.label :seniority_level, "Internship", class: 'radio-label' %>
+
+            <%= f.radio_button :seniority_level,"Entry Level"  %>
+            <%= f.label :seniority_level, "Entry Level", class: 'radio-label' %>
+
+            <%= f.radio_button :seniority_level,"Associate" %>
+            <%= f.label :seniority_level, "Associate", class: 'radio-label' %>
+
+            <%= f.radio_button :seniority_level,"Middle Management" %>
+            <%= f.label :seniority_level, "Middle Management", class: 'radio-label' %>
+
+            <%= f.radio_button :seniority_level,"Mid-Senior level" %>
+            <%= f.label :seniority_level, "Mid-Senior level", class: 'radio-label' %>
+
+            <%= f.radio_button :seniority_level,"Senior Management" %>
+            <%= f.label :seniority_level, "Senior Management", class: 'radio-label' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12">
+        <div class="row">
+          <%#= f.input :description,:label => "Job Title", wrapper: :horizontal_form_job %> 
+          <div class="form-group" >
+            <div class="col-sm-2">
+            <%= f.label :description ,class: "control-label jobdesc" %>
+            </div>
+            <div class="col-sm-10">
+            <%= f.input :description,:label => "",placeholder:'Min 100 character description required...', input_html:{class: "form-control wysihtml5"} %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-offset-1 col-md-4">       
+        <div class=" jobformdesc">  
+          <div class="row"> 
+            <%= f.check_box :job_status, {class: "pull-left"}, "Draft", "Open"%>
+            <p class="padding-left-25"><strong>Save a Draft</strong></p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="control-label  actions pull-right ">
+        <%= f.submit "Submit", class: 'btn btn-primary',style:"background:#4B7892;" %>
+      </div>  
+    <%end%>
+  </div>
+</div>  
+
+
+<script type="text/javascript">
+  $('.qualification,job_skills,industry,company .min_exp, .max_exp, .job_degree',' .job_specialization').select2();
+  $('.job_skills,industry, .job_degree, .job_specialization ').select2({ tags: true });
+
+  $(".job_skills, .industry, .job_degree, .job_specialization").off('select2:select').on('select2:select', function(e) {
+    saveNewItem($(this), 'degree','skill');
+  });
+</script>
+
