@@ -20,24 +20,53 @@
 							<p class="text"><%= @digital_cv.objective.html_safe %></p>
 							<hr>
 						<% end %>
-						<% if @digital_cv.cv_languages.size > 0 %>
-							<h4>Languages</h4>
-							<% @digital_cv.cv_languages.each do |cv_language| %>
-								<%
-									a = []
-									a << 'Read' if cv_language.read?
-									a << 'Write' if cv_language.write?
-									a << 'Speak' if cv_language.speak?
-								%>
-								<p>
-									<strong><%= cv_language.language.title %></strong>
-									(<%= a.join(', ') %>)
-								</p>
-							<% end %>
-							<hr>
+						<% if @digital_cv.contact_detail.present? %>
+							<h4>Contact</h4>
+							<div class="media">
+								<% if @digital_cv.contact_detail.try(:address_with_pincode).present? %>
+									<div class="media-left pull-left width-5">
+										<i class="fa fa-map-marker" aria-hidden="true"></i>
+									</div>
+									<div class="media-body">
+										<p><%= @digital_cv.contact_detail.address_with_pincode %></p>
+									</div>
+								<% end %>
+								<% if @digital_cv.contact_detail.try(:mobile).present? %>
+									<div class="media-left pull-left width-5">
+										<i class="fa fa-phone" aria-hidden="true"></i>
+									</div>
+									<div class="media-body">
+										<p><%= @digital_cv.contact_detail.mobile %></p>
+									</div>
+								<% end %>
+								<% if @digital_cv.contact_detail.try(:email).present? %>
+									<div class="media-left pull-left width-5">
+										<i class="fa fa-envelope" aria-hidden="true"></i>
+									</div>
+									<div class="media-body">
+										<p><%= @digital_cv.contact_detail.email %></p>
+									</div>
+								<% end %>
+								<% if @digital_cv.contact_detail.try(:skype_username).present? %>
+									<div class="media-left pull-left width-5">
+										<i class="fa fa-skype" aria-hidden="true"></i>
+									</div>
+									<div class="media-body">
+										<p><%= @digital_cv.contact_detail.skype_username %></p>
+									</div>
+								<% end %>
+								<% if @digital_cv.contact_detail.try(:linkedin_url).present? %>
+									<div class="media-left pull-left width-5">
+										<i class="fa fa-linkedin-square fa-1x" aria-hidden="true"></i>
+									</div>
+									<div class="media-body">
+										<p><%= @digital_cv.contact_detail.linkedin_url %></p>
+									</div>
+								<% end %>
+							</div>
 						<% end %>
 						<% if @digital_cv.cv_skills.size>0 %>
-							<h4>Skills</h4>
+							<h4>Professional Skills</h4>
 							<div class="row">
 								<% @digital_cv.cv_skills.each do |cv_skill| %>
 									<% skill_per = cv_skill.self_rating*20  %>
@@ -55,51 +84,22 @@
 							</div>
 							<hr>
 						<% end %>
-						<% if @digital_cv.contact_detail.present? %>
-							<h4>Contact</h4>
+						<% if @digital_cv.cv_languages.size > 0 %>
+							<h4>Languages</h4>
+							<% @digital_cv.cv_languages.each do |cv_language| %>
+								<%
+									a = []
+									a << 'Read' if cv_language.read?
+									a << 'Write' if cv_language.write?
+									a << 'Speak' if cv_language.speak?
+								%>
+								<p>
+									<strong><%= cv_language.language.title %></strong>
+									(<%= a.join(', ') %>)
+								</p>
+							<% end %>
+							<hr>
 						<% end %>
-						<div class="media">
-							<% if @digital_cv.contact_detail.try(:address_with_pincode).present? %>
-								<div class="media-left pull-left width-5">
-									<i class="fa fa-map-marker" aria-hidden="true"></i>
-								</div>
-								<div class="media-body">
-									<p><%= @digital_cv.contact_detail.address_with_pincode %></p>
-								</div>
-							<% end %>
-							<% if @digital_cv.contact_detail.try(:mobile).present? %>
-								<div class="media-left pull-left width-5">
-									<i class="fa fa-phone" aria-hidden="true"></i>
-								</div>
-								<div class="media-body">
-									<p><%= @digital_cv.contact_detail.mobile %></p>
-								</div>
-							<% end %>
-							<% if @digital_cv.contact_detail.try(:email).present? %>
-								<div class="media-left pull-left width-5">
-									<i class="fa fa-envelope" aria-hidden="true"></i>
-								</div>
-								<div class="media-body">
-									<p><%= @digital_cv.contact_detail.email %></p>
-								</div>
-							<% end %>
-							<% if @digital_cv.contact_detail.try(:skype_username).present? %>
-								<div class="media-left pull-left width-5">
-									<i class="fa fa-skype" aria-hidden="true"></i>
-								</div>
-								<div class="media-body">
-									<p><%= @digital_cv.contact_detail.skype_username %></p>
-								</div>
-							<% end %>
-							<% if @digital_cv.contact_detail.try(:linkedin_url).present? %>
-								<div class="media-left pull-left width-5">
-									<i class="fa fa-linkedin-square fa-1x" aria-hidden="true"></i>
-								</div>
-								<div class="media-body">
-									<p><%= @digital_cv.contact_detail.linkedin_url %></p>
-								</div>
-							<% end %>
-						</div>
 					</div>
 				</div><!-- col-md-4 ends-->
 				<div class="col-md-8 col-xs-8 padding-left-40">

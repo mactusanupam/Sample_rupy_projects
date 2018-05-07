@@ -1,6 +1,13 @@
-.normal-break {
+* {
   word-break: normal !important;
 }
+.company-name {
+  text-transform: uppercase;
+}
+.padding-bottom-5 {
+  padding-bottom: 5px;
+}
+
 .template1, .template7 {
   .template-table {
     width: 100%;
