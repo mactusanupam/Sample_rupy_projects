@@ -102,14 +102,13 @@
                       <p>
                         <strong><%= a.degree.title %>,
                         <%= a.specialization.title %></strong><br>
-                        <%= a.institute %><br>
-                        <%= a.university %> |
+                        <%= a.institute %> | <%= a.university %> <br />
                         <%= a.start_date.strftime("%B, %Y") %> -
                         <% if a.pursuing %>
-                        Present
+                          Present
                         <% else %>
-                        <%= a.end_date.strftime("%B, %Y") %>
-                        <% end %><br>
+                          <%= a.end_date.strftime("%B, %Y") %>
+                        <% end %> |
                         <% if a.is_cgpa? %>
                           CGPA - <%= a.percentage %>
                         <% else %>

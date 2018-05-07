@@ -144,17 +144,22 @@
 											<ul class="padding-left-20">
 												<% @digital_cv.academic_details.each do |a| %>
 													<li>
-														<h5>
-															<strong><%= a.degree.title %></strong>&nbsp;in&nbsp;
-															<strong><%= a.specialization.title %></strong>
-															<font class="pull-right">
-																<%= a.start_date.strftime("%B, %Y") %> -
-																<%= a.pursuing ? 'present' : a.end_date.strftime("%B, %Y") %>
-															</font>
-														</h5>
 														<p>
-															<%= a.institute %>, <%= a.university %>
-															<br>
+															<strong><%= a.degree.title %></strong>&nbsp;in&nbsp;
+															<strong><%= a.specialization.title %></strong><br>
+															<%= a.institute %> | <%= a.university %><br>
+															<%= a.start_date.strftime("%B, %Y") %> -
+															<% if a.pursuing %>
+																Present
+															<% else %>
+																<%= a.end_date.strftime("%B, %Y") %>
+															<% end %>
+															 |
+															<% if a.is_cgpa? %>
+																CGPA - <%= a.percentage %>
+															<% else %>
+																Percentage - <%= a.percentage %>%
+															<% end %>
 														</p>
 													</li>
 												<% end %>

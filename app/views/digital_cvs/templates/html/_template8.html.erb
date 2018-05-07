@@ -159,7 +159,15 @@
                   </strong>
                 </td>
                 <td valign="top" width="85%" >
-                  <p><strong><%= academic_detail.degree.title %></strong>&nbsp;in&nbsp;<%= academic_detail.specialization.title %> with <%= academic_detail.percentage %>% from <strong><%= academic_detail.university %></strong></p>
+                  <p>
+                    <strong><%= academic_detail.degree.title %></strong>&nbsp;in&nbsp;<%= academic_detail.specialization.title %> with
+                    <% if academic_detail.is_cgpa? %>
+                      CGPA <%= academic_detail.percentage %>
+                    <% else %>
+                      <%= academic_detail.percentage %>%
+                    <% end %>
+                    from <strong><%= academic_detail.university %></strong>
+                  </p>
                 </td>
               </tr>
             <% end %>

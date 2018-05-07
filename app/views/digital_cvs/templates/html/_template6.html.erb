@@ -85,22 +85,22 @@
 						<h4>Education</h4>
 						<div class="col-md-12 col-xs-12">
 						<% @digital_cv.academic_details.each do |a| %>
-							<p><strong><%= a.degree.title %>,
-							<%= a.specialization.title %></strong><br>
-							<%= a.institute %><br>
-							<%= a.university %> |
-							<%= a.start_date.strftime("%B, %Y") %> -
-							<% if a.pursuing %>
-								Present
-							<% else %>
-								<%= a.end_date.strftime("%B, %Y") %>
-							<% end %><br>
-							<% if a.is_cgpa? %>
-								CGPA - <%= a.percentage %>
-							<% else %>
-								Percentage - <%= a.percentage %>%
-							<% end %>
-							</p>
+							<p>
+                <strong><%= a.degree.title %>,
+                <%= a.specialization.title %></strong><br>
+                <%= a.institute %> | <%= a.university %> <br />
+                <%= a.start_date.strftime("%B, %Y") %> -
+                <% if a.pursuing %>
+                  Present
+                <% else %>
+                  <%= a.end_date.strftime("%B, %Y") %>
+                <% end %> |
+                <% if a.is_cgpa? %>
+                  CGPA - <%= a.percentage %>
+                <% else %>
+                  Percentage - <%= a.percentage %>%
+                <% end %>
+              </p>
 						<% end %>
 						</div>
 						<div class="clearfix"></div>
