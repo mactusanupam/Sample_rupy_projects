@@ -1,4 +1,3 @@
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container-fluid">
   <div class="template2 normal-break">
     <div class="basic-info">
@@ -16,7 +15,7 @@
       <% if @digital_cv.contact_detail.try(:email).present? %>
         <b>
           <h4 class="title">
-            <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;PERSONAL INFO
+            <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;CONTACT INFO
           </h4>
         </b>
         <hr>
@@ -102,21 +101,22 @@
       <% if @digital_cv.employment_details.present? %>
         <div>
           <h4><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp; EXPERIENCE</h4>
+          <hr />
           <table class="table">
             <% for employment_detail in @digital_cv.employment_details %>
               <tr>
                 <td valign="top" width="20%">
-                  <strong><%= employment_detail.start_date.strftime("%B, %Y") %>-
+                  <strong><%= employment_detail.start_date.strftime("%b, %Y") %>-
                     <% if employment_detail.present_job %>
                       Present
                     <% else %>
-                      <%= employment_detail.end_date.strftime("%B, %Y") %>
+                      <%= employment_detail.end_date.strftime("%b, %Y") %>
                     <% end %>
                   </strong>
                 </td>
                 <td width="80%" valign="top" class="employ_det_d">
                   <h5><strong><%= employment_detail.job_title.title %></strong></h5>
-                  <h6><%= employment_detail.company.name %></h6>
+                  <h6 class="company-name"><%= employment_detail.company.name %></h6>
                   <% if employment_detail.responsibilities.present? %>
                     <h5><strong>Responsibilities</strong></h5>
                     <%= employment_detail.responsibilities.html_safe %>
@@ -136,15 +136,16 @@
           <h4>
            <i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp; EDUCATION DETAILS
          </h4>
+         <hr />
          <table class="table">
             <% for academic_detail in @digital_cv.academic_details %>
               <tr>
                 <td valign="top" width="20%">
-                  <strong><%= academic_detail.start_date.strftime("%B, %Y") %>-
+                  <strong><%= academic_detail.start_date.strftime("%b, %Y") %>-
                     <% if academic_detail.pursuing %>
                       Present
                     <% else %>
-                      <%= academic_detail.end_date.strftime("%B, %Y") %>
+                      <%= academic_detail.end_date.strftime("%b, %Y") %>
                     <% end %>
                   </strong>
                 </td>
@@ -196,11 +197,12 @@
       <% if @digital_cv.certifications.present? %>
         <div>
           <h4><i class="fa fa-certificate"></i>&nbsp; CERTIFICATION</h4>
+          <hr />
           <table class="table">
             <% for certification in @digital_cv.certifications %>
               <tr>
                 <td valign="top" width="20%">
-                  <strong><%= certification.date.strftime("%B, %Y") %></strong>
+                  <strong><%= certification.date.strftime("%b, %Y") %></strong>
                 </td>
                 <td width="80%" valign="top">
                   <p><strong><%= certification.title %></strong> by <%= certification.certifier %></p>
@@ -214,10 +216,11 @@
       <% if @digital_cv.honor_and_awards.present? %>
         <div>
           <h4><i class="fa fa-trophy" aria-hidden="true"></i>&nbsp; HONORS AND AWARDS</h4>
+          <hr />
           <table class="table">
             <% for award in @digital_cv.honor_and_awards %>
               <tr>
-                <td valign="top" width="15%"><strong><%= award.award_date.strftime("%B, %Y") %></strong>
+                <td valign="top" width="15%"><strong><%= award.award_date.strftime("%b, %Y") %></strong>
                 </td>
                 <td width="85%" valign="top" style="padding-top: 0px;">
                   <h5><strong><%= award.title %></strong>

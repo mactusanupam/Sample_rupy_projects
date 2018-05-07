@@ -8,6 +8,10 @@
   padding-bottom: 5px;
 }
 
+table, .employ_det_d {
+  font-size: 14px;
+}
+
 .template1, .template7 {
   .template-table {
     width: 100%;
@@ -52,8 +56,12 @@
 
 .template2, .template8 {
   padding-top: 20px;
+
   hr {
     margin-top: -2px;
+  }
+  .table td {
+    border-top: 0;
   }
   .container{
     background: #fff;
@@ -71,9 +79,6 @@
   }
   .employ_det_d{
     padding-top:0px !important;
-  }
-  h6 {
-    word-break: break-all;
   }
 }
 
