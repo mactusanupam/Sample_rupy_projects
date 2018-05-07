@@ -4,15 +4,13 @@
 
 
 $(document).ready(function(){
-   $('.qualifications, .post-job-skills, .job-search').select2({ tags: true });
+  $('.qualifications, .post-job-skills, .job-search').select2({ tags: true });
 
   $(".essential_skills, .post-job-skills, .job-search").on('change',function(){
     var qualifications = $(this).find('option:last-child').val();
     saveNewSkill($(this),selSkillTitle);
   });
 
-});
-$(document).ready(function(){
   $('#job_form_id .wysihtml5').wysihtml5({ toolbar: {
     'font-styles': true,
     'color': true,
@@ -28,4 +26,3 @@ $(document).ready(function(){
     }
   });
 });
-  
