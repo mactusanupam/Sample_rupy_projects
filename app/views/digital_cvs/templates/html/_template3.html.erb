@@ -115,12 +115,12 @@
 												<li>
 													<h5>
 														<strong><%= e.job_title.title %></strong>
-														<small class="pull-right">
+														<font class="pull-right">
 															<%= e.start_date.strftime("%B, %Y") %> -
 															<%= e.present_job ? 'present' : e.end_date.strftime("%B, %Y") %>
-														</small>
+														</font>
 													</h5>
-													<p><%= e.company.name %></p>
+													<p class="company-name"><%= e.company.name %></p>
 													<h5 class="padding-left-20"><i><strong>Responsibilities</strong></i></h5>
 													<div class="text">
 														<%= e.responsibilities.html_safe %>
@@ -147,10 +147,10 @@
 														<h5>
 															<strong><%= a.degree.title %></strong>&nbsp;in&nbsp;
 															<strong><%= a.specialization.title %></strong>
-															<small class="pull-right">
+															<font class="pull-right">
 																<%= a.start_date.strftime("%B, %Y") %> -
 																<%= a.pursuing ? 'present' : a.end_date.strftime("%B, %Y") %>
-															</small>
+															</font>
 														</h5>
 														<p>
 															<%= a.institute %>, <%= a.university %>
@@ -173,7 +173,7 @@
 													<h5>
 														<strong class="text-capitalize"> <%= tr.name %></strong> from
 														<strong class="text-capitalize"><%= tr.institute %></strong>
-														<small class="pull-right"><%= tr.duration %>  days </small>
+														<font class="pull-right"><%= tr.duration %>  days </font>
 													</h5>
 													<p class="text"><%= tr.info.html_safe %></p>
 												</li>
@@ -191,7 +191,7 @@
 												<li>
 													<h5 style="margin-bottom: 5px;">
 														<strong> <%= cert.title %></strong>
-														<small class="pull-right"><%= cert.date.strftime("%B, %Y") %></small>
+														<font class="pull-right"><%= cert.date.strftime("%B, %Y") %></font>
 													</h5>
 													<p><%= cert.certifier %></p>
 												</li>
@@ -210,7 +210,7 @@
 													<li>
 														<h5 style="margin-bottom: 5px;">
 															<strong> <%= ha.title %></strong>
-															<small class="pull-right"><%= ha.award_date.strftime("%B, %Y") %></small>
+															<font class="pull-right"><%= ha.award_date.strftime("%B, %Y") %></font>
 														</h5>
 														<p>
 															<% if ha.awarded_by.present? %>

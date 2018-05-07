@@ -129,8 +129,8 @@
 									<% @digital_cv.employment_details.each do |e| %>
 									<h5>
 										<strong><%= e.job_title.title %></strong>
-										<small class="pull-right"><%= e.start_date.strftime("%B, %Y") %> - <%= e.present_job ? 'present' : e.end_date.strftime("%B, %Y") %></small></h5>
-										<p><%= e.company.name %></p>
+										<font class="pull-right"><%= e.start_date.strftime("%B, %Y") %> - <%= e.present_job ? 'present' : e.end_date.strftime("%B, %Y") %></font></h5>
+										<p class="company-name"><%= e.company.name %></p>
 										<h5 class="padding-left-20"><i><strong>Responsibilities</strong></i></h5>
 										<div class="text">
 											<%= e.responsibilities.html_safe %>
@@ -150,17 +150,23 @@
 										<div class="row">
 											<h4>Education</h4>
 											<% @digital_cv.academic_details.each do |a| %>
-											<div class="col-md-6 col-xs-6 education">
+											<div class="col-md-12 col-xs-12 education">
 												<div class="row">
 													<p>
 														<strong><%= a.degree.title %></strong>&nbsp;in&nbsp;
-														<strong><%= a.specialization.title %></strong><br><%= a.institute %><br>
-														<%= a.university %><br>
+														<strong><%= a.specialization.title %></strong><br>
+														<%= a.institute %> | <%= a.university %><br>
 														<%= a.start_date.strftime("%B, %Y") %> -
 														<% if a.pursuing %>
-														Present
+															Present
 														<% else %>
-														<%= a.end_date.strftime("%B, %Y") %>
+															<%= a.end_date.strftime("%B, %Y") %>
+														<% end %>
+														 |
+														<% if a.is_cgpa? %>
+															CGPA - <%= a.percentage %>
+														<% else %>
+															Percentage - <%= a.percentage %>%
 														<% end %>
 													</p>
 												</div>
@@ -177,7 +183,7 @@
 										<% @digital_cv.trainings.each do |tr| %>
 										<h5><strong class="text-capitalize"> <%= tr.name %></strong> from <strong class="text-capitalize"><%= tr.institute %></strong>
 
-											<small class="pull-right"><%= tr.duration %>  days </small>
+											<font class="pull-right"><%= tr.duration %>  days </font>
 										</h5>
 
 										<p class="text"><%= tr.info.html_safe %></p><hr>
@@ -207,7 +213,7 @@
 												by <%= ha.awarded_by %>
 												<% end %>
 												at <strong><%= ha.company_name %></strong><br>
-												<small><%= ha.award_date.strftime("%B, %Y") %></small>
+												<font><%= ha.award_date.strftime("%B, %Y") %></font>
 											</p>
 											<% end %>
 											<hr>
