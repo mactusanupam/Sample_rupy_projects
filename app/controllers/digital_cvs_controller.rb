@@ -104,6 +104,7 @@ class DigitalCvsController < ApplicationController
       format.pdf do
         render pdf: "#{@digital_cv.name}",
         show_as_html: params.key?('debug'),
+        encoding:     'utf8',
         margin: {left: 0, top: 0, right:0 }
       end
     end
