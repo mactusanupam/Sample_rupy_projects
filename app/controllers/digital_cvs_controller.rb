@@ -1,5 +1,5 @@
 class DigitalCvsController < ApplicationController
-  before_action :set_digital_cv, except: [:index, :new, :create]
+  before_action :set_digital_cv, except: [:index, :new, :create, :online_resume]
   before_action :authenticate_user!, only: [:share_and_download]
 
   respond_to :docx
@@ -104,6 +104,34 @@ class DigitalCvsController < ApplicationController
       format.pdf do
         render pdf: "#{@digital_cv.name}",
         show_as_html: params.key?('debug'),
+        encoding:     'utf8',
+        margin: {left: 0, top: 0, right:0 }
+      end
+    end
+  end
+
+  def online_resume
+    @digital_cv = DigitalCv.find_by(slug: params[:slug])
+    raise ActiveRecord::RecordNotFound unless @digital_cv
+
+    # cookies[:ecv] ||= { :value => { digital_cv_id: @digital_cv.id, downloaded: false, viewed: false }, :expires => 3.month.from_now }
+
+    if request.format == 'html'
+      @digital_cv.increment!(:view)
+      # cookies[:ecv][:viewed] = true
+    end
+
+    if request.format == 'pdf'
+      @digital_cv.increment!(:download)
+      # cookies[:ecv]['downloaded'] = 'true'
+    end
+
+    respond_to do |format|
+      format.html { render :share_and_download }
+      format.pdf do
+        render pdf: "#{@digital_cv.name}",
+        template: 'digital_cvs/share_and_download',
+        show_as_html: params.key?('debug'),
         margin: {left: 0, top: 0, right:0 }
       end
     end
@@ -129,7 +157,7 @@ class DigitalCvsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def digital_cv_params
     params.require(:digital_cv).permit(
-      :summary, :id, :name, :user_id, :objective, :is_experienced, :employment_status, :template_id, :template,
+      :summary, :id, :name, :user_id, :objective, :is_experienced, :employment_status, :template_id, :template, :slug,
       employment_details_attributes: employment_details_attributes,
       academic_details_attributes: academic_details_attributes,
       cv_languages_attributes: cv_languages_attributes,

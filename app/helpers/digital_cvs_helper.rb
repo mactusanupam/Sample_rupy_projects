@@ -13,7 +13,7 @@ module DigitalCvsHelper
 
   def share_cv_url(digital_cv)
     protocol = Rails.env.development? ? 'http' : 'https'
-    "#{protocol}://#{request.host_with_port}/digital-cvs/#{digital_cv.id}/share_and_download/#{digital_cv.slug}"
+    "#{protocol}://#{request.host_with_port}/ecv/#{digital_cv.slug}"
   end
 
   def all_sections

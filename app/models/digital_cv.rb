@@ -44,6 +44,7 @@ class DigitalCv < ApplicationRecord
   has_many :certifications, :dependent => :destroy
   accepts_nested_attributes_for :certifications, allow_destroy: true, :reject_if => :all_blank
 
-  validates :summary,  presence: true, length: { maximum: 500 }
+  validates :summary,  presence: true, length: { maximum: 500 }, allow_nil: true
+  validates :slug, presence: true
   validates :slug, uniqueness: true, allow_blank: true
 end

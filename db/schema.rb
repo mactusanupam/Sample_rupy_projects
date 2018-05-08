@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 20180507111754) do
     t.string "linkedin_url"
     t.string "skype_username"
     t.text "address"
-    t.integer "pincode"
+    t.string "pincode"
     t.bigint "digital_cv_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -149,6 +149,8 @@ ActiveRecord::Schema.define(version: 20180507111754) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "view", default: 0
+    t.integer "download", default: 0
     t.index ["slug"], name: "index_digital_cvs_on_slug"
     t.index ["template_id"], name: "index_digital_cvs_on_template_id"
     t.index ["user_id"], name: "index_digital_cvs_on_user_id"

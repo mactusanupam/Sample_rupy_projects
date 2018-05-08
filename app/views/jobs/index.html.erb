@@ -15,7 +15,7 @@
               <%= hidden_field_tag :title, params[:title], class: "form-control", placeholder: "Search by title" %>
               <div class="col-md-12">
                 <label for="job">Company Name</label>
-         
+
                   <%= select_tag "company_id", options_from_collection_for_select(@company, "id", "name",params[:company_id]), include_blank: true, class: "form-control job-search" %>
               </div>
               <div class="col-md-12">
@@ -24,7 +24,7 @@
               </div>
               <div class="col-md-3">
                 <label for="job">Location</label>
-              </div>  
+              </div>
                 <div class="col-md-12">
                 <%= text_field_tag "location", params[:location], id: "location", class: "form-control job-search" %>
               </div>
@@ -65,9 +65,4 @@
     </div>
    </div>
   </div>
-</div><br /><br />
-<style type="text/css">
-  .select2 .select2-container .select2-container--default .select2-container--above {
-  width ="280px"; 
-}
-</style> 
+</div>

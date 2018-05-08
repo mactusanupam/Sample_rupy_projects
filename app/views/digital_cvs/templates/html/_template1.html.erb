@@ -1,50 +1,9 @@
-<style type="text/css">
-  .template-table {
-    width: 100%;
-    display: -webkit-flex; /* Safari */
-    display: flex; /* Standard syntax */
-  }
-  .text {
-    text-align: justify;
-  }
-  .left-sidebar {
-    min-height: 500px;
-    background-color: #373d48;
-    color: white;
-  }
-  .header-text {
-    margin-top: 10px;
-    background-color: #232933;
-  }
-  h3 {
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    color: #002e58;
-    font-weight: bold;
-  }
-  .header-text h4 {
-    border: 0;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  h2 {
-    margin: 0;
-  }
-  li {
-    word-break: break-all;
-  }
-  .emp-details ul {
-    padding-left: 15px !important;
-  }
-</style>
-<div class="container">
-  <div class="row">
+<div class="container template1">
+  <div class="row normal-break">
     <div class="col-md-12 col-xs-12 template-table">
       <div class="col-md-4 col-xs-4 left-sidebar">
         <div class="row">
-          <div class="col-md-12 col-xs-12">
+          <div class="col-md-12 col-xs-12" style="padding-top: 30px;">
             <h2><strong><%= @digital_cv.contact_detail.try(:name) %></strong></h2>
             <h4>
               <%= @digital_cv.present_job ? @digital_cv.present_job.job_title.title : '' %>
@@ -156,7 +115,7 @@
       <div class="col-md-8 col-xs-8">
         <% if @digital_cv.summary.present? %>
         <div class="row">
-            <div class="col-md-12 col-xs-12 text" style="margin-top: 20px;">
+            <div class="col-md-12 col-xs-12 text" style="margin-top: 50px;">
               <%= @digital_cv.summary %>
             </div>
           </div>
@@ -170,19 +129,19 @@
           </div>
         <% end %>
         <% if @digital_cv.employment_details.present? %>
-          <div class="row padding-5">
+          <div class="row padding-bottom-5">
             <div class="col-md-12 col-xs-12">
               <h3>Experience</h3>
             </div>
           </div>
           <% @digital_cv.employment_details.each do |e| %>
-            <div class="row padding-5">
+            <div class="row padding-bottom-5">
               <div class="col-md-2 col-xs-3">
-                <%= e.start_date.strftime("%B, %Y") %> - <br /><%= e.present_job ? 'present' : e.end_date.strftime("%B, %Y") %>
+                <%= e.start_date.strftime("%b, %Y") %> - <br /><%= e.present_job ? 'present' : e.end_date.strftime("%b, %Y") %>
               </div>
               <div class="col-md-10 col-xs-9 emp-details">
                 <strong><%= e.job_title.title %></strong>
-                <p><%= e.company.name %></p>
+                <p class="company-name"><%= e.company.name %></p>
                 <% if e.responsibilities.present? %>
                   <h5><strong>Responsibilities</strong></h5>
                   <%= e.responsibilities.html_safe %>
@@ -196,24 +155,30 @@
           <% end %>
         <% end %>
         <% if @digital_cv.academic_details.present? %>
-          <div class="row padding-5">
+          <div class="row padding-bottom-5">
             <div class="col-md-12 col-xs-12">
               <h3>Education</h3>
             </div>
           </div>
           <% @digital_cv.academic_details.each do |a| %>
-            <div class="row padding-5">
+            <div class="row padding-bottom-5">
               <div class="col-md-2 col-xs-3">
-                <%= a.start_date.strftime("%B, %Y") %> - <br />
+                <%= a.start_date.strftime("%b, %Y") %> - <br />
                 <% if a.pursuing %>
                   Present
                 <% else %>
-                  <%= a.end_date.strftime("%B, %Y") %>
+                  <%= a.end_date.strftime("%b, %Y") %>
                 <% end %>
               </div>
               <div class="col-md-10 col-xs-9">
                 <strong><%= a.degree.title %></strong> in
-                <%= a.specialization.title %> with <%= a.percentage %>% from
+                <%= a.specialization.title %> with
+                <% if a.is_cgpa? %>
+                CGPA <%= a.percentage %>
+                <% else %>
+                  <%= a.percentage %>%
+                <% end %>
+                 from
                 <strong><%= a.university %></strong>.
               </div>
             </div>
@@ -248,7 +213,7 @@
           <% @digital_cv.certifications.each do |cert| %>
             <div class="row padding-5">
               <div class="col-md-2 col-xs-3">
-                <%= cert.date.strftime("%B, %Y") %>
+                <%= cert.date.strftime("%b, %Y") %>
               </div>
               <div class="col-md-10 col-xs-9">
                 <%= cert.title %> - <strong><%= cert.certifier %></strong>
@@ -265,10 +230,10 @@
           <% @digital_cv.honor_and_awards.each do |ha| %>
             <div class="row padding-5">
               <div class="col-md-2 col-xs-3">
-                <%= ha.award_date.strftime("%B, %Y") %>
+                <%= ha.award_date.strftime("%b, %Y") %>
               </div>
               <div class="col-md-10 col-xs-9">
-                <%= ha.title %> at <%= ha.company_name %>
+                <%= ha.title %> at <%= ha.company_name || "Unknown" %>
               </div>
             </div>
           <% end %>
@@ -307,6 +272,26 @@
             </div>
             <hr />
           <% end %>
+        <% end %>
+        <% if @digital_cv.references.present? %>
+          <div class="row padding-5">
+            <div class="col-md-12 col-xs-12">
+              <h3>References</h3>
+            </div>
+          </div>
+          <ul>
+            <% for reference in @digital_cv.references %>
+              <li>
+                <strong><%= reference.name %></strong>,
+                <%= reference.job_title.try(:title) %> at
+                <strong><%= reference.company_name || 'Unknown' %></strong>
+                <p>
+                  <strong>Contact: </strong>
+                  <%= reference.mobile %>, <%= reference.email %>
+                </p>
+              </li>
+            <% end %>
+          </ul>
         <% end %>
         <% if @digital_cv.personal_detail.present? %>
           <div class="row padding-5">

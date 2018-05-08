@@ -1,57 +1,16 @@
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<style type="text/css">
-
-  .template-2-data img{
-    width:80px;
-    height:80px;
-  }
-  .template-2-data .pp-image{
-    padding-left:41px;
-  }
-
-  .template-2-data hr{
-    margin-top: -2px;
-  }
-
-  .template-2-data .container{
-    background: #fff;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .template-2-data .profile_social_url{
-    max-width:154;
-    word-wrap:break-word;
-  }
-
- .template-2-data .existingEntry{
-    margin-bottom: -35px !important;
-  }
-  .template-2-data h4{
-    font-weight:500;
-  }
-
-  .template-2-data .employ_det_d{
-    padding-top:0px !important;
-  }
-
-  .template-2-data h6 {
-    word-break: break-all;
-  }
-</style>
-
 <div class="container">
-  <div class="template-2-data">
+  <div class="template8">
     <br><br>
     <div class="basic-info">
-      <div class="col-md-10">
+      <div class="col-md-10 col-xs-10">
         <p class="text-capitalize">
           <h3><b><%= @digital_cv.contact_detail.try(:name) %></b></h3>
         </p>
         <% if @digital_cv.summary.present? %>
-          <p><%= @digital_cv.summary %></p>
+          <p class="text-justify"><%= @digital_cv.summary.html_safe %></p>
         <% end %>
       </div>
-      <div class="col-md-2 pp-image ">
+      <div class="col-md-2 col-xs-2">
         <% if @digital_cv.photo.present? && @digital_cv.photo.image.present? %>
           <%= image_tag @digital_cv.photo.image.url(:thumb) %>
         <% else %>
@@ -64,7 +23,7 @@
       <% if @digital_cv.contact_detail.try(:email).present? %>
         <b>
           <h4 class="title">
-            <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;PERSONAL INFO
+            <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;CONTACT INFO
           </h4>
         </b>
         <hr>
@@ -143,29 +102,30 @@
           <i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp; Career Objective
         </h4>
         <hr>
-        <section>
-          <%= @digital_cv.objective %>
+        <section class="text-justify">
+          <%= @digital_cv.objective.html_safe %>
         </section>
         <br>
       <% end %>
       <% if @digital_cv.employment_details.present? %>
         <div>
           <h4><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp; EXPERIENCE</h4>
+          <hr />
           <table class="table">
             <% for employment_detail in @digital_cv.employment_details %>
               <tr>
                 <td valign="top" width="15%">
-                  <strong><%= employment_detail.start_date.strftime("%B, %Y") %>-
+                  <strong><%= employment_detail.start_date.strftime("%b, %Y") %>-
                     <% if employment_detail.present_job %>
                       Present
                     <% else %>
-                      <%= employment_detail.end_date.strftime("%B, %Y") %>
+                      <%= employment_detail.end_date.strftime("%b, %Y") %>
                     <% end %>
                   </strong>
                 </td>
                 <td width="85%" valign="top" class="employ_det_d">
                   <h5><strong><%= employment_detail.job_title.title %></strong></h5>
-                  <h6><%= employment_detail.company.name %></h6>
+                  <h6 class="company-name"><%= employment_detail.company.name %></h6>
                   <% if employment_detail.responsibilities.present? %>
                     <h5><strong>Responsibilities</strong></h5>
                     <%= employment_detail.responsibilities.html_safe %>
@@ -185,20 +145,29 @@
           <h4>
            <i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp; EDUCATION DETAILS
          </h4>
+         <hr />
          <table class="table">
             <% for academic_detail in @digital_cv.academic_details %>
               <tr>
                 <td valign="top" width="15%">
-                  <strong><%= academic_detail.start_date.strftime("%B, %Y") %>-
+                  <strong><%= academic_detail.start_date.strftime("%b, %Y") %>-
                     <% if academic_detail.pursuing %>
                       Present
                     <% else %>
-                      <%= academic_detail.end_date.strftime("%B, %Y") %>
+                      <%= academic_detail.end_date.strftime("%b, %Y") %>
                     <% end %>
                   </strong>
                 </td>
                 <td valign="top" width="85%" >
-                  <p><strong><%= academic_detail.degree.title %></strong>&nbsp;in&nbsp;<%= academic_detail.specialization.title %> with <%= academic_detail.percentage %>% from <strong><%= academic_detail.university %></strong></p>
+                  <p>
+                    <strong><%= academic_detail.degree.title %></strong>&nbsp;in&nbsp;<%= academic_detail.specialization.title %> with
+                    <% if academic_detail.is_cgpa? %>
+                      CGPA <%= academic_detail.percentage %>
+                    <% else %>
+                      <%= academic_detail.percentage %>%
+                    <% end %>
+                    from <strong><%= academic_detail.university %></strong>
+                  </p>
                 </td>
               </tr>
             <% end %>
@@ -245,11 +214,12 @@
       <% if @digital_cv.certifications.present? %>
         <div>
           <h4><i class="fa fa-certificate"></i>&nbsp; CERTIFICATION</h4>
+          <hr />
           <table class="table">
             <% for certification in @digital_cv.certifications %>
               <tr>
                 <td valign="top" width="15%">
-                  <strong><%= certification.date.strftime("%B, %Y") %></strong>
+                  <strong><%= certification.date.strftime("%b, %Y") %></strong>
                 </td>
                 <td width="85%" valign="top">
                   <p><strong><%= certification.title %></strong> by <%= certification.certifier %></p>
@@ -257,16 +227,17 @@
               </tr>
             <% end %>
           </table>
-        </div><br>
+        </div>
       <% end %>
 
       <% if @digital_cv.honor_and_awards.present? %>
         <div>
           <h4><i class="fa fa-trophy" aria-hidden="true"></i>&nbsp; HONORS AND AWARDS</h4>
+          <hr />
           <table class="table">
             <% for award in @digital_cv.honor_and_awards %>
               <tr>
-                <td valign="top" width="15%"><strong><%= award.award_date.strftime("%B, %Y") %></strong>
+                <td valign="top" width="15%"><strong><%= award.award_date.strftime("%b, %Y") %></strong>
                 </td>
                 <td width="85%" valign="top" style="padding-top: 0px;">
                   <h5><strong><%= award.title %></strong>
@@ -279,10 +250,8 @@
               </tr>
             <% end %>
           </table>
-          <hr>
         </div>
       <% end %>
-      <br>
 
       <% if @digital_cv.research_or_project_details.present? %>
         <section>

@@ -172,8 +172,6 @@ width:100%;
   color:red;
 }
 
-
-
 .job-button{
   margin-top: 10px;
 }
@@ -181,8 +179,9 @@ width:100%;
 ul{
   list-style-type: none;
 }
-li { 
-display: inline;
+
+li {
+  display: inline;
 }
 
 abbr[title="required"] {
@@ -193,4 +192,8 @@ abbr[title="required"] {
 }
 .jobexp{
   margin-left:10px
+}
+
+.select2 .select2-container .select2-container--default .select2-container--above {
+  width: 280px;
 }

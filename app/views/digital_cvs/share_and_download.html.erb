@@ -4,20 +4,38 @@
   <div class="row" style="padding: 20px 0;">
     <div class="col-md-12">
       <div class="pull-right">
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-download" aria-hidden="true"></i> Download
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <%= link_to share_and_download_digital_cv_path(@digital_cv, format: :pdf), class: 'dropdown-item' do%>
-              <%= fa_icon "file-pdf-o", text: 'Download PDF' %>
-            <% end %>
-            <%#= link_to 'javascript:void(0)', class: 'dropdown-item' do %>
-              <%#= fa_icon "file-word-o", text: 'Download DOCX' %>
-            <%# end %>
+        <% if request.params["action"] == 'share_and_download' %>
+          <div class="col-sm-6">
+            <%= link_to "Online Resume", "/resumes/#{@digital_cv.id}/edit/share_url", class: 'btn btn-primary', remote: true %>
           </div>
-        </div>
-        <%#= link_to "Online Resume", "/resumes/#{@digital_cv.id}/edit/share_url", class: 'btn btn-primary', remote: true %>
+          <div class="col-sm-6 dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-download" aria-hidden="true"></i> Download
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to share_and_download_digital_cv_path(@digital_cv, format: :pdf), class: 'dropdown-item', target: '_blank' do%>
+                <%= fa_icon "file-pdf-o", text: 'Download PDF' %>
+              <% end %>
+              <%#= link_to 'javascript:void(0)', class: 'dropdown-item' do %>
+                <%#= fa_icon "file-word-o", text: 'Download DOCX' %>
+              <%# end %>
+            </div>
+          </div>
+        <% else %>
+          <div class="col-sm-6 dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-download" aria-hidden="true"></i> Download
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to "/ecv/#{params[:slug]}.pdf", class: 'dropdown-item', target: '_blank' do %>
+                <%= fa_icon "file-pdf-o", text: 'Download PDF' %>
+              <% end %>
+              <%#= link_to 'javascript:void(0)', class: 'dropdown-item' do %>
+                <%#= fa_icon "file-word-o", text: 'Download DOCX' %>
+              <%# end %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -25,4 +43,4 @@
 
 <%= render "digital_cvs/templates/html/#{@digital_cv.template.name}" %>
 
-<div id="share-modal"></div>
+<div id="share-modal" class="modal"></div>

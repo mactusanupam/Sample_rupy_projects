@@ -1,25 +1,54 @@
-<div class="modal-dialog" role="document">
+<div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header talent-fore-btn color-white">
       <div class="modal-title clearfix">
         <div class="pull-left">
           <h4>ONLINE RESUME</h4>
         </div>
+        <div class="pull-right">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <%= fa_icon 'times 2x', class: 'icon-red btn-danger' %>
+          </button>
+        </div>
       </div>
     </div>
     <div class="modal-body">
       <%= simple_form_for(@digital_cv, html: { remote: true }, wrapper: :horizontal_form) do |f|  %>
-        <h3 class="text-center">ONLINE RESUME</h3>
         <h4 class="text-center">Enter the custom url for your online resume</h4>
         <%= f.error_notification %>
         <%
           url_base = "#{Rails.env.development? ? 'http' : 'https'}://#{request.host_with_port}/ecv/"
         %>
-        <%= f.input :slug, label: url_base, input_html: { placeholder: 'e.g. Enter your name here'}, label_html: { class: 'col-sm-4' }  %>
+        <%= f.input :slug, label: url_base, input_html: { placeholder: 'e.g. Some unique value to identify your resume'}, label_html: { class: 'col-sm-4' }  %>
         <div class="text-center">
           <%= f.submit "Save", class: "btn btn-primary talent-fore-btn" %>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">
+            Cancel
+          </button>
         </div>
       <% end %>
     </div>
+  </div>
+</div>
+
+
+
+<div class="success-content hide">
+  <div class="alert alert-success">
+    Successfully Created Custom URL for your resume.
+  </div>
+  <h5 class="text-left">The custom URL for you resume is </h5>
+  <div class="input-group form-group">
+    <span class="form-control" aria-describedby="basic-addon1">
+      <%= share_cv_url(@digital_cv) %>
+    </span>
+    <a class="input-group-addon" id="basic-addon1" href="javascript:void(0)" title="click to copy the url" data-toggle="tooltip">
+      <i class="fa fa-copy"></i>
+    </a>
+  </div>
+  <div class="text-center">
+    <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">
+      Close
+    </button>
   </div>
 </div>
