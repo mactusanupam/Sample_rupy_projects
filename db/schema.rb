@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180507111754) do
+ActiveRecord::Schema.define(version: 20180508113811) do
 
   create_table "academic_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "institute"
@@ -138,6 +138,13 @@ ActiveRecord::Schema.define(version: 20180507111754) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "degrees_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "degree_id"
+    t.bigint "job_id"
+    t.index ["degree_id"], name: "index_degrees_jobs_on_degree_id"
+    t.index ["job_id"], name: "index_degrees_jobs_on_job_id"
+  end
+
   create_table "digital_cvs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "My Resume"
     t.text "summary"
@@ -237,10 +244,8 @@ ActiveRecord::Schema.define(version: 20180507111754) do
     t.integer "job_view", default: 0
     t.integer "no_of_openings", default: 0
     t.string "seniority_level"
-    t.bigint "degree_id"
     t.bigint "specialization_id"
     t.index ["company_id"], name: "index_jobs_on_company_id"
-    t.index ["degree_id"], name: "index_jobs_on_degree_id"
     t.index ["industry_id"], name: "index_jobs_on_industry_id"
     t.index ["qualification_id"], name: "index_jobs_on_qualification_id"
     t.index ["specialization_id"], name: "index_jobs_on_specialization_id"
@@ -434,6 +439,8 @@ ActiveRecord::Schema.define(version: 20180507111754) do
   add_foreign_key "cv_languages", "languages"
   add_foreign_key "cv_skills", "digital_cvs"
   add_foreign_key "cv_skills", "skills"
+  add_foreign_key "degrees_jobs", "degrees"
+  add_foreign_key "degrees_jobs", "jobs"
   add_foreign_key "digital_cvs", "templates"
   add_foreign_key "digital_cvs", "users"
   add_foreign_key "employment_details", "companies"
@@ -444,7 +451,6 @@ ActiveRecord::Schema.define(version: 20180507111754) do
   add_foreign_key "job_applications", "users"
   add_foreign_key "job_responsibilities", "job_titles"
   add_foreign_key "jobs", "companies"
-  add_foreign_key "jobs", "degrees"
   add_foreign_key "jobs", "industries"
   add_foreign_key "jobs", "qualifications"
   add_foreign_key "jobs", "specializations"

@@ -12,12 +12,12 @@ $(document).ready(function(){
   });
 
   $('#job_form_id .wysihtml5').wysihtml5({ toolbar: {
-    'font-styles': true,
-    'color': true,
+    'font-styles': false,
+    'color': false,
     'emphasis': {
     'small': false
     },
-    'blockquote': true,
+    'blockquote': false,
     'lists': true,
     'html': false,
     'link': true,

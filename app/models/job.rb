@@ -5,11 +5,12 @@ class Job < ApplicationRecord
   belongs_to :company
   belongs_to :qualification
   belongs_to :specialization
-  belongs_to :degree
   belongs_to :user
 
   has_and_belongs_to_many :skills
   accepts_nested_attributes_for :skills
+  has_and_belongs_to_many :degrees
+  accepts_nested_attributes_for :degrees
 
   has_many :job_applications, :dependent => :destroy
   accepts_nested_attributes_for :job_applications, allow_destroy: true
@@ -19,7 +20,7 @@ class Job < ApplicationRecord
   validates :qualification_id, presence: true
   validates :offered_ctc, presence: true 
   validates :location, presence: true
-  validates :degree_id, presence: true 
+  validates :degree_ids, presence: true 
   validates :specialization_id, presence: true
   validates :industry_id, presence: true
   validates :skill_ids, presence: true

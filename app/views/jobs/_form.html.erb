@@ -17,17 +17,17 @@
         </div>
         <div class="row">
           <div class="form-group">
-            <%= f.input :degree_id,:collection =>Degree.all,:label_method => :title,:value_method => :id, :prompt => 'Select OR write options..............', wrapper: :horizontal_form_job ,input_html:{ class: 'job_degree', multiple: true} %>
+            <%= f.input :degree_ids,:collection =>Degree.all,:label_method => :title,:value_method => :id,:label => "Degrees", :prompt => 'Select OR write options..............', wrapper: :horizontal_form_job ,input_html:{ class: 'degree', multiple: true} %>
           </div>
         </div>
         <div class="row">
           <div class="form-group">
-            <%= f.input :specialization_id,:collection =>Specialization.all,:label_method => :title,:value_method => :id, :prompt => 'Select OR write specialization..............', wrapper: :horizontal_form_job ,input_html:{ class: 'job_specialization', multiple: true} %>
+            <%= f.input :specialization_id,:collection =>Specialization.all,:label_method => :title,:value_method => :id, :prompt => 'Select OR write specialization..............', wrapper: :horizontal_form_job ,input_html:{ class: 'specialization'} %>
           </div>
         </div>
         <div class="row">
           <div class="form-group">
-            <%= f.input :skill_ids,:collection =>Skill.all,:label_method => :title,:value_method => :id,:label => "Job Skills",:prompt => 'Select an option..............', input_html:{ class: 'job_skills', multiple: true}, wrapper: :horizontal_form_job %>
+            <%= f.input :skill_ids,:collection =>Skill.all,:label_method => :title,:value_method => :id,:label => "Job Skills",:prompt => 'Select an option..............', input_html:{ class: 'skill', multiple: true}, wrapper: :horizontal_form_job %>
           </div>
         </div> 
         <div class="row">
@@ -66,7 +66,7 @@
             <%= f.input :location, placeholder:'Job-Location', wrapper: :horizontal_form_job  %> 
           </div>
           <div class="col-md-offset-4">OR
-          <%= f.check_box :location%>
+          <%= f.check_box :location, collection: ["Remote address", "local address"], :checked => ["Remote address", true]%>
             <%= f.label :location, "Remote address", class: 'radio-label' %>
           </div>
         </div>  
@@ -154,13 +154,18 @@
   </div>
 </div>  
 
-
 <script type="text/javascript">
-  $('.qualification,job_skills,industry,company .min_exp, .max_exp, .job_degree',' .job_specialization').select2();
-  $('.job_skills,industry, .job_degree, .job_specialization ').select2({ tags: true });
+  $(document).ready(function(){
+    $(".degree, .specialization, .qualification, .skill, .industry, .company .min_exp, .max_exp").select2({
+      tags: true
+    });
 
-  $(".job_skills, .industry, .job_degree, .job_specialization").off('select2:select').on('select2:select', function(e) {
-    saveNewItem($(this), 'degree','skill');
-  });
+    $(".degree, .specialization, .skill").off('select2:select').on('select2:select', function(e) {
+      /*elem = $(this).hasClass('specialization') || $(this).hasClass('degree') || $(this).hasClass('skill');*/
+      elem = $(this).hasClass('specialization') ? 'skill':'degree';
+      saveNewItem($(this), elem);
+    });
+  })
 </script>
+
 

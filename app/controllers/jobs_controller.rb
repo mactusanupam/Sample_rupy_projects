@@ -105,8 +105,10 @@ class JobsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def job_params
-      params.fetch(:job,{}).permit(:min_exp, :max_exp, :title, :industry_id, :company_id, :location, :offered_ctc, :qualification_id, :website_url,
-       :experience, :description,:user_id,:job_view,:no_of_openings,:job_status,:job_type, :seniority_level, :degree_id,:specialization_id, skill_ids:[])
+      params.fetch(:job,{}).permit(:min_exp, :max_exp, :title, :industry_id, :company_id, :location, :offered_ctc,
+       :qualification_id, :website_url,
+       :experience, :description,:user_id,:job_view,:no_of_openings,:job_status,:job_type, :seniority_level, 
+       :specialization_id, degree_ids:[], skill_ids:[])
     end
 
     def job_application_params
