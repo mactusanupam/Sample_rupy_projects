@@ -42,11 +42,11 @@
             </div>
           </div>
           <% end %>
-          <% if @digital_cv.contact_detail.try(:linkedin_profile).present? %>
+          <% if @digital_cv.contact_detail.try(:linkedin_url).present? %>
           <div class="row">
             <div class="col-md-12 col-xs-12">
               <h5><strong>Linkedin Profile URL</strong></h5>
-              <%= @digital_cv.contact_detail.linkedin_profile %>
+              <%= @digital_cv.contact_detail.linkedin_url %>
             </div>
           </div>
           <% end %>
