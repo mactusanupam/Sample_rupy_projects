@@ -63,7 +63,7 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'col-sm-3 no-left-right-padding control-label text-right'
+    b.use :label, class: 'col-sm-2 no-left-right-padding control-label text-right'
 
     b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
       ba.use :input, class: 'form-control'

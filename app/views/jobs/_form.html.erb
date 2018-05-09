@@ -29,27 +29,28 @@
           <div class="form-group">
             <%= f.input :skill_ids,:collection =>Skill.all,:label_method => :title,:value_method => :id,:label => "Job Skills",:prompt => 'Select an option..............', input_html:{ class: 'skill', multiple: true}, wrapper: :horizontal_form_job %>
           </div>
-        </div> 
+        </div>
         <div class="row">
           <div class="form-group">
-            <%= f.label :experience ,class: "control-label col-sm-4"%>
-            <% exp_array = (0..20).to_a.map(&:to_s)
-            min_exp, max_exp = @job.experience.present? ? @job.experience.split('-').map(&:to_i) : nil %>
-            <div class= "col-md-2 jobexp">
-            <%= f.input :min_exp, :collection => exp_array,:label => "" ,:prompt=> 'Min Exp', :selected => min_exp%>
-            </div>
-            <div class= "col-md-1" style="padding-top:35px;"> -</div>
-            <div class= "col-md-2">
-            <%= f.input :max_exp, :collection => exp_array, :label => "", :prompt=> 'Max Exp', :selected => max_exp%>
-            </div>
-            <div class= "col-md-2" style="padding-top:35px;">
-             <span>Years</span>
-            </div>
-            <%#= f.collection_select(:min_exp, exp_array, :to_s, :to_s, prompt: 'Min Exp', :selected => min_exp)%>
-            <%#= f.collection_select(:max_exp, exp_array, :to_s, :to_s, prompt: 'Max Exp', :selected => max_exp)%> 
+            <%= f.input "Experience", required: true, wrapper: :horizontal_form_job do %>
+              <% exp_array = (0..20).to_a.map(&:to_s)
+              min_exp, max_exp = @job.experience.present? ? @job.experience.split('-').map(&:to_i) : nil %>
+               <div class= "col-md-4">
+                <%= f.input :min_exp, :collection => exp_array,label: false ,:prompt=> 'Min Exp', :selected => min_exp ,required: false %>
+              </div>
+              <div class= "col-md-1 padding-top-5 text-center"> -</div>
+              <div class= "col-md-4">
+                <%= f.input :max_exp, :collection => exp_array, label: false, :prompt=> 'Max Exp', :selected => max_exp ,required: false %>
+              </div>
+              <div class= "col-md-2 padding-top-5 text-center">
+                <span>Years</span>
+              </div>
+              
+            <%end%> 
           </div>
-        </div>   
-      </div>
+        </div>
+      </div>   
+        
       <div class= "col-md-6 col-sm-12" style="padding-left: 50px;">
         <div class="row">
           <div class="form-group">
@@ -63,16 +64,15 @@
         </div>
         <div class="row">
           <div class="form-group">
-            <%= f.input :location, placeholder:'Job-Location', wrapper: :horizontal_form_job  %> 
+            <%= f.input :location, placeholder:'Job-Location', wrapper: :horizontal_form_job ,input_html:{ class: 'location'}  %> 
+            <div class="col-md-offset-8">
+              <%= f.check_box :location, input_html:{ class: 'job_location'}%>
+               <%= f.hidden_field :location ,:value =>"Remote address" %>
+              <%#= f.input :location, :as => :check_boxes, collection: [['Completed', 'completed']]%>
+                <%= f.label :location, "Remote address", class: 'location-label' %>
           </div>
-          <div class="col-md-offset-4">OR
-          <%= f.check_box :location, collection: ["Remote address", "local address"], :checked => ["Remote address", true]%>
-            <%= f.label :location, "Remote address", class: 'radio-label' %>
-          </div>
+          </div> 
         </div>  
-        <div class="row">
-          
-        </div>
         <div class="row">
           <div class="form-group">
             <%= f.input :no_of_openings,:label => "Openings", placeholder:'Enter the Enteger value eg,5', wrapper: :horizontal_form_job  %>
@@ -128,12 +128,12 @@
       <div class="col-md-12 col-sm-12">
         <div class="row">
           <%#= f.input :description,:label => "Job Title", wrapper: :horizontal_form_job %> 
-          <div class="form-group" >
+          <div class="form-group required" >
             <div class="col-sm-2">
-            <%= f.label :description ,class: "control-label jobdesc" %>
+            <%= f.label :description ,class: "control-label jobdesc",required:true %>
             </div>
             <div class="col-sm-10">
-            <%= f.input :description,:label => "",placeholder:'Min 100 character description required...', input_html:{class: "form-control wysihtml5"} %>
+            <%= f.input :description, label: false, placeholder:'Min 100 character description required...', input_html:{class: "form-control wysihtml5"} %>
             </div>
           </div>
         </div>
