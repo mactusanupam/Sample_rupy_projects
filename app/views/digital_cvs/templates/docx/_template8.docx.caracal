@@ -22,6 +22,7 @@ name = @digital_cv.contact_detail.try(:name)
 present_job_title = @digital_cv.present_job ? @digital_cv.present_job.job_title.title : "No Title"
 personal_info = @digital_cv.personal_detail.attributes
 contact_info = @digital_cv.contact_detail.attributes
+docx_image = @digital_cv.photo.image.url(:thumb) ? @digital_cv.photo.image.url(:thumb) : 'digital_cv/photo_cv.png'
 
 cv_skill = @digital_cv.cv_skills
 languages = @digital_cv.cv_languages
@@ -42,6 +43,7 @@ end
 
 
 c2 = Caracal::Core::Models::TableCellModel.new do
+    img font_url+docx_image, width: 80, height: 80, align: :center
 end
 
 c01=Caracal::Core::Models::TableCellModel.new do
@@ -695,7 +697,7 @@ c4 = Caracal::Core::Models::TableCellModel.new do
         spacing 2
       end
     end
-    cp1 = Caracal::Core::Models::TableCellModel.new do
+        cp1 = Caracal::Core::Models::TableCellModel.new do
       if digital_cv.personal_detail.try(:nationality).present?
         p "Nationality", bold: true
       end
@@ -742,6 +744,13 @@ c4 = Caracal::Core::Models::TableCellModel.new do
 end
 
 docx.table [[c1,c2]] do
+cell_style cols[1], width: 2000
+border_bottom do
+    color   'E5E5E5'
+    line    :single
+    size    1
+    spacing 2
+  end
 end
 
 docx.table [[c3,c4]] do

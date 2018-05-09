@@ -38,10 +38,10 @@
           </div>
         <% end %>
 
-        <% if @digital_cv.contact_detail.try(:linkedin_profile).present?  %>
+        <% if @digital_cv.contact_detail.try(:linkedin_url).present?  %>
           <div class="profile_social_url">
             <strong>Linkedin profile url:</strong>
-            <p><%= @digital_cv.contact_detail.linkedin_profile %></p>
+            <p class="linkedin_url_break"><%= @digital_cv.contact_detail.linkedin_url %></p>
           </div>
         <% end %>
 
@@ -90,7 +90,7 @@
       <br>
       <% if @digital_cv.objective.present? %>
         <h4>
-          <i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp; Career Objective
+          <i class="fa fa-bullseye" aria-hidden="true"></i>&nbsp; CAREER OBJECTIVE
         </h4>
         <hr>
         <section class="tect-justify">
@@ -195,7 +195,7 @@
             <li>
               <p>Attended<strong> <%= trainingdata.duration %> </strong> days training on <strong> <%= trainingdata.name %></strong> from <strong><%= trainingdata.institute %></strong>
               </p>
-              <p><%= trainingdata.info %></p>
+              <p><%= trainingdata.info.html_safe %></p>
             </li>
             <% end %>
           </ul>
@@ -320,7 +320,7 @@
               <% end %>
               <% if @digital_cv.personal_detail.try(:hobbies).present? %>
                 <li>
-                  <p><strong>Hobbies and Interest-</strong>
+                  <p><strong>Hobbies and Interest:</strong>
                   <%= raw @digital_cv.personal_detail.hobbies %>
                 </li>
               <% end %>

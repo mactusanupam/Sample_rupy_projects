@@ -19,6 +19,7 @@ name = @digital_cv.contact_detail.try(:name)
 present_job_title = @digital_cv.present_job ? @digital_cv.present_job.job_title.title : "No Title"
 personal_info = @digital_cv.personal_detail.attributes
 contact_info = @digital_cv.contact_detail.attributes
+docx_image = @digital_cv.photo.image.url(:thumb) ? @digital_cv.photo.image.url(:thumb) : 'digital_cv/photo_cv.png'
 
 cv_skill = @digital_cv.cv_skills
 languages = @digital_cv.cv_languages
@@ -32,6 +33,7 @@ font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https:
 
 
 c1 = Caracal::Core::Models::TableCellModel.new do
+  	img font_url+docx_image, width: 80, height: 80, align: :center
 	p
 	h1  name, size: '50', bold: true
 	h5  present_job_title

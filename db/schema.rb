@@ -189,15 +189,6 @@ ActiveRecord::Schema.define(version: 20180506145456) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "job_responsibilities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "responsibility_type"
-    t.text "responsibility_text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "job_title_id"
-    t.index ["job_title_id"], name: "index_job_responsibilities_on_job_title_id"
-  end
-
   create_table "job_titles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -390,7 +381,6 @@ ActiveRecord::Schema.define(version: 20180506145456) do
   add_foreign_key "employment_details", "digital_cvs"
   add_foreign_key "employment_details", "job_titles"
   add_foreign_key "honor_and_awards", "digital_cvs"
-  add_foreign_key "job_responsibilities", "job_titles"
   add_foreign_key "personal_details", "digital_cvs"
   add_foreign_key "references", "digital_cvs"
   add_foreign_key "references", "job_titles"

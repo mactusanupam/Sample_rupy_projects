@@ -30,15 +30,15 @@
 						<% end %>
 
 						<% if @digital_cv.contact_detail.try(:skype_username).present? || @digital_cv.contact_detail.try(:linkedin_url).present?%>
-						  <h4>Social media</h4>
-	      		  <div class="social-media">
+						  	<h4>Social media</h4>
+	      		  			<div class="social-media">
 								<% if @digital_cv.contact_detail.try(:skype_username).present? %>
 									<h5 class="margin-bottom-0"><strong>Skype:</strong></h5>
 									<p><%= @digital_cv.contact_detail.skype_username %></p>
 								<% end %>
 								<% if @digital_cv.contact_detail.try(:linkedin_url).present? %>
 									<h5 class="margin-bottom-0"><strong>LinkedIn URL:</strong></h5>
-									<p><%= @digital_cv.contact_detail.linkedin_url %></p>
+									<p class="linkedin_url_break"><%= @digital_cv.contact_detail.linkedin_url %></p>
 								<% end %>
 						  </div>
 						<% end %>
