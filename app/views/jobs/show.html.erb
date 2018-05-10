@@ -1,0 +1,133 @@
+<div class="container-fluid jobs">
+  <div class="row background-grey">
+    <%= render 'job_heading_searchbox' %>
+    <div class="col-md-12 col-xs-12 col-sm-12">
+      <!-- <div class="col-md-offset-1 col-xs-8 col-sm-8 col-md-8"> -->
+      <!-- Uncomment above line and comment below line when right side content is ready-->
+      <div class="col-md-offset-1 col-xs-10 col-sm-10 col-md-10">
+        <div class="jobshowup">
+          <div class="row">
+            <div class="col-sm-8 col-xs-12 col-md-8">
+              <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 job-title">
+                  <%= @job.title %>
+                </div>
+              </div>
+            <%= render partial: 'jobs/job_status_show', locals: {job: @job } %>
+            <div class="col-sm-4 col-xs-12 col-md-4 text-right">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <% if @job.company.profile_image.present?%>
+                    <%= link_to image_tag(@job.company.profile_image.image.url(:small), class:"img-responsive"), company_url(@job.company) %>
+                  <% else %>
+                    <%= link_to image_tag("/assets/logo-beta.png", class:"img-responsive", size: '150x50'), company_url(@job.company) %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-right">
+              <span>Job Views:&nbsp;<%= @job.job_view %> |</span>
+              <% if policy(@job).job_applied? %>
+              <span><%= link_to "Job Applications: #{@job.job_applications.count || 0}" ,job_applied_job_path %></span>
+              <% else %>
+              <span>Job Applications:&nbsp;<%= @job.job_applications.count || 0 %> </span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="jobshowdown">
+          <div class="row" style="margin-bottom: 5px;">
+            <div class="col-xs-8 col-sm-8 col-md-8">
+              <strong style="font-size: 15px;">Job Description:</strong>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+              <strong>Share this job</strong>
+              <%= render partial: 'jobs/social_share', locals: {job: @job } %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 text-justify job-description">
+              <%= @job.description.html_safe %>
+              <p>
+                <strong style="font-size: 15px;">Key Skills: </strong>
+                <%= @job.skills.collect(&:title).join(", ") %>
+              </p>
+            </div>
+            <div class="col-xs-4 col-sm-4col-md-4">
+              <div>
+                <strong>Industry</strong><br />
+                <%= @job.industry.name %>
+              </div>
+              <div>
+                <strong>Qualification</strong><br />
+                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+
+                &nbsp;<%= @job.qualification.try(:title) %>
+              </div>
+              <div>
+                <strong>Experience</strong><br />
+                <i class="fa fa-briefcase" aria-hidden="true"></i>
+                &nbsp;<%= @job.experience %>&nbsp;years
+              </div>
+              <div>
+                <strong>Offered CTC</strong><br />
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                <%= number_with_delimiter(@job.offered_ctc) %>
+              </div>
+              <div>
+                <strong>No of Openings: </strong>
+                <%= @job.no_of_openings %>
+              </div>
+              <div>
+                <strong>Employment Type</strong><br />
+                <%= @job.job_type %>
+              </div>
+              <div>
+                <strong>Seniority Level</strong><br />
+                <%= @job.seniority_level %>
+              </div>
+              <!--div>
+                <strong>Job-Function</strong><br />
+                  Engineering Information
+                  Technology
+              </div-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class=" col-xs-2 col-sm-2 col-md-2">
+        <div class="row jobshowup jobs-right">
+          <div class="col-md-12">
+            <h3>Similar Jobs will be listed here along with advertisement</h3>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<!-- Modal window div -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title">Add your cv here</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for @job.job_applications.build, url: apply_job_path(@job), method: :post, remote: true do |f| %>
+          <%= f.hidden_field :user_id ,:value => current_user.try(:id) %>
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <div class="form-group">
+              <%= f.file_field :document %>
+          </div>
+          <div class="modal-footer">
+            <%= f.submit 'Resume Update', class: 'btn btn-primary',style:"background:#4B7892;" %>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

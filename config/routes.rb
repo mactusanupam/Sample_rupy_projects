@@ -12,6 +12,19 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :jobs do
+    collection do
+      get :job_application_update
+      post :job_application_update
+      get :job_application
+    end
+    member do
+      post :apply
+      get :job_applied
+      patch :job_status_update
+    end
+  end
+
   resources :digital_cvs, path: '/resumes' do
     member do
       patch :update_name
@@ -37,6 +50,7 @@ Rails.application.routes.draw do
     get "/#{act}", to: "static_pages##{act.gsub('-', '_')}"
   end
 
+  get '/post-jobs', to:'static_pages#post_jobs'
   get '/states/:countrycode', to: 'static_pages#states'
   get '/resumes-plans-pricing/:digital_cv_id', to: 'static_pages#resumes_plans_pricing'
 

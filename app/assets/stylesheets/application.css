@@ -106,6 +106,9 @@ input[type="number"] {
   list-style-type: none;
   padding-left: 0;
 }
+.wysihtml5-toolbar .dropdown {
+ display: inline;
+}
 
 footer {
   background-color: #27323d;

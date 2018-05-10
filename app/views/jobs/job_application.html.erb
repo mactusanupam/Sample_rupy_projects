@@ -1,0 +1,45 @@
+<div class="container-fluid jobs">
+  <%= render 'job_heading_searchbox' %>
+  <div class='row' style="padding-bottom: 20px;">
+    <div class="col-md-offset-2 col-xs-offset-1 col-sm-offset-1 col-md-8 col-sm-11 col-xs-11">
+      <% if @job_applications.empty? %>
+        <div class="well job-well">
+          <h2>
+            You have not applied to any job yet.
+            <%= link_to 'Apply now', jobs_url %>
+          </h2>
+        </div>
+      <% else %>
+        <table class="table table-bordered table-striped ">
+          <thead style="background-color: #4B7892;color:white;">
+            <tr>
+              <th>Jop Title</th>
+              <th>Company</th>
+              <th>Applied on</th>
+              <th>Recruiter Comment</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @job_applications.each do |application| %>
+              <tr>
+                <td><%= link_to application.job.title, job_path(application.job) %></td>
+                <td><%= application.job.company.name %></td>
+                <td><%= application.created_at.strftime(" %b %d, %Y") %></td>
+                <td><%= application.recruiter_comment%></td>
+                <td><%= application.status %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+   <!--  <div class="col-md-2 col-sm-2 applied-jobside">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Advertisement for cv</h4>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>
