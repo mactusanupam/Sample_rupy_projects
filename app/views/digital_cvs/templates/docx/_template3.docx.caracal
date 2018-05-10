@@ -322,7 +322,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
   end
 
   if digital_cv.personal_detail.present? 
-  h4 "PERSONAL INFORMATION"
+  h4 "ADDITIONAL INFORMATION"
   end
   
   cp1 = Caracal::Core::Models::TableCellModel.new do
