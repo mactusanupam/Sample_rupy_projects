@@ -1,0 +1,197 @@
+<%= wicked_pdf_stylesheet_link_tag "bootstrap_and_overrides" %>
+<style type="text/css">
+  div.alwaysbreak { page-break-before: always; }
+  div.nobreak:before { clear:both; }
+  div.nobreak { page-break-inside: avoid; }
+
+  .sub_title{
+  color: #666666;
+ }
+ .last_section{
+  color: #666666;
+  font-weight: bold; 
+  margin-bottom: 5px;
+ }
+</style>
+
+<%
+  if session[:jd]["position_details"]
+    job_title = JobTitle.find_by(id: session[:jd]['position_details']['job_title_id']).try(:title)
+    reporting_to_title = JobTitle.find_by(id: session[:jd]['position_details']['reporting_to_id']).try(:title)
+    about_company = session[:jd]["position_details"]["about"]
+    location = session[:jd]["position_details"]["location"]
+    min_exp = session[:jd]["position_details"]["min_exp"]
+    max_exp = session[:jd]["position_details"]["max_exp"]
+    divison = session[:jd]["position_details"]["divison"]
+    job_type = session[:jd]["position_details"]["job_type"]
+    qualification = session[:jd]["position_details"]["qualification_id"]
+    openings = session[:jd]["position_details"]["openings"]
+
+    company_id = session[:jd]['position_details']['company_id'].present? ? session[:jd]['position_details']['company_id'] : nil
+    company_detail = Company.select('id, name, website').find(company_id) unless company_id.nil?
+  end
+
+  if session[:jd]["application_process"]
+    to_apply = session[:jd]["application_process"]["to_apply"]
+  end
+
+  if session[:jd]["job_requirements"]
+    essential_skills = Skill.where(id: session[:jd]["job_requirements"]["essential_skills"]).collect(&:title)
+
+    optional_skills = Skill.where(id: session[:jd]["job_requirements"]["optional_skills"]).collect(&:title)
+
+    education_requirements = session[:jd]["job_requirements"]["education_requirements"]
+    work_requirements = session[:jd]["job_requirements"]["work_requirements"]
+  end
+
+  if session[:jd]['job_responsibilities']
+    job_responsibilities = JobResponsibility.where(id: session[:jd]['job_responsibilities']['responsibility_ids']).group_by(&:responsibility_type)
+  end
+%>
+
+<!--p>################Downloadhtml Template-###################<p/-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-10 col-xs-12 col-md-offset-1 jd-template">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class=" col-xs-6">
+              <h3><strong><%= job_title %></strong></h3>
+              <% if min_exp || max_exp.present? %>
+                <h5><strong> Experience: </strong><%= min_exp %>&nbsp;-&nbsp;<%= max_exp %> &nbsp; years</h5>
+              <% end %>
+              <% if location.present? %>
+                <h5><strong>Location: &nbsp; </strong><%= location %></h5>
+              <% end %>
+              <% if divison.present? %>
+                <h5><strong class="sub_title">Department: </strong><%= divison %></h5>
+              <% end %>
+            </div>
+            <div class="col-xs-6">
+              <div class="col-xs-6 col-xs-push-1 pull-right ">
+                <%= wicked_pdf_image_tag("talent_fore.png", class:"img-responsive", size: '150x50') %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% if company_detail.present? %>
+          <div class="row">
+            <div class="col-xs-12 company-details" style="margin-left:10px;">
+              <h5><strong class="sub_title">Company Name: </strong>
+                <%= company_detail["name"] %>
+              </h5>
+              <% if about_company.present? %>
+                <h4 class="sub_title" style="font-weight: bold; margin-top: 30px;"> About Company</h4>
+                <p class="text-justify">
+                  <%= about_company.html_safe %>
+                </p>
+              <%end%>  
+              <p>
+                <strong style="color:#666666">Website: </strong>
+                <% website = !(company_detail["website"][/\Ahttp:\/\//] || company_detail["website"][/\Ahttp:\/\//]) ? 'http://'+company_detail["website"] : company_detail["website"] %>
+                <%= link_to company_detail["website"], website, target: '_blank' %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+        <% if openings.present? %>
+          <div class="row">
+            <div class="col-xs-12" style="margin-left:10px;">
+              <h4><strong class="sub_title">Openings: </strong><%= openings %></h4>
+            </div>
+          </div>
+        <% end %>
+
+        <% if job_responsibilities || work_requirements || education_requirements %>
+          <div clas="row">
+            <div class="col-xs-12" style="margin-left:10px;">
+              <h3 class="sub_title">
+               Job Description:
+              </h3>
+            </div>
+          </div>    
+        <% end %>
+
+        <% if job_responsibilities.present? %>
+          <div class="row" style="margin-left:10px;">
+            <h4><strong>Responsibilities:</strong></h4>
+
+            <% job_responsibilities.each do |k, resp| %>
+              <h5><strong style="color:#666666"><%= resp_type(k.to_i) %></strong></h5>
+              <ul style="margin-left:-20px;">
+                <% resp.each do |res| %>
+                  <li><%= res['responsibility_text'] %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="row" style="margin-left:10px;">
+          <% if work_requirements.reject!(&:blank?).present? || education_requirements.reject!(&:blank?).present? %>
+            <h4><strong style="color:#666666">Requirements:</strong></h4>
+          <% end %>
+
+          <% if work_requirements.present? %>
+            <h5><strong>Work Requirements</strong></h5>
+            <ul style="margin-left:-20px;">
+              <% work_requirements.each do |resp| %>
+                <li><%= resp %></li>
+              <% end %>
+            </ul>
+          <% end %>
+
+          <% if education_requirements.present? %>
+            <h5><strong>Qualification Requirements</strong></h5>
+            <ul style="margin-left:-20px;">
+              <% education_requirements.each do |resp| %>
+                <li><%= resp %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+        <% if essential_skills || optional_skills %>
+          <div class= "row">
+            <div class="col-xs-12" style="margin-left: 10px;">
+              <h3 class="sub_title">Skills</h3>
+              <% if essential_skills %>
+                <h5 style="margin-bottom: 0;"><strong>Must have</strong></h5>
+                <%= essential_skills.join(', ') %>
+              <% end %>
+
+              <% if optional_skills %>
+                <h5 style="margin-bottom: 0;"><strong>Optional</strong></h5>
+                <%= optional_skills.join(', ') %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <div class= "row">
+          <div class="col-xs-12" style="margin-left: 10px;">
+            <% if qualification %>
+              <h4 class="last_section">Qualification</h4>
+              <p><%= qualification %></p>
+            <% end %>
+            
+            <% if reporting_to_title %>
+              <h4 class="last_section">Reporting To</h4>
+              <p><%= reporting_to_title %></p>
+            <% end %>
+
+            <% if job_type %>
+              <h4 class="last_section">Job Nature</h4>
+              <p><%= job_type %></p>
+            <% end %>
+
+            <% if to_apply %>
+              <h4 class="last_section">Apply To :- </h4>
+              <p><%= to_apply %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,110 @@
+// Place all the styles related to the job_description_creators controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+ h1 {
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #24607D;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.6em;
+    color: #555;
+    font-family: 'Open Sans', sans-serif;
+  }
+.control-label,.radio-label{
+  color:#666666;
+}
+
+.required.control-label:after{
+  content:"*";
+  color:red;
+}
+
+.jd-template{
+  padding: 20px;
+	box-shadow: 0px 0px 1px #78a2ba inset;
+}
+
+.jd-heading{
+  margin-left:50px;
+	color:#24607D;
+	font-size:30px;
+}
+
+.field_details{
+  margin-left:60px;
+	color:#24607D;
+	font-size:20px;
+	padding-top:5px;
+	padding-bottom:5px;
+	border-bottom: 1px solid black;
+}
+
+.field_contents{
+	margin-left:50px;
+}
+
+.blank{
+  margin-top:10px;
+  padding-top:10px;
+  padding-bottom:5px;
+
+}
+
+
+.panel-default .panel-heading {
+  background-color: #24607D;
+
+}
+.site_button {
+  background-color: #24607E;
+}
+
+.padded-jd {
+  padding: 20px 0;
+}
+
+
+.requirements {
+  margin-bottom: 10px;
+  ul {
+    max-height: 200px;
+    overflow-y: scroll;
+  }
+}
+
+.responsibilities, .selected-responsibilities {
+  ul {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+}
+
+.requirements, .responsibilities, .selected-responsibilities {
+  padding: 10px;
+  li {
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+}
+
+.min_exp, .max_exp {
+  width: 100px;
+}
+.select2-container--default .select2-selection--multiple, .select2-dropdown--below {
+  width: 450px !important;
+}
+.template{
+  margin-left:-0px;
+}
+
+.add-btn {
+  position: relative;
+  top: 70px;
+}

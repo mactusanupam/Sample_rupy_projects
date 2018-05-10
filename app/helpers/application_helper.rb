@@ -33,4 +33,7 @@ module ApplicationHelper
 
     [start, end_page, page_count]
   end
+  def get_company
+    Company.all.collect {|p| [ p.name, p.id] } << ["Add New", ""]
+  end
 end

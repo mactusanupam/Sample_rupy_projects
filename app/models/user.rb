@@ -8,7 +8,7 @@ class User < ApplicationRecord
   belongs_to :user_type
   belongs_to :company, optional: true
   validates :first_name, :last_name, presence: true
-
+  
   has_many :jobs
   has_many :job_applications, dependent: :destroy
 
