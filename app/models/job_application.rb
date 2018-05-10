@@ -7,6 +7,6 @@ class JobApplication < ApplicationRecord
   validates :status, presence: true
   has_attached_file :document
   #attr_accessor :document
-  validates_attachment :document, :content_type => { :content_type => %w(application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document) }
+  validates_attachment :document,presence: true, :content_type => { :content_type => %w(application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document) }
    # before_save :job_status_update
 end
