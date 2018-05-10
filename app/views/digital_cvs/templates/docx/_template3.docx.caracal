@@ -75,6 +75,31 @@ c1 = Caracal::Core::Models::TableCellModel.new do
     end
   end
 
+  if languages.size>0
+    h4 "LANGUAGES"
+    languages.each do |language|
+      a = []
+      a << 'Read' if language.read?
+      a << 'Write' if language.write?
+      a << 'Speak' if language.speak?
+      p language.language.title+ "("+a.join(', ')+")"
+    end
+    hr do
+      color   'E5E5E5'
+      line    :single
+      size    1
+      spacing 1
+    end
+  end
+
+  if cv_skill.size>0
+    h4 "SKILLS"
+    cv_skill.each do |skills|
+      p skills.skill.title
+      img font_url + "/assets/digital_cv/rating_images/"+skills.self_rating.to_s+"_rating.png",width:150 , height: 10, align: :left
+    end
+  end
+  
   c01=Caracal::Core::Models::TableCellModel.new do
     img font_url + "/assets/font-awesome-icon/map.png",width:10 , height: 10, align: :left 
   end

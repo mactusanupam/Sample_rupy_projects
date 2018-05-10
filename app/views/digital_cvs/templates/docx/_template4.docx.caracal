@@ -81,7 +81,7 @@ c3 = Caracal::Core::Models::TableCellModel.new do
     end
   end
 
-   c01=Caracal::Core::Models::TableCellModel.new do
+  c01=Caracal::Core::Models::TableCellModel.new do
     img font_url + "/assets/font-awesome-icon/map.png",width:10 , height: 10, align: :left 
   end
   c02=Caracal::Core::Models::TableCellModel.new do

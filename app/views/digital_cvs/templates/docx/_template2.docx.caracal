@@ -29,7 +29,9 @@ employment_details = @digital_cv.employment_details
 education_detail = @digital_cv.academic_details
 trainings = @digital_cv.trainings
 certifications = @digital_cv.certifications
+
 honor_awards = @digital_cv.honor_and_awards
+
 research_or_projectdet = @digital_cv.research_or_project_details
 references = @digital_cv.references
 font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://talentfore.com"

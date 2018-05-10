@@ -163,8 +163,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
     trainings.each do |tr|
       p tr.name+" from "+ tr.institute, bold: true
       p tr.duration.to_s+" days", align: :right
-      p ActionView::Base.full_sanitizer.sanitize(tr.info)
-      
+      p ActionView::Base.full_sanitizer.sanitize(tr.info)    
     end
   end
 
@@ -182,9 +181,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 
     honor_awards.each do |ha|
       p ha.title+" awarded by "+ha.awarded_by+" at "+ha.company_name
-      
       p ha.award_date.strftime("%B, %Y")
-      
     end
   end
 
@@ -245,8 +242,6 @@ c2 = Caracal::Core::Models::TableCellModel.new do
   table [[cp1,cp2]] do
       cell_style cols[0], width: 2000
   end
-  
-  
 end 
 
 docx.table [[c1,c2]] do
