@@ -259,6 +259,9 @@
 }
 .ss-item img{
   border-radius:5px 5px 0 0;
+  .zoom-img {
+    cursor: zoom-in;
+  }
 }
 
 .to {
@@ -297,7 +300,7 @@ abbr {
 }
 
 @media only screen and (max-width: 767px) {
-  .digital-cv-form ul .list-group-item {
+  .digital-cv-form ul .list-group-item, .modal-content {
     width: 100%;
   }
 }

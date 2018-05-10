@@ -324,11 +324,17 @@
           </div>
           <div class="col-md-6" style="float:left;">
             <ul class="list-unstyled">
+              <% if @digital_cv.personal_detail.try(:date_of_birth).present? %>
+                <li>
+                  <strong>Date of Birth: </strong>
+                  <%= @digital_cv.personal_detail.date_of_birth %>
+                </li>
+              <% end %>
               <% if @digital_cv.personal_detail.try(:marital_status).present?%>
-              <li>
-                <strong>Marital Status: </strong>
-                <%= DigitalCvsHelper::MARITAL_STATUS[@digital_cv.personal_detail.marital_status] %>
-              </li>
+                <li>
+                  <strong>Marital Status: </strong>
+                  <%= DigitalCvsHelper::MARITAL_STATUS[@digital_cv.personal_detail.marital_status] %>
+                </li>
               <% end %>
             </ul>
           </div>
