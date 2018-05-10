@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(version: 20180508113811) do
     t.string "name", default: "My Resume"
     t.text "summary"
     t.text "objective"
-    t.boolean "is_experienced"
+    t.boolean "is_experienced", default: true
     t.string "employment_status"
     t.bigint "user_id"
     t.bigint "template_id"
@@ -239,11 +239,6 @@ ActiveRecord::Schema.define(version: 20180508113811) do
     t.datetime "updated_at", null: false
     t.bigint "qualification_id"
     t.bigint "user_id"
-    t.string "job_status", default: "Open"
-    t.string "job_type", default: "Permanent"
-    t.index ["company_id"], name: "index_jobs_on_company_id"
-    t.index ["industry_id"], name: "index_jobs_on_industry_id"
-    t.index ["qualification_id"], name: "index_jobs_on_qualification_id"
     t.integer "job_view", default: 0
     t.integer "no_of_openings", default: 0
     t.string "seniority_level"
@@ -458,8 +453,6 @@ ActiveRecord::Schema.define(version: 20180508113811) do
   add_foreign_key "job_applications", "users"
   add_foreign_key "job_responsibilities", "job_titles"
   add_foreign_key "jobs", "companies"
-  add_foreign_key "jobs", "industries"
-  add_foreign_key "jobs", "qualifications"
   add_foreign_key "jobs", "degrees"
   add_foreign_key "jobs", "industries"
   add_foreign_key "jobs", "qualifications"
