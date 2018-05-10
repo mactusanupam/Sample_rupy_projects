@@ -42,11 +42,11 @@
             </div>
           </div>
           <% end %>
-          <% if @digital_cv.contact_detail.try(:linkedin_profile).present? %>
+          <% if @digital_cv.contact_detail.try(:linkedin_url).present? %>
           <div class="row">
             <div class="col-md-12 col-xs-12">
               <h5><strong>Linkedin Profile URL</strong></h5>
-              <%= @digital_cv.contact_detail.linkedin_profile %>
+              <%= @digital_cv.contact_detail.linkedin_url %>
             </div>
           </div>
           <% end %>
@@ -337,13 +337,21 @@
             <%end %>
           </div>
           <div class="col-md-6 col-xs-6">
-            <% if @digital_cv.personal_detail.try(:marital_status).present?%>
-            <div class="row">
-              <div class="col-md-6 col-xs-8"><strong>Marial Status</strong></div>
-              <div class="col-md-6 col-xs-4">
-                <%= DigitalCvsHelper::MARITAL_STATUS[@digital_cv.personal_detail.marital_status] %>
+            <% if @digital_cv.personal_detail.try(:date_of_birth).present?%>
+              <div class="row">
+                <div class="col-md-6 col-xs-8"><strong>Date of Birth</strong></div>
+                <div class="col-md-6 col-xs-4">
+                  <%= @digital_cv.personal_detail.date_of_birth %>
+                </div>
               </div>
-            </div>
+            <% end %>
+            <% if @digital_cv.personal_detail.try(:marital_status).present?%>
+              <div class="row">
+                <div class="col-md-6 col-xs-8"><strong>Marial Status</strong></div>
+                <div class="col-md-6 col-xs-4">
+                  <%= DigitalCvsHelper::MARITAL_STATUS[@digital_cv.personal_detail.marital_status] %>
+                </div>
+              </div>
             <% end %>
           </div>
         </div>

@@ -22,15 +22,18 @@ class User < ApplicationRecord
     self.user_type.title = 'Super Admin'
   end
 
-  def recruiter?
-    self.user_type.title = 'Recruiter'
-  end
-
   def job_user_validation?
     self.user_type_id.to_i == 1 || self.user_type_id.to_i == 2 ||self.user_type_id.to_i == 3 .present?
   end
 
   def has_applied?(job_id)
     job_applications.where(job_id: job_id).present?
+
+  def employer?
+    self.user_type.title = 'Employer'
+  end
+
+  def individual?
+    self.user_type.title = 'Individual'
   end
 end
