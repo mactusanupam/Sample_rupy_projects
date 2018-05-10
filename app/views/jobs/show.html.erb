@@ -20,7 +20,7 @@
                   <% if @job.company.profile_image.present?%>
                     <%= link_to image_tag(@job.company.profile_image.image.url(:small), class:"img-responsive"), company_url(@job.company) %>
                   <% else %>
-                    <%= link_to image_tag("/assets/logo-beta.png", class:"img-responsive", size: '150x50'), company_url(@job.company) %>
+                    <%= link_to image_tag("/assets/talent_fore.png", class:"img-responsive", size: '150x50'), company_url(@job.company) %>
                   <% end %>
                 </div>
               </div>

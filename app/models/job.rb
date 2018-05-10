@@ -18,9 +18,9 @@ class Job < ApplicationRecord
   validates :title, presence: true, length: { minimum: 5, allow_blank: true }
   validates :company_id, presence: true
   validates :qualification_id, presence: true
-  validates :offered_ctc, presence: true 
+  validates :offered_ctc, presence: true
   validates :location, presence: true
-  validates :degree_ids, presence: true 
+  validates :degree_ids, presence: true
   validates :specialization_id, presence: true
   validates :industry_id, presence: true
   validates :skill_ids, presence: true

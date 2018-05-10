@@ -10,7 +10,7 @@ class JobPolicy < ApplicationPolicy
   end
 
   def create?
-    user && (user.recruiter? || user.admin? || user.super_admin?)
+    user && (user.employer? || user.admin? || user.super_admin?)
   end
 
   def update?
@@ -34,12 +34,12 @@ class JobPolicy < ApplicationPolicy
   end
 
   def job_status_update?
-    user.job_user_validation?
+    posted_user_or_admin?
   end
 
   private
 
   def posted_user_or_admin?
-    user && (record.user == user || user.admin? || user.super_admin? || user.recruiter?)
+    user && (record.user == user || user.admin? || user.super_admin? || user.employer?)
   end
 end

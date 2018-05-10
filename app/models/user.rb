@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   has_many :jobs
   has_many :job_applications, dependent: :destroy
-  
+
   accepts_nested_attributes_for :company, :allow_destroy => true
 
   def admin?
@@ -22,12 +22,9 @@ class User < ApplicationRecord
     self.user_type.title = 'Super Admin'
   end
 
-  def job_user_validation?
-    self.user_type_id.to_i == 1 || self.user_type_id.to_i == 2 ||self.user_type_id.to_i == 3 .present?
-  end
-
   def has_applied?(job_id)
     job_applications.where(job_id: job_id).present?
+  end
 
   def employer?
     self.user_type.title = 'Employer'

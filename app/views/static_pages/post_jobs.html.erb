@@ -5,11 +5,7 @@
 
     <div class="caption">
       <h1 class="heading1">
-      <%if current_user.first_name == 'Super'||current_user.first_name == 'Admin' %>
         <%= link_to "Post Free Jobs!", new_job_path, class: 'btn btn-lg talent-fore-btn color-white btn-sharp big-btn' %>
-        <%else%>
-        <%= link_to "Let's Find jobs!", jobs_path, class: 'btn btn-lg talent-fore-btn color-white btn-sharp big-btn' %>
-        <%end%>
       </h1>
     </div>
   </div>
