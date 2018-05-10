@@ -10,10 +10,13 @@ unless UserType.any?
   UserType.create([
     {title: 'Super Admin'},
     {title: 'Admin'},
-    {title: 'Recruiter'},
-    {title: 'Other User'}
+    {title: 'Employer'},
+    {title: 'Individual'}
   ])
 end
+
+UserType.find_or_create_by(title: 'Recruiter').update_attributes({title: 'Employer'})
+UserType.find_or_create_by(title: 'Other User').update_attributes({title: 'Individual'})
 
 unless User.any?
   User.create([

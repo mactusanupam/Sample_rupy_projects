@@ -19,4 +19,12 @@ class User < ApplicationRecord
   def super_admin?
     self.user_type.title = 'Super Admin'
   end
+
+  def employer?
+    self.user_type.title = 'Employer'
+  end
+
+  def individual?
+    self.user_type.title = 'Individual'
+  end
 end
