@@ -11,17 +11,9 @@ module DigitalCvsHelper
     'o' => 'Other'
   }
 
-  def get_template
-    Template.all
-  end
-
-  def get_company
-    Company.all.collect {|p| [ p.name, p.id] } << ["Add New", ""]
-  end
-
   def share_cv_url(digital_cv)
     protocol = Rails.env.development? ? 'http' : 'https'
-    "#{protocol}://#{request.host_with_port}/digital-cvs/#{digital_cv.id}/share_and_download/#{digital_cv.slug}"
+    "#{protocol}://#{request.host_with_port}/ecv/#{digital_cv.slug}"
   end
 
   def all_sections
@@ -35,7 +27,7 @@ module DigitalCvsHelper
 
   def optional_sections
     %w(trainings certifications honor_and_awards \
-    research_or_project_details personal_details references)
+    research_or_project_details personal_details references share_url)
   end
 
   def current_section

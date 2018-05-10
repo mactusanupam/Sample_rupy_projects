@@ -1,38 +1,45 @@
-<div class="container">
+<% content_for :title, "2018 Professional Resume Templates to use | TalentFore" %>
+<% content_for :description, "Talentfore provides you with best resume templates. You get to select the best resume format as per your requirement when you use talentfore. These templates are available in multiple styles and can help you in building best resumes for creating great impression." %>
+<% content_for :keywords, "resume templates, best resume templates, building best resume, Professional Resume Templates, best resume format, TalentFore." %>
+
+<div class="container ss-item">
   <div class="row">
-    <div class="col-md-offset-2 col-md-8">
+    <div class="col-md-offset-1 col-md-10">
       <div class="text-center">
         <h3 style="color: #24607D;">SELECT A TEMPLATE</h3>
       </div>
-      <div id="template-carousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#template-carousel" data-slide-to="0" class="active"></li>
-          <li data-target="#template-carousel" data-slide-to="1" class=""></li>
-          <li data-target="#template-carousel" data-slide-to="2" class=""></li>
-        </ol>
-        <div class="carousel-inner">
-        <%= form_for @digital_cv do |f| %>
-          <% get_template.each_with_index do |template, index| %>
-            <%= f.hidden_field :template_id, value: template.id %>
-            <div class="item <%= 'active' if index == 0 %>">
-              <%= image_tag "digital_cv/cvtemplateimage/#{template.name}.png", alt: "Template Blue" %>
-              <div class="hidden-xs carousel-caption">
-                <%= f.submit "Use this template", class: "btn btn-primary btn-lg select-template-button" %>
+      <%= form_for @digital_cv do |f| %>
+        <% get_template.each_with_index do |template, index| %>
+          <%= f.hidden_field :template_id, value: template.id %>
+          <%= f.hidden_field :user_id, value: current_user.try(:id) %>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center margin-bottom-100">
+            <%= image_tag "digital_cv/cvtemplateimage/large/#{template.name}.jpg", alt: "#{template.name}", class: 'img-responsive zoom-img' %>
+            <div class="text-center" style="margin-top: -80px;">
+              <%= f.submit "Use this template", class: "btn btn-primary btn-xs talent-fore-btn" %>
+            </div>
+          </div>
+
+          <div class="modal fade" id="enlargeImageModal" tabindex="-1" role="dialog" aria-labelledby="enlargeImageModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                  <img src="" class="enlargeImageModalSource" style="width: 100%;">
+                </div>
               </div>
             </div>
-          <% end %>
+          </div>
         <% end %>
-        </div>
-        <a class="left carousel-control" href="#template-carousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#template-carousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
+      <% end %>
     </div>
   </div>
+  <p class="col-sm-offset-1 col-sm-10 text-justify" style="font-size: 16px;">
+    TalentFore Resume templates are designed and developed by Human Resource professionals and selected by recruiters. Your curriculum vitae (CV) or resume is often the first impression you'll make on a prospective employer, our Resume templates help you impress your future employers. These templates provide a range of styles – which can be adapted to fit your personal preference. Simply choose a template that suits your work experience and choice of design and get started. Our Professional resume templates will help you make a resume that stands out from a sea of applicants.
+    TalentFore Resume templates are a great place to start when you're reformatting or writing a resume. To catch the hiring manager’s attention your resume is the first place, show them how you are the best fit and wow them. Why try copying someone’s resume or use editing skills on Microsoft Word, when a professionally designed resume can be created in 10 minutes at Talentfore.com. Our resume templates ensure you mention the important information that recruiters are looking for while also ensuring that you have the option of including optional information which would be important for you to impress the recruiter.
+    You have option to choose from our Modern Resume Templates including Photo CV Templates. Create a beautiful CV or resume online in minutes. Download as PDF or DOCX.
+
+    Our blogs, communities and articles will help you to acquire the best knowledge regarding tthe latest trends and practices.
+  </p>
 </div>

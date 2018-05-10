@@ -19,6 +19,18 @@ Rails.application.routes.draw do
   end
 
   resources :companies
+  resources :jobs do
+    collection do
+      get :job_application_update
+      post :job_application_update
+      get :job_application
+    end
+    member do
+      post :apply
+      get :job_applied
+      patch :job_status_update
+    end
+  end
 
   resources :digital_cvs, path: '/resumes' do
     member do
@@ -32,21 +44,24 @@ Rails.application.routes.draw do
       get :preview, to: 'digital_cvs#show'
     end
   end
-
-  get '/resumes/:id/edit/:slug', to: 'digital_cvs#edit'
-  get '/job_description_creators/new/:slug', to: 'job_description_creators#new'
-
+  
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   resources :messages, only: [:create, :destroy]
 
+  get "/ecv/:slug", to: 'digital_cvs#online_resume', format: [:html, :pdf]
+  get '/resumes/:id/edit/:slug', to: 'digital_cvs#edit'
+  get '/resume-templates', to: 'digital_cvs#new'
+  
   get '/job_description_creators/new/:slug', to: 'job_description_creators#new'
-  get '/about-us', to:'static_pages#about_us'
-  get '/resume-builder', to:'static_pages#resume_builder'
-  get '/contact-us', to:'static_pages#contact_us'
-  get '/index', to:'static_pages#index'
+ 
+  get '/post-jobs', to:'static_pages#post_jobs'
   get '/states/:countrycode', to: 'static_pages#states'
-  get '/cities/', to: 'static_pages#cities'
+  get '/resumes-plans-pricing/:digital_cv_id', to: 'static_pages#resumes_plans_pricing'
+
+  %w(about-us resume-builder contact-us index cities).each do |act|
+    get "/#{act}", to: "static_pages##{act.gsub('-', '_')}"
+  end
 
   %w(skill language degree specialization job_title).each do |item|
     post "/save_new_#{item}", to: "skills_and_languages#save_new_#{item}", format: :json

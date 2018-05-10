@@ -4,7 +4,7 @@
     <%#= menu_item "Home", root_path %>
 
     <%= menu_item "Resume Builder", root_path %>
-    <%= menu_item "JD Creater", new_job_description_creator_path %>
+    <%= menu_item "Employer Zone", '/post-jobs' %>
     <%= drop_down "Community" do %>
       <%= menu_item "Blogs", "/blogs" %>
       <%= menu_item "Discussions", community_questions_path %>
@@ -12,6 +12,7 @@
     <% end %>
     <%= menu_item "Contact Us", contact_us_path %>
     <% if user_signed_in? %>
+      <%= menu_item "Employer Zone", '/post-jobs' %> 
       <%= drop_down "Welcome #{current_user.first_name}" do %>
         <%= menu_item "Logout", destroy_user_session_path, method: :delete %>
       <% end %>

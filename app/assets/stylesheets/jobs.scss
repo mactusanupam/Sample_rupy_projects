@@ -1,0 +1,192 @@
+// Place all the styles related to the jobs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.jobs {
+  line-height: 1.8em;
+}
+
+.jobtitle{
+  padding: 3px;
+}
+.search{
+  padding: 8%;
+  margin-top:2px;
+}
+
+.rightsidebar{
+  background-color:white;
+  padding: 12px;
+}
+.advertisesidebar{
+  margin-right:0.1em;
+  margin-left:0.1em;
+  background-color: #f2f2f2;
+  padding:9%;
+}
+.job-head{
+  margin-top:2px;
+  font-size:17px;
+  padding:1%;
+  background-color:#24607D;
+  color:white;
+  /*box-shadow: 0 0 1px #999999;*/
+}
+
+.job-title{
+  color: #09c ;
+  font-size:17px;
+}
+
+.job-content{
+  /*background-color:#eef3f6;*/
+  padding:10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 1px #999999;
+}
+
+.job-panel {
+  margin-left: -30px;
+  border-radius: 0;
+  min-height: 250px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+
+}
+
+
+.jobform{
+  box-shadow: 0 0 3px #999999;
+  background-color: white;
+  margin-bottom: 20px;
+}
+.icon{
+      padding: 2px 1px ;
+      margin-top:10%;
+}
+.jobformtitle{
+      padding-left: 0;
+      margin-top: 20px;
+      /*background-color: #E7E7E7;*/
+
+}
+
+
+.actions{
+      padding-bottom:2%;
+}
+
+
+/*------------------ job-show view -------------------*/
+
+.jobshowup {
+  background-color: #fff;
+  padding: 10px 10px 0;
+  margin-bottom: 20px;
+  box-shadow: 0 0 3px #999999;
+}
+.jobshowdown{
+  padding: 10px 10px;
+  background-color: #fff;
+  margin-bottom: 20px;
+  box-shadow: 0 0 3px #999999;
+}
+
+.job-description {
+  word-wrap: break-word;
+}
+
+.jobs-right {
+  min-height: 300px;
+}
+  .showdown-head{
+        padding:2%;
+        margin-left:10px;
+        color:#09c;
+      .showdown-title{
+        padding:3%;
+
+      }
+
+  }
+
+  .jobshowlabel {
+    width:110px;
+    color:black;
+    text-align: right;
+    clear: both;
+    float:left;
+    margin-right:15px;
+    }
+  .show-desc{
+    background-color:white;
+    padding:10px;
+    word-wrap: break-word;
+    margin-top:0px;
+  }
+.jobformdesc{
+    margin-left:13%;
+    width:85.3%;
+}
+.show-right-sidebar{
+    margin-top:1.5%;
+
+    background-color:white;
+    padding:5%;
+}
+
+
+.applied-jobside{
+  background-color:white;
+  min-height: 100px;
+}
+
+.job-well {
+  border-radius: 0;
+  background: white;
+  min-height: 200px;
+}
+
+.radio-label {
+  font-weight: normal;
+}
+
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}
+
+#job_form .control-label{
+  text-align:left;
+}
+#job_form .select select{
+width:100%;
+}
+.red-color{
+  color:red;
+}
+
+.job-button{
+  margin-top: 10px;
+}
+
+abbr[title="required"] {
+  display: none;
+}
+.jobdesc{
+  margin-left:30px;
+}
+
+
+.select2 .select2-container .select2-container--default .select2-container--above {
+  width: 280px;
+}
+.job_location{
+  margin-top: 15px;
+}

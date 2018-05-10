@@ -1,8 +1,7 @@
 class DigitalCvsController < ApplicationController
-  before_action :set_digital_cv, except: [:index, :new, :create, :share_and_download]
+  before_action :set_digital_cv, except: [:index, :new, :create, :online_resume]
   before_action :authenticate_user!, only: [:share_and_download]
 
-  # layout 'pdf', only: [:share_and_download]
   respond_to :docx
 
   # GET /digital_cvs
@@ -78,6 +77,11 @@ class DigitalCvsController < ApplicationController
     render :update, locals: { only_name: true, only_photo: false }
   end
 
+  def update_name
+    @digital_cv.update_column(:name, params[:digital_cv][:name])
+    render :update, locals: { only_name: true, only_photo: false }
+  end
+
   def save_photo
     photo = @digital_cv.photo
 
@@ -90,18 +94,43 @@ class DigitalCvsController < ApplicationController
   end
 
   def share_and_download
-    begin
-      conditions = {id: params[:id]}
-      conditions.merge!({slug: params[:slug]}) if params[:slug].present?
-
-      @digital_cv = DigitalCv.find_by! conditions
-    rescue ActiveRecord::RecordNotFound => e
-      redirect_to root_url, alert: "Sorry, no matching URL found!!"
+    unless @digital_cv.user_id
+      @digital_cv.user_id = current_user.id
+      @digital_cv.save(validate: false)
     end
+
     respond_to do |format|
       format.html
       format.pdf do
         render pdf: "#{@digital_cv.name}",
+        show_as_html: params.key?('debug'),
+        encoding:     'utf8',
+        margin: {left: 0, top: 0, right:0 }
+      end
+    end
+  end
+
+  def online_resume
+    @digital_cv = DigitalCv.find_by(slug: params[:slug])
+    raise ActiveRecord::RecordNotFound unless @digital_cv
+
+    # cookies[:ecv] ||= { :value => { digital_cv_id: @digital_cv.id, downloaded: false, viewed: false }, :expires => 3.month.from_now }
+
+    if request.format == 'html'
+      @digital_cv.increment!(:view)
+      # cookies[:ecv][:viewed] = true
+    end
+
+    if request.format == 'pdf'
+      @digital_cv.increment!(:download)
+      # cookies[:ecv]['downloaded'] = 'true'
+    end
+
+    respond_to do |format|
+      format.html { render :share_and_download }
+      format.pdf do
+        render pdf: "#{@digital_cv.name}",
+        template: 'digital_cvs/share_and_download',
         show_as_html: params.key?('debug'),
         margin: {left: 0, top: 0, right:0 }
       end
@@ -120,13 +149,15 @@ class DigitalCvsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_digital_cv
     @digital_cv = DigitalCv.find(params[:id])
+    cv = cookies[:digital_cv]
+    raise Pundit::NotAuthorizedError unless DigitalCvPolicy.new(current_user, @digital_cv, cv).send("#{action_name}?")
   end
 
 
   # Only allow a trusted parameter "white list" through.
   def digital_cv_params
     params.require(:digital_cv).permit(
-      :summary, :id, :name, :user_id, :objective, :is_experienced, :employment_status, :template_id, :template,
+      :summary, :id, :name, :user_id, :objective, :is_experienced, :employment_status, :template_id, :template, :slug,
       employment_details_attributes: employment_details_attributes,
       academic_details_attributes: academic_details_attributes,
       cv_languages_attributes: cv_languages_attributes,

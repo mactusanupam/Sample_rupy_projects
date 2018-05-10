@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420080809) do
+ActiveRecord::Schema.define(version: 20180508113811) do
 
   create_table "academic_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "institute"
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.index ["degree_id"], name: "index_academic_details_on_degree_id"
     t.index ["digital_cv_id"], name: "index_academic_details_on_digital_cv_id"
     t.index ["specialization_id"], name: "index_academic_details_on_specialization_id"
+  end
+
+  create_table "billing_plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "plan_code"
+    t.string "plan_name"
+    t.decimal "plan_price", precision: 10, scale: 5
+    t.string "plan_frequency"
+    t.string "type"
+    t.text "features"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "certifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -81,7 +92,7 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.string "linkedin_url"
     t.string "skype_username"
     t.text "address"
-    t.integer "pincode"
+    t.string "pincode"
     t.bigint "digital_cv_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -127,6 +138,13 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "degrees_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "degree_id"
+    t.bigint "job_id"
+    t.index ["degree_id"], name: "index_degrees_jobs_on_degree_id"
+    t.index ["job_id"], name: "index_degrees_jobs_on_job_id"
+  end
+
   create_table "digital_cvs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "My Resume"
     t.text "summary"
@@ -138,6 +156,8 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "view", default: 0
+    t.integer "download", default: 0
     t.index ["slug"], name: "index_digital_cvs_on_slug"
     t.index ["template_id"], name: "index_digital_cvs_on_template_id"
     t.index ["user_id"], name: "index_digital_cvs_on_user_id"
@@ -185,6 +205,8 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.string "document_content_type"
     t.integer "document_file_size"
     t.datetime "document_updated_at"
+    t.string "status", default: "Applied"
+    t.string "recruiter_comment", default: "Application Received"
     t.index ["job_id"], name: "index_job_applications_on_job_id"
     t.index ["user_id"], name: "index_job_applications_on_user_id"
   end
@@ -222,6 +244,18 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.index ["company_id"], name: "index_jobs_on_company_id"
     t.index ["industry_id"], name: "index_jobs_on_industry_id"
     t.index ["qualification_id"], name: "index_jobs_on_qualification_id"
+    t.integer "job_view", default: 0
+    t.integer "no_of_openings", default: 0
+    t.string "seniority_level"
+    t.bigint "degree_id"
+    t.bigint "specialization_id"
+    t.string "job_status", default: "Open"
+    t.string "job_type", default: "Permanent"
+    t.index ["company_id"], name: "index_jobs_on_company_id"
+    t.index ["degree_id"], name: "index_jobs_on_degree_id"
+    t.index ["industry_id"], name: "index_jobs_on_industry_id"
+    t.index ["qualification_id"], name: "index_jobs_on_qualification_id"
+    t.index ["specialization_id"], name: "index_jobs_on_specialization_id"
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
@@ -320,6 +354,20 @@ ActiveRecord::Schema.define(version: 20180420080809) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "billing_plan_id"
+    t.string "type"
+    t.string "state"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "subscribeble_type"
+    t.bigint "subscribeble_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billing_plan_id"], name: "index_subscriptions_on_billing_plan_id"
+    t.index ["subscribeble_type", "subscribeble_id"], name: "index_subscriptions_on_subscribeble_type_and_subscribeble_id"
+  end
+
   create_table "templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "template_type"
@@ -398,6 +446,8 @@ ActiveRecord::Schema.define(version: 20180420080809) do
   add_foreign_key "cv_languages", "languages"
   add_foreign_key "cv_skills", "digital_cvs"
   add_foreign_key "cv_skills", "skills"
+  add_foreign_key "degrees_jobs", "degrees"
+  add_foreign_key "degrees_jobs", "jobs"
   add_foreign_key "digital_cvs", "templates"
   add_foreign_key "digital_cvs", "users"
   add_foreign_key "employment_details", "companies"
@@ -410,6 +460,10 @@ ActiveRecord::Schema.define(version: 20180420080809) do
   add_foreign_key "jobs", "companies"
   add_foreign_key "jobs", "industries"
   add_foreign_key "jobs", "qualifications"
+  add_foreign_key "jobs", "degrees"
+  add_foreign_key "jobs", "industries"
+  add_foreign_key "jobs", "qualifications"
+  add_foreign_key "jobs", "specializations"
   add_foreign_key "jobs", "users"
   add_foreign_key "jobs_skills", "jobs"
   add_foreign_key "jobs_skills", "skills"
@@ -417,6 +471,7 @@ ActiveRecord::Schema.define(version: 20180420080809) do
   add_foreign_key "references", "digital_cvs"
   add_foreign_key "references", "job_titles"
   add_foreign_key "research_or_project_details", "digital_cvs"
+  add_foreign_key "subscriptions", "billing_plans"
   add_foreign_key "trainings", "digital_cvs"
   add_foreign_key "users", "companies"
   add_foreign_key "users", "job_titles"

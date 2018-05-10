@@ -10,10 +10,13 @@ unless UserType.any?
   UserType.create([
     {title: 'Super Admin'},
     {title: 'Admin'},
-    {title: 'Recruiter'},
-    {title: 'Other User'}
+    {title: 'Employer'},
+    {title: 'Individual'}
   ])
 end
+
+UserType.find_or_create_by(title: 'Recruiter').update_attributes({title: 'Employer'})
+UserType.find_or_create_by(title: 'Other User').update_attributes({title: 'Individual'})
 
 unless User.any?
   User.create([
@@ -140,13 +143,14 @@ unless Specialization.any?
   ])
 end
 
-unless Template.any?
-  Template.create([
-    {name: 'template1', template_type: 'photo'},
-    {name: 'template2', template_type: 'photo'},
-    {name: 'template3', template_type: 'photo'}
-  ])
-end
+Template.find_or_create_by(name: 'template1').update_attributes({template_type: ''})
+Template.find_or_create_by(name: 'template2').update_attributes({template_type: ''})
+Template.find_or_create_by(name: 'template3').update_attributes({template_type: ''})
+Template.find_or_create_by(name: 'template4').update_attributes({template_type: 'photo'})
+Template.find_or_create_by(name: 'template5').update_attributes({template_type: 'photo'})
+Template.find_or_create_by(name: 'template6').update_attributes({template_type: ''})
+Template.find_or_create_by(name: 'template7').update_attributes({template_type: 'photo'})
+Template.find_or_create_by(name: 'template8').update_attributes({template_type: 'photo'})
 
 unless JobTitle.any?
   JobTitle.create([
@@ -209,3 +213,39 @@ end
 #     end
 #   end
 # end
+
+DigitalCvPlan.find_or_create_by(plan_code: 'cv01').update_attributes({
+  plan_name:                 'Pay Per Resume',
+  plan_price:                '1.95',
+  plan_frequency:            'one resume',
+  features:                  {
+                                'download formats'   => 'PDF and DOCX(MS Word)',
+                                'resume templates'   => 20,
+                                'cover letter'       => true,
+                                'email support'      => true,
+                                'photo cv templates' => 5,
+                                'multiple download'  => '30 days',
+                                'multiple resumes'   => false,
+                                'custom url'         => false,
+                                'analytics'          => false,
+                                'linkedin import'    => true
+                              }
+})
+
+DigitalCvPlan.find_or_create_by(plan_code: 'cv02').update_attributes({
+  plan_name:                 'Premium Plan',
+  plan_price:                '9.95',
+  plan_frequency:            'quarterly',
+  features:                  {
+                                'download formats'   => 'PDF and DOCX(MS Word)',
+                                'resume templates'   => 20,
+                                'cover letter'       => true,
+                                'email support'      => true,
+                                'photo cv templates' => 5,
+                                'multiple download'  => '90 days',
+                                'multiple resumes'   => 10,
+                                'custom url'         => true,
+                                'analytics'          => true,
+                                'linkedin import'    => true
+                              }
+})

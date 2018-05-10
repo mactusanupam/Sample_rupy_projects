@@ -100,6 +100,10 @@
   margin-bottom: 50px;
 }
 
+.margin-bottom-100 {
+  margin-bottom: 100px;
+}
+
 .margin-bottom-20 {
   margin-bottom: 20px;
 }
@@ -116,4 +120,20 @@
   vertical-align: middle;
   vertical-align: -webkit-baseline-middle;
   vertical-align: -moz-middle-with-baseline;
+}
+
+.icon-green {
+  color: #3c763d;
+}
+
+.icon-red {
+  color: #a94442;
+}
+
+.margin-left-40 {
+  margin-left: 40px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e2e2e2;
 }

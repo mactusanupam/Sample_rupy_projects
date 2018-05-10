@@ -7,21 +7,34 @@
   $('.modal-backdrop').remove()
   $('.photo-div').html('').html('<%= escape_javascript(render partial: "digital_cvs/photo_partial" ) %>')
 <% else %>
-  var activeTab = $('.resume-editor-left li.active');
-  <% if errors %>
-    $("#resume-editor-form").html('').html('<%= escape_javascript(render partial: "digital_cvs/#{current_section}" ) %>');
+  <% if params[:digital_cv] && params[:digital_cv][:slug] %>
+    $('#share-modal').html('').html("<%= escape_javascript(render 'digital_cvs/share_url') %>");
+
+    <% if @digital_cv.errors.any? %>
+      //update class for label and input
+      $('#share-modal label').removeClass('col-sm-2').addClass('col-sm-4');
+      $('#share-modal input').parent('div.col-sm-9').removeClass('col-sm-9').addClass('col-sm-7');
+    <% else %>
+      var html = $('#share-modal .success-content').html();
+      $('#share-modal .modal-body').html('').html(html);
+    <% end %>
   <% else %>
-    $.toaster('Resume information saved successfully.', 'Success', 'success');
+    var activeTab = $('.resume-editor-left li.active');
+    <% if errors %>
+      $("#resume-editor-form").html('').html('<%= escape_javascript(render partial: "digital_cvs/#{current_section}" ) %>');
+    <% else %>
+      $.toaster('Resume information saved successfully.', 'Success', 'success');
 
-    var href = activeTab.next('li').find('a').attr('href');
+      var href = activeTab.next('li').find('a').attr('href');
 
-    if(typeof href !== "undefined") {
-      $.get(href, function(data) {}, 'script');
-    } else if(activeTab.next('li').hasClass('optional-section')) {
-      href = activeTab.next('li').next('li').find('a').attr('href');
-      $.get(href, function(data) {}, 'script');
-    }
+      if(typeof href !== "undefined") {
+        $.get(href, function(data) {}, 'script');
+      } else if(activeTab.next('li').hasClass('optional-section')) {
+        href = activeTab.next('li').next('li').find('a').attr('href');
+        $.get(href, function(data) {}, 'script');
+      }
 
+    <% end %>
   <% end %>
 <% end %>
 

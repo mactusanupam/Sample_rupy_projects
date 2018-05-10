@@ -3,6 +3,14 @@
 
 $(document).ready(function(){
 
+  $('#online-resume').popover({
+    html : true,
+    placement: 'bottom',
+    content: function() {
+      return $('#preview-cv #popover-content-wrapper').html();
+    }
+  });
+
   //CV name inline change
   $('.edit-cv-name').hide();
   $('#cv-name-change').click(function(){
@@ -62,12 +70,19 @@ $(document).ready(function(){
     var valueSelected = this.value;
     var companyFields = $(this).parents('.employer-details').children('.cv-company-fields');
 
-    if (!valueSelected) {
+    if (valueSelected == 'others') {
       companyFields.find('input').prop('disabled', false);
       companyFields.removeClass('hide');
     } else {
       companyFields.find('input').attr('disabled', true);
       companyFields.addClass('hide');
     }
+  });
+
+  //image zoom in
+  $('.ss-item img').on('click', function() {
+    var src = $(this).attr('src').replace("small", "large");
+    $('.enlargeImageModalSource').attr('src', src);
+    $('#enlargeImageModal').modal('show');
   });
 })
