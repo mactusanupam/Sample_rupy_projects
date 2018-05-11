@@ -36,7 +36,11 @@ class JobPolicy < ApplicationPolicy
   def job_status_update?
     posted_user_or_admin?
   end
-
+  
+  def suspicious_job?
+    true
+  end
+    
   private
 
   def posted_user_or_admin?

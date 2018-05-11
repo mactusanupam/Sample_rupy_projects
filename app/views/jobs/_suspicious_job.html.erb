@@ -1,0 +1,21 @@
+<hr />
+<div class="row">
+  <div class="col-xs-8 col-sm-8 col-md-8">
+    <h4><strong>See anything suspicious? Report this job posting.</strong></h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-8 col-sm-8 col-md-8" style="margin-top: 15px;">
+    <% s_job = @suspicious_job || @job.suspicious_jobs.build %>
+    <%= simple_form_for s_job, url: suspicious_job_job_path(@job), html: { method: :post, remote: true}, wrapper: :horizontal_form_job do |f| %>
+      <%= f.error_notification %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= f.input :reporter_email, :label => "Your Email Address" %>
+      <%= f.input :comment, :label => "This job is", input_html: {rows: 1, cols: 10}, placeholder: 'What is your suspicion?' %>
+      <%= f.input :additional_comment, placeholder: 'Additonal information about suspicion' %>
+      <div class="col-xs-8 col-sm-8 col-md-8 text-center">
+        <%= f.submit "Submit", class: 'btn btn-primary talent-fore-btn'  %>
+      </div>
+   <% end %>
+  </div>
+</div>

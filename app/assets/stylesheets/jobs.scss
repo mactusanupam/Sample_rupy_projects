@@ -98,6 +98,7 @@ table, th, td {
   box-shadow: 0 0 3px #999999;
 }
 
+
 .job-description {
   word-wrap: break-word;
 }
@@ -187,5 +188,15 @@ abbr[title="required"] {
   .job-location {
     margin-top: -13px;
     margin-bottom: 5px;
+    .checkbox {
+      padding-top: 0px !important;
+    }
   }
+}
+
+.suscipicious-job {
+  background-color: #f3f0f0;
+  margin: 0 -10px;
+  padding: 20px;
+  padding-top: 0;
 }
