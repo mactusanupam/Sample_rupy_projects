@@ -69,7 +69,7 @@
         <% get_template.each_with_index do |template, index| %>
           <div class="item <%= index == 0 ? 'active' : ''%>">
             <div class="carousel-col">
-              <%= image_tag "digital_cv/cvtemplateimage/#{template.name}.png", alt: "Template Blue", class: 'img-responsive' %>
+              <%= image_tag "digital_cv/cvtemplateimage/small/#{template.name}.jpg", alt: "Template Blue", class: 'img-responsive' %>
             </div>
           </div>
         <% end %>

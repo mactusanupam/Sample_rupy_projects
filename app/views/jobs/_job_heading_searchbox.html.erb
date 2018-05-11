@@ -1,0 +1,22 @@
+<div class="row blue-bar">
+  <div class="job-top-search">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class= "col-md-offset-2 col-sm-offset-2 col-xs-offset-2 col-xs-6 col-sm-6 col-md-6">
+      <% if params[:action] == 'index' %>
+        <%= form_tag(jobs_path , method: :get , class: "col-md-12 jobtitle") do %>
+          <%= text_field_tag :title, params[:title] , class: "col-md-10 jobtitle" , placeholder:"Search by job title" %>
+          <%= submit_tag 'Search' ,name: nil , class: "col-md-2 jobtitle"%>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-xs-4 col-md-4 col-sm-4">
+      <%= link_to 'All Jobs', jobs_path , class: "btn btn-link", style: 'color: white' %>
+      <%= link_to 'Applied Jobs', job_application_jobs_path , class: "btn btn-link", style: 'color: white' %>
+      <% if policy(Job).create? %>
+        <%= link_to 'JD Creater', new_job_description_creator_path , class: "btn btn-link", style: 'color: white' %>
+        <%= link_to 'Post Job', new_job_path , class: "btn btn-link", style: 'color: white' %>
+      <% end %>
+    </div>
+    </div>
+  </div>
+</div>

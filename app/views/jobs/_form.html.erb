@@ -1,0 +1,63 @@
+<div class="row">
+  <%= simple_form_for @job, html: { id: "job_form_id", style: 'display: inline;' }, wrapper: :horizontal_form_job, wrapper_mappings: { radio_buttons: :horizontal_job_radio_and_checkboxes }  do |f| %>
+    <div class= "col-md-6 col-sm-12">
+      <%= f.hidden_field :user_id ,:value => current_user.id %>
+      <%= f.input :title,:label => "Job Title", placeholder:'Job Title' %>
+      <%= f.input :qualification_id,:collection =>Qualification.all,:label_method => :title,:value_method => :id, :prompt => 'Select Required Qualification', input_html:{ class: 'qualification'} %>
+      <%= f.input :degree_ids,:collection =>Degree.all,:label_method => :title,:value_method => :id,:label => "Degrees", :prompt => 'Select OR write option', input_html:{ class: 'degree', multiple: true} %>
+      <%= f.input :specialization_id,:collection =>Specialization.all,:label_method => :title,:value_method => :id, :prompt => 'Select OR write specialization', input_html:{ class: 'specialization'} %>
+      <%= f.input :skill_ids,:collection =>Skill.all,:label_method => :title,:value_method => :id,:label => "Job Skills",:prompt => 'Select some options', input_html: { class: 'skill', multiple: true} %>
+
+      <%= f.input "Experience", required: true do %>
+        <% exp_array = (0..20).to_a.map(&:to_s)
+        min_exp, max_exp = @job.experience.present? ? @job.experience.split('-').map(&:to_i) : nil %>
+         <div class= "col-md-5 no-left-right-padding">
+          <%= f.input :min_exp, :collection => exp_array, label: false ,:prompt=> 'Min Exp', :selected => min_exp, required: false %>
+        </div>
+        <div class= "col-md-5 no-left-right-padding">
+          <%= f.hint "-", class: 'col-sm-1 padding-top-5 text-center margin-left_-40 to' %>
+          <%= f.input :max_exp, :collection => exp_array, label: false, :prompt=> 'Max Exp', :selected => max_exp, required: false %>
+        </div>
+        <div class= "col-md-1 padding-top-5 text-center margin-left_-40">
+          <span>Years</span>
+        </div>
+      <% end %>
+    </div>
+
+    <div class= "col-md-6 col-sm-12">
+      <%= f.input :industry_id, :collection => Industry.all, :label_method => :name,:value_method => :id, :prompt=> 'Select an Industry', input_html:{ class: 'industry'} %>
+      <%= f.input :company_id, :collection =>Company.all, :label_method => :name,:value_method => :id, :prompt => 'Select a Company', input_html: { class: 'company'} %>
+      <%= f.input :location, placeholder:'Job Location', input_html:{ class: 'location'}  %>
+      <div class="row">
+        <div class="col-sm-9 no-padding form-group pull-right job-location">
+          <%= f.check_box :location, {}, 'remote' %>
+          <%= f.label :location, "Virtual Office / Remote working", class: 'location-label' %>
+        </div>
+      </div>
+      <%= f.input :no_of_openings,:label => "Openings", placeholder:'Enter the Enteger value eg,5', wrapper: :horizontal_form_job  %>
+      <%= f.input :offered_ctc, placeholder:'Enter the integer value,eg-100000', wrapper: :horizontal_form_job  %>
+
+      <%= f.input :job_type, as: :radio_buttons, collection: [['Full Time', 'Full Time'], ['Part Time', 'Part Time'], ['Internship', 'Internship'], ['Contract', 'Contract']], label_method: :second, value_method: :first, :item_wrapper_class => 'radio-inline' %>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="margin-left_-40">
+      <%= f.input :seniority_level, as: :radio_buttons, collection: [['Internship', 'Internship'], ['Entry Level', 'Entry Level'], ['Associate', 'Associate'], ['Middle Management', 'Middle Management'], ['Mid-Senior Level', 'Mid-Senior Level'], ['Senior Management', 'Senior Management']], label_method: :second, value_method: :first, :item_wrapper_class => 'radio-inline' %>
+
+      <%= f.input :description, placeholder:'Min 100 character description required', input_html:{class: "form-control wysihtml5"} %>
+    </div>
+
+    <div class="col-md-offset-2 col-sm-offset-2">
+      <div class="row margin-left_-40">
+        <%= f.check_box :job_status, {class: "pull-left"}, "Draft", "Open"%>
+        <p class="padding-left-25"><strong>&nbsp;Save as Draft</strong></p>
+      </div>
+      <div class="row margin-left_-40">
+        <div class="actions">
+          <%= f.submit "Submit", class: 'btn btn-primary site_button' %>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>
+
