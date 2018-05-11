@@ -149,9 +149,9 @@ c3 = Caracal::Core::Models::TableCellModel.new do
   
 
   if cv_skill.size>0
-    h4 "PROFESSIONAL SKILLS"
+    h4 "SKILLS"
     cv_skill.each do |skills|
-      p skills.skill.title
+      p skills.skill.title, bold: true
       img font_url + "/assets/digital_cv/rating_images/"+skills.self_rating.to_s+"_rating.png",width:150 , height: 10, align: :left
     end
     hr do
@@ -169,7 +169,10 @@ c3 = Caracal::Core::Models::TableCellModel.new do
       a << 'Read' if language.read?
       a << 'Write' if language.write?
       a << 'Speak' if language.speak?
-      p language.language.title+ "("+a.join(', ')+")"
+      p do
+        text language.language.title, bold: true
+        text " ("+a.join(', ')+")"
+      end
     end
     hr do
       color   'E5E5E5'
@@ -185,10 +188,12 @@ c4 = Caracal::Core::Models::TableCellModel.new do
     h4 "EXPERIENCE"
   end
   employment_details.each do |e|
-    h4 e.job_title.title, bold: true
     end_date = e.present_job ? 'present' : e.end_date.strftime("%B, %Y") 
+    h4 do
+        text e.job_title.title
+        text " | "+e.start_date.strftime("%B, %Y")+" - "+end_date, bold: false, align: :right
+    end
     h5 e.company.name 
-    p e.start_date.strftime("%B, %Y")+" - "+end_date, align: :right
     if e.responsibilities.present?
       h4 "Responsibilities", italic:true, bold: true
       p ActionView::Base.full_sanitizer.sanitize(e.responsibilities)
@@ -213,7 +218,11 @@ c4 = Caracal::Core::Models::TableCellModel.new do
       else 
       "Percentage -" + e.percentage.to_s 
       end 
-      p e.degree.title + " in "+ e.specialization.title, bold: true
+      p do
+        text e.degree.title, bold: true
+        text " in "
+        text e.specialization.title, bold: true
+      end
       p e.institute + " | "+e.university
       p e.start_date.strftime("%B, %Y")+" - "+edu_end_date+" | "+percentage
       p
@@ -230,9 +239,20 @@ c4 = Caracal::Core::Models::TableCellModel.new do
     h4 "TRAININGS"
 
     trainings.each do |tr|
-      p tr.name+" from "+ tr.institute, bold: true
-      p tr.duration.to_s+" days", align: :right
-      p ActionView::Base.full_sanitizer.sanitize(tr.info)
+      c41 = Caracal::Core::Models::TableCellModel.new do
+        p do 
+          text tr.name, bold: true
+          text " from "
+          text tr.institute, bold: true
+        end
+        p ActionView::Base.full_sanitizer.sanitize(tr.info)
+      end
+      c42 = Caracal::Core::Models::TableCellModel.new do
+        p tr.duration.to_s+" days", align: :right
+      end
+      table [[c41,c42]] do
+        cell_style cols[1], width: 900
+      end
       hr do
           color   'E5E5E5'
           line    :single
@@ -261,7 +281,11 @@ c4 = Caracal::Core::Models::TableCellModel.new do
     h4 "HONORS AND AWARDS"
 
     honor_awards.each do |ha|
-      p ha.title+" awarded by "+ha.awarded_by+" at "+ha.company_name
+      p do
+        text ha.title, bold: true
+        text " awarded by "+ha.awarded_by+" at "
+        text ha.company_name, bold: true
+      end
       p ha.award_date.strftime("%B, %Y")
       hr do
           color   'E5E5E5'

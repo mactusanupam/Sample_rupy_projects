@@ -234,7 +234,7 @@
 								<%= ha.award_date.strftime("%b, %Y") %>
 							</div>
 							<div class="col-md-10 col-xs-9">
-								<%= ha.title %> at <%= ha.company_name %>
+								<strong><%= ha.title %></strong> awarded by <%= ha.awarded_by %> at <%= ha.company_name || 'Unknown' %>
 							</div>
 						</div>
 					<% end %>

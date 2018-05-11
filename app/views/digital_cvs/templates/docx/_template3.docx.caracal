@@ -75,31 +75,6 @@ c1 = Caracal::Core::Models::TableCellModel.new do
     end
   end
 
-  if languages.size>0
-    h4 "LANGUAGES"
-    languages.each do |language|
-      a = []
-      a << 'Read' if language.read?
-      a << 'Write' if language.write?
-      a << 'Speak' if language.speak?
-      p language.language.title+ "("+a.join(', ')+")"
-    end
-    hr do
-      color   'E5E5E5'
-      line    :single
-      size    1
-      spacing 1
-    end
-  end
-
-  if cv_skill.size>0
-    h4 "SKILLS"
-    cv_skill.each do |skills|
-      p skills.skill.title
-      img font_url + "/assets/digital_cv/rating_images/"+skills.self_rating.to_s+"_rating.png",width:150 , height: 10, align: :left
-    end
-  end
-  
   c01=Caracal::Core::Models::TableCellModel.new do
     img font_url + "/assets/font-awesome-icon/map.png",width:10 , height: 10, align: :left 
   end
@@ -168,7 +143,7 @@ c1 = Caracal::Core::Models::TableCellModel.new do
   if cv_skill.size>0
     h4 "PROFESSIONAL SKILLS"
     cv_skill.each do |skills|
-      p skills.skill.title
+      p skills.skill.title, bold: true
       img font_url + "/assets/digital_cv/rating_images/"+skills.self_rating.to_s+"_rating.png",width:150 , height: 10, align: :left
     end
     hr do
@@ -186,7 +161,10 @@ c1 = Caracal::Core::Models::TableCellModel.new do
       a << 'Read' if language.read?
       a << 'Write' if language.write?
       a << 'Speak' if language.speak?
-      p language.language.title+ "("+a.join(', ')+")"
+      p do
+        text language.language.title, bold: true
+        text " ("+a.join(', ')+")"
+      end
     end
     hr do
       color   'E5E5E5'
@@ -208,9 +186,12 @@ c2 = Caracal::Core::Models::TableCellModel.new do
       img font_url + "/assets/font-awesome-icon/circular.png",width:6 , height: 6, align: :left
     end
     c22 = Caracal::Core::Models::TableCellModel.new do
-      h4 e.job_title.title, bold: true
-      h5 e.company.name 
-      p e.start_date.strftime("%B, %Y")+" - "+end_date, align: :right
+      h4 do
+        text e.job_title.title
+        text " | "+e.start_date.strftime("%B, %Y")+" - "+end_date, bold: false, align: :right
+      end
+      
+      h5 e.company.name
       if e.responsibilities.present?
         h4 "Responsibilities", italic:true, bold: true
         p ActionView::Base.full_sanitizer.sanitize(e.responsibilities)
@@ -243,7 +224,11 @@ c2 = Caracal::Core::Models::TableCellModel.new do
         else 
         "Percentage -" + e.percentage.to_s 
         end 
-        p e.degree.title + " in "+ e.specialization.title, bold: true
+        p do
+          text e.degree.title, bold: true
+          text " in "
+          text e.specialization.title, bold: true
+        end
         p e.institute + " | "+e.university
         p e.start_date.strftime("%B, %Y")+" - "+edu_end_date+" | "+percentage
       end
@@ -268,12 +253,19 @@ c2 = Caracal::Core::Models::TableCellModel.new do
       end
       c26 = Caracal::Core::Models::TableCellModel.new do
 
-      p tr.name+" from "+ tr.institute, bold: true
-      p tr.duration.to_s+" days", align: :right
+      p do 
+        text tr.name, bold: true
+        text " from "
+        text tr.institute, bold: true
+      end
       p ActionView::Base.full_sanitizer.sanitize(tr.info)
       end
-      table [[c25,c26]] do
+      c27 = Caracal::Core::Models::TableCellModel.new do
+      p tr.duration.to_s+" days", align: :right
+      end
+      table [[c25,c26,c27]] do
         cell_style cols[0], width: 500
+        cell_style cols[2], width: 900
       end
       hr do
           color   'E5E5E5'
@@ -288,15 +280,17 @@ c2 = Caracal::Core::Models::TableCellModel.new do
     h4 "CERTIFICATIONS"
 
     certifications.each do |cert|
-      c27 = Caracal::Core::Models::TableCellModel.new do
+      c28 = Caracal::Core::Models::TableCellModel.new do
         img font_url + "/assets/font-awesome-icon/circular.png",width:6 , height: 6, align: :left
       end
-      c28 = Caracal::Core::Models::TableCellModel.new do
-      p cert.title, bold: true
-      p cert.certifier
-      p cert.date.strftime("%B, %Y")
+      c29 = Caracal::Core::Models::TableCellModel.new do
+        p cert.title, bold: true
+        p cert.certifier
       end
-      table [[c27,c28]] do
+      c30 = Caracal::Core::Models::TableCellModel.new do
+        p cert.date.strftime("%B, %Y"), align: :right
+      end
+      table [[c28,c29,c30]] do
         cell_style cols[0], width: 500
       end
       hr do
@@ -315,12 +309,18 @@ c2 = Caracal::Core::Models::TableCellModel.new do
         img font_url + "/assets/font-awesome-icon/circular.png",width:6 , height: 6, align: :left
       end
       c30 = Caracal::Core::Models::TableCellModel.new do
-      p ha.title+" awarded by "+ha.awarded_by+" at "+ha.company_name
-      
-      p ha.award_date.strftime("%B, %Y")
+        p ha.title, bold: true
+        p do
+        text " awarded by "+ha.awarded_by+" at "
+        text ha.company_name, bold: true
+        end
       end
-      table [[c29,c30]] do
+      c31 = Caracal::Core::Models::TableCellModel.new do
+        p ha.award_date.strftime("%B, %Y"), align: :right
+      end
+      table [[c29,c30,c31]] do
         cell_style cols[0], width: 500
+        cell_style cols[2], width: 2000
       end
       hr do
           color   'E5E5E5'
@@ -336,7 +336,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
     research_or_project_details.each do |research|
     p research.title, bold: true
     p research.guide
-    p research.description
+    p ActionView::Base.full_sanitizer.sanitize(research.description)
     hr do
       color   'E5E5E5'
       line    :single

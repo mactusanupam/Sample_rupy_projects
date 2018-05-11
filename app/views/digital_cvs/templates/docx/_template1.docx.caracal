@@ -74,7 +74,7 @@ c1 = Caracal::Core::Models::TableCellModel.new do
 	if cv_skill.size>0
 		h4 ' Skills ', bgcolor: '272D36', size: 35
 		cv_skill.each do |f|
-			p f.skill.title
+			p f.skill.title, bold:true
 			img font_url + "/assets/digital_cv/rating_images/"+f.self_rating.to_s+"_rating.png",width:150 , height: 10, align: :left
 		end
 	end
@@ -86,7 +86,10 @@ c1 = Caracal::Core::Models::TableCellModel.new do
 			a << 'Read' if lang.read?
 			a << 'Write' if lang.write?
 			a << 'Speak' if lang.speak?
-			p lang.language.title+ "("+a.join(', ')+")"
+			p do 
+				text lang.language.title, bold: true
+				text " ("+a.join(', ')+")"
+			end
 		end
 	end
 end
@@ -171,7 +174,11 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 				p e.start_date.strftime("%b, %Y").to_s + "-\n" + edu_end_date.to_s
 			end
       		c24 = Caracal::Core::Models::TableCellModel.new do
-		        p e.degree.title + " in "+ e.specialization.title+" with "+ percentage.to_s + " from "+ e.university
+		        p do
+				  text e.degree.title, bold: true
+				  text ' in '+e.specialization.title+" with "+percentage.to_s + " from "
+				  text e.university, bold: true
+				end
 		    end
 		    table [[c23,c24]] do
 		        cell_style cols[0], width: 1400
@@ -195,7 +202,12 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 		end
 	 	ul do
 			trainings.each do |tra|
-				li "Attended " + tra.duration.to_s + " days training on " + tra.name + " from " + tra.institute
+				li do
+				  text "Attended " + tra.duration.to_s + " days training on "
+				  text tra.name, bold: true
+				  text " from "
+				  text tra.institute, bold: true
+				end
 			end
 		end
 	end
@@ -219,7 +231,10 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 				p cert.date.strftime("%b, %Y")
 			end
 			c26 = Caracal::Core::Models::TableCellModel.new do
-				p cert.title+" - "+ cert.certifier
+				p do
+				  text cert.title+" - "
+				  text cert.certifier, bold: true
+				end
 			end
 			table [[c25,c26]] do
 				cell_style cols[0], width: 1400
@@ -246,7 +261,11 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 			p ha.award_date.strftime("%b, %Y")
 			end
 			c28 = Caracal::Core::Models::TableCellModel.new do
-			p ha.title+" at "+ha.company_name
+				p do
+		        text ha.title, bold: true
+		        text " awarded by "+ha.awarded_by
+		        text " at "+ha.company_name
+		        end
 			end
 	        table [[c27,c28]] do
 	        cell_style cols[0], width: 1400
@@ -269,19 +288,31 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 			spacing 1
 		end
 		research_or_projectdet.each do |project_det|
-		table [["Title: ", project_det.title]] do
-			cell_style cols[0], width: 1400
-			cell_style cells, margins: { top: 0, bottom: 0, left: 0, right: 0 }
-		end
-		table [["Description:",ActionView::Base.full_sanitizer.sanitize(project_det.description)]] do
-			cell_style cols[0], width: 1400
-			cell_style cells, margins: { top: 0, bottom: 0, left: 0, right: 0 }
+			c29 = Caracal::Core::Models::TableCellModel.new do
+				p "Title: ", bold: true
+			end
+			c30 = Caracal::Core::Models::TableCellModel.new do
+				p project_det.title
+			end
+			table [[c29, c30]] do
+				cell_style cols[0], width: 1400
+				cell_style cells, margins: { top: 0, bottom: 0, left: 0, right: 0 }
+			end
+			c31 = Caracal::Core::Models::TableCellModel.new do
+				p "Description: ", bold: true
+			end
+			c32 = Caracal::Core::Models::TableCellModel.new do
+				p ActionView::Base.full_sanitizer.sanitize(project_det.description)
+			end
+			table [[c31,c32]] do
+				cell_style cols[0], width: 1400
+				cell_style cells, margins: { top: 0, bottom: 0, left: 0, right: 0 }
 			end
 			hr do
-			color   'E5E5E5'
-			line    :single
-			size    1
-			spacing 1
+				color   'E5E5E5'
+				line    :single
+				size    1
+				spacing 1
 			end
 		end
 	end

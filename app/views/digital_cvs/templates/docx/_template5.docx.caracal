@@ -127,7 +127,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
       else 
       "Percentage -" + e.percentage.to_s 
       end 
-      p e.degree.title + " in "+ e.specialization.title, bold: true
+      p e.degree.title + ", "+ e.specialization.title, bold: true
       p e.institute + " | "+e.university
       p e.start_date.strftime("%B, %Y")+" - "+edu_end_date+" | "+percentage
       p
@@ -152,7 +152,10 @@ c2 = Caracal::Core::Models::TableCellModel.new do
         a << 'Read' if language.read?
         a << 'Write' if language.write?
         a << 'Speak' if language.speak?
-        p language.language.title+ "("+a.join(', ')+")"
+        p do
+          text language.language.title, bold: true
+          text  " ("+a.join(', ')+")"
+        end
       end
       
     end
@@ -161,9 +164,20 @@ c2 = Caracal::Core::Models::TableCellModel.new do
     h4 "TRAININGS", bgcolor: 'EEEEEE'
 
     trainings.each do |tr|
-      p tr.name+" from "+ tr.institute, bold: true
+      c21 = Caracal::Core::Models::TableCellModel.new do
+      p do 
+        text tr.name, bold: true
+        text " from "
+        text tr.institute, bold: true
+      end
+      p ActionView::Base.full_sanitizer.sanitize(tr.info)
+      end
+      c22 = Caracal::Core::Models::TableCellModel.new do
       p tr.duration.to_s+" days", align: :right
-      p ActionView::Base.full_sanitizer.sanitize(tr.info)    
+      end
+      table [[c21,c22]] do
+        cell_style cols[1], width: 900
+      end
     end
   end
 
@@ -180,7 +194,11 @@ c2 = Caracal::Core::Models::TableCellModel.new do
     h4 "HONORS AND AWARDS", bgcolor: 'EEEEEE'
 
     honor_awards.each do |ha|
-      p ha.title+" awarded by "+ha.awarded_by+" at "+ha.company_name
+      p do
+        text ha.title, bold: true
+        text " awarded by "+ha.awarded_by+" at "
+        text ha.company_name, bold: true
+      end
       p ha.award_date.strftime("%B, %Y")
     end
   end

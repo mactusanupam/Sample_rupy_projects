@@ -32,6 +32,7 @@ honor_awards = @digital_cv.honor_and_awards
 research_or_project_details = @digital_cv.research_or_project_details
 references = @digital_cv.references
 font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://talentfore.com"
+
 docx.style do
   id        'Heading1'  
   name      'heading 1'
@@ -54,8 +55,8 @@ c1 = Caracal::Core::Models::TableCellModel.new do
   p
   p
   p
-  h1  name, size: '50', bold: true
-  h5 present_job_title
+  h1 name, bold:true,size: 40
+  h5 present_job_title,size: 25
 
   if contact_info['mobile'].present?
     p
@@ -131,7 +132,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
       else 
       "Percentage -" + e.percentage.to_s 
       end 
-      p e.degree.title + " in "+ e.specialization.title, bold: true
+      p e.degree.title + ", "+ e.specialization.title, bold: true
       p e.institute + " | "+e.university
       p e.start_date.strftime("%B, %Y")+" - "+edu_end_date+" | "+percentage
       p
@@ -156,7 +157,10 @@ c2 = Caracal::Core::Models::TableCellModel.new do
         a << 'Read' if language.read?
         a << 'Write' if language.write?
         a << 'Speak' if language.speak?
-        p language.language.title+ "("+a.join(', ')+")"
+        p do
+          text language.language.title, bold: true
+          text  " ("+a.join(', ')+")"
+        end
       end
       
     end
@@ -165,9 +169,20 @@ c2 = Caracal::Core::Models::TableCellModel.new do
     h4 "TRAININGS", bgcolor: 'EEEEEE'
 
     trainings.each do |tr|
-      p tr.name+" from "+ tr.institute, bold: true
-      p tr.duration.to_s+" days", align: :right
+      c21 = Caracal::Core::Models::TableCellModel.new do
+      p do 
+        text tr.name, bold: true
+        text " from "
+        text tr.institute, bold: true
+      end
       p ActionView::Base.full_sanitizer.sanitize(tr.info)
+      end
+      c22 = Caracal::Core::Models::TableCellModel.new do
+      p tr.duration.to_s+" days", align: :right
+      end
+      table [[c21,c22]] do
+        cell_style cols[1], width: 900
+      end
     end
   end
 
@@ -184,7 +199,11 @@ c2 = Caracal::Core::Models::TableCellModel.new do
     h4 "HONORS AND AWARDS", bgcolor: 'EEEEEE'
 
     honor_awards.each do |ha|
-      p ha.title+" awarded by "+ha.awarded_by+" at "+ha.company_name
+      p do
+        text ha.title, bold: true
+        text " awarded by "+ha.awarded_by+" at "
+        text ha.company_name, bold: true
+      end
       p ha.award_date.strftime("%B, %Y")
     end
   end
