@@ -13,9 +13,9 @@
       <%= link_to 'All Jobs', jobs_path , class: "btn btn-link", style: 'color: white' %>
       <%= link_to 'Applied Jobs', job_application_jobs_path , class: "btn btn-link", style: 'color: white' %>
       <% if policy(Job).create? %>
-      <%= link_to 'JD-Creater', new_job_description_creator_path , class: "btn btn-link", style: 'color: white' %>
+        <%= link_to 'JD Creater', new_job_description_creator_path , class: "btn btn-link", style: 'color: white' %>
+        <%= link_to 'Post Job', new_job_path , class: "btn btn-link", style: 'color: white' %>
       <% end %>
-      <%#= link_to 'Jobs', '/jobs' , class: "btn btn-primary talent-fore-btn" %>
     </div>
     </div>
   </div>

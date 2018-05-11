@@ -9,7 +9,7 @@
  }
  .last_section{
   color: #666666;
-  font-weight: bold; 
+  font-weight: bold;
   margin-bottom: 5px;
  }
 </style>
@@ -86,7 +86,7 @@
                 <p class="text-justify">
                   <%= about_company.html_safe %>
                 </p>
-              <%end%>  
+              <%end%>
               <p>
                 <strong style="color:#666666">Website: </strong>
                 <% website = !(company_detail["website"][/\Ahttp:\/\//] || company_detail["website"][/\Ahttp:\/\//]) ? 'http://'+company_detail["website"] : company_detail["website"] %>
@@ -110,7 +110,7 @@
                Job Description:
               </h3>
             </div>
-          </div>    
+          </div>
         <% end %>
 
         <% if job_responsibilities.present? %>
@@ -129,7 +129,7 @@
         <% end %>
 
         <div class="row" style="margin-left:10px;">
-          <% if work_requirements.reject!(&:blank?).present? || education_requirements.reject!(&:blank?).present? %>
+          <% if (work_requirements || []).reject!(&:blank?).present? || (education_requirements || []).reject!(&:blank?).present? %>
             <h4><strong style="color:#666666">Requirements:</strong></h4>
           <% end %>
 
@@ -173,7 +173,7 @@
               <h4 class="last_section">Qualification</h4>
               <p><%= qualification %></p>
             <% end %>
-            
+
             <% if reporting_to_title %>
               <h4 class="last_section">Reporting To</h4>
               <p><%= reporting_to_title %></p>

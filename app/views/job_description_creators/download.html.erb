@@ -4,7 +4,7 @@
  }
  .last_section{
   color: #666666;
-  font-weight: bold; 
+  font-weight: bold;
   margin-bottom: 5px;
  }
 </style>
@@ -118,22 +118,22 @@
         <% if job_responsibilities.present? %>
           <div class="row" style="margin-left:10px;">
             <h4><strong>Responsibilities:</strong></h4>
-          </div> 
+          </div>
           <% job_responsibilities.each do |k, resp| %>
             <div class="row" style="margin-left:10px;">
               <h5><strong style="color:#666666"><%= resp_type(k.to_i) %></strong></h5>
             </div>
-            <ul class="template">  
+            <ul class="template">
               <% resp.each do |res| %>
                 <div class= "row">
                   <li><%= res['responsibility_text'] %></li>
-                </div>  
+                </div>
               <% end %>
-            </ul>  
+            </ul>
           <% end %>
-        <% end %>   
-        
-        <% if work_requirements.reject!(&:blank?).present? || education_requirements.reject!(&:blank?).present? %>
+        <% end %>
+
+        <% if (work_requirements || []).reject!(&:blank?).present? || (education_requirements || []).reject!(&:blank?).present? %>
           <div class="row" style="margin-left:10px;">
             <h4><strong class="sub_title">Requirements:</strong></h4>
           </div>
@@ -143,13 +143,13 @@
           <div class="row" style="margin-left:10px;">
             <h5><strong ">Work Requirements</strong></h5>
           </div>
-          <ul class="template">            
+          <ul class="template">
             <% work_requirements.each do |resp| %>
               <div class="row" >
                <li><%= resp %></li>
-              </div>  
+              </div>
             <% end %>
-          </ul>    
+          </ul>
         <% end %>
         <% if education_requirements.present? %>
           <div class="row" style="margin-left:10px;">
@@ -159,11 +159,11 @@
             <% education_requirements.each do |resp| %>
               <div class="row" >
                 <li><%= resp %></li>
-              </div>   
+              </div>
             <% end %>
-          </ul>  
-        <% end %>  
-       
+          </ul>
+        <% end %>
+
         <% if essential_skills || optional_skills %>
           <div class= "row">
             <div class="col-xs-12" style="margin-left: 12px;">
