@@ -1,68 +1,65 @@
 <% content_for :title, "Free Job Posting | Job Portal | Recruitment – Sales World" %>
-<div class="container-fluid jobs">
-  <div class="row background-grey">
-    <%= render 'job_heading_searchbox' %>
-    <div class="col-md-12 col-xs-12 col-sm-12">
-      <!-- <div class="col-md-offset-1 col-xs-2 col-sm-2 col-md-2 no-padding"> -->
-      <!-- Uncomment above line and comment below line when right side content is ready-->
-      <div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-3 no-padding">
-        <div class="panel panel-default job-panel">
-          <div class="panel-heading padding-5 talent-fore-btn">
-            <h3 class="panel-title color-white">Search Jobs By</h3>
-          </div>
-          <div class="panel-body padding-5">
-            <%= form_tag jobs_path, :method => 'get' do |f|%>
-              <%= hidden_field_tag :title, params[:title], class: "form-control", placeholder: "Search by title" %>
-              <div class="col-md-12">
-                <label for="job">Company Name</label>
+<%= render 'job_heading_searchbox' %>
+<div class="container jobs">
+  <div class="col-md-12 col-xs-12 col-sm-12">
+    <!-- <div class="col-md-offset-1 col-xs-2 col-sm-2 col-md-2 no-padding"> -->
+    <!-- Uncomment above line and comment below line when right side content is ready-->
+    <div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-3 no-padding">
+      <div class="panel panel-default job-panel">
+        <div class="panel-heading padding-5 talent-fore-btn">
+          <h3 class="panel-title color-white">Search Jobs By</h3>
+        </div>
+        <div class="panel-body padding-5">
+          <%= form_tag jobs_path, :method => 'get' do |f|%>
+            <%= hidden_field_tag :title, params[:title], class: "form-control", placeholder: "Search by title" %>
+            <div class="col-md-12">
+              <label for="job">Company Name</label>
 
-                  <%= select_tag "company_id", options_from_collection_for_select(@company, "id", "name",params[:company_id]), include_blank: true, class: "form-control job-search" %>
-              </div>
+                <%= select_tag "company_id", options_from_collection_for_select(@company, "id", "name",params[:company_id]), include_blank: true, class: "form-control job-search" %>
+            </div>
+            <div class="col-md-12">
+              <label for="job">Industry</label>
+              <%= select_tag "industry_id", options_from_collection_for_select(@industry, "id", "name",params[:industry_id]), include_blank: true, class: "form-control job-search" %>
+            </div>
+            <div class="col-md-3">
+              <label for="job">Location</label>
+            </div>
               <div class="col-md-12">
-                <label for="job">Industry</label>
-                <%= select_tag "industry_id", options_from_collection_for_select(@industry, "id", "name",params[:industry_id]), include_blank: true, class: "form-control job-search" %>
-              </div>
-              <div class="col-md-3">
-                <label for="job">Location</label>
-              </div>
-                <div class="col-md-12">
-                <%= text_field_tag "location", params[:location], id: "location", class: "form-control job-search" %>
-              </div>
-              <div class="col-md-12 padding-5">
-                <%= button_tag("search", type: 'submit', class: "btn btn-primary  job-button talent-fore-btn")%>
-              </div>
-            <% end %>
-          </div>
+              <%= text_field_tag "location", params[:location], id: "location", class: "form-control job-search" %>
+            </div>
+            <div class="col-md-12 padding-5">
+              <%= button_tag("search", type: 'submit', class: "btn btn-primary  job-button talent-fore-btn")%>
+            </div>
+          <% end %>
         </div>
       </div>
+    </div>
 
-      <!-- <div class="col-xs-6 col-sm-6 col-md-6"> -->
-      <!-- Uncomment above line and comment below line when right side content is ready-->
-      <div class="col-xs-12 col-sm-12 col-md-7 ">
-        <% if params[:location] || params[:company_id] || params[:industry_id] || params[:title] %>
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-              <div class="job-head content">
-                <span><%= @jobs.size %> related jobs found</span>
-              </div>
+    <!-- <div class="col-xs-6 col-sm-6 col-md-6"> -->
+    <!-- Uncomment above line and comment below line when right side content is ready-->
+    <div class="col-xs-12 col-sm-12 col-md-7 ">
+      <% if params[:location] || params[:company_id] || params[:industry_id] || params[:title] %>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="job-head content">
+              <span><%= @jobs.size %> related jobs found</span>
             </div>
           </div>
-        <% end %>
-        <%= render partial: 'jobs/job_list' %>
-        <div class="row pull-right <%= @jobs_total.empty? ? 'hidden' : ''%>">
-          <%= render partial: 'layouts/pagination', locals: { page_size: 25, total_count: @jobs_total.size } %>
+        </div>
+      <% end %>
+      <%= render partial: 'jobs/job_list' %>
+      <div class="row pull-right <%= @jobs_total.empty? ? 'hidden' : ''%>">
+        <%= render partial: 'layouts/pagination', locals: { page_size: 25, total_count: @jobs_total.size } %>
+      </div>
+    </div>
+    <div class="clearfix visible-xs-block"></div>
+    <!-- This div is for right side bar which will have advertisements-->
+    <!-- <div class="col-xs-2 col-sm-2 col-md-2">
+      <div class="row rightsidebar">
+        <div class="col-md-12">
+          Advertisement for the cv goes here.
         </div>
       </div>
-      <div class="clearfix visible-xs-block"></div>
-      <!-- This div is for right side bar which will have advertisements-->
-      <!-- <div class="col-xs-2 col-sm-2 col-md-2">
-        <div class="row rightsidebar">
-          <div class="col-md-12">
-            Advertisement for the cv goes here.
-          </div>
-        </div>
-      </div> -->
-    </div>
-   </div>
+    </div> -->
   </div>
 </div>

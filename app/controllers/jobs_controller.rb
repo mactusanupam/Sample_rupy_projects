@@ -23,7 +23,7 @@ class JobsController < ApplicationController
   # GET /jobs/new
   def new
     @job = Job.new
-    authorize @job
+    authorize Job
     @job.skills.build
   end
 
@@ -34,7 +34,7 @@ class JobsController < ApplicationController
   # POST /jobs
   def create
     @job = Job.new(job_params)
-    authorize @job
+    authorize Job
     if @job.save
       redirect_to @job, notice: 'Job was successfully created.'
     else
@@ -60,10 +60,9 @@ class JobsController < ApplicationController
   def apply
     @application = @job.job_applications.build(job_application_params)
 
-    if @application.save!
-      redirect_to @job, notice: 'You applied successfully.'
-    else
-      render :edit
+    if request.post?
+      @application.save
+      redirect_to jobs_url, notice: 'Job applied successfully.'
     end
   end
 
