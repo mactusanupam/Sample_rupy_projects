@@ -5,10 +5,21 @@
 
 $(document).ready(function(){
 
-  $(".degree, .specialization, .qualification, .skill, .industry, .company .min_exp, .max_exp, .job-search").select2();
+  $(".qualification, .industry, .company, .min_exp, .max_exp, .job-search").select2();
+
+  $(".degree, .specialization, .skill").select2({
+    tags: true
+  });
 
   $(".degree, .specialization, .skill").off('select2:select').on('select2:select', function(e) {
-    elem = $(this).hasClass('specialization') ? 'skill':'degree';
+    elem = '';
+    if($(this).hasClass('specialization'))
+      elem = 'specialization';
+    else if($(this).hasClass('skill'))
+      elem = 'skill'
+    else
+      elem = 'degree';
+
     saveNewItem($(this), elem);
   });
 

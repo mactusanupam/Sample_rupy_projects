@@ -15,6 +15,9 @@ class Job < ApplicationRecord
   has_many :job_applications, :dependent => :destroy
   accepts_nested_attributes_for :job_applications, allow_destroy: true
 
+  has_many :suspicious_jobs, :dependent => :destroy
+  accepts_nested_attributes_for :suspicious_jobs, allow_destroy: true
+
   validates :title, presence: true, length: { minimum: 5, allow_blank: true }
   validates :company_id, presence: true
   validates :qualification_id, presence: true

@@ -40,7 +40,9 @@
             <span>The opening of this job is On hold/Closed</span>
           </div>
         <% else %>
-          <button type="button" class="btn btn-primary job-button" data-toggle="modal" data-target="#myModal">Submit CV</button>
+        
+        <%#= link_to "Submit CV", apply_job_path(@job), class: "btn btn-link", remote: true  %>
+          <button type="button" class="btn btn-primary talent-fore-btn" data-toggle="modal" data-target="#myModal">Submit CV</button>
       <% end %>
     </div>
   </div>

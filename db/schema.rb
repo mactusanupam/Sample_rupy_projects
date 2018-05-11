@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508113811) do
+ActiveRecord::Schema.define(version: 20180511095210) do
 
   create_table "academic_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "institute"
@@ -245,6 +245,7 @@ ActiveRecord::Schema.define(version: 20180508113811) do
     t.integer "no_of_openings", default: 0
     t.string "seniority_level"
     t.bigint "specialization_id"
+    t.boolean "remote_location"
     t.index ["company_id"], name: "index_jobs_on_company_id"
     t.index ["industry_id"], name: "index_jobs_on_industry_id"
     t.index ["qualification_id"], name: "index_jobs_on_qualification_id"
@@ -361,6 +362,14 @@ ActiveRecord::Schema.define(version: 20180508113811) do
     t.index ["subscribeble_type", "subscribeble_id"], name: "index_subscriptions_on_subscribeble_type_and_subscribeble_id"
   end
 
+  create_table "suspicious_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "job_id"
+    t.string "reporter_email"
+    t.text "comment"
+    t.text "additional_comment"
+    t.index ["job_id"], name: "index_suspicious_jobs_on_job_id"
+  end
+
   create_table "templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "template_type"
@@ -462,6 +471,7 @@ ActiveRecord::Schema.define(version: 20180508113811) do
   add_foreign_key "references", "job_titles"
   add_foreign_key "research_or_project_details", "digital_cvs"
   add_foreign_key "subscriptions", "billing_plans"
+  add_foreign_key "suspicious_jobs", "jobs"
   add_foreign_key "trainings", "digital_cvs"
   add_foreign_key "users", "companies"
   add_foreign_key "users", "job_titles"
