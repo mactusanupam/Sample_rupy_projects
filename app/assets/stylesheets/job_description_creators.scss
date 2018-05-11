@@ -1,7 +1,7 @@
 // Place all the styles related to the job_description_creators controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
- h1 {
+ .page-head{
     margin: 0 0 8px;
     text-transform: uppercase;
     font-family: Montserrat,sans-serif;
@@ -10,7 +10,7 @@
     color: #24607D;
   }
 
-  p {
+.jd-head-line {
     font-size: 14px;
     line-height: 1.6em;
     color: #555;

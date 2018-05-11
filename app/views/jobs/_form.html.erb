@@ -65,11 +65,12 @@
         <div class="row">
           <div class="form-group">
             <%= f.input :location, placeholder:'Job-Location', wrapper: :horizontal_form_job ,input_html:{ class: 'location'}  %> 
-            <div class="col-md-offset-8">
-              <%= f.check_box :location, input_html:{ class: 'job_location'}%>
-               <%= f.hidden_field :location ,:value =>"Remote address" %>
+            <div class="col-md-offset-8 remote-location">
+            <%=  f.check_box :remote_location, as: :check_box, inline_label: "jhgjkjg" %>
+              <%#= f.check_box :location, input_html:{ class: 'job_location'}%>
+               <%#= f.hidden_field :location ,:value =>"Remote address" %>
               <%#= f.input :location, :as => :check_boxes, collection: [['Completed', 'completed']]%>
-                <%= f.label :location, "Remote address", class: 'location-label' %>
+                <%= f.label :remote_location, "Remote address", class: 'location-label' %>
           </div>
           </div> 
         </div>  
@@ -82,10 +83,12 @@
           <div class="form-group">
             <%= f.input :offered_ctc, placeholder:'Enter the integer value,eg-100000', wrapper: :horizontal_form_job  %>
           </div>
-        </div> 
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12"> 
         <div class="row">
-          <div class="form-group pull-right">
-            <label class="control-label col-sm-2" style="padding-top: 0;">Job Type</label>
+          <div class="form-group">
+            <label class="control-label col-sm-2" style="padding-top: 0;">Job Type&nbsp;&nbsp;</label>
             <%= f.radio_button :job_type,"Full Time"%>
             <%= f.label :job_type, "Full Time", class: 'radio-label' %>
             <%= f.radio_button :job_type,"Part Time"  %>
@@ -102,8 +105,8 @@
       <div class="col-md-12 col-sm-12">
         <div class="row">
           <div class="form-group">
-            <label class="control-label col-sm-2">Seniority Level</label>
-            <div class="col-sm-10 ">
+            <label class="control-label col-sm-2">Seniority Level&nbsp;</label>
+            <!--div class="col-sm-10 "-->
             <%= f.radio_button :seniority_level,"Internship"%>
             <%= f.label :seniority_level, "Internship", class: 'radio-label' %>
 
@@ -121,7 +124,7 @@
 
             <%= f.radio_button :seniority_level,"Senior Management" %>
             <%= f.label :seniority_level, "Senior Management", class: 'radio-label' %>
-            </div>
+            <!--/div-->
           </div>
         </div>
       </div>
@@ -148,7 +151,7 @@
       </div>
       
       <div class="control-label  actions pull-right ">
-        <%= f.submit "Submit", class: 'btn btn-primary',style:"background:#4B7892;" %>
+        <%= f.submit "Submit", class: 'btn btn-primary talent-fore-btn' %>
       </div>  
     <%end%>
   </div>

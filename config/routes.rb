@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       post :apply
       get :job_applied
       patch :job_status_update
+      post :suspicious_job
     end
   end
 

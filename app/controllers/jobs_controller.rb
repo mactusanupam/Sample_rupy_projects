@@ -1,7 +1,7 @@
 class JobsController < ApplicationController
   PAGE_SIZE = 25
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_job, only: [:edit, :update, :destroy, :apply, :job_applied, :job_status_update]
+  before_action :set_job, only: [:edit, :update, :destroy, :apply, :job_applied, :job_status_update, :suspicious_job]
 
   after_action :verify_authorized, except: [:index, :show, :job_application]
   before_action :set_page, only: [:index]
@@ -85,6 +85,12 @@ class JobsController < ApplicationController
       @job_application.update(job_application_params)
     end
   end
+  def suspicious_job
+    @suspicious_job = @job.suspicious_jobs.create(suspicious_job_params)
+    if @suspicious_job.save
+      redirect_to @job, notice: 'Your advise recorded.'
+    end
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -107,11 +113,15 @@ class JobsController < ApplicationController
       params.fetch(:job,{}).permit(:min_exp, :max_exp, :title, :industry_id, :company_id, :location, :offered_ctc,
        :qualification_id, :website_url,
        :experience, :description,:user_id,:job_view,:no_of_openings,:job_status,:job_type, :seniority_level, 
-       :specialization_id, degree_ids:[], skill_ids:[])
+        :remote_location, :specialization_id, degree_ids:[], skill_ids:[])
     end
 
     def job_application_params
       params.fetch(:job_application, {}).permit(:document,:job_id,:user_id,:recruiter_comment, :status)
     end
+
+    def suspicious_job_params
+      params.fetch(:suspicious_job,{}).permit(:job_id, :reporter_email, :comment, :additional_comment)
+    end  
 
 end

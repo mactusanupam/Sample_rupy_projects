@@ -98,6 +98,7 @@ table, th, td {
   box-shadow: 0 0 3px #999999;
 }
 
+
 .job-description {
   word-wrap: break-word;
 }
@@ -187,6 +188,8 @@ abbr[title="required"] {
 .select2 .select2-container .select2-container--default .select2-container--above {
   width: 280px !important;
 }
-.job_location{
-  margin-top: 15px;
+.location-label{
+  margin-bottom: 15px;
+  font-weight: normal;
 }
+
