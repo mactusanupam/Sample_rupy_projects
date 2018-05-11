@@ -10,6 +10,8 @@ class EmploymentDetail < ApplicationRecord
 
   accepts_nested_attributes_for :company, reject_if: :all_blank
 
+  default_scope { order("start_date desc") }
+
   private
 
   def end_after_start

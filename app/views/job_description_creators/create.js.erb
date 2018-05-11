@@ -1,0 +1,8 @@
+var activeTab = $('.resume-editor-left li.active');
+var href = activeTab.next('li').find('a').attr('href');
+
+if(typeof href === 'undefined') {
+  window.location.replace('/job_description_creators/download');
+} else {
+  $.get(href, function(data) {}, 'script');
+}

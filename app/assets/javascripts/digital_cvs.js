@@ -78,4 +78,11 @@ $(document).ready(function(){
       companyFields.addClass('hide');
     }
   });
+
+  //image zoom in
+  $('.ss-item img').on('click', function() {
+    var src = $(this).attr('src').replace("small", "large");
+    $('.enlargeImageModalSource').attr('src', src);
+    $('#enlargeImageModal').modal('show');
+  });
 })

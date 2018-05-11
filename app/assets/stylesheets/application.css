@@ -25,7 +25,6 @@
   margin-bottom: 50px;
   min-height: 287px;
 }
-
 .heading1 {
   font-size:30px;
   font-family: "Lato",Arial,Helvetica,sans-serif;
@@ -105,6 +104,9 @@ input[type="number"] {
 .wysihtml5-toolbar {
   list-style-type: none;
   padding-left: 0;
+}
+.wysihtml5-toolbar .dropdown {
+ display: inline;
 }
 
 footer {
