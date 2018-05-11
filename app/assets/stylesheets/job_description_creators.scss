@@ -56,13 +56,8 @@
 
 }
 
-
 .panel-default .panel-heading {
   background-color: #24607D;
-
-}
-.site_button {
-  background-color: #24607E;
 }
 
 .padded-jd {
@@ -97,9 +92,13 @@
 .min_exp, .max_exp {
   width: 100px;
 }
-/*.select2-container--default .select2-selection--multiple, .select2-dropdown--below {
-  width: 450px !important;
-}*/
+
+.jd_form {
+  .select2-container--default .select2-selection--multiple, .select2-dropdown--below {
+    width: 450px !important;
+  }
+}
+
 .template{
   margin-left:-0px;
 }

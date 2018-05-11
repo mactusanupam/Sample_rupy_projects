@@ -5,15 +5,12 @@
 
 $(document).ready(function(){
 
-  $(".degree, .specialization, .qualification, .skill, .industry, .company .min_exp, .max_exp, .job-search").select2({
-      tags: true
-    });
+  $(".degree, .specialization, .qualification, .skill, .industry, .company .min_exp, .max_exp, .job-search").select2();
 
-    $(".degree, .specialization, .skill").off('select2:select').on('select2:select', function(e) {
-      /*elem = $(this).hasClass('specialization') || $(this).hasClass('degree') || $(this).hasClass('skill');*/
-      elem = $(this).hasClass('specialization') ? 'skill':'degree';
-      saveNewItem($(this), elem);
-    });
+  $(".degree, .specialization, .skill").off('select2:select').on('select2:select', function(e) {
+    elem = $(this).hasClass('specialization') ? 'skill':'degree';
+    saveNewItem($(this), elem);
+  });
 
   $('#job_form_id .wysihtml5').wysihtml5({ toolbar: {
     'font-styles': false,
@@ -29,20 +26,6 @@ $(document).ready(function(){
     'smallmodals': false
     }
   });
+
+  $('.job_seniority_level, .job_description').find('label.col-sm-3').removeClass('col-sm-3').addClass('col-sm-2');
 });
-
-
-$(document).ready(function(){
-  $('#job_form_id').on('change', '.job_location input[type=checkbox]', function() {
-  // Does some stuff and logs the event to the console
-  if($(this).is(':checked')) {
-    alert('ppppppppppp...................');
-      $('.location').value == $(this).value;
-    } else {
-      alert('ppppppppppp...................');
-      $('.location').value == $('.location').value;
-    }
-  });
-});
-
-

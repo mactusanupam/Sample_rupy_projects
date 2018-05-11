@@ -105,40 +105,37 @@ table, th, td {
 .jobs-right {
   min-height: 300px;
 }
-  .showdown-head{
-        padding:2%;
-        margin-left:10px;
-        color:#09c;
-      .showdown-title{
-        padding:3%;
-
-      }
-
+.showdown-head{
+  padding:2%;
+  margin-left:10px;
+  color:#09c;
+  .showdown-title{
+    padding:3%;
   }
+}
 
-  .jobshowlabel {
-    width:110px;
-    color:black;
-    text-align: right;
-    clear: both;
-    float:left;
-    margin-right:15px;
-    }
-  .show-desc{
-    background-color:white;
-    padding:10px;
-    word-wrap: break-word;
-    margin-top:0px;
-  }
+.jobshowlabel {
+  width:110px;
+  color:black;
+  text-align: right;
+  clear: both;
+  float:left;
+  margin-right:15px;
+}
+.show-desc{
+  background-color:white;
+  padding:10px;
+  word-wrap: break-word;
+  margin-top:0px;
+}
 .jobformdesc{
-    margin-left:13%;
-    width:85.3%;
+  margin-left:13%;
+  width:85.3%;
 }
 .show-right-sidebar{
-    margin-top:1.5%;
-
-    background-color:white;
-    padding:5%;
+  margin-top:1.5%;
+  background-color:white;
+  padding:5%;
 }
 
 
@@ -162,12 +159,6 @@ table, th, td {
   color:red;
 }
 
-#job_form .control-label{
-  text-align:left;
-}
-#job_form .select select{
-width:100%;
-}
 .red-color{
   color:red;
 }
@@ -187,6 +178,14 @@ abbr[title="required"] {
 .select2 .select2-container .select2-container--default .select2-container--above {
   width: 280px !important;
 }
-.job_location{
-  margin-top: 15px;
+
+#job_form_id {
+  .radio-inline {
+    padding-left: 15px;
+    margin-left: 0;
+  }
+  .job-location {
+    margin-top: -13px;
+    margin-bottom: 5px;
+  }
 }
