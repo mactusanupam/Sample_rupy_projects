@@ -87,41 +87,13 @@
               <strong>Seniority Level</strong><br />
               <%= @job.seniority_level %>
             </div>
-            <!--div>
-              <strong>Job-Function</strong><br />
-                Engineering Information
-                Technology
-            </div-->
           </div>
         </div>
-        <hr />
-        <div class="row">
-          <div class="col-xs-8 col-sm-8 col-md-8 text-justify">
-            <div class="col-xs-4 col-sm-4 col-md-4 text-justify">
-              <h4><strong>Your Suggestion :-</strong></h4>
-            </div>  
-          </div>
-          <div class="col-xs-8 col-sm-8 col-md-8 text-justify">
-            <%= simple_form_for @job.suspicious_jobs.build, url: suspicious_job_job_path(@job), method: :post do |f| %>
-            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-            <%= f.input :reporter_email,:label => "Your Email Address", wrapper: :horizontal_form_job %>
-            <%= f.input :comment, :label => "This job is ",input_html: {rows: 1, cols: 10} , wrapper: :horizontal_form_job%>
-            <%= f.input :additional_comment, wrapper: :horizontal_form_job %>
-            <div class="col-xs-8 col-sm-8 col-md-8 pull-right">
-              <%= f.submit "Submit", class: 'btn btn-primary talent-fore-btn'  %>
-            </div>
-           <% end %>
-          </div>
+        <div class="suscipicious-job">
+          <%= render "jobs/suspicious_job" %>
         </div>
-      </div>  
+      </div>
     </div>
-      <!-- <div class=" col-xs-2 col-sm-2 col-md-2">
-        <div class="row jobshowup jobs-right">
-          <div class="col-md-12">
-            <h3>Similar Jobs will be listed here along with advertisement</h3>
-          </div>
-        </div>
-      </div> -->
   </div>
 </div>
 <!-- Modal window div -->
@@ -136,13 +108,13 @@
             <h4 class="modal-title">Add your cv here</h4>
         </div>
         <div class="modal-body">
-          
+
             <%= f.hidden_field :user_id ,:value => current_user.try(:id) %>
             <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
             <div class="form-group">
                 <%= f.file_field :document %>
             </div>
-        </div>    
+        </div>
         <div class="modal-footer">
           <%= f.submit 'Resume Update', class: 'btn btn-primary',style:"background:#4B7892;" %>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

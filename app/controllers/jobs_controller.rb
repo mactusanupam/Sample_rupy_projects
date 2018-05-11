@@ -85,12 +85,11 @@ class JobsController < ApplicationController
       @job_application.update(job_application_params)
     end
   end
+
   def suspicious_job
-    @suspicious_job = @job.suspicious_jobs.create(suspicious_job_params)
-    if @suspicious_job.save
-      redirect_to @job, notice: 'Your advise recorded.'
-    end
-  end  
+    @suspicious_job = @job.suspicious_jobs.build(suspicious_job_params)
+    @suspicious_job.save
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -112,7 +111,7 @@ class JobsController < ApplicationController
     def job_params
       params.fetch(:job,{}).permit(:min_exp, :max_exp, :title, :industry_id, :company_id, :location, :offered_ctc,
        :qualification_id, :website_url,
-       :experience, :description,:user_id,:job_view,:no_of_openings,:job_status,:job_type, :seniority_level, 
+       :experience, :description,:user_id,:job_view,:no_of_openings,:job_status,:job_type, :seniority_level,
         :remote_location, :specialization_id, degree_ids:[], skill_ids:[])
     end
 
@@ -122,6 +121,6 @@ class JobsController < ApplicationController
 
     def suspicious_job_params
       params.fetch(:suspicious_job,{}).permit(:job_id, :reporter_email, :comment, :additional_comment)
-    end  
+    end
 
 end
