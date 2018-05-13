@@ -15,9 +15,6 @@ unless UserType.any?
   ])
 end
 
-UserType.find_or_create_by(title: 'Recruiter').update_attributes({title: 'Employer'})
-UserType.find_or_create_by(title: 'Other User').update_attributes({title: 'Individual'})
-
 unless User.any?
   User.create([
     {
