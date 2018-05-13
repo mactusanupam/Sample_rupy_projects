@@ -75,10 +75,11 @@
 									<i class="fa fa-linkedin-square fa-1x" aria-hidden="true"></i>
 								</div>
 								<div class="media-body">
-									<p><%= @digital_cv.contact_detail.linkedin_url %></p>
+									<p class="linkedin_url_break"><%= @digital_cv.contact_detail.linkedin_url %></p>
 								</div>
 								<% end %>
 							</div>
+							<hr style="margin:0;">
 						<% end %>
 						<% if @digital_cv.cv_skills.size>0 %>
 						<h4>Skills</h4>

@@ -19,6 +19,7 @@ name = @digital_cv.contact_detail.try(:name)
 present_job_title = @digital_cv.present_job ? @digital_cv.present_job.job_title.title : "No Title"
 personal_info = @digital_cv.personal_detail.attributes
 contact_info = @digital_cv.contact_detail.attributes
+docx_image = @digital_cv.photo.image.url(:thumb) ? @digital_cv.photo.image.url(:thumb) : 'digital_cv/photo_cv.png'
 
 cv_skill = @digital_cv.cv_skills
 languages = @digital_cv.cv_languages
@@ -38,7 +39,8 @@ docx.style do
 end
 
 c1 = Caracal::Core::Models::TableCellModel.new do
-	p
+  	img font_url+docx_image, width: 80, height: 80, align: :center
+  	p
 	h1  name, size: '50', bold: true
 	h4  present_job_title
 
@@ -74,7 +76,7 @@ c1 = Caracal::Core::Models::TableCellModel.new do
 	if cv_skill.size>0
 		h4 ' Skills ', bgcolor: '272D36', size: 35
 		cv_skill.each do |f|
-			p f.skill.title, bold:true
+			p f.skill.title, bold: true
 			img font_url + "/assets/digital_cv/rating_images/"+f.self_rating.to_s+"_rating.png",width:150 , height: 10, align: :left
 		end
 	end
@@ -86,7 +88,7 @@ c1 = Caracal::Core::Models::TableCellModel.new do
 			a << 'Read' if lang.read?
 			a << 'Write' if lang.write?
 			a << 'Speak' if lang.speak?
-			p do 
+			p do
 				text lang.language.title, bold: true
 				text " ("+a.join(', ')+")"
 			end

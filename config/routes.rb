@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       get :share_and_download
       get :change_cv_template
       get :preview, to: 'digital_cvs#show'
+      get :download_cv_docx, :format => :docx
     end
   end
   

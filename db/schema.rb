@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(version: 20180511095210) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
+  
   create_table "job_applications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "job_id"
     t.bigint "user_id"
