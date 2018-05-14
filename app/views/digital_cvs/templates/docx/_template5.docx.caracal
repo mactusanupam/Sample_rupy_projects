@@ -21,7 +21,6 @@ present_job_title = @digital_cv.present_job ? @digital_cv.present_job.job_title.
 docx_image = @digital_cv.photo.image.url(:medium) ? 
 @digital_cv.photo.image.url(:medium) : 'digital_cv/photo_cv.png'
 
-personal_info = @digital_cv.personal_detail.attributes
 contact_info = @digital_cv.contact_detail.attributes
 cv_skill = @digital_cv.cv_skills
 languages = @digital_cv.cv_languages
@@ -209,8 +208,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
     research_or_project_details.each do |research|
     p research.title, bold: true
     p research.guide
-    p research.description
-    
+    p ActionView::Base.full_sanitizer.sanitize(research.description)
     end
   end
 

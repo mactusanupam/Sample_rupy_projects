@@ -212,8 +212,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
     research_or_project_details.each do |research|
     p research.title, bold: true
     p research.guide
-    p research.description
-    
+    p ActionView::Base.full_sanitizer.sanitize(research.description)
     end
   end
 
