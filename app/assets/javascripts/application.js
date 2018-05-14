@@ -18,6 +18,7 @@
 //= require bootstrap-wysihtml5
 //= require alertify
 //= require_tree .
+//= require intl-tel-input
 
 $(document).ready(function(){
 
