@@ -20,7 +20,6 @@ name = @digital_cv.contact_detail.try(:name)
 present_job_title = @digital_cv.present_job ? @digital_cv.present_job.job_title.title : "No Title"
 docx_image = @digital_cv.photo.image.url(:thumb) ? @digital_cv.photo.image.url(:thumb) : 'digital_cv/photo_cv.png'
 
-personal_info = @digital_cv.personal_detail.attributes
 contact_info = @digital_cv.contact_detail.attributes
 cv_skill = @digital_cv.cv_skills
 languages = @digital_cv.cv_languages
@@ -32,6 +31,8 @@ honor_awards = @digital_cv.honor_and_awards
 research_or_project_details = @digital_cv.research_or_project_details
 references = @digital_cv.references
 font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://talentfore.com"
+img_url = docx_image != '/assets/digital_cv/photo_cv.png' ? "http:" : font_url
+
 docx.style do
   id        'Heading1'  
   name      'heading 1'
@@ -54,7 +55,7 @@ c1 = Caracal::Core::Models::TableCellModel.new do
 end
 
 c2 = Caracal::Core::Models::TableCellModel.new do
-  img font_url+docx_image, width: 80, height: 80, align: :right
+  img img_url+docx_image, width: 80, height: 80, align: :right
 end
 
 c3 = Caracal::Core::Models::TableCellModel.new do
@@ -269,12 +270,7 @@ c4 = Caracal::Core::Models::TableCellModel.new do
       p cert.title, bold: true
       p cert.certifier
       p cert.date.strftime("%B, %Y")
-      hr do
-          color   'E5E5E5'
-          line    :single
-          size    1
-          spacing 1
-      end
+      p
     end
   end
   if digital_cv.honor_and_awards.present?
@@ -284,15 +280,10 @@ c4 = Caracal::Core::Models::TableCellModel.new do
       p do
         text ha.title, bold: true
         text " awarded by "+ha.awarded_by+" at "
-        text ha.company_name, bold: true
+        text ha.company_name.to_s, bold: true
       end
       p ha.award_date.strftime("%B, %Y")
-      hr do
-          color   'E5E5E5'
-          line    :single
-          size    1
-          spacing 1
-      end
+      p
     end
   end
 
@@ -301,7 +292,7 @@ c4 = Caracal::Core::Models::TableCellModel.new do
     research_or_project_details.each do |research|
     p research.title, bold: true
     p research.guide
-    p research.description
+    p ActionView::Base.full_sanitizer.sanitize(research.description)
     hr do
       color   'E5E5E5'
       line    :single
@@ -332,7 +323,7 @@ c4 = Caracal::Core::Models::TableCellModel.new do
     p "Disabled", bold: true
     end
     if digital_cv.personal_detail.try(:hobbies).present? 
-    p "Hobbies", bold: true
+    p "Hobbies and Interests", bold: true
     end
   end
   cp2 = Caracal::Core::Models::TableCellModel.new do
@@ -356,7 +347,7 @@ c4 = Caracal::Core::Models::TableCellModel.new do
     end
   end
   table [[cp1,cp2]] do
-      cell_style cols[0], width: 2000
+      cell_style cols[0], width: 2500
   end
   hr do
     color   'E5E5E5'

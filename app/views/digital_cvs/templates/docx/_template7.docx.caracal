@@ -17,7 +17,6 @@ docx.font name: 'Helvetica'
 digital_cv = @digital_cv
 name = @digital_cv.contact_detail.try(:name)
 present_job_title = @digital_cv.present_job ? @digital_cv.present_job.job_title.title : "No Title"
-personal_info = @digital_cv.personal_detail.attributes
 contact_info = @digital_cv.contact_detail.attributes
 docx_image = @digital_cv.photo.image.url(:thumb) ? @digital_cv.photo.image.url(:thumb) : 'digital_cv/photo_cv.png'
 
@@ -30,6 +29,7 @@ certifications = @digital_cv.certifications
 honor_awards = @digital_cv.honor_and_awards
 research_or_projectdet = @digital_cv.research_or_project_details
 font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://talentfore.com/"
+img_url = docx_image != '/assets/digital_cv/photo_cv.png' ? "http:" : font_url
 
 docx.style do  
   id        'heading 5'
@@ -39,7 +39,7 @@ docx.style do
 end
 
 c1 = Caracal::Core::Models::TableCellModel.new do
-  	img font_url+docx_image, width: 80, height: 80, align: :center
+  	img img_url+docx_image, width: 80, height: 80, align: :center
   	p
 	h1  name, size: '50', bold: true
 	h4  present_job_title
@@ -266,7 +266,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 				p do
 		        text ha.title, bold: true
 		        text " awarded by "+ha.awarded_by
-		        text " at "+ha.company_name
+		        text " at "+ha.company_name.to_s
 		        end
 			end
 	        table [[c27,c28]] do
@@ -340,7 +340,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 		p "Disabled", bold: true
 		end
 		if digital_cv.personal_detail.try(:hobbies).present? 
-		p "Hobbies", bold: true
+		p "Hobbies and Interests", bold: true
 		end
 	end
 	cp2 = Caracal::Core::Models::TableCellModel.new do
@@ -364,7 +364,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 		end
 	end
 	table [[cp1,cp2]] do
-		cell_style cols[0], width: 2000
+		cell_style cols[0], width: 2500
 	end
 	hr do
 		color   'E5E5E5'
