@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(version: 20180511095210) do
     t.string "name", default: "My Resume"
     t.text "summary"
     t.text "objective"
-    t.boolean "is_experienced"
+    t.boolean "is_experienced", default: true
     t.string "employment_status"
     t.bigint "user_id"
     t.bigint "template_id"
@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(version: 20180511095210) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  
+
   create_table "job_applications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "job_id"
     t.bigint "user_id"
@@ -239,10 +239,10 @@ ActiveRecord::Schema.define(version: 20180511095210) do
     t.datetime "updated_at", null: false
     t.bigint "qualification_id"
     t.bigint "user_id"
-    t.string "job_status", default: "Open"
-    t.string "job_type", default: "Permanent"
     t.integer "job_view", default: 0
     t.integer "no_of_openings", default: 0
+    t.string "job_status", default: "Open"
+    t.string "job_type", default: "Permanent"
     t.string "seniority_level"
     t.bigint "specialization_id"
     t.boolean "remote_location"

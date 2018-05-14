@@ -20,7 +20,6 @@ user_info = @digital_cv.user.attributes
 name = @digital_cv.contact_detail.try(:name)
 
 present_job_title = @digital_cv.present_job ? @digital_cv.present_job.job_title.title : "No Title"
-personal_info = @digital_cv.personal_detail.attributes
 contact_info = @digital_cv.contact_detail.attributes
 docx_image = @digital_cv.photo.image.url(:thumb) ? @digital_cv.photo.image.url(:thumb) : 'digital_cv/photo_cv.png'
 
@@ -36,6 +35,7 @@ honor_awards = @digital_cv.honor_and_awards
 research_or_projectdet = @digital_cv.research_or_project_details
 references = @digital_cv.references
 font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://talentfore.com"
+img_url = docx_image != '/assets/digital_cv/photo_cv.png' ? "http:" : font_url
 
 docx.style do  
   id        'heading 5'
@@ -52,7 +52,7 @@ end
 
 
 c2 = Caracal::Core::Models::TableCellModel.new do
-  img font_url+docx_image, width: 80, height: 80, align: :center
+  img img_url+docx_image, width: 80, height: 80, align: :center
 end
 
 c01=Caracal::Core::Models::TableCellModel.new do
@@ -110,9 +110,9 @@ c3 = Caracal::Core::Models::TableCellModel.new do
     p contact_info['email']
   end
 
-  if personal_info['date_of_birth'].present?
+  if digital_cv.personal_detail.try(:date_of_birth).present?
     p 'Date of birth:', bold: true
-    p personal_info['date_of_birth']
+    p digital_cv.personal_detail.try(:date_of_birth).present?
   end
 
   if contact_info['linkedin_url'] != nil && contact_info['linkedin_url'] !=""
@@ -319,6 +319,37 @@ c4 = Caracal::Core::Models::TableCellModel.new do
       end
       table [[c21,c22]] do
         cell_style cols[0], width: 1400
+        cell_style cells, margins: {top:100, left:200, right: 200, bottom: 100}
+        border_top do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_vertical do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
       end
     end
   end
@@ -368,7 +399,38 @@ c4 = Caracal::Core::Models::TableCellModel.new do
         end
       end
       table [[c23,c24]] do
-            cell_style cols[0], width: 1400
+        cell_style cols[0], width: 1400
+        cell_style cells, margins: {top:100, left:200, right: 200, bottom: 100}
+        border_top do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_vertical do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
       end
     end
   end
@@ -499,6 +561,37 @@ c4 = Caracal::Core::Models::TableCellModel.new do
       end
       table [[c25,c26]] do
         cell_style cols[0], width: 1400
+        cell_style cells, margins: {top:100, left:200, right: 200, bottom: 100}
+        border_top do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_vertical do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
       end
       end
   end
@@ -539,11 +632,42 @@ c4 = Caracal::Core::Models::TableCellModel.new do
         p do
         text ha.title, bold: true
         text " by "+ha.awarded_by
-        text " at "+ha.company_name
+        text " at "+ha.company_name.to_s
         end
       end
       table [[c27,c28]] do
-      cell_style cols[0], width: 1400
+        cell_style cols[0], width: 1400
+        cell_style cells, margins: {top:100, left:200, right: 200, bottom: 100}
+        border_top do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_vertical do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
       end
     end
     hr do
@@ -684,7 +808,7 @@ c4 = Caracal::Core::Models::TableCellModel.new do
       p "Disabled", bold: true
       end
       if digital_cv.personal_detail.try(:hobbies).present? 
-      p "Hobbies", bold: true
+      p "Hobbies and Interests", bold: true
       end
     end
     cp2 = Caracal::Core::Models::TableCellModel.new do
@@ -708,7 +832,7 @@ c4 = Caracal::Core::Models::TableCellModel.new do
       end
     end
     table [[cp1,cp2]] do
-        cell_style cols[0], width: 2000
+        cell_style cols[0], width: 2500
     end
   end
 end

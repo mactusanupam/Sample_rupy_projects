@@ -20,7 +20,6 @@ name = @digital_cv.contact_detail.try(:name)
 present_job_title = @digital_cv.present_job ? @digital_cv.present_job.job_title.title : "No Title"
 docx_image = @digital_cv.photo.image.url(:thumb) ? @digital_cv.photo.image.url(:thumb) : 'digital_cv/photo_cv.png'
 
-personal_info = @digital_cv.personal_detail.attributes
 contact_info = @digital_cv.contact_detail.attributes
 cv_skill = @digital_cv.cv_skills
 languages = @digital_cv.cv_languages
@@ -202,7 +201,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
       p do
         text ha.title, bold: true
         text " awarded by "+ha.awarded_by+" at "
-        text ha.company_name, bold: true
+        text ha.company_name.to_s, bold: true
       end
       p ha.award_date.strftime("%B, %Y")
     end
@@ -239,7 +238,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
     p "Disabled", bold: true
     end
     if digital_cv.personal_detail.try(:hobbies).present? 
-    p "Hobbies", bold: true
+    p "Hobbies and Interests", bold: true
     end
   end
   cp2 = Caracal::Core::Models::TableCellModel.new do
@@ -263,7 +262,7 @@ c2 = Caracal::Core::Models::TableCellModel.new do
     end
   end
   table [[cp1,cp2]] do
-      cell_style cols[0], width: 2000
+      cell_style cols[0], width: 2500
   end
 end 
 
