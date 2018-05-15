@@ -27,6 +27,8 @@ trainings = @digital_cv.trainings
 certifications = @digital_cv.certifications
 honor_awards = @digital_cv.honor_and_awards
 research_or_projectdet = @digital_cv.research_or_project_details
+references = @digital_cv.references
+
 font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://talentfore.com/"
 
 docx.style do  
@@ -123,6 +125,12 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 	end
 
 	if digital_cv.is_experienced
+		hr do
+			color   'E5E5E5'
+			line    :single
+			size    1
+			spacing 1
+		end
 		h4 'Experience', color: '154870', size: 35
 		hr do
 			color   'E5E5E5'
@@ -150,7 +158,43 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 			end
 			table [[c21,c22]] do
 				cell_style cols[0], width: 1400
+				border_top do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_bottom do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_left do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_right do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end 
+				border_vertical do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
 			end
+		end
+		hr do
+				color   'E5E5E5'
+				line    :single
+				size    1
+				spacing 1
 		end
 	end
 
@@ -165,10 +209,10 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 		education_detail.each do |e|
 			edu_end_date =  e.pursuing ? 'Present' : e.end_date.strftime("%b, %Y") 
 			percentage = if e.is_cgpa? 
-				"CGPA -" + e.percentage.to_s
-			else 
-				"Percentage -" + e.percentage.to_s 
-			end 
+		    	"CGPA " + e.percentage.to_s
+		      	else 
+		        e.percentage.to_s+"%" 
+		    end 
 			c23 = Caracal::Core::Models::TableCellModel.new do
 				p e.start_date.strftime("%b, %Y").to_s + "-\n" + edu_end_date.to_s
 			end
@@ -181,6 +225,36 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 		    end
 		    table [[c23,c24]] do
 		        cell_style cols[0], width: 1400
+		        border_top do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_bottom do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_left do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_right do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_vertical do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end 
 		    end
 		end
 		hr do
@@ -237,6 +311,36 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 			end
 			table [[c25,c26]] do
 				cell_style cols[0], width: 1400
+				border_top do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_bottom do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_left do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_right do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_vertical do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end 
 			end
     	end
 		hr do
@@ -267,7 +371,37 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 		        end
 			end
 	        table [[c27,c28]] do
-	        cell_style cols[0], width: 1400
+	        	cell_style cols[0], width: 1400
+	        	border_top do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_bottom do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_left do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
+				border_right do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end 
+				border_vertical do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end
 	        end
 		end
 		hr do
@@ -296,6 +430,36 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 			table [[c29, c30]] do
 				cell_style cols[0], width: 1400
 				cell_style cells, margins: { top: 0, bottom: 0, left: 0, right: 0 }
+				border_top do
+					color   'FFFFFF'
+					line    :single
+					size    1
+					spacing 2
+				end
+				border_bottom do
+					color   'FFFFFF'
+					line    :single
+					size    1
+					spacing 2
+				end
+				border_left do
+					color   'FFFFFF'
+					line    :single
+					size    1
+					spacing 2
+				end
+				border_right do
+					color   'FFFFFF'
+					line    :single
+					size    1
+					spacing 2
+				end 
+				border_vertical do
+					color   'FFFFFF'
+					line    :single
+					size    1
+					spacing 2
+				end
 			end
 			c31 = Caracal::Core::Models::TableCellModel.new do
 				p "Description: ", bold: true
@@ -306,6 +470,36 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 			table [[c31,c32]] do
 				cell_style cols[0], width: 1400
 				cell_style cells, margins: { top: 0, bottom: 0, left: 0, right: 0 }
+				border_top do
+					color   'FFFFFF'
+					line    :single
+					size    1
+					spacing 2
+				end
+				border_bottom do
+					color   'FFFFFF'
+					line    :single
+					size    1
+					spacing 2
+				end
+				border_left do
+					color   'FFFFFF'
+					line    :single
+					size    1
+					spacing 2
+				end
+				border_right do
+					color   'FFFFFF'
+					line    :single
+					size    1
+					spacing 2
+				end
+				border_vertical do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end 
 			end
 			hr do
 				color   'E5E5E5'
@@ -316,8 +510,79 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 		end
 	end
 
+	if digital_cv.references.present?
+		h4 "References", color: '154870', size: 35
+  		hr do
+			color   'E5E5E5'
+			line    :single
+			size    1
+			spacing 1
+		end
+		references.each do |reference|
+			c33 = Caracal::Core::Models::TableCellModel.new do
+				img font_url + "/assets/font-awesome-icon/circular.png",width:6 , height: 6, align: :left
+			end
+			c34 = Caracal::Core::Models::TableCellModel.new do
+				p do
+					text reference.name, bold: true
+					text ", "+reference.job_title.try(:title)
+					text " at "+reference.company_name
+				end
+				p do
+					text "Contact:", bold: true
+					text reference.mobile.to_s + ", " + reference.email
+				end
+			end
+			table [[c33,c34]] do
+				cell_style cols[0], width: 500
+				border_top do
+					color   'FFFFFF'
+					line    :single
+					size    1
+					spacing 2
+				end
+				border_bottom do
+					color   'FFFFFF'
+					line    :single
+					size    1
+					spacing 2
+				end
+				border_left do
+					color   'FFFFFF'
+					line    :single
+					size    1
+					spacing 2
+				end
+				border_right do
+					color   'FFFFFF'
+					line    :single
+					size    1
+					spacing 2
+				end
+				border_vertical do
+				    color   'FFFFFF'
+				    line    :single
+				    size    1
+				    spacing 2
+				end 
+			end
+			hr do
+				color   'E5E5E5'
+				line    :single
+				size    1
+				spacing 1
+			end
+    	end
+	end
+
 	if digital_cv.personal_detail.present? 
   		h4 "Additional Information", color: '154870', size: 35
+  		hr do
+			color   'E5E5E5'
+			line    :single
+			size    1
+			spacing 1
+		end
   	end
   
 	cp1 = Caracal::Core::Models::TableCellModel.new do
@@ -362,12 +627,36 @@ c2 = Caracal::Core::Models::TableCellModel.new do
 	end
 	table [[cp1,cp2]] do
 		cell_style cols[0], width: 2500
-	end
-	hr do
-		color   'E5E5E5'
-		line    :single
-		size    1
-		spacing 1
+		border_top do
+			color   'FFFFFF'
+			line    :single
+			size    1
+			spacing 2
+		end
+		border_bottom do
+			color   'FFFFFF'
+			line    :single
+			size    1
+			spacing 2
+		end
+		border_left do
+			color   'FFFFFF'
+			line    :single
+			size    1
+			spacing 2
+		end
+		border_right do
+			color   'FFFFFF'
+			line    :single
+			size    1
+			spacing 2
+		end 
+		border_vertical do
+		    color   'FFFFFF'
+		    line    :single
+		    size    1
+		    spacing 2
+		end
 	end
 end
 

@@ -181,6 +181,36 @@ c2 = Caracal::Core::Models::TableCellModel.new do
       end
       table [[c21,c22]] do
         cell_style cols[1], width: 900
+        border_top do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end   
+        border_vertical do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
       end
     end
   end
@@ -261,11 +291,72 @@ c2 = Caracal::Core::Models::TableCellModel.new do
     end
   end
   table [[cp1,cp2]] do
-      cell_style cols[0], width: 2500
+    cell_style cols[0], width: 2500
+    border_top do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_bottom do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_left do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_right do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end   
+      border_vertical do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
   end
 end 
 
 docx.table [[c1,c2]] do
-cell_style cols[0], width: 3500
+  cell_style cols[0], width: 3500
+  border_top do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end   
+        border_vertical do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        
 end
 
