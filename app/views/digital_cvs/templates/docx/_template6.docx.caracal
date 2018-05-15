@@ -246,6 +246,60 @@ c2 = Caracal::Core::Models::TableCellModel.new do
     end
   end
 
+  if digital_cv.references.present?
+    h4 "REFERENCES", bgcolor: 'EEEEEE'
+     
+    references.each do |reference|
+      c23 = Caracal::Core::Models::TableCellModel.new do
+        img font_url + "/assets/font-awesome-icon/circular.png",width:6 , height: 6, align: :left
+      end
+      c24 = Caracal::Core::Models::TableCellModel.new do
+        p do
+          text reference.name, bold: true
+          text ", "+reference.job_title.try(:title)
+          text " at "+reference.company_name
+        end
+        p do
+          text "Contact:", bold: true
+          text reference.mobile.to_s + ", " + reference.email
+        end
+      end
+      table [[c23,c24]] do
+        cell_style cols[0], width: 500
+        border_top do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_vertical do
+            color   'FFFFFF'
+            line    :single
+            size    1
+            spacing 2
+        end 
+      end
+    end
+  end
+
   if digital_cv.personal_detail.present? 
     h4 "PERSONAL INFORMATION", bgcolor: 'EEEEEE'
   end
@@ -328,35 +382,34 @@ end
 docx.table [[c1,c2]] do
   cell_style cols[0], width: 3500
   border_top do
-          color   'FFFFFF'
-          line    :single
-          size    1
-          spacing 2
-        end
-        border_bottom do
-          color   'FFFFFF'
-          line    :single
-          size    1
-          spacing 2
-        end
-        border_left do
-          color   'FFFFFF'
-          line    :single
-          size    1
-          spacing 2
-        end
-        border_right do
-          color   'FFFFFF'
-          line    :single
-          size    1
-          spacing 2
-        end   
-        border_vertical do
-          color   'FFFFFF'
-          line    :single
-          size    1
-          spacing 2
-        end
-        
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+  border_bottom do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+  border_left do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+  border_right do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end   
+  border_vertical do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
 end
 
