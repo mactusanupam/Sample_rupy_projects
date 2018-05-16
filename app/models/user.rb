@@ -12,7 +12,6 @@ class User < ApplicationRecord
   has_many :job_applications, dependent: :destroy
 
   validates :first_name, :last_name, presence: true
-  validates :company_id, presence: true, :if => lambda {|u| user_type_id == UserType.find_by(title: 'Employer').id}
 
   accepts_nested_attributes_for :company, :allow_destroy => true
 
