@@ -20,6 +20,7 @@
 //= require_tree .
 //= require intl-tel-input
 
+
 $(document).ready(function(){
 
   $(window).on('popstate', function() {

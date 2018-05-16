@@ -17,8 +17,8 @@
       <div class="col-sm-12 no-padding margin-bottom-30">
         <%= f.input :first_name, label_html: { class: 'col-sm-3' } %>
         <%= f.input :last_name, label_html: { class: 'col-sm-3' } %>
-        <%= f.input :email, label_html: { class: 'col-sm-3 ' } %>
-        <%= f.input :mobile, label_html: { class: 'col-sm-3'}, input_html:{ class: 'user_mobile', size: 10} %>
+        <%= f.input :email, label_html: { class: 'col-sm-3' } %>
+        <%= f.input :mobile, input_html:{ class: 'selected-dial-code tel', :allowDropdown => false}, label_html: { class: 'col-sm-3'}%>
         <%= f.input :skype_username, label_html: { class: 'col-sm-3' } %>
         <%= f.input :linkedin_url, label_html: { class: 'col-sm-3' } %>
         <%= f.input :address, label_html: { class: 'col-sm-3' } %>
@@ -39,14 +39,3 @@
 </div>
 
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    $(".user_mobile").intlTelInput({
-        formatOnInit: true,
-        separateDialCode: true,
-       
-       /* utilsScript: "assets/libphonenumber/utils.js"*/
-    });
-  }); 
- 
-</script>
