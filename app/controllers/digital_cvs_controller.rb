@@ -15,10 +15,6 @@ class DigitalCvsController < ApplicationController
     if @digital_cvs.size == 0
       redirect_to new_digital_cv_path
     end
-
-    @contact_detail = ContactDetail.all
-   # logger.debug "New article: #{@contact_detail.mobile.inspect}"
-   
   end
 
   # GET /digital_cvs/1

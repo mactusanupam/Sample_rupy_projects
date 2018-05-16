@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "intlTelInput";
+
 .digital-cv-form {
   .padded-cv {
     padding: 20px 0;
@@ -310,5 +312,5 @@ abbr {
 .intl-tel-input {
   position: relative;
   display: block !important;
-  
+
 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180511095210) do
+ActiveRecord::Schema.define(version: 20180516202942) do
 
   create_table "academic_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "institute"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20180511095210) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
-    t.bigint "mobile"
+    t.string "mobile"
     t.string "linkedin_url"
     t.string "skype_username"
     t.text "address"
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(version: 20180511095210) do
     t.string "name", default: "My Resume"
     t.text "summary"
     t.text "objective"
-    t.boolean "is_experienced"
+    t.boolean "is_experienced", default: true
     t.string "employment_status"
     t.bigint "user_id"
     t.bigint "template_id"
@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(version: 20180511095210) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  
+
   create_table "job_applications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "job_id"
     t.bigint "user_id"
@@ -239,14 +239,16 @@ ActiveRecord::Schema.define(version: 20180511095210) do
     t.datetime "updated_at", null: false
     t.bigint "qualification_id"
     t.bigint "user_id"
-    t.string "job_status", default: "Open"
-    t.string "job_type", default: "Permanent"
     t.integer "job_view", default: 0
     t.integer "no_of_openings", default: 0
     t.string "seniority_level"
+    t.bigint "degree_id"
     t.bigint "specialization_id"
+    t.string "job_status", default: "Open"
+    t.string "job_type", default: "Permanent"
     t.boolean "remote_location"
     t.index ["company_id"], name: "index_jobs_on_company_id"
+    t.index ["degree_id"], name: "index_jobs_on_degree_id"
     t.index ["industry_id"], name: "index_jobs_on_industry_id"
     t.index ["qualification_id"], name: "index_jobs_on_qualification_id"
     t.index ["specialization_id"], name: "index_jobs_on_specialization_id"
@@ -314,7 +316,7 @@ ActiveRecord::Schema.define(version: 20180511095210) do
     t.string "name"
     t.bigint "job_title_id"
     t.string "email"
-    t.bigint "mobile"
+    t.string "mobile"
     t.bigint "digital_cv_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -460,6 +462,7 @@ ActiveRecord::Schema.define(version: 20180511095210) do
   add_foreign_key "job_applications", "users"
   add_foreign_key "job_responsibilities", "job_titles"
   add_foreign_key "jobs", "companies"
+  add_foreign_key "jobs", "degrees"
   add_foreign_key "jobs", "industries"
   add_foreign_key "jobs", "qualifications"
   add_foreign_key "jobs", "specializations"

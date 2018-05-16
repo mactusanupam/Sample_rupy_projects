@@ -86,28 +86,4 @@ $(document).ready(function(){
     $('#enlargeImageModal').modal('show');
   });
 
-  //country code fore mobile
-
-  $(".tel").intlTelInput({
-      formatOnDisplay: true,
-      separateDialCode: true,
-      setNumber: "+447733123456",
-      initialCountry: "auto",
-      getNumberType:"MOBILE",
-      setCountry: "iso2",
-       initialCountry: "in",
-      /*getNumber: "intlTelInputUtils.numberFormat.E164",
-      utilsScript: "assets/libphonenumber/utils.js"*/
-      defaultCountry: "auto"
-   }); 
-
-  /*$(".user_mobile").intlTelInput("setNumber", "+44 7733 123 456");*/
-
-
-
 })
-
-
-
-
-

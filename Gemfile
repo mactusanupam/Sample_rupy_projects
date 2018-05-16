@@ -37,7 +37,7 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'caracal'
 gem 'caracal-rails'
-gem 'intl-tel-input'
+gem 'intl-tel-input-rails'
 
 
 group :development, :test do

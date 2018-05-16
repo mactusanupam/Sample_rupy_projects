@@ -17,8 +17,9 @@
 //= require select2
 //= require bootstrap-wysihtml5
 //= require alertify
+//= require intlTelInput
+//= require libphonenumber/utils
 //= require_tree .
-//= require intl-tel-input
 
 
 $(document).ready(function(){
