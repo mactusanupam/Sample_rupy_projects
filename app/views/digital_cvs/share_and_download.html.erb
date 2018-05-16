@@ -16,9 +16,9 @@
               <%= link_to share_and_download_digital_cv_path(@digital_cv, format: :pdf), class: 'dropdown-item', target: '_blank' do%>
                 <%= fa_icon "file-pdf-o", text: 'Download PDF' %>
               <% end %>
-              <%#= link_to 'javascript:void(0)', class: 'dropdown-item' do %>
-                <%#= fa_icon "file-word-o", text: 'Download DOCX' %>
-              <%# end %>
+              <%= link_to download_cv_docx_digital_cv_path(@digital_cv, format: :docx), class: 'dropdown-item', target: '_blank' do %>
+                <%= fa_icon "file-word-o", text: 'Download DOCX' %>
+              <% end %>
             </div>
           </div>
         <% else %>
