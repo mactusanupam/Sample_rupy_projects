@@ -85,4 +85,5 @@ $(document).ready(function(){
     $('.enlargeImageModalSource').attr('src', src);
     $('#enlargeImageModal').modal('show');
   });
+
 })
