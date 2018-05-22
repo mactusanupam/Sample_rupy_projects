@@ -94,9 +94,17 @@ class DigitalCvsController < ApplicationController
   end
 
   def share_and_download
+    if current_user.present?
+      analytic_record = [viewed: true ,ip_address: request.ip, user_id: current_user.id,type_id: @digital_cv.id]
+      AnalyticDigitalCv.create(analytic_record)
+      #logger.debug"----ccccccccccccccc---#{@digital_cv.inspect}" 
+    else
+      analytic_record = [viewed: true ,ip_address: request.ip, type_id: @digital_cv.id]
+      AnalyticDigitalCv.create(analytic_record)
+    end  
     unless @digital_cv.user_id
       @digital_cv.user_id = current_user.id
-      @digital_cv.save(validate: false)
+      @digital_cv.save(validate: false) 
     end
 
     respond_to do |format|
@@ -106,6 +114,7 @@ class DigitalCvsController < ApplicationController
         show_as_html: params.key?('debug'),
         encoding:     'utf8',
         margin: {left: 0, top: 0, right:0 }
+       AnalyticDigitalCv.update(downloaded: true)
       end
     end
   end
@@ -117,12 +126,15 @@ class DigitalCvsController < ApplicationController
     # cookies[:ecv] ||= { :value => { digital_cv_id: @digital_cv.id, downloaded: false, viewed: false }, :expires => 3.month.from_now }
 
     if request.format == 'html'
-      @digital_cv.increment!(:view)
+      #@digital_cv.increment(:view)
+      analytic_record = [viewed: true ,ip_address: request.ip, user_id: current_user.id,type_id: @digital_cv.id]
+      AnalyticDigitalCv.create(analytic_record) 
       # cookies[:ecv][:viewed] = true
     end
 
     if request.format == 'pdf'
-      @digital_cv.increment!(:download)
+      #@digital_cv.increment(:download)
+      AnalyticDigitalCv.update(downloaded: true)
       # cookies[:ecv]['downloaded'] = 'true'
     end
 

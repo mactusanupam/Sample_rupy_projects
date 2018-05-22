@@ -27,7 +27,12 @@
           </div>
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 text-right">
-            <span>Job Views:&nbsp;<%= @job.job_view %> |</span>
+          <span>Job Views:&nbsp;
+            <%=AnalyticJob.where(type_id: @job.id).count('viewed')%>
+          </span>&nbsp;|
+            <!--span>Job Views:&nbsp;<%#= @job.job_view %><%#= AnalyticJob.where(:view_count, @job.id) %>
+            <%#=AnalyticJob.view_count(@job)%>
+              |</span-->
             <% if policy(@job).job_applied? %>
             <span><%= link_to "Job Applications: #{@job.job_applications.count || 0}" ,job_applied_job_path %></span>
             <% else %>

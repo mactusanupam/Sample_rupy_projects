@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root :to => 'static_pages#resume_builder'
-
+  
    resources :job_description_creators, only: [:new, :create] do
     collection do
       get :download
@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   end
 
   resources :companies
+  #resources :emergencies, controller: :contacts, type: 'Emergency'
+  #resources :friends, controller: :contacts, type: 'Friend'
   resources :jobs do
     collection do
       get :job_application_update

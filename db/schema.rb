@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180516202942) do
+ActiveRecord::Schema.define(version: 20180518090052) do
 
   create_table "academic_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "institute"
@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(version: 20180516202942) do
     t.index ["degree_id"], name: "index_academic_details_on_degree_id"
     t.index ["digital_cv_id"], name: "index_academic_details_on_digital_cv_id"
     t.index ["specialization_id"], name: "index_academic_details_on_specialization_id"
+  end
+
+  create_table "analytics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "type"
+    t.integer "type_id", default: 0
+    t.bigint "user_id"
+    t.boolean "viewed", default: false
+    t.boolean "downloaded", default: false
+    t.boolean "vote_count", default: false
+    t.string "ip_address"
+    t.string "session_hash"
+    t.index ["user_id"], name: "index_analytics_on_user_id"
   end
 
   create_table "billing_plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -149,7 +161,7 @@ ActiveRecord::Schema.define(version: 20180516202942) do
     t.string "name", default: "My Resume"
     t.text "summary"
     t.text "objective"
-    t.boolean "is_experienced", default: true
+    t.boolean "is_experienced"
     t.string "employment_status"
     t.bigint "user_id"
     t.bigint "template_id"
@@ -239,18 +251,14 @@ ActiveRecord::Schema.define(version: 20180516202942) do
     t.datetime "updated_at", null: false
     t.bigint "qualification_id"
     t.bigint "user_id"
+    t.string "job_status", default: "Open"
+    t.string "job_type", default: "Permanent"
     t.integer "job_view", default: 0
     t.integer "no_of_openings", default: 0
-    t.string "job_status", default: "Open"
-    t.string "job_type", default: "Permanent"
     t.string "seniority_level"
-    t.bigint "degree_id"
     t.bigint "specialization_id"
-    t.string "job_status", default: "Open"
-    t.string "job_type", default: "Permanent"
     t.boolean "remote_location"
     t.index ["company_id"], name: "index_jobs_on_company_id"
-    t.index ["degree_id"], name: "index_jobs_on_degree_id"
     t.index ["industry_id"], name: "index_jobs_on_industry_id"
     t.index ["qualification_id"], name: "index_jobs_on_qualification_id"
     t.index ["specialization_id"], name: "index_jobs_on_specialization_id"
@@ -442,6 +450,7 @@ ActiveRecord::Schema.define(version: 20180516202942) do
   add_foreign_key "academic_details", "degrees"
   add_foreign_key "academic_details", "digital_cvs"
   add_foreign_key "academic_details", "specializations"
+  add_foreign_key "analytics", "users"
   add_foreign_key "certifications", "digital_cvs"
   add_foreign_key "community_answers", "community_questions"
   add_foreign_key "community_answers", "users"
@@ -464,7 +473,6 @@ ActiveRecord::Schema.define(version: 20180516202942) do
   add_foreign_key "job_applications", "users"
   add_foreign_key "job_responsibilities", "job_titles"
   add_foreign_key "jobs", "companies"
-  add_foreign_key "jobs", "degrees"
   add_foreign_key "jobs", "industries"
   add_foreign_key "jobs", "qualifications"
   add_foreign_key "jobs", "specializations"

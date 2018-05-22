@@ -26,10 +26,11 @@
           </div>
           <div class="col-md-4">
             <%= link_to community_question_vote_path(@community_question), method: :put, remote: true, class: "btn btn-default btn-xs", id: "upvote" do %>
-                Like | <b> <%= @community_question.vote_count || 0 %></b>
+                Like | <b> <%=AnalyticCommunityQuestion.where(type_id: @community_question.id, vote_count: true).count('vote_count')%><%#= @community_question.vote_count || 0 %></b>
             <% end %>
             <span class="text-muted">
-              Viewed: <%= pluralize(@community_question.view_count || 0, 'time') %>
+              Viewed: <%#= pluralize(@community_question.view_count || 0, 'time') %>
+              <%=AnalyticCommunityQuestion.where(type_id: @community_question.id).count('viewed')%>
             </span>
           </div>
           <div class="col-md-4 text-right">

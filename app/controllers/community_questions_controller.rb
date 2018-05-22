@@ -13,7 +13,14 @@ class CommunityQuestionsController < ApplicationController
 
   # GET /community_questions/1
   def show
-    @community_question.increment!(:view_count)
+    @analytic = AnalyticCommunityQuestion.all
+    if current_user.present? 
+     analytic_record = [viewed: true ,ip_address: request.ip, user_id: current_user.id,type_id: @community_question.id]
+     AnalyticCommunityQuestion.create(analytic_record) 
+    else
+     analytic_record = [viewed: true ,ip_address: request.ip, type_id: @community_question.id]
+     AnalyticCommunityQuestion.create(analytic_record)
+    end  
   end
 
   # GET /community_questions/new
@@ -46,11 +53,13 @@ class CommunityQuestionsController < ApplicationController
 
   def vote
     @community_question = CommunityQuestion.find(params[:community_question_id])
-    @community_question.increment!(:vote_count)
+    #@community_question.increment!(:vote_count)
+
     respond_to do |format|
       @question_upvote = 1
       format.html
       format.js
+      AnalyticCommunityQuestion.update(vote_count: true)
     end
   end
 

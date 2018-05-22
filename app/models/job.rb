@@ -11,7 +11,8 @@ class Job < ApplicationRecord
   accepts_nested_attributes_for :skills
   has_and_belongs_to_many :degrees
   accepts_nested_attributes_for :degrees
-
+  
+  has_many :analytics, :dependent => :destroy
   has_many :job_applications, :dependent => :destroy
   accepts_nested_attributes_for :job_applications, allow_destroy: true
 
