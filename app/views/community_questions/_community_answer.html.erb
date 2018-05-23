@@ -17,7 +17,7 @@
         <div class="col-md-12 no-padding" style="margin: 15px 0;">
           <div class="text-left">
             <%= link_to community_question_community_answer_vote_path(community_answer.community_question, community_answer), method: :put, remote: true, class: "btn btn-default btn-xs", id: "answers_upvote#{community_answer.id}" do %>
-              Like | <b><%= community_answer.vote_count || 0 %></b>
+              Like | <b><%#= community_answer.vote_count || 0 %><%=AnalyticCommunityAnswer.where(type_id: community_answer.id, vote_count: true).count('vote_count')%></b>
             <% end %>
           </div>
         </div>

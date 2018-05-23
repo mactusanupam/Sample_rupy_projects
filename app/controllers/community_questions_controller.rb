@@ -15,10 +15,10 @@ class CommunityQuestionsController < ApplicationController
   def show
     @analytic = AnalyticCommunityQuestion.all
     if current_user.present? 
-     analytic_record = [viewed: true ,ip_address: request.ip, user_id: current_user.id,type_id: @community_question.id]
+     analytic_record = [viewed: true ,ip_address: request.remote_ip, user_id: current_user.id,type_id: @community_question.id]
      AnalyticCommunityQuestion.create(analytic_record) 
     else
-     analytic_record = [viewed: true ,ip_address: request.ip, type_id: @community_question.id]
+     analytic_record = [viewed: true ,ip_address: request.remote_ip, type_id: @community_question.id]
      AnalyticCommunityQuestion.create(analytic_record)
     end  
   end
@@ -54,7 +54,7 @@ class CommunityQuestionsController < ApplicationController
   def vote
     @community_question = CommunityQuestion.find(params[:community_question_id])
     #@community_question.increment!(:vote_count)
-
+    @liked = AnalyticCommunityQuestion.where(type_id: @community_question.id, vote_count: true)
     respond_to do |format|
       @question_upvote = 1
       format.html

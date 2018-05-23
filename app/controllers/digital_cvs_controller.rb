@@ -95,11 +95,11 @@ class DigitalCvsController < ApplicationController
 
   def share_and_download
     if current_user.present?
-      analytic_record = [viewed: true ,ip_address: request.ip, user_id: current_user.id,type_id: @digital_cv.id]
+      analytic_record = [viewed: true ,ip_address: request.remote_ip, user_id: current_user.id,type_id: @digital_cv.id]
       AnalyticDigitalCv.create(analytic_record)
       #logger.debug"----ccccccccccccccc---#{@digital_cv.inspect}" 
     else
-      analytic_record = [viewed: true ,ip_address: request.ip, type_id: @digital_cv.id]
+      analytic_record = [viewed: true ,ip_address: request.remote_ip, type_id: @digital_cv.id]
       AnalyticDigitalCv.create(analytic_record)
     end  
     unless @digital_cv.user_id

@@ -1,3 +1,2 @@
-class Analytic < ApplicationRecord 
-		
+class Analytic < ApplicationRecord 		
 end	

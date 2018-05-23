@@ -17,7 +17,15 @@ class CommunityAnswersController < ApplicationController
 
   def vote
     @community_answer = CommunityAnswer.find(params[:community_answer_id])
-    @community_answer.increment!(:vote_count)
+    #@community_answer.increment!(:vote_count) 
+    #AnalyticCommunityAnswer.update(vote_count: true)
+     if current_user.present? 
+     analytic_record = [viewed: true , vote_count: true, ip_address: request.remote_ip, user_id: current_user.id, type_id: @community_answer.id]
+     AnalyticCommunityAnswer.create(analytic_record) 
+    else
+     analytic_record = [viewed: true ,vote_count: true, ip_address: request.remote_ip, type_id: @community_answer.id]
+     AnalyticCommunityAnswer.create(analytic_record)
+    end 
     @answer_upvote = 1
     render :template => 'community_questions/vote.js.erb'
   end

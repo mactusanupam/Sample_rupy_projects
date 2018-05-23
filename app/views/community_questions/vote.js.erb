@@ -1,6 +1,6 @@
-<% if @question_upvote && @community_question.vote_count.present? %>
+<% if @question_upvote && @liked.present? %>
 	$("#upvote").addClass('disabled');
-	$("#upvote").html("Liked | <b><%= @community_question.vote_count %></b>");
+	$("#upvote").html("Liked | <b><%= AnalyticCommunityQuestion.where(type_id: @community_question.id, vote_count: true).count('vote_count') %></b>");
 <% end %>
 
 <% if @answer_upvote && @community_answer.vote_count.present? %>

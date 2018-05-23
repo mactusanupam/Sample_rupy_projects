@@ -5,8 +5,6 @@ class JobsController < ApplicationController
 
   after_action :verify_authorized, except: [:index, :show, :job_application]
   before_action :set_page, only: [:index]
- 
-
   # GET /jobs
   def index
     @industry = Industry.all
@@ -19,10 +17,10 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
     if current_user.present? 
-     analytic_record = [viewed: true ,ip_address: request.ip, user_id: current_user.id,type_id: @job.id]
+     analytic_record = [viewed: true ,ip_address: request.remote_ip, user_id: current_user.id,type_id: @job.id]
      AnalyticJob.create(analytic_record) 
     else
-     analytic_record = [viewed: true ,ip_address: request.ip,type_id: @job.id]
+     analytic_record = [viewed: true ,ip_address: request.remote_ip,type_id: @job.id]
      AnalyticJob.create(analytic_record)
     end  
   end
