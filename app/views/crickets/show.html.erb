@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @cricket.team %>
+</p>
+
+<p>
+  <strong>Palyer:</strong>
+  <%= @cricket.palyer %>
+</p>
+
+<h2> Views:&nbsp;
+<%=AnalyticCricket.where(record_id: @cricket.id).count('view_count')%>&nbsp;&nbsp;times
+</h2> <br />
+<%= link_to cricket_vote_path(@cricket), method: :put, remote: true, class: "btn btn-default btn-xs", id: "upvote" do %>
+                  Like|<b> <%=AnalyticCricket.where(record_id: @cricket.id, vote_count: true).count('vote_count')%><%#= @community_question.vote_count || 0 %></b>
+<% end %>
+<h2>Likes:<%=AnalyticCricket.where(record_id: @cricket.id, vote_count: true).count('vote_count')%></h2>
+<%= link_to 'Edit', edit_cricket_path(@cricket) %> |
+<%= link_to 'Back', crickets_path %>

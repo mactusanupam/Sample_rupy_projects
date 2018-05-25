@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  view_count: MyString
+  vote_count: false
+  ip_address: MyString
+  session_hash: MyString
+
+two:
+  type: 
+  view_count: MyString
+  vote_count: false
+  ip_address: MyString
+  session_hash: MyString

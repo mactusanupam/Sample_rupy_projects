@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @football.team %>
+</p>
+
+<p>
+  <strong>Palyer:</strong>
+  <%= @football.palyer %>
+</p>
+
+<h2> Views:&nbsp;
+<%=AnalyticFootball.where(record_id: @football.id).count('view_count')%>&nbsp;&nbsp;times
+</h2> <br />
+<%= link_to football_vote_path(@football), method: :put, remote: true, class: "btn btn-default btn-xs", id: "upvote1" do %>
+                  Like|<b> <%=AnalyticFootball.where(record_id: @football.id, vote_count: true).count('vote_count')%><%#= @community_question.vote_count || 0 %></b>
+<% end %>
+<h2>Likes:<%=AnalyticFootball.where(record_id: @football.id, vote_count: true).count('vote_count')%></h2>
+
+<%= link_to 'Edit', edit_football_path(@football) %> |
+<%= link_to 'Back', footballs_path %>

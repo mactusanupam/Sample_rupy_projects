@@ -1,0 +1,27 @@
+<%= form_with(model: football, local: true) do |form| %>
+  <% if football.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(football.errors.count, "error") %> prohibited this football from being saved:</h2>
+
+      <ul>
+      <% football.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :team %>
+    <%= form.text_field :team, id: :football_team %>
+  </div>
+
+  <div class="field">
+    <%= form.label :palyer %>
+    <%= form.text_field :palyer, id: :football_palyer %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

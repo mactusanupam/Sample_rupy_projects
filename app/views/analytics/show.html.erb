@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @analytic.type %>
+</p>
+
+<p>
+  <strong>View count:</strong>
+  <%= @analytic.view_count %>
+</p>
+
+<p>
+  <strong>Vote count:</strong>
+  <%= @analytic.vote_count %>
+</p>
+
+<p>
+  <strong>Ip address:</strong>
+  <%= @analytic.ip_address %>
+</p>
+
+<p>
+  <strong>Session hash:</strong>
+  <%= @analytic.session_hash %>
+</p>
+
+<%= link_to 'Edit', edit_analytic_path(@analytic) %> |
+<%= link_to 'Back', analytics_path %>

@@ -1,0 +1,4 @@
+<% if @liked.vote_count.present? %>
+	$("#upvote1").addClass('disabled');
+	$("#upvote1").html("Liked | <b><%= @liked.vote_count %></b>");
+<% end %>
