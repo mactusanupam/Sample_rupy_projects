@@ -1,0 +1,104 @@
+<% unless @job_title.present? %>
+  <div class="margin-top-50 alert alert-danger">
+    <p>Looks like you have not selected the job title yet. Please select that in overview section first and click submit.</p>
+  </div>
+  <div class="text-center">
+    <%= link_to "Go To Overview", new_job_description_creator_path(slug: 'overview'), remote: true, class: 'btn site_button color-white' %>
+  </div>
+<% else %>
+  <div class="<%= @job_title.present? ? 'show' : 'hide' %>">
+    <div class="col-md-12 margin-bottom-30">
+      <h4 class="text-center">JOB RESPONSIBILITIES </h4>
+      <hr />
+    <div class="form-group" style="margin-left: 0; margin-right: 0">
+      <h4 style="text-transform: uppercase;">
+        Pre-written job reponsibilites for
+        <strong><%= @job_title.try(:title) %></strong>
+      </h4>
+      <div class="background-grey responsibilities">
+        <ul class="list-unstyled">
+          <% if @job_title.try(:job_responsibilities).present? %>
+            <% @job_title.try(:job_responsibilities).each do |resp| %>
+              <li>
+                <%= link_to "Add", 'javascript:void(0)', class: 'color-white btn btn-xs site_button resp-add', style: 'margin-right: 10px;' %>
+                <%= hidden_field_tag "job_responsibilities[responsibility_ids][]", resp.id %>
+                <%= resp.responsibility_text %>
+                <%= link_to "Remove", 'javascript:void(0)', class: 'btn btn-xs btn-danger pull-right resp-li hide' %>
+              </li>
+            <% end %>
+          <% else %>
+            <li class="alert alert-danger">
+              <h4>No Responsibility Found. Add your own responsibilities below.</h4>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="form-group" style="margin-left: 0; margin-right: 0">
+      <h4 style="text-transform: uppercase;">
+        OR write your own job reponsibilites for
+        <strong><%= @job_title.try(:title) %></strong>
+      </h4>
+      <%= form_for JobResponsibility.new, url: save_responsibility_job_description_creators_path, remote: true, method: :post, html: { class: 'form-horizontal jd_form' } do |form| %>
+        <%= form.hidden_field :job_title_id, value: @job_title.try(:id) %>
+        <div class="form-group">
+          <label class="control-label col-sm-3 text-left" style="padding-top: 0;">Responsibility Type</label>
+          <div class="col-sm-9 no-padding">
+            <div class="col-sm-2 no-padding">
+              <%= form.radio_button :responsibility_type, JobResponsibility::Type:: FUNCTIONAL %>
+              <%= form.label :responsibility_type, "Functional", class: 'radio-label' %>
+            </div>
+            <div class="col-sm-3" style="padding-right: 0">
+              <%= form.radio_button :responsibility_type, JobResponsibility::Type:: ORGANISATIONAL %>
+              <%= form.label :responsibility_type, "Organizational", class: 'radio-label' %>
+            </div>
+            <div class="col-sm-3" style="padding-right: 0">
+              <%= form.radio_button :responsibility_type, JobResponsibility::Type::MANAGEMENT %>
+              <%= form.label :responsibility_type, "Management", class: 'radio-label' %>
+            </div>
+            <div class="col-sm-3 no-padding">
+              <%= form.radio_button :responsibility_type, JobResponsibility::Type::OTHERS  %>
+              <%= form.label :responsibility_type, "Others", class: 'radio-label' %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-11">
+            <%= form.text_area :responsibility_text, class: "form-control wysihtml5", placeholder: 'write your own responsibility(one at a time) and click add', style: "height: 50px;" %>
+          </div>
+          <div class="col-sm-1 no-padding">
+            <%= form.submit "Add", class: 'add-btn btn btn-primary site_button btn-xs' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <%= form_for :job_responsibilities, url:job_description_creators_path, method: :post, remote: true, class: 'form-horizontal' do %>
+      <div class="col-sm-11 form-group selected-responsibilities background-grey">
+        <ul class="list-unstyled">
+        </ul>
+      </div>
+      <div class="text-center">
+        <%= submit_tag "Submit and Continue", class: "btn btn-primary site_button" %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+  $('.jd_form .wysihtml5').wysihtml5({ toolbar: {
+    'font-styles': false,
+    'color': false,
+    'emphasis': {
+      'small': false
+    },
+    'blockquote': false,
+    'lists': false,
+    'html': false,
+    'link': true,
+    'image': false,
+    'smallmodals': false
+    }
+  });
+</script>

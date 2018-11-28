@@ -1,0 +1,201 @@
+<% content_for :title, "Resume Builder |Best Resume templates |Best Resume format -TalentFore" %>
+<% content_for :description, "Find the best plan from our flexible pricing option to create an eye catching resume using our resume builder expertise. All plans include access to all templates. Premium plan include reports and analytics. Secured data storage and SSL. Create a resume now and increase your chances of getting your resume shortlisted." %>
+<% content_for :keywords, "Resumes, Pricing, Plans and Packages, Premium plan" %>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 no-padding">
+    <div class="poster">
+      <%= image_tag "static_pages/digital_cv.jpg", class: 'img-responsive' %>
+
+      <div class="caption">
+        <h1 class="heading1">
+          <%= link_to "Let's Get Started!", digital_cvs_path, class: 'btn btn-lg talent-fore-btn btn-sharp big-btn' %>
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row cv-features">
+  <h2 class="heading1 text-center">
+    Benefits of TalentFore “Resume Builder”
+  </h2>
+  <div class="container">
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6 feature">
+            <%= fa_icon 'clock-o 4x fw', text: 'Fast and Easy to use' %>
+            <p class="text-justify feature-p">
+              Create awesome resumes with just a few clicks and entering only the fields that you want. There are number of convenient layouts to choose from which structures and exhibits your skills, achievements and hard work in a professional, concise and lucid manner. See and check your resume after every entry.
+            </p>
+          </div>
+          <div class="col-md-6 feature">
+            <%= fa_icon 'file-pdf-o 3x fw', text: 'PDF and DOCX Format' %>
+            <p class="text-justify">
+              Many a times there can be confusion over the thought of building your resume in a particular format. Kill this confusion because now you can save and download your document in both PDF and DOX formats to match you and your probable employer’s specifications.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 feature">
+            <%= fa_icon 'pencil-square-o 4x fw', text: 'Flexible Text editor' %>
+            <p class="text-justify feature-p">
+              Converting, editing and formatting your CV is just a couple of clicks away. This feature keeps complexity of editing text at bay. Design and polish your CV effortlessly according to the position you are applying for.
+            </p>
+          </div>
+          <div class="col-md-6 feature">
+            <%= fa_icon 'line-chart 3x', text: 'Analytics for views and downloads' %>
+            <p class="text-justify">
+              Appropriate analytics on your resume views and downloads can liberate your anticipation. This feature helps you to know the number of times your CV has been viewed and downloaded. This feature is available for all CV formats prepared by you.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row cv-landing cv-landing-templates">
+  <div class="col-xs-11 col-md-10 col-centered">
+    <div id="carousel" class="carousel slide" data-ride="carousel" data-type="multi">
+      <ol class="carousel-indicators margin-top-50" style="margin-bottom: -50px; padding-top: 20px;">
+
+        <% (0..5).each do |n| %>
+          <li data-target="#carousel" data-slide-to="<%= n %>" class="<%= n == 0 ? 'active' : '' %>"></li>
+        <% end %>
+      </ol>
+      <div class="carousel-inner">
+        <% get_template.each_with_index do |template, index| %>
+          <div class="item <%= index == 0 ? 'active' : ''%>">
+            <div class="carousel-col">
+              <%= image_tag "digital_cv/cvtemplateimage/small/#{template.name}.jpg", alt: "Template Blue", class: 'img-responsive' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Controls -->
+      <div class="left carousel-control">
+        <a href="#carousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </div>
+      <div class="right carousel-control">
+        <a href="#carousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <p class="text-center margin-top-50 margin-bottom-20">
+      <%= link_to "Create My Resume Now!", digital_cvs_path, class: 'btn btn-lg talent-fore-btn color-white btn-sharp big-btn' %>
+    </p>
+  </div>
+</div>
+
+<div class="row cv-builder-features">
+  <div class="col-md-offset-2 col-sm-offset-2 col-md-8 col-sm-8 col-lg-8 padding-bottom-10">
+    <div class="row">
+      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+        <h4 class="heading4 site-color">Job Responsibilities Phrases to Choose from</h4>
+        <p class="text-justify feature-p">
+          It’s right that selecting the accurate terminologies and phrases improves the content weight of your resume and lead you towards getting selected. The point that TalentFore provides high-quality phrases is because it makes the task of organizing your resume painless and faster. Recruiters of large companies are very case sensitive therefore a simple mistake in your resume can simply make you rejected for the job. In talentfore the suggested phrases have been selected very carefully. The templates, keywords, and phrases we recommend for your resume are more engaging and balanced. It justifies that you have a better knowledge of drafting a resume so as your personality has professionalism. Therefore, you stand with better chances of selection in front of the recruiters.
+          In TalentFore the resume formats and templates are effective. Such resume templates make your resume look interesting and acknowledged. The foremost important factor behind selecting TalentFore resume templates is because the templates that we offer are approved by the HR professionals. These specific formats of resumes are also evaluated for better visualization and impact.
+        </p>
+        <p class="margin-top-50 margin-bottom-20">
+          <%= link_to "Create My Resume Now!", digital_cvs_path, class: 'btn btn-lg talent-fore-btn color-white btn-sharp big-btn' %>
+        </p>
+      </div>
+      <div class="col-md-offset-1 col-sm-offset-1 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <%= image_tag "digital_cv/job_responsibilities.jpg", class: 'img-responsive' %>
+      </div>
+    </div>
+    <hr />
+  </div>
+</div>
+<div class="row cv-builder-features">
+  <div class="col-md-offset-2 col-sm-offset-2 col-md-8 col-sm-8 col-lg-8">
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <%= image_tag "digital_cv/multiple_resumes.jpg", class: 'img-responsive' %>
+      </div>
+      <div class="col-md-offset-1 col-sm-offset-1 col-lg-7 col-md-7 col-sm-7 col-xs-7">
+        <h4 class="heading4 site-color">Create and Manage Multiple Resumes</h4>
+        <p class="text-justify feature-p">
+          You functionally come across numerous disciplinary constraints when it comes to building your resume. These limitations are required to affirm but hard to manage. You must draft it properly, you must put the right format in the right place, and therefore the accurate resumes will get build on. Manually it seems difficult to you. But the time you come to use TalentFore, it makes your task easier. It provides you multiple features by which you can easily do the adding, deleting, editing, etc in the required sections, just by few clicks.
+          TalentFore provides you quality resume templates that optimize your resume with all information. As a user, you just need to input your details properly. It helps to frame diverse versions of your curriculum vitae which are easily manageable with appropriate tools as per the suitability.
+        </p>
+        <p class="margin-top-50 margin-bottom-20">
+          <%= link_to "Create My Resume Now!", digital_cvs_path, class: 'btn btn-lg talent-fore-btn color-white btn-sharp big-btn' %>
+        </p>
+      </div>
+    </div>
+    <hr />
+  </div>
+</div>
+
+<div class="row cv-builder-features">
+  <div class="col-md-offset-2 col-sm-offset-2 col-md-8 col-sm-8 col-lg-8">
+    <div class="row">
+      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+        <h4 class="heading4 site-color">
+          Friendly Photo CV Templates including Docx format
+        </h4>
+        <p class="text-justify feature-p">
+          We need to download the resume after we complete drafting it. You might have faced certain difficulties while downloading the resume in your desired formats. TalentFore has multi-format download options. It is print friendly for both the resume formats i.e. PDF & DOCX. So, if you want to download the final copy of your resume in PDF then it's good. Or else, if you download it as a word doc and then edit again or use, it's also good. Talent for is a convenient platform for making your best resume and downloads it in different formats.
+        </p>
+        <p class="margin-top-50 margin-bottom-20">
+          <%= link_to "Create My Resume Now!", digital_cvs_path, class: 'btn btn-lg talent-fore-btn color-white btn-sharp big-btn' %>
+        </p>
+      </div>
+      <div class="col-md-offset-1 col-sm-offset-1 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <%= image_tag "digital_cv/photo_resume.jpg", class: 'img-responsive' %>
+      </div>
+    </div>
+    <hr />
+  </div>
+</div>
+
+<div class="row cv-builder-features">
+  <div class="col-md-offset-2 col-sm-offset-2 col-md-8 col-sm-8 col-lg-8">
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <%= image_tag "digital_cv/custom_url.jpg", class: 'img-responsive' %>
+      </div>
+      <div class="col-md-offset-1 col-sm-offset-1 col-lg-7 col-md-7 col-sm-7 col-xs-7">
+        <h4 class="heading4 site-color">
+          Custom URL to share your resume with recruiters
+        </h4>
+        <p class="text-justify feature-p">
+          We always feel comfortable when we share our LinkedIn profile link and think of winning the job. It’s easy to share links for our profiles but when it comes to resume we miss this thing. But if you are building your resume in TalentFore then this feature is available for you. You can instantly create a custom URL for your resume and rather than uploading on various job portals you can share the link. There is an example of creating the URL - <a href="javascript:void(0)">https://www.talentfore.com/ecv/(yourname)</a>. The link opens your resume with the same format without any changes. And every time you edit the resume, it updates automatically. Sharing resume becomes easier and smarter with TalentFore with this feature. That employers can download anytime and check. The premium subscription allows you to check number of times your resume has been viewed and downloaded.
+        </p>
+        <p class="margin-top-50 margin-bottom-20">
+          <%= link_to "Create My Resume Now!", digital_cvs_path, class: 'btn btn-lg talent-fore-btn color-white btn-sharp big-btn' %>
+        </p>
+      </div>
+    </div>
+    <hr />
+  </div>
+</div>
+
+<div class="row cv-builder-features">
+  <div class="col-md-offset-2 col-sm-offset-2 col-md-8 col-sm-8 col-lg-8">
+    <div class="row">
+      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+        <h4 class="heading4 site-color">ATS friendly templates</h4>
+        <p class="text-justify feature-p">
+          ATS friendly resumes are important these days. Reason being the recent hiring managers are now using ATS software to resource resumes. You can see that for a specific job post, there are thousands of applicants. ATS eventually detects your credentials that if it matches the job description and then only make it appear for the recruiter. Therefore, ATS friendly resumes are required. The resume templates and suggested key responsibilities that are available in TalentFore are ATS friendly and helps to let your resume rank better from the other thousands of resumes, which is good news for your job application.
+        </p>
+        <p class="margin-top-50 margin-bottom-20">
+          <%= link_to "Create My Resume Now!", digital_cvs_path, class: 'btn btn-lg talent-fore-btn color-white btn-sharp big-btn' %>
+        </p>
+      </div>
+      <div class="col-md-offset-1 col-sm-offset-1 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <%= image_tag "digital_cv/ats.jpg", class: 'img-responsive' %>
+      </div>
+    </div>
+  </div>
+</div>
+

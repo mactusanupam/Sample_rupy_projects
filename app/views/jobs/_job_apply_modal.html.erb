@@ -1,0 +1,23 @@
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @job.job_applications.build, url: apply_job_path(@job), method: :post, remote: true do |f| %>
+        <div class="modal-header">
+            <h4 class="modal-title">Add your cv here</h4>
+        </div>
+        <div class="modal-body">
+          
+            <%= f.hidden_field :user_id ,:value => current_user.try(:id) %>
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            <div class="form-group">
+                <%= f.file_field :document %>
+            </div>
+        </div>    
+        <div class="modal-footer">
+          <%= f.submit 'Resume Update', class: 'btn btn-primary',style:"background:#4B7892;" %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+	$("#ask_question").html("<%= escape_javascript(render 'add_question_modal') %>");
+	$("#ask_question").modal();
+<% else %>
+
+  $(window.location.replace("<%= user_session_path %>"))
+<% end %>
+

@@ -1,0 +1,195 @@
+.heading4 {
+  font-size:18px;
+  font-weight:400;
+  font-family: "Lato",Arial,Helvetica,sans-serif;
+  color:#111111;
+  margin:0px 0px 5px 0px;
+}
+.heading1 {
+  font-size:30px;
+  font-family: "Lato",Arial,Helvetica,sans-serif;
+  text-transform:uppercase;
+  color:#1b2834;
+  font-weight:900;
+}
+.heading2 {
+  font-size: 26px;
+  color: #000000;
+  text-align: center;
+  font-weight: 400;
+}
+.tab-page .tabtop li {
+  background-color: #24607D;
+  margin-right: 0 !important;
+  margin-left: 1px !important;
+}
+.tab-page .tabtop li a {
+  font-family: "Lato",Arial,Helvetica,sans-serif;
+  font-weight:700;
+  color:white;
+  line-height: 2.5 !important;
+  text-transform: uppercase;
+  border-collapse: collapse;
+  margin-right: 0 !important;
+  border: 0;
+}
+.tab-page .tabtop .active a:before {
+  content:"♦";
+  position:absolute;
+  top:15px;
+  left: 50%;
+  color:black;
+  font-size:30px;
+  text-align: center;
+}
+.tab-page .tabtop li a:hover {
+  color:white !important;
+  text-decoration:none;
+  background-color: #24607D;
+  border: none;
+}
+
+.tab-page .tabtop .active a:hover {
+  color:#fff !important;
+  border: none;
+}
+.tab-page .tabtop .active a {
+  background-color: black !important;
+  color:#FFF !important;
+  border: 0 !important;
+}
+.tab-page .margin-tops {
+  margin-top:30px;
+}
+.tab-page .tabtop li a:last-child {
+  padding:10px 22px;
+}
+.tab-page .thbada {
+  padding:10px 28px !important;
+}
+.tab-page {
+  padding: 50px 0;
+  background-color: #fff;
+}
+.tab-page p {
+  font-family: "Lato",Arial,Helvetica,sans-serif;
+}
+.tab-page .margin-tops4 {
+  margin-top:20px;
+}
+.tabsetting {
+  padding-top:6px;
+  border-bottom: 0 !important
+}
+.tab-page .services {
+  background-color:#d4d4d4;
+  min-height:710px;
+  padding:65px 0 27px 0;
+}
+.tab-page .services a:hover {
+  color:#000;
+}
+.tab-page .services h1 {
+  margin-top:0px !important;
+}
+.tab-page .heading-container p {
+  font-family: "Lato",Arial,Helvetica,sans-serif;
+  text-align:center;
+  font-size:16px !important;
+  text-transform:uppercase;
+}
+
+.business .tabtop li {
+  width: 300px;
+}
+
+.home-page-tab .tabtop li {
+  width: 190px;
+}
+
+.home-page-tab .tabtop li:first-child {
+  width: 205px !important;
+}
+
+.poster {
+  position: relative;
+}
+
+.caption {
+  position: absolute;
+  bottom: 20%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.caption h1, .caption h2, .caption h3, .caption h4, .caption a, .tab-page .tab-content a {
+  color: white !important;
+}
+
+.caption .btn, .tab-page .tab-content .btn {
+  background-color: #24607D;
+}
+
+.poster .caption .heading1 a {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.poster .caption h2 {
+  font-size: 35px;
+}
+
+.poster .caption h4 {
+  font-size: 25px;
+}
+
+.tab-content {
+  color: #666666;
+}
+
+.tab-heading {
+  min-height: 46px;
+  font-size: 20px;
+}
+
+.tab-heading1 {
+  font-size: 18px;
+}
+
+.tab-heading, .tab-heading1 {
+  text-align: center;
+  font-style: italic;
+}
+
+.tab-ul {
+  font-size: 16px;
+  text-align: left;
+  font-style: italic;
+}
+
+.business .tab-heading {
+  text-align: justify;
+}
+
+.business .tab-ul, .business .tab-heading1 {
+  font-style: normal;
+}
+
+.business .tab-heading1 {
+  text-align: left;
+}
+
+.business .tab-heading1.bold-black {
+  font-weight: bold;
+  font-color: black;
+  font-size: 16px;
+}
+
+.business .row {
+  margin: 20px 0;
+}
+
+.poster .img-responsive {
+  width: 100%;
+}

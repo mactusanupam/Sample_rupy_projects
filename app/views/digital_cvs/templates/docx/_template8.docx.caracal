@@ -1,0 +1,1105 @@
+#-----------------------------------------------------
+# page settings
+#-----------------------------------------------------
+
+docx.page_margins do
+left    1     # sets the left margin. units in twips.
+right   1    # sets the right margin. units in twips.
+top     1    # sets the top margin. units in twips.
+bottom  1    # sets the bottom margin. units in twips.
+end
+
+
+docx.font name: 'Helvetica'
+
+#-----------------------------------------------------
+# Tables
+#-----------------------------------------------------
+digital_cv = @digital_cv
+user_info = @digital_cv.user.attributes
+name = @digital_cv.contact_detail.try(:name)
+
+present_job_title = @digital_cv.present_job ? @digital_cv.present_job.job_title.title : "No Title"
+contact_info = @digital_cv.contact_detail.attributes
+docx_image = @digital_cv.photo.image.url(:thumb) ? @digital_cv.photo.image.url(:thumb) : 'digital_cv/photo_cv.png'
+
+cv_skill = @digital_cv.cv_skills
+languages = @digital_cv.cv_languages
+employment_details = @digital_cv.employment_details
+education_detail = @digital_cv.academic_details
+trainings = @digital_cv.trainings
+certifications = @digital_cv.certifications
+
+honor_awards = @digital_cv.honor_and_awards
+
+research_or_projectdet = @digital_cv.research_or_project_details
+references = @digital_cv.references
+font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://talentfore.com"
+img_url = docx_image != '/assets/digital_cv/photo_cv.png' ? "http:" : font_url
+
+docx.style do  
+  id        'heading 5'
+  name      'heading 5'
+  caps      true   
+  top     0 
+end
+
+
+c1= Caracal::Core::Models::TableCellModel.new do
+  h2  name ,color: '000000', size: '50', bold: true
+  p digital_cv.summary
+end
+
+
+c2 = Caracal::Core::Models::TableCellModel.new do
+  img img_url+docx_image, width: 80, height: 80, align: :center
+end
+
+c01=Caracal::Core::Models::TableCellModel.new do
+  img font_url + "/assets/font-awesome-icon/user-circle.png",width:14 , height: 14, align: :left
+end
+
+c02=Caracal::Core::Models::TableCellModel.new do
+  h2 'CONTACT INFO' ,color: '000000'
+end
+
+c03=Caracal::Core::Models::TableCellModel.new do
+  img font_url + "/assets/font-awesome-icon/certificate.png",width:14 , height: 14, align: :left
+end
+
+c04=Caracal::Core::Models::TableCellModel.new do
+  h2 'PROFESSIONAL SKILLS' , color: '000000'
+end
+
+c3 = Caracal::Core::Models::TableCellModel.new do
+  table [[c01,c02]] do
+    cell_style cols[0], width: 600
+    border_top do
+      color   'FFFFFF'
+      line    :single
+      size    1
+      spacing 2
+    end
+    border_bottom do
+      color   'E7E7E7'
+      line    :single
+      size    1
+      spacing 2
+    end
+    border_left do
+      color   'FFFFFF'
+      line    :single
+      size    1
+      spacing 2
+    end
+    border_right do
+      color   'FFFFFF'
+      line    :single
+      size    1
+      spacing 2
+    end
+    border_vertical do
+      color   'FFFFFF'
+      line    :single
+      size    1
+      spacing 2
+    end
+  end
+
+  if contact_info['mobile'].present?
+    p "Mobile Number:", bold: true
+    p contact_info['mobile']
+  end
+
+  if contact_info['email'].present?
+    p 'Email:', bold: true
+    p contact_info['email']
+  end
+
+  if contact_info['linkedin_url'] != nil && contact_info['linkedin_url'] !=""
+    p 'Linkedin profile url:', bold: true
+    p contact_info['linkedin_url']
+  end
+
+  if contact_info['skype_username'] != nil && contact_info['skype_username'] !=""
+    p 'Skype username:', bold: true
+    p contact_info['skype_username']
+  end
+
+  if contact_info['address'] != nil && contact_info['address'] !=""
+    p 'Address:', bold: true
+    p contact_info['address']
+  end
+
+  if cv_skill.size>0
+    table [[c03,c04]] do
+      cell_style cols[0], width: 600
+      border_top do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_bottom do
+        color   'E7E7E7'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_left do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_right do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_vertical do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+    end
+    cv_skill.each do |f|
+      p f.skill.title
+      img font_url + "/assets/digital_cv/rating_images/"+f.self_rating.to_s+"_rating.png",width:150 , height: 10, align: :left
+    end
+  end
+end
+
+c05=Caracal::Core::Models::TableCellModel.new do
+  img font_url + "/assets/font-awesome-icon/bullseye.png",width:14 , height: 14, align: :left
+end
+
+c06=Caracal::Core::Models::TableCellModel.new do
+  h2 "CAREER OBJECTIVE",color: '000000'
+end
+
+c07=Caracal::Core::Models::TableCellModel.new do
+  img font_url + "/assets/font-awesome-icon/briefcase.png",width:14 , height: 14, align: :left
+end
+
+c08=Caracal::Core::Models::TableCellModel.new do
+  h2 'EXPERIENCE',color: '000000'
+end
+
+c09=Caracal::Core::Models::TableCellModel.new do
+  img font_url + "/assets/font-awesome-icon/graduation-cap.png",width:14 , height: 14, align: :left
+end
+c010=Caracal::Core::Models::TableCellModel.new do
+  h2 'EDUCATION DETAILS',color: '000000'
+end
+
+c011=Caracal::Core::Models::TableCellModel.new do
+  img font_url + "/assets/font-awesome-icon/language.png",width:14 , height: 14, align: :left
+end
+c012=Caracal::Core::Models::TableCellModel.new do
+  h2 'LANGUAGES KNOWN',color: '000000'
+end
+
+c013=Caracal::Core::Models::TableCellModel.new do
+  img font_url + "/assets/font-awesome-icon/industry.png",width:14 , height: 14, align: :left
+end
+c014=Caracal::Core::Models::TableCellModel.new do
+  h2 "TRAINING",color: '000000'
+end
+
+c015=Caracal::Core::Models::TableCellModel.new do
+  img font_url + "/assets/font-awesome-icon/trophy.png",width:14 , height: 14, align: :left
+end
+c016=Caracal::Core::Models::TableCellModel.new do
+  h2 "HONORS AND AWARDS", color: '000000'
+end
+
+c017=Caracal::Core::Models::TableCellModel.new do
+  img font_url + "/assets/font-awesome-icon/tasks.png",width:14 , height: 14, align: :left
+end
+c018=Caracal::Core::Models::TableCellModel.new do
+  h2 "RESEARCH EXPERIENCE AND PROJECTS:", color: '000000'
+end
+
+c019=Caracal::Core::Models::TableCellModel.new do
+  img font_url + "/assets/font-awesome-icon/users.png",width:14 , height: 14, align: :left
+end
+c020=Caracal::Core::Models::TableCellModel.new do
+  h2 "REFERENCES", color: '000000'
+end
+
+c021=Caracal::Core::Models::TableCellModel.new do
+  img font_url + "/assets/font-awesome-icon/info-circle.png",width:14 , height: 14, align: :left
+end
+c022=Caracal::Core::Models::TableCellModel.new do
+  h2 "ADDITIONAL INFORMATION", color: '000000'
+end
+
+c023=Caracal::Core::Models::TableCellModel.new do
+  img font_url + "/assets/font-awesome-icon/certificate.png",width:14 , height: 14, align: :left
+end
+c024=Caracal::Core::Models::TableCellModel.new do
+  h2 "CERTIFICATION", color: '000000'
+end
+
+c4 = Caracal::Core::Models::TableCellModel.new do
+
+  table [[c05,c06]] do
+    cell_style cols[0], width: 600
+    border_top do
+      color   'FFFFFF'
+      line    :single
+      size    1
+      spacing 2
+    end
+    border_bottom do
+      color   'E5E5E5'
+      line    :single
+      size    1
+      spacing 2
+    end
+    border_left do
+      color   'FFFFFF'
+      line    :single
+      size    1
+      spacing 2
+    end
+    border_right do
+      color   'FFFFFF'
+      line    :single
+      size    1
+      spacing 2
+    end
+    border_vertical do
+      color   'FFFFFF'
+      line    :single
+      size    1
+      spacing 2
+    end
+  end
+  if digital_cv.objective.present?
+    p digital_cv.objective
+  end
+
+  if digital_cv.is_experienced
+    table [[c07,c08]] do
+      cell_style cols[0], width: 600
+      border_top do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_bottom do
+        color   'E5E5E5'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_left do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_right do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_vertical do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+    end
+    employment_details.each do |e|
+      end_date = e.present_job ? 'present' : e.end_date.strftime("%b, %Y") 
+
+      c21 = Caracal::Core::Models::TableCellModel.new do
+        p e.start_date.strftime("%b, %Y").to_s + "-\n" + end_date.to_s, bold: true
+      end
+      c22 = Caracal::Core::Models::TableCellModel.new margins: { top: 0, bottom: 0, left: 0, right: 0 } do
+        p e.job_title.title, bold: true
+        h5 e.company.name 
+      if e.responsibilities.present?
+        p "Responsibilities", bold: true
+        p ActionView::Base.full_sanitizer.sanitize(e.responsibilities)
+      end
+      if e.achievement.size>0
+        h4 "Key Achievements", italic:true, bold: true
+        p ActionView::Base.full_sanitizer.sanitize(e.achievement)
+      end
+      end
+      table [[c21,c22]] do
+        cell_style cols[0], width: 1400
+        cell_style cells, margins: {top:100, left:200, right: 200, bottom: 100}
+        border_top do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_vertical do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+      end
+    end
+  end
+  if digital_cv.academic_details.present?
+    table [[c09,c010]] do
+      cell_style cols[0], width: 600
+      border_top do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_bottom do
+        color   'E7E7E7'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_left do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_right do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_vertical do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+    end
+    education_detail.each do |e|
+      edu_end_date =  e.pursuing ? 'Present' : e.end_date.strftime("%b, %Y") 
+      percentage = if e.is_cgpa? 
+        "CGPA " + e.percentage.to_s
+      else 
+        e.percentage.to_s+"%" 
+      end 
+      c23 = Caracal::Core::Models::TableCellModel.new do
+        p e.start_date.strftime("%b, %Y").to_s + "-\n" + edu_end_date.to_s, bold: true
+      end
+      c24 = Caracal::Core::Models::TableCellModel.new do
+        p do
+          text e.degree.title, bold: true
+          text ' in '+e.specialization.title+" with "+percentage.to_s + " from "
+          text e.university, bold: true
+        end
+      end
+      table [[c23,c24]] do
+        cell_style cols[0], width: 1400
+        cell_style cells, margins: {top:100, left:200, right: 200, bottom: 100}
+        border_top do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_vertical do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+      end
+    end
+  end
+
+  if languages.size>0
+    table [[c011,c012]] do
+      cell_style cols[0], width: 600
+      border_top do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_bottom do
+        color   'E7E7E7'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_left do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_right do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_vertical do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+    end
+    ul do
+      languages.each do |lang|
+        a = []
+        a << 'Read' if lang.read?
+        a << 'Write' if lang.write?
+        a << 'Speak' if lang.speak?
+        li do
+          text lang.language.title, bold: true
+          text " ("+a.join(', ')+")"
+        end
+      end
+    end
+  end
+
+  if trainings.size>0
+    table [[c013,c014]] do
+      cell_style cols[0], width: 600
+      border_top do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_bottom do
+        color   'E7E7E7'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_left do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_right do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_vertical do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+    end
+    trainings.each do |tra|
+
+     c25 = Caracal::Core::Models::TableCellModel.new do
+        img font_url + "/assets/font-awesome-icon/circular.png",width:6 , height: 6, align: :left
+      end
+      c26 = Caracal::Core::Models::TableCellModel.new do
+        p do
+          text "Attended "
+          text tra.duration.to_s, bold: true 
+          text " days training on "
+          text tra.name, bold: true
+          text " from "
+          text tra.institute, bold: true
+          br 
+          text ActionView::Base.full_sanitizer.sanitize(tra.info)
+        end
+      end
+      table [[c25,c26]] do
+        cell_style cols[0], width: 500
+        border_top do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_vertical do
+            color   'FFFFFF'
+            line    :single
+            size    1
+            spacing 2
+        end
+      end
+    end
+  end
+
+  if certifications.size>0
+    table [[c023,c024]] do
+      cell_style cols[0], width: 600
+      border_top do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_bottom do
+        color   'E7E7E7'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_left do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_right do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_vertical do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+    end
+    certifications.each do |cert|
+      c25 = Caracal::Core::Models::TableCellModel.new do
+        p cert.date.strftime("%b, %Y"), bold: true
+      end
+      c26 = Caracal::Core::Models::TableCellModel.new do
+        p do 
+          text cert.title, bold: true
+          text " by "+ cert.certifier
+        end
+      end
+      table [[c25,c26]] do
+        cell_style cols[0], width: 1400
+        cell_style cells, margins: {top:100, left:200, right: 200, bottom: 100}
+        border_top do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_vertical do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+      end
+      end
+  end
+
+  if honor_awards.size>0
+    table [[c015,c016]] do
+      cell_style cols[0], width: 600
+      border_top do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_bottom do
+        color   'E7E7E7'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_left do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_right do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_vertical do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+    end
+    honor_awards.each do |ha|
+      c27 = Caracal::Core::Models::TableCellModel.new do
+        p ha.award_date.strftime("%b, %Y"), bold: true
+      end
+      c28 = Caracal::Core::Models::TableCellModel.new do
+        p do
+        text ha.title, bold: true
+        text " by "+ha.awarded_by
+        text " at "+ha.company_name.to_s
+        end
+      end
+      table [[c27,c28]] do
+        cell_style cols[0], width: 1400
+        cell_style cells, margins: {top:100, left:200, right: 200, bottom: 100}
+        border_top do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_vertical do
+          color   '000000'
+          line    :single
+          size    1
+          spacing 2
+        end
+      end
+    end
+  end
+
+  if research_or_projectdet.size>0
+    table [[c017,c018]] do
+      cell_style cols[0], width: 600
+      border_top do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_bottom do
+        color   'E7E7E7'
+        line    :single
+        size    1
+        spacing 2
+        end
+      border_left do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_right do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_vertical do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+    end
+    research_or_projectdet.each do |project_det|
+
+      c31 = Caracal::Core::Models::TableCellModel.new do
+        img font_url + "/assets/font-awesome-icon/circular.png",width:6 , height: 6, align: :left
+      end
+      c32 = Caracal::Core::Models::TableCellModel.new do
+        p project_det.title, bold: true do
+          if project_det.duration.present?
+            text "Duration: " + project_det.duration.to_s  + " days"
+          end
+          br
+          text ActionView::Base.full_sanitizer.sanitize(project_det.description)
+          br
+        end
+      end
+      table [[c31,c32]] do
+        cell_style cols[0], width: 500
+        border_top do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_vertical do
+            color   'FFFFFF'
+            line    :single
+            size    1
+            spacing 2
+        end
+      end
+    end
+  end
+
+  if references.size>0
+    table [[c019,c020]] do
+      cell_style cols[0], width: 600
+      border_top do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_bottom do
+        color   'E7E7E7'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_left do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_right do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_vertical do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+    end
+    references.each do |reference|
+      c33 = Caracal::Core::Models::TableCellModel.new do
+        img font_url + "/assets/font-awesome-icon/circular.png",width:6 , height: 6, align: :left
+      end
+      c34 = Caracal::Core::Models::TableCellModel.new do
+        p do
+          text reference.name, bold: true
+          text ", "+reference.job_title.try(:title)
+          text " at "+reference.company_name
+        end
+        p do
+          text "Contact:", bold: true
+          text reference.mobile.to_s + ", " + reference.email
+        end
+      end
+      table [[c33,c34]] do
+        cell_style cols[0], width: 500
+        border_top do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_vertical do
+            color   'FFFFFF'
+            line    :single
+            size    1
+            spacing 2
+        end 
+      end
+    end
+  end
+  if digital_cv.personal_detail.present? 
+    table [[c021,c022]] do
+      cell_style cols[0], width: 600
+      border_top do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_bottom do
+        color   'E7E7E7'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_left do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_right do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+      border_vertical do
+        color   'FFFFFF'
+        line    :single
+        size    1
+        spacing 2
+      end
+    end
+    cp1 = Caracal::Core::Models::TableCellModel.new do
+      if digital_cv.personal_detail.try(:nationality).present?
+        p "Nationality", bold: true
+      end
+      if digital_cv.personal_detail.try(:date_of_birth).present?
+        p "Date of birth", bold: true
+      end
+      if digital_cv.personal_detail.try(:gender).present?
+        p "Gender", bold: true
+      end
+      if digital_cv.personal_detail.try(:marital_status).present?
+        p "Marial Status", bold: true
+      end
+      if digital_cv.personal_detail.try(:disabled).present?
+      p "Disabled", bold: true
+      end
+      if digital_cv.personal_detail.try(:hobbies).present? 
+      p "Hobbies and Interests", bold: true
+      end
+    end
+    cp2 = Caracal::Core::Models::TableCellModel.new do
+      if digital_cv.personal_detail.try(:nationality).present?
+        p ": "+digital_cv.personal_detail.nationality.to_s.capitalize
+      end
+      if digital_cv.personal_detail.try(:date_of_birth).present?
+        p ": "+digital_cv.personal_detail.date_of_birth.to_s
+      end
+      if digital_cv.personal_detail.try(:gender).present?
+        p ": "+DigitalCvsHelper::GENDER[digital_cv.personal_detail.gender]
+      end
+      if digital_cv.personal_detail.try(:marital_status).present?
+        p ": "+DigitalCvsHelper::MARITAL_STATUS[digital_cv.personal_detail.marital_status]
+      end
+      if digital_cv.personal_detail.try(:disabled).present?
+      p ": "+digital_cv.personal_detail.disabled? ? 'Yes' : 'No'
+      end
+      if digital_cv.personal_detail.try(:hobbies).present? 
+      p ": "+ActionView::Base.full_sanitizer.sanitize(digital_cv.personal_detail.hobbies)
+      end
+    end
+    table [[cp1,cp2]] do
+        cell_style cols[0], width: 2500
+        border_top do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_bottom do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_left do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_right do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+        border_vertical do
+          color   'FFFFFF'
+          line    :single
+          size    1
+          spacing 2
+        end
+    end
+  end
+end
+
+docx.table [[c1,c2]] do
+  cell_style cols[1], width: 2000
+  border_top do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+  border_bottom do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+    end
+  border_left do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+  border_right do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+  border_vertical do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+end
+
+docx.table [[c3,c4]] do
+  cell_style cols[0], width: 3500
+  border_top do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+  border_bottom do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+    end
+  border_left do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+  border_right do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+  border_vertical do
+    color   'FFFFFF'
+    line    :single
+    size    1
+    spacing 2
+  end
+end

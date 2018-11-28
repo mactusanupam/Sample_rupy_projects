@@ -1,0 +1,57 @@
+<div id="popover-content-wrapper" style="display: none;">
+  <div class="row">
+    <div class="text-center">
+      <h4>Share, Send and Track Your Resume ( Premium Only )</h4>
+      <ul class="text-left">
+        <li>Send an individual link to your online resume.</li>
+        <li>Employers can view and download your resume.</li>
+        <li>Track how many employers view and download your resume.</li>
+      </ul>
+      <%= link_to "Sign Up Now!", "/resumes-plans-pricing/#{@digital_cv.id}", class: 'btn btn-default talent-fore-btn color-white' %>
+    </div>
+  </div>
+</div>
+
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header talent-fore-btn color-white">
+      <div class="modal-title clearfix">
+        <div class="pull-left">
+          <h4>PREVIEW RESUME</h4>
+        </div>
+        <div class="pull-right">
+          <a tabindex="0" id="online-resume" class="btn btn-default" role="button" data-toggle="popover" title="ONLINE RESUME">
+            <%= fa_icon "link", text: "ONLINE RESUME" %>
+          </a>
+          <%= link_to "/resumes-plans-pricing/#{@digital_cv.id}", class: 'btn btn-default btn-success' do %>
+            <%= fa_icon "download", text: "DOWNLOAD" %>
+          <% end %>
+          <%= link_to edit_url(@digital_cv), class: 'btn btn-default', "data-dismiss": "modal" do %>
+            <%= fa_icon "pencil", text: "CONTINUE EDITING" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body no-padding">
+      <div id="template-list">
+        <h4>
+          <span>Select any other template for your resume</span>
+          <!-- <span style="margin-left: 50px;">
+            <input type='checkbox' name='photo_cv'/> Show only Photo CV templates.
+          </span> -->
+        </h4>
+
+        <div class="row ss-item">
+          <% get_template.each do |template| %>
+            <div class="col-sm-2 template-image">
+              <%= link_to image_tag("digital_cv/cvtemplateimage/small/#{template.name}.jpg", alt: "Template Blue"), change_cv_template_digital_cv_path(template_id: template.id), remote: true %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div id="selected-template-cv">
+        <%= render "digital_cvs/templates/html/#{@digital_cv.template.name}" %>
+      </div>
+    </div>
+  </div>
+</div>

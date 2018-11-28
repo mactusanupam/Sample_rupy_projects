@@ -1,0 +1,21 @@
+<%= simple_form_for(@digital_cv, remote: true, wrapper: :horizontal_form) do |f| %>
+  <div class="col-md-12">
+    <h4 class="text-center">Training Details</h4>
+    <hr />
+    <%= f.error_notification %>
+    <div class="add_more_trainings">
+      <% @digital_cv.trainings.build unless @digital_cv.trainings.present? %>
+      <%= f.simple_fields_for :trainings do |f| %>
+        <%= render "training_fields", f: f %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-offset-2 col-sm-9 margin-bottom-30">
+      <%= link_to_add_association 'Add Another Training', f, :trainings, class: 'adda btn btn-info talent-fore-btn', data: { association_insertion_node: '.add_more_trainings', association_insertion_method: :append } %>
+    </div>
+  </div>
+  <div class="text-center">
+    <%= f.submit "Save and Continue", class: "btn btn-primary talent-fore-btn" %>
+  </div>
+<% end %>

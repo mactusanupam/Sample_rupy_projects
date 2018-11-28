@@ -1,0 +1,44 @@
+<div class="col-md-12 margin-bottom-30">
+  <h4 class="text-center">ADDITIONAL DETAILS</h4>
+  <hr />
+  <%= simple_form_for @digital_cv.personal_detail ||= @digital_cv.build_personal_detail, url: save_personal_detail_digital_cv_path, html: { method: :post, remote: true }, wrapper: :horizontal_form, wrapper_mappings: { radio_buttons: :horizontal_radio_and_checkboxes }  do |f| %>
+
+    <%= f.error_notification %>
+
+    <%= f.input :nationality do %>
+      <%= f.select :nationality, options_for_select(Nationality::Nationality.default_option("indian"), :selected => f.object.nationality), {include_blank: "What's your nationality?"}, {:class => 'form-control' } %>
+    <% end %>
+
+    <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 50,
+      end_year: Date.today.year, input_html: { class: 'no-padding' }, label_html: { class: 'col-sm-2 no-right-padding' } %>
+
+    <%= f.input :gender, as: :radio_buttons, collection: [['m', 'Male'], ['f', 'Female'], ['o', 'Other']], label_method: :second, value_method: :first, item_wrapper_class: 'radio-inline' %>
+    <%= f.input :marital_status, as: :radio_buttons, collection: [['s', 'Single'], ['m', 'Married'], ['o', 'Other']], label_method: :second, value_method: :first, :item_wrapper_class => 'radio-inline' %>
+
+    <%= f.input :disabled, as: :radio_buttons, collection: [['0', 'No'], ['1', 'Yes']], label_method: :second, value_method: :first, :item_wrapper_class => 'radio-inline' %>
+    <%= f.input :hobbies, input_html: { class: 'hobbies' } %>
+    <%= f.input :affiliations, input_html: { class: 'hobbies' } %>
+
+    <div class="text-center">
+      <%= f.button :submit, "Submit", class: "btn btn-primary talent-fore-btn" %>
+    </div>
+  <% end %>
+
+  <script type="text/javascript">
+    $('.hobbies').wysihtml5({ toolbar: {
+      'font-styles': false,
+      'color': false,
+      'emphasis': {
+        'small': false
+      },
+      'blockquote': false,
+      'lists': true,
+      'html': false,
+      'link': true,
+      'image': false,
+      'smallmodals': false
+      }
+    });
+  </script>
+</div>
+

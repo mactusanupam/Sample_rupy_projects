@@ -1,0 +1,36 @@
+<div class="nested-fields">
+  <div class="form-group col-sm-12 text-right">
+    <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
+  </div>
+  <%= f.association :degree, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { class: 'degree' }, prompt: 'Please select or type your degree' %>
+  <%= f.association :specialization, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { class: 'specialization' }, prompt: 'Please select or type your specialization' %>
+  <%= f.input :institute, label_html: { class: 'col-sm-2 no-left-right-padding-padding text-right' }, input_html: { placeholder: 'e.g. Delhi college of Engineering, Delhi' } %>
+  <%= f.input :university, label_html: { class: 'col-sm-2 no-left-right-padding text-right' }, input_html: { placeholder: 'e.g. Delhi University, Delhi' } %>
+  <%= f.input :percentage, label: grade_label(f.object), label_html: { class: 'col-sm-2 no-left-right-padding text-right' } %>
+  <%= f.input :is_cgpa, inline_label: 'Is it CGPA?', wrapper_html: { class: 'text-right col-sm-11 is_cgpa' } %>
+
+  <%= f.input "Duration", required: true do %>
+    <%= f.input :start_date, as: :date, start_year: Date.today.year - 50,
+      end_year: Date.today.year, discard_day: true, order: [:month, :year], label: false, wrapper_html: { class: 'col-sm-4 no-padding' }, input_html: { class:
+        'no-padding' } %>
+    <div class='col-sm-4 end-date' style='display: <%= "#{f.object.pursuing? ? 'none' : 'block'}" %>'>
+      <%= f.hint "To", class: 'col-sm-1 padding-top-5 text-center margin-left_-40 to' %>
+      <%= f.input :end_date, as: :date, start_year: Date.today.year - 50,
+        end_year: Date.today.year, discard_day: true, order: [:month, :year], label: false, input_html: { class: "no-padding", disabled: f.object.pursuing? } %>
+    </div>
+    <%= f.input :pursuing, inline_label: 'Still going here?', wrapper_html: { class: 'margin-left_-30 col-sm-4' } %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".degree, .specialization").select2({
+      tags: true
+    });
+
+    $(".degree, .specialization").off('select2:select').on('select2:select', function(e) {
+      elem = $(this).hasClass('specialization') ? 'specialization':'degree';
+      saveNewItem($(this), elem);
+    });
+  })
+</script>

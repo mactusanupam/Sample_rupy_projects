@@ -1,0 +1,15 @@
+<div class="row blue-bar">
+  <div class="container">
+    <div class="pull-right">
+      <% if request.params["action"] == 'show' %>
+        <%= link_to "Edit Resume", edit_digital_cv_path(@digital_cv), class: 'btn btn-link', style: 'color: white;' %>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changecvtemplatemodal" id="chgtempmodbtn">
+          Change Template
+        </button>
+      <% end %>
+      <% unless request.params["action"] == 'index' || request.params["action"] == 'edit' %>
+        <%= link_to "Download Resume", share_and_download_digital_cv_path(@digital_cv), class: 'btn btn-clock btn-default' %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -59,7 +59,11 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
+<<<<<<< HEAD
   # config.active_job.queue_name_prefix = "analytic_counter_#{Rails.env}"
+=======
+  # config.active_job.queue_name_prefix = "talent_fore_#{Rails.env}"
+>>>>>>> 967eb6bf2ecfd5b1ec932c74e24ca2d87334443d
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -88,4 +92,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+<<<<<<< HEAD
+=======
+
+  config.paperclip_defaults = {
+    :s3_region => 'ap-south-1',
+    :bucket => 'talentfore-prod',
+    :preserve_files => true,
+    :storage => :s3,
+    :url =>':s3_domain_url',
+    :path => '/:class/:attachment/:id_partition/:style/:filename'
+  }
+>>>>>>> 967eb6bf2ecfd5b1ec932c74e24ca2d87334443d
 end

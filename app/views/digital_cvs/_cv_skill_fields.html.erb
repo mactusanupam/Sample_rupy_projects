@@ -1,0 +1,42 @@
+<div class="nested-fields nested_cv_skills">
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-5">
+      <%= f.collection_select :skill_id, Skill.all, :id, :title, {:prompt => 'Please select'}, { class: 'form-control cv_skills' } %>
+
+    </div>
+    <div class="col-sm-1 skill-rating">
+      <%= f.radio_button :self_rating, '1' %>
+      <!-- <label for="1" title="Poor -1 rating"></label> -->
+    </div>
+    <div class="col-sm-1 skill-rating">
+      <%= f.radio_button :self_rating, '2'%>
+      <!-- <label title="Below Average -2 rating"></label> -->
+    </div>
+    <div class="col-sm-1 skill-rating">
+      <%= f.radio_button :self_rating, '3' %>
+      <!-- <label title="Good - 3 rating"></label> -->
+    </div>
+    <div class="col-sm-1 skill-rating">
+      <%= f.radio_button :self_rating, '4' %>
+      <!-- <label title="Pretty good - 4 rating"></label> -->
+    </div>
+    <div class="col-sm-1 skill-rating">
+      <%= f.radio_button :self_rating, '5'%>
+      <!-- <label title="Awesome - 5 rating"></label> -->
+    </div>
+    <div class="col-sm-1 skill-rating no-padding">
+      <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function(){
+      $(".nested_cv_skills .cv_skills").select2({
+        tags: true
+      });
+
+      $('.cv_skills').off('select2:select').on('select2:select',function(e){
+        saveNewItem($(this), 'skill');
+      });
+    })
+  </script>
+</div>

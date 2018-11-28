@@ -1,0 +1,5 @@
+$('.suscipicious-job').html('').html("<%= escape_javascript(render 'jobs/suspicious_job') %>");
+<% unless @suspicious_job.errors.any? %>
+  alertify.alert('Your concern submitted successfully.');
+  $('.suscipicious-job form').find("input[type=text], input[type=email], textarea").val("");
+<% end %>

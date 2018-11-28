@@ -1,0 +1,12 @@
+<% if @question_upvote && @liked.present? %>
+	$("#upvote").addClass('disabled');
+	$("#upvote").html("Liked | <b><%= AnalyticCommunityQuestion.where(type_id: @community_question.id, vote_count: true).count('vote_count') %></b>");
+<% end %>
+
+<% if @answer_upvote && @community_answer.vote_count.present? %>
+	var id = "<%= @community_answer.id %>";
+
+	$("#answers_upvote"+id).addClass('disabled');
+	$("#answers_upvote"+id).html("Liked | <b><%= @community_answer.vote_count %></b>");
+	$("#arrow_answers_upvote"+id).html("<%= @community_answer.vote_count %>");
+<% end %>

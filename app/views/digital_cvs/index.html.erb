@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <div class="row">
+    <%= render 'blue_bar' %>
+  </div>
+  <% if user_signed_in? %>
+    <div class="row">
+      <div class="col-md-offset-1 col-sm-offset-1 col-md-10 col-sm-10 col-lg-10">
+        <div class="text-right">
+          <a href="/resumes/new" class="btn btn-primary">
+            <%= fa_icon 'file-pdf-o lg' %>
+            Create a new Resume
+          </a>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="row page-desc">
+    <div class="col-md-12">
+      <div class="col-md-offset-1 col-sm-offset-1 col-md-10 col-sm-10 col-lg-10 text-center">
+        <h3 class="page-head">Your Resumes</h3>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-offset-1 col-sm-offset-1 col-md-10 col-sm-10 col-lg-10">
+      <table class="table table-striped table-bordered table-responsive">
+        <thead>
+          <tr class="blue-bar color-white">
+            <th>Name</th>
+            <th>Created On</th>
+            <th>Last modified </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for cvdata in @digital_cvs %>
+          <tr>
+            <td><%= cvdata.name %></td>
+            <td><%= cvdata.created_at.strftime("%B %d, %Y") %></td>
+            <td><%= cvdata.updated_at.strftime("%B %d, %Y") %></td>
+            <td>
+              <%= link_to digital_cv_path(cvdata), class: "btn icon-btn btn-default btn-xs" do %>
+                <%= fa_icon "eye", text: 'Preview' %>
+              <% end %>
+              <%= link_to "/resumes-plans-pricing/#{cvdata.id}", class: "btn btn-default icon-btn btn-xs btn-success" do %>
+                <%= fa_icon "download", text: 'Download' %>
+              <% end %>
+              <%= link_to edit_digital_cv_path(cvdata) , class: "btn btn-primary btn-xs icon-btn" do %>
+                <%= fa_icon "pencil", text: 'Edit' %>
+              <% end %>
+              <%= link_to digital_cv_path(cvdata), :data => { :confirm => "Are you sure you want to delete this resume?" }, :method => :delete , class: "btn btn-danger btn-xs icon-btn" do %>
+                <%= fa_icon "trash-o", text: 'Delete' %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

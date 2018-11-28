@@ -28,6 +28,10 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
+<<<<<<< HEAD
+=======
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+>>>>>>> 967eb6bf2ecfd5b1ec932c74e24ca2d87334443d
 
   config.action_mailer.perform_caching = false
 
@@ -51,4 +55,21 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+<<<<<<< HEAD
+=======
+
+  credentials =  Aws::SharedCredentials.new(profile_name: ENV['T_S3_USER']).credentials
+
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_region => ENV['S3_REGION'],
+    :bucket => ENV['T_S3_BUCKET_NAME'],
+    :url =>':s3_domain_url',
+    :path => '/:class/:attachment/:id_partition/:style/:filename',
+    :s3_credentials => {
+      :access_key_id => credentials.access_key_id,
+      :secret_access_key => credentials.secret_access_key
+    }
+  }
+>>>>>>> 967eb6bf2ecfd5b1ec932c74e24ca2d87334443d
 end

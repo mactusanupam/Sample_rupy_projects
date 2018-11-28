@@ -1,0 +1,2 @@
+$('#selected-template-cv').html('');
+$('#selected-template-cv').html('<%= escape_javascript(render "digital_cvs/templates/html/#{@digital_cv.template.name}") %>');

@@ -1,0 +1,12 @@
+
+<% if request.post? %>
+  <% if @application.errors.any? %>
+  $("#comment_error").append("<%= escape_javascript("comment should not be to short and fields should not be empty!") %>");
+   <% else %>
+		location.reload();
+	<% end %>
+<% else %>
+	$("#job_apply").html("<%= escape_javascript(render 'jobs/job_apply_modal') %>");
+	$("#job_apply").modal();
+<% end %>
+

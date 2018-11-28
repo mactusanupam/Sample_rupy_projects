@@ -1,0 +1,72 @@
+<div class="nested-fields">
+  <div class="form-group col-sm-12 text-right">
+    <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
+  </div>
+  <div class="col-sm-12">
+    <%= f.input :name %>
+    <%= f.input :email %>
+    <%= f.input :mobile, label: 'Contact Number', input_html: { class: 'ref-mobile' } %>
+    <%= f.input :company_name, label: 'Organization Name' %>
+    <%= f.association :job_title, label: 'Designation' %>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      $("select").select2({
+        tags: true
+      });
+
+      $('select').off('select2:select').on('select2:select',function(e){
+        saveNewItem($(this), 'job_title');
+      });
+
+
+      //telephone number
+      var mobile = "<%= f.object.mobile %>";
+      var telInput = $(".ref-mobile");
+      var errorMsg = $("#error-msg");
+      var validMsg = $("#valid-msg");
+
+      telInput.intlTelInput({
+        formatOnDisplay: true,
+        separateDialCode: true,
+        initialCountry: "in",
+        setNumber: mobile
+      });
+
+      $("form").submit(function(){
+        if(validateMobile(telInput))
+          telInput.val(telInput.intlTelInput("getNumber"));
+        else
+          return false;
+      });
+
+      // on blur: validate
+      telInput.blur(function() {
+        validateMobile(telInput);
+      });
+
+      var validateMobile = function(telInput){
+        if ($.trim(telInput.val())) {
+          if (telInput.intlTelInput("isValidNumber")) {
+            telInput.parents('.form-group').removeClass("has-error");
+            telInput.parents('div.col-sm-9').children('#error-msg').remove();
+
+            validHtml = '<span id="valid-msg" class="help-block">✓ Valid</span>';
+            telInput.parents('div.col-sm-9').append(validHtml);
+
+            return true;
+          } else {
+            errorHtml = '<span id="error-msg" class="help-block">Invalid Number</span>';
+            telInput.parents('.form-group').addClass("has-error");
+            telInput.parents('div.col-sm-9').children('#valid-msg').remove();
+            telInput.parents('div.col-sm-9').append(errorHtml);
+
+            return false;
+          }
+        }
+      };
+
+    });
+  </script>
+</div>

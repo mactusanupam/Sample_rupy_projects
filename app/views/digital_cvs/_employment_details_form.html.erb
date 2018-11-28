@@ -1,0 +1,41 @@
+<%= simple_form_for(@digital_cv, html: { class: 'exp-form', remote: true }, wrapper: :horizontal_form) do |f| %>
+  <div class="col-md-12">
+    <h4 class="text-center">EMPLOYMENT HISTORY</h4>
+    <hr />
+
+    <%= f.error_notification %>
+
+    <div class="employment-details">
+      <% @digital_cv.employment_details.build unless @digital_cv.employment_details.present? %>
+      <%= f.simple_fields_for :employment_details, validate: true do |employment_detail| %>
+        <%= render "employment_detail_fields", :f => employment_detail %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-sm-offset-2 margin-bottom-30">
+    <%= link_to_add_association 'Add Another Employer', f, :employment_details, class: 'adda btn btn-info talent-fore-btn', data: { association_insertion_node: '.employment-details', association_insertion_method: :append } %>
+  </div>
+  <div class="text-center">
+    <%= f.submit "Save and Continue", class: "btn btn-primary talent-fore-btn" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".employment-details .achievements, .employment-details .keyresarea").wysihtml5({ toolbar: {
+        'font-styles': false,
+        'color': false,
+        'emphasis': {
+          'small': false
+        },
+        'blockquote': false,
+        'lists': true,
+        'html': false,
+        'link': true,
+        'image': false,
+        'smallmodals': false
+        }
+      });
+  })
+</script>

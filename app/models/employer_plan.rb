@@ -1,0 +1,2 @@
+class EmployerPlan < BillingPlan
+end

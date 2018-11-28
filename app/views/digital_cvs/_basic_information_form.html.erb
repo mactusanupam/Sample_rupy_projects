@@ -1,0 +1,33 @@
+<%= simple_form_for(@digital_cv, remote: true, wrapper: :horizontal_form, wrapper_mappings: { radio_buttons: :horizontal_radio_and_checkboxes }, validate: true) do |f| %>
+  <div class="col-md-12 margin-bottom-30">
+    <h4 class="text-center">SUMMARY</h4>
+    <hr />
+    <%= f.error_notification %>
+
+    <%= f.input :summary, label: 'Executive Summary', input_html: { rows: 6, maxlength: 500 }, require: true %>
+    <p class="col-sm-offset-2 col-sm-9 help-block">
+      Remaining Characters:
+      <span class="char-count">
+        <%= 500 - f.object.summary.try(:length).to_i %>
+      </span>
+      <span class="pull-right">Maximum 500 characters allowed</span>
+    </p>
+
+    <%= f.input :objective, label: 'Career Objective', input_html: { rows: 6, maxlength: 500 } %>
+    <p class="col-sm-offset-2 col-sm-9 help-block">
+      Remaining Characters:
+      <span class="char-count">
+        <%= 500 - f.object.objective.try(:length).to_i %>
+      </span>
+      <span class="pull-right">Maximum 500 characters allowed</span>
+    </p>
+
+    <%= f.input :employment_status, as: :radio_buttons, collection: [['Fresher', 'Fresher'], ['Employed', 'Employed'], ['Not Working', 'Not Working'], ['On Sabbatical', 'On Sabbatical']], label_method: :second, value_method: :first, item_wrapper_class: 'radio-inline'  %>
+  </div>
+  <div class="text-center">
+    <%= f.button :submit, "Save and Continue", class: "btn btn-primary talent-fore-btn" %>
+  </div>
+<% end %>
+
+
+

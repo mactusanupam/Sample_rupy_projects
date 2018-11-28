@@ -1,0 +1,12 @@
+<div class="nested-fields honawar-nested-fields">
+	<div class="form-group col-sm-12 text-right">
+    <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
+  </div>
+  <div class="col-sm-12">
+  	<%= f.input :title, label: 'Award Title', label_html: { class: 'col-sm-2 no-right-padding' } %>
+	  <%= f.input :company_name, label: 'Organization Name' %>
+	  <%= f.input :award_date, as: :date, start_year: Date.today.year - 50,
+      end_year: Date.today.year, discard_day: true, order: [:month, :year], label: 'Award Date', input_html: { class: 'no-padding' }, label_html: { class: 'col-sm-2 no-left-right-padding' } %>
+	  <%= f.input :awarded_by, label: 'Awarded By', label_html: { class: 'col-sm-2 no-right-padding' } %>
+  </div>
+</div>

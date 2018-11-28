@@ -1,0 +1,94 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-3 col-md-3 col-sm-3 col-xs-6 no-padding">
+      <div class="col-sm-12 col-xs-12 col-md-12 no-padding">
+        <div class="text-center"><h4>QUICK LINKS</h4></div>
+        <div class="col-md-6 col-sm-6 col-xs-6 no-padding">
+          <ul class="list-unstyled">
+            <li>
+              <%= link_to 'Skill Assessment', 'javascript:void(0)', class: "text-black" %>
+            </li>
+            <li>
+              <%= link_to 'Resume Builder', "/", class: "text-black" %>
+            </li>
+            <li>
+              <%= link_to 'Search Jobs', 'javascript:void(0)', class: "text-black" %>
+            </li>
+           </ul>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6 no-padding">
+          <ul class="list-unstyled">
+            <!-- <li><%#= link_to 'Refer a Friend', referral_path, class: "text-black" %></li> -->
+            <li>
+              <%= link_to 'Write a Review', 'javascript:void(0)', class: "text-black" %>
+            </li>
+            <li><%= link_to 'Post Jobs', 'javascript:void(0)', class: "text-black" %></li>
+            <li><%= link_to 'Discussions', community_questions_path, class: "text-black" %></li>
+            <li><%= link_to 'Blogs', '/blogs', class: "text-black" %></li>
+            <!-- <li><%#= link_to 'My Learnings', 'javascript:void(0)', class: "text-black" %></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+      <ul class="list-unstyled">
+        <li><h4>COMPANY</h4></li>
+        <li><%= link_to 'About Us', 'javascript:void(0)', class: "text-black" %></li>
+        <li><%= link_to 'Media Room', 'javascript:void(0)', class: "text-black" %></li>
+        <li><%= link_to 'Careers', 'javascript:void(0)', class: "text-black" %></li>
+        <li>
+          <%= link_to 'Terms and Conditions', 'javascript:void(0)', class: "text-black" %>
+        </li>
+        <li>
+          <%= link_to 'Contact Us', '/contact-us', class: "text-black" %>
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+      <div class="text-left"><h4>CONNECT WITH US</h4></div>
+      <ul class="list-unstyled">
+        <li><span class="glyphicon glyphicon-envelope"></span>&nbsp;
+        <%= link_to 'info[at]talentfore[dot]com', "mailto:info@talentfore.com" %></li>
+        <li>
+          <span class="glyphicon glyphicon-phone-alt"></span>&nbsp; +91 - 8880088080
+        </li>
+        <li class="social-icons">
+          <%= link_to "https://www.facebook.com/TalentFore-2019375708304748/" do %>
+            <%= fa_icon "facebook" %>
+          <% end %>
+          <%= link_to "javascript:void(0)" do %>
+            <%= fa_icon "twitter" %>
+          <% end %>
+          <%= link_to "https://www.linkedin.com/company/talent-fore/" do %>
+            <%= fa_icon "linkedin" %>
+          <% end %>
+          <%= link_to "javascript:void(0)" do %>
+            <%= fa_icon "google-plus" %>
+          <% end %>
+          <%= link_to "javascript:void(0)" do %>
+            <%= fa_icon "instagram" %>
+          <% end %>
+          <%= link_to "javascript:void(0)" do %>
+            <%= fa_icon "youtube" %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <% if Rails.env.production? %>
+      <div class="col-lg-1 col-md-1 col-sm-1">
+        <span id="siteseal">
+          <script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=3vEg714bah235x9krqz6pHh2e29EIqNamz5JAQFicno9zdz4KgpcoP2uwlwT"></script>
+          <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
+        </span>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-lg-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-8 col-xs-12 no-padding">
+      <hr />
+      <div class="text-center no-white">
+        &copy;<%= Date.today.year %> Saleswold Pvt. Ltd., All Rights Reserved.
+      </div>
+    </div>
+  </div>
+</div>

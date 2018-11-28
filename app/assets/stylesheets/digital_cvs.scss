@@ -1,0 +1,316 @@
+// Place all the styles related to the digital_cvs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "intlTelInput";
+
+.digital-cv-form {
+  .padded-cv {
+    padding: 20px 0;
+  }
+
+  h1 {
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #24607D;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.6em;
+    color: #555;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .tab-content {
+    .tab-pane {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+  }
+
+  .item img {
+    margin-bottom:10px;
+  }
+
+  .profile-pic-btn{
+    margin-left: 40px;
+  }
+
+  .profile-photo {
+    border:1px solid #DCDCDC;
+    padding:33px;
+    margin-top:24px;
+    background: white;
+  }
+}
+
+#template-carousel {
+  padding: 10px 10px 30px 10px;
+
+  .carousel-control {
+    background: none;
+    color: #222;
+    font-size: 2.3em;
+    text-shadow: none;
+  }
+  .carousel-control.left {
+    left: -75px;
+  }
+
+  .carousel-control.right {
+    right: -75px !important;
+  }
+
+  .carousel-indicators {
+    li {
+      background: #c0c0c0;
+    }
+    .active {
+      background: #333;
+    }
+  }
+
+  .fa-quote-left, .fa-quote-right {
+    color: black;
+  }
+
+  div.hidden-xs.carousel-caption {
+    position:fixed !important;
+    top:200px !important;
+    z-index: 99;
+  }
+}
+
+.select-exp_months{
+  margin-top: 25px;
+}
+
+.resume-editor {
+  .panel-body {
+    width: 100%;
+    display: -webkit-flex; /* Safari */
+    display: flex; /* Standard syntax */
+  }
+  .resume-editor-left, .panel-default .panel-heading {
+    color: #fff;
+  }
+  .resume-editor-left {
+    padding: 20px 0;
+    border-right: 1px solid #3071a9;
+    ul.nav-stacked {
+      margin-left: 15px;
+      li {
+        margin-bottom: 0.5em;
+        a {
+          border: 1px solid #3071a9;
+          border-right: none;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          position: relative;
+          background: #24607D;
+          height: 50px;
+          transition: all 300ms ease-in;
+          border-top-left-radius: 3px;
+          border-bottom-left-radius: 3px;
+          color: #ffffff;
+          background-color: #24607D;
+          background-image: -webkit-gradient(linear, left top, left bottom, from(#122931), to(#24607D));
+          box-shadow: inset -4px 0 2px rgba(214,214,214,0.5);
+        }
+      }
+      li.active {
+        margin-right: -1px;
+        padding-left: 1px;
+        a, a:hover {
+          border-color: #3071a9;
+          border:0;
+          border-radius: 0 !important;
+          background: #fff;
+          color: #417BFF;
+          font-weight: 600;
+          box-shadow: -1px 2px 2px rgba(0,0,0,0.08);
+        }
+      }
+      li.optional-section {
+        background-color: white;
+        color: black;
+        padding: 10px;
+        margin-left: -15px;
+        text-align: center;
+      }
+    }
+    .dropdown {
+      margin: 20px;
+    }
+  }
+
+  .languages, .skills {
+    margin-bottom: 50px;
+    .skill-rating {
+      margin-top: 6px;
+    }
+  }
+  a i {
+    margin-right: 15px;
+  }
+  .exp-form {
+    margin-bottom: 30px;
+  }
+  .margin-bottom-30 {
+    margin-bottom: 30px;
+  }
+  .no-padding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .form-group {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .digital_cv_employment_status, .digital_cv_honor_and_awards_company {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+  .end-date {
+    margin-right: 10px;
+  }
+
+  .edit_digital_cv p {
+    margin-top: -15px;
+    margin-bottom: 15px;
+  }
+}
+
+.btn-glyphicon {
+  padding:8px;
+  background:#ffffff;
+  margin-right:4px;
+}
+.icon-btn {
+  padding: 3px 8px;
+}
+
+.fa-cloud-download, .fa-eye {
+  margin-right: 5px !important;
+}
+
+.fa-eye.fa-2x {
+  font-size: 1.5em;
+  vertical-align: bottom;
+}
+
+#preview-cv .modal-dialog {
+  width: 85%;
+  #selected-template-cv {
+    margin: 10px;
+    .container {
+      width: 97%;
+      border: 1px solid #24607D;
+      padding: 20px;
+      border-radius: 4px;
+    }
+  }
+  div {
+    word-wrap: break-word;
+  }
+}
+
+#template-list {
+  margin-left: 25px;
+  margin-bottom: 20px;
+
+  .template-image {
+    margin-top: 10px;
+    img {
+      width: 100px;
+      height: 150px;
+    }
+  }
+}
+
+.dropdown-menu a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-menu a:hover {
+  background-color: #285e8e;
+  color: white;
+}
+
+.is_cgpa {
+  margin-top: -15px;
+}
+
+.ss-item .ss-item-text{
+  background-color:white;
+  text-align:center;
+  padding: 10px 20px;
+  border-radius:0 0 5px 5px;
+  font-weight:bold;
+}
+.ss-item .ss-item-text, .ss-item img{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.ss-item {
+  img {
+    border-radius:5px 5px 0 0;
+  }
+  .zoom-img {
+    cursor: zoom-in;
+  }
+}
+
+.to {
+  margin-top: 0 !important;
+}
+
+.popover {
+  border-radius: 2px !important;
+}
+
+.popover-title {
+  background-color: #24607D !important;
+  width: 500px !important;
+  border-radius: 2px !important;
+  padding: 4px 15px;
+  font-weight: 600;
+  line-height: 30px;
+  font-size: 1.8rem;
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.popover-content {
+  background-color: #27323d !important;
+  width: 500px;
+  li, a {
+    font-size: 1.5rem;
+  }
+  h4 {
+    font-size: 1.8rem;
+  }
+}
+
+abbr {
+  color: red;
+}
+
+@media only screen and (max-width: 767px) {
+  .digital-cv-form ul .list-group-item, .modal-content {
+    width: 100%;
+  }
+}
+/*--------contact_details---------------------*/
+.intl-tel-input {
+  position: relative;
+  display: block !important;
+
+}

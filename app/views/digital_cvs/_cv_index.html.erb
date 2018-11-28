@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center">
+        <h2><strong>Online CV Builder</strong></h2>
+        <h3>Create your professional resume in 10 minutes!</h3>
+        <%= image_tag "static_pages/ecv_builder.png", class: 'pull-right' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-11 text-center", style="padding-left:60px; margin-top:10px;">
+      <%= link_to "Create My CV Now", new_digital_cv_path, class: 'btn btn-primary btn-lg' %>
+    </div>
+  </div>
+  <div class="row cv-features">
+    <h2><strong>Features</strong></h2>
+    <div class="col-md-4 feature">
+      <%= fa_icon 'cog', text: 'Customizable Professional templates' %>
+    </div>
+    <div class="col-md-4 feature">
+      <%= fa_icon 'clock-o', text: 'Create a Resume in 10 Minutes' %>
+    </div>
+    <div class="col-md-4 feature">
+      <%= fa_icon 'file-text-o', text: 'Flexible editor' %>
+    </div>
+    <div class="col-md-4 feature">
+      <%= fa_icon 'link', text: 'Create an individual URL for your online resume' %>
+    </div>
+    <div class="col-md-4 feature">
+      <%= fa_icon 'newspaper-o', text: 'Publish your online Resume for Fre' %>
+    </div>
+    <div class="col-md-4 feature">
+      <%= fa_icon 'pencil-square-o', text: 'Edit your Resume anytime as you like' %>
+      </span>
+    </div>
+  </div>
+</div>

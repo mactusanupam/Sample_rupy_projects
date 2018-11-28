@@ -1,0 +1,9 @@
+<div class="nested-fields certification-nested-fields">
+  <div class="form-group col-sm-12 text-right">
+    <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
+  </div>
+  <%= f.input :title, label: 'Certification Title', label_html: { class: 'col-sm-2 no-left-right-padding' } %>
+  <%= f.input :certifier, label: 'Certifier', label_html: { class: 'col-sm-2 no-left-right-padding' } %>
+  <%= f.input :date, as: :date, start_year: Date.today.year - 50,
+      end_year: Date.today.year, discard_day: true, order: [:month, :year], label: 'Certification Date', input_html: { class: 'no-padding' }, label_html: { class: 'col-sm-2 no-left-right-padding' } %>
+</div>

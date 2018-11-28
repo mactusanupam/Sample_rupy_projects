@@ -1,0 +1,33 @@
+<div id="answer-now">
+  <h2>Your Answer:</h2>
+  <%= form_with(model: [ @community_question, @community_question.community_answers.build ] , id: "post_answer", remote: true, :html => { class: "form-horizontal" }) do |form| %>
+
+    <div id="answer_errors"></div>
+    <% if @community_answer %>
+      <div class="alert alert-danger">
+        <ul class="list-unstyled">
+          <% @community_answer.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= form.text_area :answer_text, class: "form-control text_area", rows: 7 %>
+    </div>
+    <% if user_signed_in? %>
+      <div class="form-group pull-right">
+        <%= form.check_box :anonymus, id: :community_answer_anonymus, class: "pull-left" %>
+        <span class="padding-top3 padding-left-5">Add Anonymously</span>
+      </div>
+      <div class="form-group">
+        <%= form.submit  "Post Your Answer", class: 'btn btn-primary talent-fore-btn' %>
+      </div>
+    <% else %>
+      <div class="alert alert-danger">Please
+        <%= link_to "login", new_user_session_path %>
+        to answer this question.
+      </div>
+    <% end %>
+  <% end %>
+</div>

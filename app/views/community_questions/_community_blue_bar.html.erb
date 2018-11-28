@@ -1,0 +1,13 @@
+<div class="row blue-bar">
+  <div class="container">
+    <div class="clearfix"></div>
+    <div class="pull-right">
+      <%= link_to 'Recent Questions', community_questions_path , class: "btn btn-link color-white" %>
+      <%=
+      link_to_if(current_user.nil?, "Ask a Question", new_user_session_path, class: "btn btn-primary site_button") do
+      link_to "Ask a Question", new_community_question_path, class: "btn btn-primary  site_button", remote: true
+      end
+      %>
+    </div>
+  </div>
+</div>

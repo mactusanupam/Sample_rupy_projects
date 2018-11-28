@@ -1,0 +1,68 @@
+<% content_for :title, "Job-Description | Job-Details | Job-Description-pdf" %>
+<div class="jd-form">
+  <div class="container-fluid">
+    <div class="row">
+      <%= render 'blue_bar' %>
+    </div>
+    <div class="row padded-jd">
+      <div class="col-lg-8 col-lg-offset-2">
+        <div class="text-center page-desc">
+          <h1 class="page-head">Job Description Creator</h1>
+          <p class="jd-head-line">The easy to use and professionally designed Job Description creator enables your most compelling qualities and information to stand out.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container resume-editor">
+    <div class="row">
+      <div class="col-lg-11 col-lg-offset-1 col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading clearfix" style="min-height: 50px;"></div>
+          <div class="panel-body no-padding">
+            <div class="col-md-3 no-padding site_button">
+              <div class="resume-editor-left">
+                <ul class="nav nav-pills nav-stacked">
+                  <li class="<%= (!jd_sections.include?(params[:slug]) || params[:slug] == 'overview') ? 'active' : nil %>">
+                    <a href="/job_description_creators/new/overview" data-remote="true">
+                      <%= fa_icon 'info-circle', text: 'OVERVIEW' %>
+                    </a>
+                  </li>
+                  <li class="<%= params[:slug] == 'job_details' ? 'active' : nil %>">
+                    <a href="/job_description_creators/new/job_details" data-remote="true">
+                      <%= fa_icon 'suitcase', text: 'JOB REQUIREMENTS' %>
+                    </a>
+                  </li>
+                  <li class="<%= params[:slug] == 'responsibility' ? 'active' : nil %>">
+                    <a href="/job_description_creators/new/responsibility" data-remote="true">
+                      <%= fa_icon 'graduation-cap', text: 'JOB RESPONSIBILITIES' %>
+                    </a>
+                  </li>
+                  <li class="<%= params[:slug] == 'application_process' ? 'active' : nil %>">
+                    <a href="/job_description_creators/new/application_process" data-remote="true">
+                      <%= fa_icon 'gears', text: 'APPLICATION PROCESS'  %>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="col-md-12 no-padding text-left">
+                <strong>TIPS: </strong>
+                Fields marked with <span class="red-star">*</span> are mandatory.
+              </div>
+              <div class="tab-content" id="jd-editor-form">
+                <div class="tab-pane fade active in">
+                  <% if jd_sections.include?(params[:slug]) %>
+                    <%= render "#{params[:slug]}_form" %>
+                  <% else %>
+                    <%= render "overview_form" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

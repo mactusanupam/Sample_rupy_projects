@@ -6,10 +6,18 @@
 
 # Ignore bundler config.
 /.bundle
+<<<<<<< HEAD
+=======
+config/database.yml
+>>>>>>> 967eb6bf2ecfd5b1ec932c74e24ca2d87334443d
 
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
+<<<<<<< HEAD
+=======
+/public/system/*
+>>>>>>> 967eb6bf2ecfd5b1ec932c74e24ca2d87334443d
 !/log/.keep
 !/tmp/.keep
 

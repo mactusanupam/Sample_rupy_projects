@@ -1,0 +1,22 @@
+<%= simple_form_for(@digital_cv, html: { class: 'academic-form', remote: true }, wrapper: :horizontal_form) do |f|  %>
+  <div class="col-md-12 margin-bottom-30">
+    <h4 class="text-center">ACADEMIC DETAILS</h4>
+    <hr />
+    <%= f.error_notification %>
+    <div class="add_more_academic_details">
+      <% @digital_cv.academic_details.build unless @digital_cv.academic_details.present? %>
+      <%= f.simple_fields_for :academic_details do |academic_detail| %>
+        <%= render "academic_detail_fields", :f => academic_detail %>
+      <% end %>
+    </div>
+    <div class="row margin-bottom-30">
+      <div class="col-sm-offset-2 col-sm-9">
+        <%= link_to_add_association 'Add More Academic Details', f, :academic_details, class: 'adda btn btn-info talent-fore-btn', data: { association_insertion_node: '.add_more_academic_details', association_insertion_method: :append } %>
+        <br><br>
+      </div>
+    </div>
+    <div class="text-center">
+      <%= f.submit "Save and Continue", class: "btn btn-primary talent-fore-btn" %>
+    </div>
+  </div>
+<% end %>

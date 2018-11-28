@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "analytic_counter",
+=======
+  "name": "talent_fore",
+>>>>>>> 967eb6bf2ecfd5b1ec932c74e24ca2d87334443d
   "private": true,
   "dependencies": {}
 }

@@ -10,6 +10,186 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+<<<<<<< HEAD
  *= require_tree .
  *= require_self
  */
+=======
+ *= require font-awesome
+ *= require alertify
+ *= require alertify/bootstrap
+ *= require select2
+ *= require_tree .
+ *= require_self
+ */
+
+.main-container {
+  margin-top: 91px;
+}
+.main-container .row-fluid {
+  margin-bottom: 50px;
+  min-height: 287px;
+}
+.heading1 {
+  font-size:30px;
+  font-family: "Lato",Arial,Helvetica,sans-serif;
+  text-transform:uppercase;
+  color: #24607D;
+  font-weight:900;
+}
+.heading2 {
+  font-size: 26px;
+  color: #000000;
+  text-align: center;
+  font-weight: 400;
+}
+.heading4 {
+  font-size:18px;
+  font-weight:400;
+  font-family: "Lato",Arial,Helvetica,sans-serif;
+  color:#000000;
+  margin:0px 0px 5px 0px;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.talent-fore-btn, .blue-bar {
+  background-color: #24607D !important;
+}
+
+.blue-bar {
+  border-bottom: 2px solid #3399ff;
+  margin-bottom: 20px;
+  min-height: 60px;
+  padding: 10px 0;
+}
+
+.site-color {
+  color: #24607D !important;
+}
+
+.resume-editor abbr, .contact-us abbr {
+  color: red;
+  border-bottom: none;
+}
+
+.page-desc h4, .page-desc h5, .site-features {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.page-desc .page-head {
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  font-family: Montserrat,sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #24607D;
+}
+
+.margin-top-bottom-10 {
+  margin: 10px 0 !important;
+}
+
+.alertify.ajs-movable:not(.ajs-maximized) .ajs-header {
+  color:#ff751a;
+}
+.alertify .ajs-body .ajs-content {
+  color: red;
+}
+
+.wysihtml5-toolbar .btn-group {
+  display: inline;
+}
+.wysihtml5-toolbar {
+  list-style-type: none;
+  padding-left: 0;
+}
+.wysihtml5-toolbar .dropdown {
+ display: inline;
+}
+
+footer {
+  background-color: #27323d;
+  color: white;
+  padding-top: 30px;
+  margin: 0 -15px;
+}
+
+footer .brand {
+  padding: 5px;
+  float: left;
+}
+
+footer .brand img {
+  width: 206px;
+  height: 140px;
+  border: 5px solid white;
+}
+
+footer a {
+  color: #d2d1d1;
+}
+
+footer h4 {
+  font-weight: bold;
+}
+
+footer a.btn-round {
+  margin-top: 5px;
+}
+
+footer .btn-danger, footer .btn-danger:hover {
+  background-color: #d84b6b;
+}
+
+footer hr {
+  margin-bottom: 5px;
+}
+
+footer .social-icons {
+  margin-top: 10px;
+}
+
+footer .social-icons .fa {
+  padding: 5px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 5px;
+  width:1.7em;
+  border-radius:5px;
+}
+
+footer .social-icons a {
+  color: #FFF;
+}
+
+footer .no-white {
+  color: #d2d1d1;
+}
+
+.fa-facebook {
+  background-color: #3B5998;
+}
+.fa-linkedin {
+  background-color: #007BB5;
+}
+.fa-twitter {
+  background-color: #55acee;
+}
+.fa-google-plus {
+  background-color: tomato;
+}
+.fa-instagram {
+  background-color: #c32aa3;
+}
+.fa-youtube {
+  background-color: #bb0000;
+}
+>>>>>>> 967eb6bf2ecfd5b1ec932c74e24ca2d87334443d

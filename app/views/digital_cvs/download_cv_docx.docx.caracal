@@ -1,0 +1,381 @@
+#-----------------------------------------------------
+# page settings
+#-----------------------------------------------------
+
+docx.page_margins do
+left    1     # sets the left margin. units in twips.
+right   1    # sets the right margin. units in twips.
+top     1    # sets the top margin. units in twips.
+bottom  1    # sets the bottom margin. units in twips.
+end
+
+docx.font name: 'Helvetica'
+
+#-----------------------------------------------------
+# Tables
+#-----------------------------------------------------
+digital_cv = @digital_cv
+user_info = @digital_cv.user.attributes
+docx_image = @digital_cv.photo.image.url(:thumb)
+font_url = ENV['RAILS_ENV'] == "development" ? "http://localhost:3000" : "https://talentfore.com/"
+
+present_job_tit = @digital_cv.present_job ? @digital_cv.present_job.job_title : "No Title"
+personal_info = @digital_cv.personal_detail.attributes
+cv_skill = @digital_cv.cv_skills
+languages = @digital_cv.cv_languages
+employement_detail = @digital_cv.employment_details
+education_detail = @digital_cv.academic_details
+trainings = @digital_cv.trainings
+certifications = @digital_cv.certifications
+honr_aw = @digital_cv.honor_and_awards
+research_or_projectdet = @digital_cv.research_or_projectdetails
+references = @digital_cv.references
+
+c1= Caracal::Core::Models::TableCellModel.new do
+img 'http:' + docx_image, width: 75, height: 75, align: :center
+h4  user_info['first_name']+" "+user_info['last_name']
+end
+
+c2 = Caracal::Core::Models::TableCellModel.new do
+h4 "CONTACT DETAILS"
+p user_info['email']
+p personal_info['mobile']
+p personal_info['skype_username']
+p personal_info['linkedin_profile']
+end
+
+if digital_cv.experienced
+c3 = Caracal::Core::Models::TableCellModel.new do
+h4 "EMPLOYMENT DETAILS"
+p "Employment Status: " + digital_cv['employment_status']
+p  "Total Experience: " + digital_cv.year.to_s + " years and " + digital_cv.month.to_s + " months"
+p "Current Location: " + digital_cv['city']
+p "Preferred Location: " + personal_info['prefferred_location']
+end
+end
+
+c4 = Caracal::Core::Models::TableCellModel.new do
+h4 "OTHERS DETAILS"
+p personal_info['nationality']
+p personal_info['date_of_birth']
+p personal_info['gender']
+p personal_info['marital_status']
+p personal_info['disabled']
+end
+
+if digital_cv.experienced
+docx.table [[c1,c2,c3,c4]] do
+cell_style cols[0], width: 2000
+cell_style cols, background: '48788E'
+cell_style cols, color: 'ffffff'
+end
+
+else
+docx.table [[c1,c2,c4]] do
+cell_style cols[0], width: 2000
+cell_style cols, background: '48788E'
+cell_style cols, color: 'ffffff'
+end
+end
+
+docx.p  digital_cv.summary
+
+c5 = Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/bullseye.png",width:14 , height: 14, align: :left
+end
+
+c6 = Caracal::Core::Models::TableCellModel.new do
+h4 "Career Objective" do
+color   '000000'
+end
+hr do
+color   'E5E5E5'
+line    :single
+size    1
+spacing 1
+end
+p digital_cv.objective
+end
+
+docx.table [[c5,c6]] do
+cell_style cols[0], width: 600
+end
+
+c7 = Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/briefcase.png",width:14 , height: 14, align: :left
+end
+
+if digital_cv.experienced
+c8 = Caracal::Core::Models::TableCellModel.new do
+h4 'EXPERIENCE' do
+color   '000000'
+end
+hr do
+color   'E5E5E5'
+line    :single
+size    1
+spacing 1
+end
+employement_detail.each do |empl|
+end_date = if empl.present_job
+then "present"
+else
+empl.end_date.strftime("%Y-%m")
+end
+h5 empl.start_date.strftime("%Y-%m").to_s+"-"+end_date.to_s
+p empl.job_title
+p empl.company.name
+p ActionView::Base.full_sanitizer.sanitize(empl.key_area)
+p
+p ActionView::Base.full_sanitizer.sanitize(empl.achievement)
+p
+end
+end
+
+docx.table [[c7,c8]] do
+cell_style cols[0], width: 600
+end
+end
+
+c9 = Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/graduation-cap.png",width:14 , height: 14, align: :left
+end
+
+if education_detail.size>0
+c10 = Caracal::Core::Models::TableCellModel.new do
+h4 'EDUCATION DETAILS' do
+color   '000000'
+end
+hr do
+color   'E5E5E5'
+line    :single
+size    1
+spacing 1
+end
+education_detail.each do |educat|
+h5 educat.start_date.strftime("%Y-%m").to_s+"-"+educat.end_date.strftime("%Y-%m").to_s
+p educat.degree+" " +"in "+educat.specialization+" with "+ educat.percentage.to_s + " from "+ educat.university
+p
+end
+end
+
+docx.table [[c9,c10]] do
+cell_style cols[0], width: 600
+end
+end
+
+if languages.size>0
+c11 = Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/language.png",width:14 , height: 14, align: :left
+end
+
+c12 = Caracal::Core::Models::TableCellModel.new do
+h4 'LANGUAGE KNOWN' do
+color   '000000'
+end
+hr do
+color   'E5E5E5'
+line    :single
+size    1
+spacing 1
+end
+languages.each do |lang|
+a = []
+a << 'Read' if lang.read?
+a << 'Write' if lang.write?
+a << 'Speak' if lang.speak?
+p lang.language.name+ "("+a.join(', ')+")"
+end
+p
+end
+
+docx.table [[c11,c12]] do
+cell_style cols[0], width: 600
+end
+end
+
+if trainings.size>0
+c13 = Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/industry.png",width:14 , height: 14, align: :left
+end
+
+c14 = Caracal::Core::Models::TableCellModel.new do
+h4 "TRAINING" do
+color   '000000'
+end
+hr do
+color   'E5E5E5'
+line    :single
+size    1
+spacing 1
+end
+trainings.each do |tra|
+p "Attended " + tra.duration.to_s + " days training on " + tra.name + " from " + tra.institute
+p
+end
+p
+end
+
+docx.table [[c13,c14]] do
+cell_style cols[0], width: 600
+end
+end
+
+if certifications.size>0
+c15 = Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/certificate.png",width:14 , height: 14, align: :left
+end
+
+c16 = Caracal::Core::Models::TableCellModel.new do
+h4 "CERTIFICATION" do
+color   '000000'
+end
+hr do
+color   'E5E5E5'
+line    :single
+size    1
+spacing 1
+end
+certifications.each do |cert|
+h5 cert.date.strftime("%Y-%m")
+p cert.title + " - " +  cert.certifier
+end
+p
+end
+
+docx.table [[c15,c16]] do
+cell_style cols[0], width: 600
+end
+end
+
+if honr_aw.size>0
+c17 = Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/trophy.png",width:14 , height: 14, align: :left
+end
+
+c18 = Caracal::Core::Models::TableCellModel.new do
+h4 "HONORS AND AWARDS" do
+color   '000000'
+end
+hr do
+color   'E5E5E5'
+line    :single
+size    1
+spacing 1
+end
+honr_aw.each do |honor|
+h5 honor.award_date.strftime("%Y-%m")
+p honor.title + " at " + honor.company
+end
+p
+end
+
+docx.table [[c17,c18]] do
+cell_style cols[0], width: 600
+end
+end
+
+if research_or_projectdet.size>0
+c19 = Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/tasks.png",width:14 , height: 14, align: :left
+end
+
+c20 = Caracal::Core::Models::TableCellModel.new do
+h4 "RESEARCH EXPERIENCE AND PROJECTS:" do
+color   '000000'
+end
+
+hr do
+color   'E5E5E5'
+line    :single
+size    1
+spacing 1
+end
+
+research_or_projectdet.each do |project_det|
+p "Title: " + project_det.title
+p "Duration: " + project_det.duration.to_s  + " days"
+p "Description"
+p project_det.description
+p
+end
+
+p
+end
+
+docx.table [[c19,c20]] do
+cell_style cols[0], width: 600
+end
+end
+
+if references.size>0
+c21 = Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/users.png",width:14 , height: 14, align: :left
+end
+
+c22 = Caracal::Core::Models::TableCellModel.new do
+h4 "REFERENCES" do
+color '000000'
+end
+hr do
+color   'E5E5E5'
+line    :single
+size    1
+spacing 1
+end
+references.each do |reference|
+h5 reference.name + ", " + reference.designation do
+color '000000'
+end
+p reference.companyname
+p reference.contact_no.to_s + ", " + reference.designation
+end
+p
+end
+
+docx.table [[c21,c22]] do
+cell_style cols[0], width: 600
+end
+end
+
+if !personal_info['hobbies'].blank?
+c23= Caracal::Core::Models::TableCellModel.new do
+img font_url + "/assets/font-awesome-icon/hourglass.png",width:14 , height: 14, align: :left
+end
+
+c24= Caracal::Core::Models::TableCellModel.new do
+h4 "HOBBIES AND INTERESTS" do
+color '000000'
+end
+hr do
+color   'E5E5E5'
+line    :single
+size    1
+spacing 1
+end
+p personal_info['hobbies']
+p
+end
+
+docx.table [[c23,c24]] , border_size: 0 do
+cell_style cols[0], width: 600
+end
+
+end
+docx.h5 "DECLARATION" do
+color '000000'
+align 'center'
+end
+
+docx.p "I hereby declare that information furnished above is true to the best of my knowledge.", align: :center
+
+c23 = Caracal::Core::Models::TableCellModel.new do
+h5 "Place: Bangalore"
+h5 "Date: " + Time.now.strftime("%B %d, %Y").to_s
+end
+
+c24 = Caracal::Core::Models::TableCellModel.new do
+h5  user_info['first_name'] + " " + user_info['last_name'] , align: :right
+end
+docx.table [[c23,c24]] do
+end

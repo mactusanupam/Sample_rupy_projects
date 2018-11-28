@@ -1,0 +1,2 @@
+var commentDivId = "#show_answers_comments-<%= params[:id] %>"
+$(commentDivId).html("<%= escape_javascript(render partial: 'community_questions/community_answer_comment', collection: @comments) %>")

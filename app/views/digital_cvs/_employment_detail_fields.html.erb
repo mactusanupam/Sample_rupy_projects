@@ -1,0 +1,41 @@
+<div class="nested-fields employer-details">
+  <div class="form-group col-sm-12 text-right">
+    <%= link_to_remove_association "Remove", f, class: 'btn btn-danger btn-xs' %>
+  </div>
+  <%= f.association :company, collection: get_company, prompt: "Select Your Employer", label: 'Employer', input_html: { class: 'cv_company' }, label_html: { class: 'text-right col-sm-2 no-left-right-padding' } %>
+
+  <%= f.simple_fields_for :company, Company.new, validate: true do |company_fields| %>
+    <%= render "company_fields", :f => company_fields %>
+  <% end %>
+  <%=f.association :job_title, :label => "Job Title", label_html: { class: 'text-right col-sm-2 no-left-right-padding' }, :input_html => {:class => "employment-title"} %>
+
+  <%= f.input "Duration", required: true do %>
+    <%= f.input :start_date, as: :date, start_year: Date.today.year - 50,
+      end_year: Date.today.year, discard_day: true, order: [:month, :year], label: false, wrapper_html: { class: 'col-sm-4 no-padding' }, input_html: { class:
+        'no-padding' } %>
+    <div class='col-sm-4 end-date' style='display: <%= "#{f.object.present_job? ? 'none' : 'block'}" %>'>
+      <%= f.hint "To", class: 'col-sm-1 padding-top-5 text-center margin-left_-40 to' %>
+      <%= f.input :end_date, as: :date, start_year: Date.today.year - 50,
+        end_year: Date.today.year, discard_day: true, order: [:month, :year], label: false, input_html: { class: "no-padding", disabled: f.object.present_job? } %>
+    </div>
+    <%= f.input :present_job, inline_label: 'Still Working here?', wrapper_html: { class: 'margin-left_-30 col-sm-4' } %>
+  <% end %>
+
+  <%= f.input :responsibilities, label: 'Responsibilities', input_html: { class: 'keyresarea'}, label_html: { class: 'text-right col-sm-2 no-left-right-padding' } %>
+
+  <%= f.input :achievement, label: 'Achievements', input_html: { class: 'achievements'}, label_html: { class: 'text-right col-sm-2 no-left-right-padding' } %>
+
+  <hr />
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(".employment-title").select2({
+        tags: true
+      });
+
+      $(".employment-title").off('select2:select').on('select2:select', function(e) {
+        saveNewItem($(this), 'job_title');
+      });
+    })
+  </script>
+</div>
+

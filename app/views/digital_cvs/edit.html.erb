@@ -1,0 +1,129 @@
+<% content_for :title, "Digital CV | Create professional resume in minutes | Update your information" %>
+<div class="digital-cv-form">
+  <div class="container-fluid">
+    <div class="row">
+      <%= render 'blue_bar' %>
+    </div>
+    <div class="row padded-cv">
+      <div class="col-lg-8 col-lg-offset-2">
+        <div class="text-center">
+          <h1>Build a Compelling CV</h1>
+          <p>The easy to use and professionally designed digital CV builder enables your most <br>compelling qualities and information to stand out. Get noticed by top recruiters instantly!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container resume-editor">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading clearfix talent-fore-btn">
+            <h3 class="panel-title pull-left">
+              <div class="show-cv-name">
+                <span><%= @digital_cv.name %></span>
+                <button id='cv-name-change' class="btn-link glyphicon glyphicon-pencil" style="color: white;"></button>
+              </div>
+              <div class="edit-cv-name" style="display: none; color: black;">
+                <%= form_for @digital_cv, url: update_name_digital_cv_path(@digital_cv), remote: true, html: { style: 'display: inline;' }  do |form| %>
+                  <%= form.text_field :name, required: true %>
+                  <button type="submit" class="btn btn-link change-name">
+                    <span class="glyphicon glyphicon-ok text-primary"></span>
+                  </button>
+                <% end %>
+                <button type='cancel' id='remove-edit-cv-name' class="btn-link glyphicon glyphicon-remove" style="color: red; display: inline;"></button>
+              </div>
+            </h3>
+            <div class="pull-right">
+              <%= link_to "#{digital_cv_path(@digital_cv)}/preview", class: 'btn btn-clock btn-default', remote: true do %>
+                <%= fa_icon "eye 2x", text: "Preview & Download" %>
+              <% end %>
+            </div>
+          </div>
+          <div class="panel-body no-padding">
+            <div class="col-md-3 no-padding talent-fore-btn">
+              <div class="resume-editor-left">
+                <ul class="nav nav-pills nav-stacked">
+                  <li class="<%= (!all_sections.include?(params[:slug]) || params[:slug] == 'contact_details') ? 'active' : nil %>">
+                    <%= link_to "/resumes/#{@digital_cv.id}/edit/contact_details", remote: true do %>
+                      <%= fa_icon 'address-card', text: 'CONTACT DETAILS' %>
+                    <% end %>
+                  </li>
+                  <li class="<%= params[:slug] == 'basic_information' ? 'active' : nil %>">
+                    <%= link_to "/resumes/#{@digital_cv.id}/edit/basic_information", remote: true do %>
+                      <%= fa_icon 'info-circle', text: 'SUMMARY' %>
+                    <% end %>
+                  </li>
+                  <% if @digital_cv.is_experienced? %>
+                    <li class="<%= params[:slug] == 'employment_details' ? 'active' : nil%>">
+                      <%= link_to "/resumes/#{@digital_cv.id}/edit/employment_details", remote: true do %>
+                        <%= fa_icon 'suitcase', text: 'WORK EXPERIENCE' %>
+                      <% end %>
+                    </li>
+                  <% end %>
+                  <li class="<%= params[:slug] == 'academic_details' ? 'active' : nil%>">
+                    <%= link_to "/resumes/#{@digital_cv.id}/edit/academic_details", remote: true do %>
+                      <%= fa_icon 'graduation-cap', text: 'EDUCATION' %>
+                    <% end %>
+                  </li>
+                  <li class="<%= params[:slug] == 'languages_and_skills' ? 'active' : nil%>">
+                    <%= link_to "/resumes/#{@digital_cv.id}/edit/languages_and_skills", remote: true do %>
+                      <%= fa_icon 'gears', text: 'LANGUAGES & SKILLS' %>
+                    <% end %>
+                  </li>
+                  <li class="optional-section">OPTIONAL SECTIONS</li>
+                  <li class="<%= params[:slug] == 'research_or_project_details' ? 'active' : nil%>">
+                    <%= link_to "/resumes/#{@digital_cv.id}/edit/research_or_project_details", remote: true do %>
+                      <%= fa_icon 'tasks', text: 'RESEARCHES/PROJECTS' %>
+                    <% end %>
+                  </li>
+                  <li class="<%= params[:slug] == 'trainings' ? 'active' : nil%>">
+                    <%= link_to "/resumes/#{@digital_cv.id}/edit/trainings", remote: true do %>
+                      <%= fa_icon 'university', text: 'TRAININGS' %>
+                    <% end %>
+                  </li>
+                  <li class="<%= params[:slug] == 'certifications' ? 'active' : nil%>">
+                    <%= link_to "/resumes/#{@digital_cv.id}/edit/certifications", remote: true do %>
+                      <%= fa_icon 'certificate', text: 'CERTIFICATIONS' %>
+                    <% end %>
+                  </li>
+                  <li class="<%= params[:slug] == 'honor_and_awards' ? 'active' : nil%>">
+                    <%= link_to "/resumes/#{@digital_cv.id}/edit/honor_and_awards", remote: true do %>
+                      <%= fa_icon 'trophy', text: 'HONORS & AWARDS' %>
+                    <% end %>
+                  </li>
+                  <li class="<%= params[:slug] == 'references' ? 'active' : nil%>">
+                    <%= link_to "/resumes/#{@digital_cv.id}/edit/references", remote: true do %>
+                      <%= fa_icon 'users', text: 'REFERENCES' %>
+                    <% end %>
+                  </li>
+                  <li class="<%= params[:slug] == 'personal_details' ? 'active' : nil%>">
+                    <%= link_to "/resumes/#{@digital_cv.id}/edit/personal_details", remote: true do %>
+                      <%= fa_icon 'user-plus', text: 'ADDITIONAL INFORMATION' %>
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="col-md-12 no-padding text-center">
+                <strong>TIPS: </strong>
+                Fields marked with <span class="red-star">*</span> are mandatory. However, to have enough content in your resume, please fill in all fields.
+              </div>
+              <div class="tab-content clearfix no-padding" id="resume-editor-form">
+                <div class="tab-pane fade active in">
+                  <% if all_sections.include?(params[:slug]) %>
+                    <%= render "#{params[:slug]}_form" %>
+                  <% else %>
+                    <%= render "contact_details_form" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id='preview-cv' class="modal fade" data-toggle='modal'></div>

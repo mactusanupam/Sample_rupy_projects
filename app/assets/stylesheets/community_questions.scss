@@ -1,0 +1,185 @@
+// Place all the styles related to the community_questions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.questions {
+  margin-bottom: 50px;
+  .question {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 10px;
+    color: black;
+
+    .title {
+      color: black;
+      text-decoration: none;
+    }
+  }
+  .odd {
+    background-color: #F9F9F9;
+  }
+  .even {
+    background-color: #FEFEFE;
+  }
+}
+
+.social-links {
+  padding: 50px 30px 0 0;
+}
+
+.askq{
+  background-color: #EEE;
+  padding: 50px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+
+.new-question {
+  padding-left: 0;
+  margin-top: 20px;
+}
+
+.ask-question {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.ask-question-1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.author {
+  padding: 10px;
+  background-color: #E0EAF1;
+}
+
+.no-question {
+  min-height: 200px;
+  background-color: #FEFDDB;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+}
+
+.search-input {
+  margin-top: 8px;
+  padding: 5px;
+
+  .input-group-addon {
+    padding: 5px 12px;
+  }
+}
+
+.search-btn {
+  padding: 0;
+  background: none;
+}
+
+.fa-facebook-icon {
+  color: #2d4373;
+}
+.fa-twitter-icon {
+  color: #55acee;
+}
+.fa-google-plus-icon {
+  color: #dd4b39;
+}
+.fa-linkedin-icon {
+  color: #046293;
+}
+.margin-right-10{
+  margin-right:10px;
+}
+.bg_grey_light{
+  background: #f6f6f6;
+}
+.bg_grey_light2{
+  background: #f8f8f8;
+}
+.text-grey{
+  color:#333;
+}
+.text-grey-light{
+  color:#aaa;
+}
+.text-grey-light1{
+  color:#8d8d8d;
+}
+.text-grey-light2{
+  color:#c2b9b9;
+}
+.text-grey-light3{
+  color:#333;
+}
+.text-grey-light4{
+  color:#7e7e7e;
+}
+.small-box{
+background:#f6f6f6;
+width:95%;
+height:20px;
+text-align:center;
+}
+.padding-10{
+  padding:0 10px 20px 10px;
+}
+.margin-left-5{
+  margin-left:5px;
+}
+.margin-bottom-10{
+ margin-bottom:10px;
+}
+.answer_comment_box{
+  height:auto;
+  color:#666;
+}
+.answer-box{
+  border-bottom:1px solid #eee;
+  border-top:1px solid #eee;
+}
+.answer {
+  border-bottom:1px solid #eee;
+  margin-top: 20px !important;
+}
+
+.answers_list .answer:first-child {
+  margin-top: 0 !important;
+}
+.answer .answer-box:last-child{
+  border-bottom:none;
+}
+
+.answer p {
+  font-size:16px;
+  color:#333;
+}
+.add_comment_text {
+  margin: 10px 0 10px 0;
+}
+
+.comment_border {
+  border-bottom:1px solid #eee;
+  padding:5px 0;
+  margin:0;
+}
+.comment_border:last-child {
+  border-bottom:none;
+}
+.comment_border:first-child {
+  border-top:1px solid #eee;
+}
+
+.padding-bottom-5 {
+  padding-bottom: 5px;
+}
+.padding-left-5 {
+  padding-left: 5px;
+}
+
+.margin-left-20 {
+  margin-left: 20px;
+}
+
+#answer-now {
+  .form-group {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-12">
+      <%= form_with(model: community_question, remote: true ,:html => { class: "form-horizontal" })  do |form| %>
+        <div class="padding_1">
+          <div id="add_question_errors"></div>
+
+          <%= form.hidden_field :user_id ,:value => current_user.id %>
+          <div class="form-group">
+            <%= form.label :question_text, 'Question Title' %>
+            <%= form.text_field :question_text, id: :community_question_question_text, class: "form-control"%>
+          </div>
+          <div class="form-group">
+            <div class="pull-right">
+              <%= form.check_box :anonymus, id: :community_question_anonymus, class: "pull-left" %>
+              <p class="padding-top3 padding-left-25">Add anonymously</p>
+            </div>
+            <div class="pull-left">
+              <%= form.check_box :terms_and_conditions , id: :community_question_terms_and_conditions, class: "pull-left" %>
+              <p class="padding-top3 padding-left-25">I agree to TalentFore
+              <%= link_to "Terms and conditions", root_path, target: '_blank'%></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row modal-footer bg_grey_light">
+          <%= submit_tag 'Cancel', :type => :reset, :class => "btn btn-danger", "data-dismiss" => "modal", "aria-hidden" => "true" %>
+          <%= form.submit "Submit", class: 'btn btn-primary margin-right-10 talent-fore-btn' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
